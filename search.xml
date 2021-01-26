@@ -105,10 +105,6 @@
             
             <tag> Csapp </tag>
             
-            <tag> 汇编语言 </tag>
-            
-            <tag> Linux </tag>
-            
         </tags>
       
     </entry>
@@ -125,7 +121,7 @@
       
       <categories>
           
-          <category> Blog </category>
+          <category> Blogs </category>
           
       </categories>
       
@@ -133,8 +129,6 @@
         <tags>
             
             <tag> Github </tag>
-            
-            <tag> Blog </tag>
             
         </tags>
       
@@ -213,13 +207,11 @@
       
         <tags>
             
-            <tag> 实验记录 </tag>
+            <tag> Csapp </tag>
             
             <tag> 计算机系统 </tag>
             
             <tag> 位计算 </tag>
-            
-            <tag> Ubuntu </tag>
             
         </tags>
       
