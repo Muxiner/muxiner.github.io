@@ -5,7 +5,6 @@ categories: Blogs
 tags: 
 - Github
   
-cover: /Images/14.jpg
 ---
 
 使用自动部署之前，我都是用的`hexo deploy`把每次生成的`public`文件夹上传到github上去，使用自动部署之后，就省略掉了这一步骤，但是多了这三步
@@ -44,13 +43,13 @@ cover: /Images/14.jpg
 
 点开博客备份仓库上方的`Settings`，点到左侧的`Secrets`项，添加两个秘密环境变量`GH_REF `、`GH_TOKEN`，值分别填写自己的`GitHub Pages` 仓库地址（不包含 https:// ）和刚刚申请到的`GitHub Personal Access Token`。
 
-![secrets](using-gitActions/secret.png)
+![](https://s1.ax1x.com/2022/04/06/qjx8it.png)
 ### 配置过程
 准备工作做好后就可以开始编写`GitHub Actions`配置文件了，这里对 Hexo 博客编译部署的步骤进行拆分讲解。
 
 配置文件的目录——在站点目录下新建`.github`文件夹，再在其中新建文件夹`workflows`，在创建`×××××××.yml`文件，命名随意。
 
-![创建结果](using-gitActions/address.png)
+![](https://s1.ax1x.com/2022/04/06/qjxJRf.png)
 
 ### 触发条件和运行环境
 我们设置在`master`分支上发生`push`操作时触发构建，使用最新的`Ubuntu`系统作为编译部署的环境，同时设置一个全局环境变量将时区修改为`Asia/Shanghai`(修改原因见 https://xirikm.net/2020/215-1.html)，具体的配置内容如下：
@@ -184,6 +183,6 @@ jobs:
 
 ### 参考
 [<u>使用 GitHub Actions 自动构建 Hexo 博客</u>](https://xirikm.net/2020/313-1)
+[<u>持续集成 Continuous Integration</u>](https://easyhexo.com/1-Hexo-install-and-config/1-5-continuous-integration.html#%E4%BB%80%E4%B9%88%E6%98%AF%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90)
 
-**持续更新中**  
-**暂时这么样**
+**文档存在信息滞后，部分信息可能与实际不符**
