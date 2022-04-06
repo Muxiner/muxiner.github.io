@@ -1,5 +1,5 @@
 name: Blog CI/CD
-
+language: ruby
 on:
   push:
     branches: 
