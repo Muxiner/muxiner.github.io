@@ -30,7 +30,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        npm install hexo-cli gulp -g
+        npm install hexo-cli -g
         npm install
 
     - name: Generate files
@@ -39,8 +39,8 @@ jobs:
     - name: Deploy blog
       run: |
         git clone "https://${{ secrets.GH_REF }}" deploy_git
-        mv ./deploy_git/.git ./public/
-        cd ./public
+        mv ./deploy_git/.git ./source/
+        cd ./source
         git config user.name "yourname"
         git config user.email "youremail"
         git add .
