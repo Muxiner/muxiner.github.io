@@ -1,5 +1,5 @@
 name: Blog CI/CD
-language: ruby
+language: python
 on:
   push:
     branches: 
