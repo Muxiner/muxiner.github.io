@@ -11,12 +11,6 @@ tags:
 
 终端出现：
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@  WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-如图：
-
 [![LnTJd1.md.png](https://s1.ax1x.com/2022/04/12/LnTJd1.md.png)](https://imgtu.com/i/LnTJd1)
 
 > 上图使用的是他人的问题图片，自己这边忘记截图了。
