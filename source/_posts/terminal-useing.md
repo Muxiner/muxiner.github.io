@@ -5,6 +5,7 @@ categories: Termnial
 tags:
  - Beauty
  - Termnial
+ - Blog
 ---
 ### 简介
 用来记录使用 Windows Terminal 一路上遇到的问题以及解决的办法、附加解决日期。

@@ -1,12 +1,15 @@
-title: 解决Github + hexo网页无法显示图片问题
+title: 【水博客】解决Github + hexo网页无法显示图片问题
 author: Muxiner
 date: 2022-04-06 13:34:24
+categories: 水博客
 tags: 
    - MarkDown
+   - Blog
 ---
 
 ### 问题描述
-md文件中加入图片链接后，在网页上无法显示图片。  
+
+md 文件中加入图片链接后，在网页上无法显示图片。  
 <!--more-->
 
 ### 解决方案

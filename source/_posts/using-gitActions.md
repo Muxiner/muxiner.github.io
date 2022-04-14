@@ -1,10 +1,10 @@
 ---
 title: 使用Github Actions实现Hexo博客在Github上的自动部署
 date: 2020-11-30 16:55:45
-categories: Blogs
+categories: Blog
 tags: 
 - Github
-  
+- Blog
 ---
 
 使用自动部署之前，我都是用的`hexo deploy`把每次生成的`public`文件夹上传到github上去，使用自动部署之后，就省略掉了这一步骤，但是多了这三步

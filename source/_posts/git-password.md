@@ -1,9 +1,9 @@
 ---
 title: git push 不用每次输入用户名和密码
 date: 2020-11-24 12:00:23
-categories: Blogs
+categories: Blog
 tags:
-- Blogs
+- Blog
 - Git
 
 ---
