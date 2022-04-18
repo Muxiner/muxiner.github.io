@@ -3,7 +3,7 @@ title: VS code 配置 C\C++环境
 date: 2020-12-12 17:36:50
 categories: 教程
 tags: 
-- Vscode
+- V code
 - C\C++
 - Blog
 ---
