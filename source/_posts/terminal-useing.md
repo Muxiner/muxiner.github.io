@@ -94,6 +94,7 @@ Set-PoshPrompt -Theme capr4n
 
 #### 安装字体
 ![](https://s3.bmp.ovh/imgs/2022/04/06/6daae30b63069edd.png)
+
 当出现上图情况时，说明是当前使用的字体并不适合所使用的主题，因而我们需要安装字体。
 之前我使用 YYDS 的搜索所得的结果 —— 安装 [JetBrains Mono](https://www.jetbrains.com/zh-cn/lp/mono/) 好看是好看而且也解决了一部分的不显示问题，但是还是会存在一些图标显示的是方框，因而重新找到了 [nerdfonts](https://www.nerdfonts.com/font-downloads) ，并选择了 **Hasklug Nerd Font** 并进行安装。
 > 下载下来的是一个字体的压缩包，里面包含了不同样式的该类字体，选取其中的一个进行安装即可。
