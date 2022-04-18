@@ -1,10 +1,10 @@
 title: Windows Terminal 使用实况记录
 author: Muxiner
 date: 2022-04-06 18:11:19
-categories: Termnial
+categories: Terminal
 tags:
  - Beauty
- - Termnial
+ - Terminal
  - Blog
 ---
 ### 简介
