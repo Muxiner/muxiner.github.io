@@ -2,9 +2,8 @@ title: 【水博客】VS code Markdown 导出 PDF 时，数学公式未能正确
 date: 2022-04-18 11:41:36
 categories:
  - 水博客
- - VS code
 tags:
- - MarkDown
+ - Markdown
  - VS code
 ---
 ## 问题描述
