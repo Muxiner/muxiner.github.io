@@ -1,13 +1,20 @@
 ---
-title: VS code 配置 C\C++环境
+title: VS code 配置 C/C++环境(过时的)
 date: 2020-12-12 17:36:50
 categories: 教程
 tags: 
-- V code
-- C\C++
+- VS code
+- C/C++
 - Blog
 ---
 
+### 注意：
+
+该文章过时了。~~不不不，只是内容不够完美，被我放弃了~~
+
+后续更新了一篇比较细致的 `Windows` 下 `VS code` 配置 `C/C++` 环境。
+
+详见 [](https://muxiner.github.io/2022/4/19/muxinervscode_using_gcc_with_mingw/)
 
 ~~本文暂时只是给我自己回忆配置过程的，内容仅供参考，莫较真。 = =~~
 -------
