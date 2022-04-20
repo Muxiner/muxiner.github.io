@@ -6,6 +6,7 @@ tags:
 - VS code
 - C/C++
 - Blog
+- index_img: https://whvn.cc/x8ye3z
 ---
 
 阅读本文后应该可以顺利的在 Windows 系统下配置好 VS code 的 C/C++ 环境。
