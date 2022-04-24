@@ -242,6 +242,97 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
 
 ### 可直接使用的配置文件
 
+> PS:
+> 该配置文件暂时仅是支持单个文件的编译
+> 多个文件的编译请详细阅读本篇文章
+
+简要介绍一下两个文件表示的工作流程：
++ `task.json` 是将 C/C++ 文件编译成 exe 文件，其路径与 C/C++ 文件相同，即在同一文件夹
++ `launch.json` 会先将文件编译成 exe 可执行文件，然后再进行调试
+
+所以，使用流程：
++ 在工作文件夹下创建 `.vscode` 文件夹，
++ 再在 `.vscide` 下创建俩文件，并将下述代码复制进去
+  + `task.json`
+  + `launch.json`
++ 按 `F5` 进行调试
++ 按 `Ctrl + F5` 非调试运行
+
+`task.json`:
+```json
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "g++.exe 生成活动文件",
+			"command": "C:/MinGW/bin/g++.exe", // 编译器路径
+                                            // 需要自行修改
+                     
+			"args": [
+				"-fdiagnostics-color=always", 
+				"-g",                         
+				"${file}",                    
+				"-o",                         // 编译时输出的位置
+				"${fileDirname}/${fileBasenameNoExtension}.exe"
+                                          // 编译输出的可执行文件
+			],
+			"problemMatcher": [
+				"$gcc"
+			],
+			   "group": "build",
+			   "detail": "编译器: C:/MinGW/bin/g++.exe"
+		   }
+	   ]
+   }
+```
+
+`launch.json`:
+```json
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) 启动",
+            "type": "cppdbg",
+            "preLaunchTask": "g++.exe 生成活动文件", // 在 launch 之前的任务名，
+                                                           // 即 在launch 之前先执行 task.json 的任务
+                                                           // 用于调试时从新生成 exe 文件，并根据新的 exe 文件进行调试
+                                                           // 因而该字段内容需和 task.json 中的 label 一样，如此才能正确的先生成再调试
+            "request": "launch",
+            "program": "${workspaceFolder}/${fileBasenameNoExtension}.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:/MinGW/bin/gdb.exe", // 调试器的路径
+                                                      // 需要自行修改
+            "setupCommands": [
+                  {
+                     "description": "为 gdb 启用整齐打印",
+                     "text": "-enable-pretty-printing",
+                     "ignoreFailures": true
+                  },
+                  {
+                     "description":  "将反汇编风格设置为 Intel",
+                     "text": "-gdb-set disassembly-flavor intel",
+                     "ignoreFailures": true
+                   }
+               ]
+           }
+       ]
+   }
+```
+
+ᕕ( ᐛ )ᕗ
+
+现在你就可以畅想 vscode 的 C 语言编程了。
+
 
 ### 参考
 + [Visual Studio Code 官方文档 | GCC on Windows](https://code.visualstudio.com/docs/cpp/config-mingw#_build-helloworldcpp)
