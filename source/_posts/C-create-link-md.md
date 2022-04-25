@@ -1,5 +1,5 @@
 ---
-title: C 语言链表的饿创建
+title: C 语言链表的创建
 date: 2021-03-29 23:57:25
 categories: C
 tags: C
