@@ -11,8 +11,6 @@ banner_img: https://w.wallhaven.cc/full/42/wallhaven-42yxry.jpg
 
 编辑时间：2021-3-29
 
-
-
 创建的方法——（有无头结点）头插法、（有无头结点）尾插法。
 
 #### 定义链表结点
