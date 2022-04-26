@@ -59,11 +59,11 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
 
    [![LDjiY8.png](https://s1.ax1x.com/2022/04/20/LDjiY8.png)](https://imgtu.com/i/LDjiY8)
 
-   之后会自动生成一个 `task.json` 文件，位于 `.vacode` 文件夹，如图：
+   之后会自动生成一个 `tasks.json` 文件，位于 `.vacode` 文件夹，如图：
 
    [![LDxeI0.png](https://s1.ax1x.com/2022/04/20/LDxeI0.png)](https://imgtu.com/i/LDxeI0)
 
-   进入 `task.json`:
+   进入 `tasks.json`:
 
    [![LDxBsH.png](https://s1.ax1x.com/2022/04/20/LDxBsH.png)](https://imgtu.com/i/LDxBsH)
 
@@ -83,7 +83,7 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
    + detail: 任务的其他详细信息。
 
 
-   `task.json`: 
+   `tasks.json`: 
    ```json
    {
 	"version": "2.0.0",
@@ -117,7 +117,7 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
    [![Lrokg1.png](https://s1.ax1x.com/2022/04/20/Lrokg1.png)](https://imgtu.com/i/Lrokg1)
 
    此时，VS code 下部的终端就会显示 `Executing task`， 即开始编译 C 文件并获得 exe 文件。
-   > 从图中可见，运行的任务将 task.json 中的部分内容显示出来。
+   > 从图中可见，运行的任务将 tasks.json 中的部分内容显示出来。
    > 如：
    > + label
    > + 编译的指令
@@ -129,7 +129,7 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
    成功之后，在文件夹中会多出对应的 exe 文件，如图：
    [![LrL2a6.png](https://s1.ax1x.com/2022/04/20/LrL2a6.png)](https://imgtu.com/i/LrL2a6)
 
-   强调一下，将上述任务完成后，我们只是利用 task.json 配置文件将 C 文件编译成了可执行的 exe 文件后续没有执行 该 exe 文件。想要查看运行结果的话：有两种办法：
+   强调一下，将上述任务完成后，我们只是利用 tasks.json 配置文件将 C 文件编译成了可执行的 exe 文件后续没有执行 该 exe 文件。想要查看运行结果的话：有两种办法：
    + 在 VS code 的终端中输入相应的指令以执行文件
    + 到对应的文件夹中找到该 exe 文件，直接执行。
 
@@ -198,11 +198,11 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
             "name": "(gdb) 启动",
             "type": "cppdbg",
             "preLaunchTask": "C/C++: gcc.exe 生成活动文件", // 在 launch 之前的任务名，
-                                                           // 即 在launch 之前先执行 task.json 的任务
+                                                           // 即 在launch 之前先执行 tasks.json 的任务
                                                            // 用于调试时从新生成 exe 文件，并根据新的 exe 文件进行调试
-                                                           // 因而该字段内容需和 task.json 中的 label 一样，如此才能正确的先生成再调试
+                                                           // 因而该字段内容需和 tasks.json 中的 label 一样，如此才能正确的先生成再调试
             "request": "launch",
-            "program": "${workspaceFolder}/${fileBasenameNoExtension}.exe",
+            "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
@@ -247,18 +247,18 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
 > 多个文件的编译请详细阅读本篇文章
 
 简要介绍一下两个文件表示的工作流程：
-+ `task.json` 是将 C/C++ 文件编译成 exe 文件，其路径与 C/C++ 文件相同，即在同一文件夹
++ `tasks.json` 是将 C/C++ 文件编译成 exe 文件，其路径与 C/C++ 文件相同，即在同一文件夹
 + `launch.json` 会先将文件编译成 exe 可执行文件，然后再进行调试
 
 所以，使用流程：
 + 在工作文件夹下创建 `.vscode` 文件夹，
 + 再在 `.vscide` 下创建俩文件，并将下述代码复制进去
-  + `task.json`
+  + `tasks.json`
   + `launch.json`
 + 按 `F5` 进行调试
 + 按 `Ctrl + F5` 非调试运行
 
-`task.json`:
+`tasks.json`:
 ```json
 {
 	"version": "2.0.0",
@@ -299,11 +299,11 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
             "name": "(gdb) 启动",
             "type": "cppdbg",
             "preLaunchTask": "g++.exe 生成活动文件", // 在 launch 之前的任务名，
-                                                           // 即 在launch 之前先执行 task.json 的任务
+                                                           // 即 在launch 之前先执行 tasks.json 的任务
                                                            // 用于调试时从新生成 exe 文件，并根据新的 exe 文件进行调试
-                                                           // 因而该字段内容需和 task.json 中的 label 一样，如此才能正确的先生成再调试
+                                                           // 因而该字段内容需和 tasks.json 中的 label 一样，如此才能正确的先生成再调试
             "request": "launch",
-            "program": "${workspaceFolder}/${fileBasenameNoExtension}.exe",
+            "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
