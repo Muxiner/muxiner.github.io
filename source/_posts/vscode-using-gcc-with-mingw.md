@@ -238,7 +238,80 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
 
 ### 进阶环境配置
 
+我所谓的进阶配置，主要指的是，对 `tasks.json` 中使用更多的变量参数。
 
+#### 预定义变量 Predefined variables
+
+支持以下预定义变量：
+
++ `${workspaceFolder}` - 在 `VS Code` 中打开的文件夹的路径
++ `${workspaceFolderBasename}` - 在 `VS Code` 中打开的文件夹的名称，不带任何斜线 (/)
++ `${file}` - 当前打开的文件
++ `${fileWorkspaceFolder}` - 当前打开文件的工作区文件夹
++ `${relativeFile}` - 当前打开的相对于 `workspaceFolder` 的文件
++ `${relativeFileDirname}` - 当前打开文件相对于 `workspaceFolder` 的目录名
++ `${fileBasename}` - 当前打开文件的基本名称
++ `${fileBasenameNoExtension}` - 当前打开的文件的基本名称，没有文件扩展名
++ `${fileDirname}` - 当前打开文件的目录名
++ `${fileExtname}` - 当前打开文件的扩展名
++ `${cwd}` - 启动 `VS Code` 时任务运行器的当前工作目录
++ `${lineNumber}` - 活动文件中当前选定的行号
++ `${selectedText}` - 活动文件中当前选定的文本
++ `${execPath}` - 正在运行的 `VS Code` 可执行文件的路径
++ `${defaultBuildTask}` - 默认构建任务的名称
++ `${pathSeparator}` - 操作系统用来分隔文件路径中的组件的字符
+
+##### 预定义变量示例 Predefined variables examples
+
+假设您有以下要求：
+
+1. 位于 `/home/your-username/your-project/folder/file.ext` 的文件在您的编辑器中打开；
+2. 目录 `/home/your-username/your-project` 作为您的根工作区打开。
+
+因此，每个变量都将具有以下值：
+
++ `${workspaceFolder}` - `/home/your-username/your-project`
++ `${workspaceFolderBasename}` - `你的项目`
++ `${file}` - `/home/your-username/your-project/folder/file.ext`
++ `${fileWorkspaceFolder}` - `/home/your-username/your-project`
++ `${relativeFile}` - `folder/file.ext`
++ `${relativeFileDirname}` - `folder`
++ `${fileBasename} - file.ext`
++ `${fileBasenameNoExtension}` - `file`
++ `${fileDirname}` - `/home/your-username/your-project/folder`
++ `${fileExtname}` - `.ext`
++ `${lineNumber}` - 光标的行号
++ `${selectedText}` - 在代码编辑器中选择的文本
++ `${execPath}` - Code.exe 的位置
++ `${pathSeparator}` - `/` 在 macOS 或 linux 上，`\` 在 Windows 上
+
+> Tip:
+> 在 tasks.json 和 launch.json 的字符串值中使用 IntelliSense 以获取预定义变量的完整列表
+
+##### 每个工作区文件夹范围内的变量 Variables scoped per workspace folder
+
+通过将根文件夹的名称附加到变量（用冒号分隔），可以访问工作区的同级根文件夹。 如果没有根文件夹名称，则该变量的作用域为使用它的同一文件夹。
+
+例如，在具有文件夹 `Server` 和 `Client` 的多根工作区中，`${workspaceFolder:Client`} 指的是 `Client` 根的路径。
+
+#### 环境变量 Environment variables
+
+您还可以通过 `${env:Name}` 
+
+语法（例如，`${env:USERNAME}`）引用环境变量。
+
+```json
+{
+  "type": "node",
+  "request": "launch",
+  "name": "Launch Program",
+  "program": "${workspaceFolder}/app.js",
+  "cwd": "${workspaceFolder}",
+  "args": ["${env:USERNAME}"]
+}
+```
+
+无
 
 ### 可直接使用的配置文件
 
