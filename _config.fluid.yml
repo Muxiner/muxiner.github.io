@@ -442,7 +442,7 @@ footer:
 index:
   # 首页 Banner 头图，可以是相对路径或绝对路径，以下相同
   # Path of Banner image, can be a relative path or an absolute path, the same on other pages
-  banner_img: https://s1.ax1x.com/2022/04/06/qjO8jH.jpg
+  banner_img: https://w.wallhaven.cc/full/g7/wallhaven-g79mrl.jpg
 
   # 头图高度，屏幕百分比
   # Height ratio of banner image
