@@ -26,6 +26,6 @@
     "hexo-server": "^3.0.0",
     "hexo-theme-fluid": "^1.9.0",
     "hexo-theme-landscape": "^0.0.3",
-    "stylus": "^0.58.0"
+    "stylus": "^0.58.1"
   }
 }
