@@ -1,10 +1,7 @@
-name: Deploy My Blog                     # Actions 显示的名字，随意设置
-
+name: Deploy Muxiner's Blog       # Actions 显示的名字，随意设置
 on: [push]                        # 监听到 push 事件后触发
-
-
 jobs:
-  build:
+  build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,24 +15,28 @@ jobs:
       with:
         node-version: "16.x"
 
-    - name: Hexo Generate         # 安装 Hexo 依赖并且生成静态文件
+    - name: Prepare SSH Env       # 写入部署 SSH 密钥
+      env:
+        SSH_PRIVATE: ${{ secrets.GH_ACTIONS }}
+      run: |
+        mkdir -p ~/.ssh/
+        echo "$SSH_PRIVATE" | tr -d '\r' > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+    - name: Prepare Git Env      # 配置 git 用户，用户邮箱
+      env:
+        GIT_NAME: muxiner
+        GIT_EMAIL: muxinerhuang@gmail.com
+      run: |
+        git config --global user.name "$GIT_NAME"
+        git config --global user.email "$GIT_EMAIL"
+
+    - name: Use Hexo And Deploy Blog            # 安装 Hexo 依赖并且生成静态文件
       run: |
         rm -f .yarnclean
         yarn --frozen-lockfile --ignore-engines --ignore-optional --non-interactive --silent --ignore-scripts --production=false
         rm -rf ./public
         yarn run hexo clean
         yarn run hexo generate
-
-    - name: Hexo Deploy           # 部署步骤，这里以 hexo deploy 为例
-      env:
-        SSH_PRIVATE: ${{ secrets.GH_ACTIONS }}
-        GIT_NAME: muxiner
-        GIT_EMAIL: muxinerhuang@gmail.com
-      run: |
-        mkdir -p ~/.ssh/
-        echo "$SSH_PRIVATE" | tr -d '\r' > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        git config --global user.name "$GIT_NAME"
-        git config --global user.email "$GIT_EMAIL"
         yarn run hexo deploy
