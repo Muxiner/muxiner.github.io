@@ -6,4 +6,5 @@ index_img:
 banner_img:
 math: true
 excerpt:
+sticky:
 ---
