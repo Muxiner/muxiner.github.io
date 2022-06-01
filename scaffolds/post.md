@@ -1,11 +1,12 @@
 ---
 title: {{ title }}
 date: {{ date }}
+excerpt:
 categories:
 tags:
 index_img:
 banner_img:
-math: true
-excerpt:
 sticky:
+math: true
+hide: false
 ---
