@@ -104,7 +104,7 @@ theme: fluid
 deploy:
   type: git
   repo: git@github.com:Muxiner/muxiner.github.io.git
-  branch: master
+  branch: test
   # 提交信息可以自定义，不填的则默认为提交时间
   message: 
 
