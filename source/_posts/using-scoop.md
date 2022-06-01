@@ -6,7 +6,7 @@ categories:
 tags:
 index_img:
 banner_img:
-excerpt: 本文所写为 `Windows 11` 下包管理器 `Scoop` 的安装与使用
+excerpt: 本文所写为 Windows 11 下包管理器 Scoop 的安装与使用
 ---
 
 
