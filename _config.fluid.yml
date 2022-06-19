@@ -442,7 +442,7 @@ footer:
 index:
   # 首页 Banner 头图，可以是相对路径或绝对路径，以下相同
   # Path of Banner image, can be a relative path or an absolute path, the same on other pages
-  banner_img: https://w.wallhaven.cc/full/g7/wallhaven-g79mrl.jpg
+  banner_img: https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/img/wallhaven-2kemyy.jpg
 
   # 头图高度，屏幕百分比
   # Height ratio of banner image
@@ -807,7 +807,7 @@ cusdis:
 # Archive Page
 #---------------------------
 archive:
-  banner_img: /img/default.png
+  banner_img: https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/img/wallhaven-3zvdzv.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:
@@ -819,7 +819,7 @@ archive:
 #---------------------------
 category:
   enable: true
-  banner_img: /img/default.png
+  banner_img: https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/img/wallhaven-3z8p3v.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:
@@ -849,7 +849,7 @@ category:
 #---------------------------
 tag:
   enable: true
-  banner_img: /img/default.png
+  banner_img: https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/img/wallhaven-z8982y.jpg
   banner_img_height: 80
   banner_mask_alpha: 0.3
   subtitle:
@@ -867,7 +867,7 @@ tag:
 #---------------------------
 about:
   enable: true
-  banner_img: /img/default.png
+  banner_img: https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/img/wallhaven-1kzdew.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:
