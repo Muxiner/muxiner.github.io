@@ -39,8 +39,9 @@ script: # 执行脚本，清除缓存，生成静态文件
 #     branch: source # 工作分支
 after_script:
   - git clone https://github.com/Muxiner/ResourceRepo.git RR
+  - mkdir ./RR/gh_travisCI
   - cp -r ./public/* ./RR/gh_travisCI
   - cd RR
   - git add .
   - git commit -m "blog deploy by travis CI"
-  - git push -u origin main
+  - git push $GH_REF main
