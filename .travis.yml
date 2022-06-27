@@ -10,6 +10,10 @@ branches:
   only:
     - source # 只有 hexo 分支检出更改才触发 CI
 
+env:
+  global:
+    - GH_REF: https://${GH_TOKEN}@github.com/Muxiner/ResourceRepo.git
+
 before_install: 
   - export TZ='Asia/Shanghai' #配置时区为东八区 UTC+8
   - npm install hexo-cli # 安装 hexo
