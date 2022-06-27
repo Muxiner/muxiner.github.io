@@ -43,5 +43,5 @@ after_script:
   - cp -r ./public/* ./RR/gh_travisCI
   - cd RR
   - git add .
-  - git commit -m "blog deploy by travis CI"
+  - git commit -m "blog deployed by travis CI"
   - git push $GH_REF main
