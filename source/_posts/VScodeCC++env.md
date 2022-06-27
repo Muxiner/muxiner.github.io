@@ -1,11 +1,17 @@
 ---
 title: VS code 配置 C/C++环境(过时的)
 date: 2020-12-12 17:36:50
+updated: 2022-06-27 23:35:10
+excerpt: windows 系统环境下的 vs code 配置 C/C++ 环境。
+index_img:
+banner_img:
 categories: 教程
 tags: 
 - VS code
 - C/C++
 - Blog
+math: true
+hide: false
 ---
 
 ### 注意：
