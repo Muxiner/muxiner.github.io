@@ -1,5 +1,10 @@
+---
 title: 【水博客】VS code Markdown 导出 PDF 时，数学公式未能正确导出
 date: 2022-04-18 11:41:36
+updated: 2022-06-28 17:41:30
+excerpt: 解决 Windows 11 系统下 VS code 对 Markdown 文件导出 PDF 时，数学公式未能正确导出的问题。
+index_img:
+banner_img:
 categories:
  - 水博客
 tags:
@@ -19,7 +24,7 @@ tags:
 但是今天就翻车了，因为在 MD 中使用了**数学公式**，再使用相同的方法导出时，就出了问题 —— 数学公式未能正确导出，还是 MD 语法的表示形式。如图：
 
 
-[![LazgxA.md.png](https://s1.ax1x.com/2022/04/18/LazgxA.md.png)](https://imgtu.com/i/LazgxA)
+![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628173919.png)
   
 就挺懵逼的。
 
@@ -60,7 +65,7 @@ tags:
   
    该插件提供了将 `Markdown` 文件输出为可预览的不同格式文件，包括 `html`， `pdf` 等。
 
-   [![LdSqYD.md.png](https://s1.ax1x.com/2022/04/18/LdSqYD.md.png)](https://imgtu.com/i/LdSqYD)
+   ![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628173942.png)
 
 
 光安装两插件还不足及解决问题，接下来就需要给加点小动作了。
@@ -75,16 +80,17 @@ tags:
 > + [everything](https://www.voidtools.com/zh-cn/)
 
 然后使用编辑器，如 `VS code` 打开该文件，在如图位置加入两行代码。
+
 ```html
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$', '$']]}, messageStyle: "none" });</script>
 ```
 
-[![LdpN0x.md.png](https://s1.ax1x.com/2022/04/18/LdpN0x.md.png)](https://imgtu.com/i/LdpN0x)
+![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628174007.png)
 
 最后再重新导出 PDF 就可以啦。
 
-[![Ldpr1H.md.png](https://s1.ax1x.com/2022/04/18/Ldpr1H.md.png)](https://imgtu.com/i/Ldpr1H)
+![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628174029.png)
 
 可见问题完美解决。
 

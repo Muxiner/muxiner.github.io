@@ -1,6 +1,8 @@
 ---
 title: Windows 下 VS code 配置 C/C++ 环境
 date: 2022-04-19 09:34:45
+updated: 2022-06-28 17:35:10
+excerpt: windows 系统环境下的 vs code 配置 C/C++ 环境。
 categories: 教程
 tags: 
 - VS code
@@ -17,7 +19,7 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
 
 ### 前提条件
 
-默认已经安装好 `VS code` 和 `C/C++` 编译器 —— `MinGW`。
+默认已经安装好 `VS code` 和 Windows 下的 `C/C++` 编译器 —— `MinGW`。
 
 若是未能安装，那就自行安装吧。~~（自己找教程去）~~
 
@@ -41,14 +43,16 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
 #### 使用 `VS code` 打开一个文件夹作为**工作路径**
    
    该文件夹可以包含子文件夹，或是创建子文件夹，配置好环境后，该文件夹会多一个 `.vscode`，该文件夹会有几个 `json` 文件。
+
 #### 在该文件夹目录中创建 `C/C++` 文件，并进行编辑
    
    简单的编辑一下就好，比如输出个 Hello World。
+
 #### 首先进行配置生成任务
    
    选择已经编辑好的 C/C++ 文件，点击顶部菜单栏的 `终端(T) > 配置任务`。
 
-   [![LDXoe1.png](https://s1.ax1x.com/2022/04/20/LDXoe1.png)](https://imgtu.com/i/LDXoe1)
+   ![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172419.png)
 
    在选择 `C/C++: gcc.exe 生成活动文件`。
    > 因为自己使用 `C` 文件进行配置任务，因为配置任务时显示的是 `gcc.exe`。
@@ -57,15 +61,15 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
    > `g++.exe` 是 `C++` 的编译器，但是也可以编译 `C`
    > 不过这一点没什么大问题，都可以在后续的 `json` 文件中修改
 
-   [![LDjiY8.png](https://s1.ax1x.com/2022/04/20/LDjiY8.png)](https://imgtu.com/i/LDjiY8)
+   ![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172452.png)
 
    之后会自动生成一个 `tasks.json` 文件，位于 `.vacode` 文件夹，如图：
 
-   [![LDxeI0.png](https://s1.ax1x.com/2022/04/20/LDxeI0.png)](https://imgtu.com/i/LDxeI0)
+   ![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172512.png)
 
    进入 `tasks.json`:
 
-   [![LDxBsH.png](https://s1.ax1x.com/2022/04/20/LDxBsH.png)](https://imgtu.com/i/LDxBsH)
+   ![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172535.png)
 
    其中：
    + type: 要自定义的任务类型
@@ -114,7 +118,7 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
    然后点击 `终端(T) > 运行生成任务`，如图：
    > 当然可以使用快捷键 `Shift + Ctrl + B`，快速 `运行生成任务`。
 
-   [![Lrokg1.png](https://s1.ax1x.com/2022/04/20/Lrokg1.png)](https://imgtu.com/i/Lrokg1)
+   ![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172556.png)
 
    此时，VS code 下部的终端就会显示 `Executing task`， 即开始编译 C 文件并获得 exe 文件。
    > 从图中可见，运行的任务将 tasks.json 中的部分内容显示出来。
@@ -124,10 +128,11 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
    > > 成功执行指令后，会显示`生成已成功完成`。
    > > 未能成功执行时，则会显示`错误信息`。
 
-   [![LrTcQI.png](https://s1.ax1x.com/2022/04/20/LrTcQI.png)](https://imgtu.com/i/LrTcQI)
+   ![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172612.png)
 
    成功之后，在文件夹中会多出对应的 exe 文件，如图：
-   [![LrL2a6.png](https://s1.ax1x.com/2022/04/20/LrL2a6.png)](https://imgtu.com/i/LrL2a6)
+
+   ![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172629.png)
 
    强调一下，将上述任务完成后，我们只是利用 tasks.json 配置文件将 C 文件编译成了可执行的 exe 文件后续没有执行 该 exe 文件。想要查看运行结果的话：有两种办法：
    + 在 VS code 的终端中输入相应的指令以执行文件
@@ -138,15 +143,15 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
 #### 其次进行配置调试任务
    点击 `运行(R) > 添加配置`，如图:
 
-   [![LrvNy4.png](https://s1.ax1x.com/2022/04/20/LrvNy4.png)](https://imgtu.com/i/LrvNy4)
+   ![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172731.png)
 
    再次点击图中选项
    > 由于不明原因，我这点击该选项后，直接生成了 launch.json 文件，但是是空的，和其他教程不一样，不过问题不大，就是配置复杂了一点。
    > ↙(`ヮ´ )↗ 开摆！
 
-   [![LrxiX4.png](https://s1.ax1x.com/2022/04/20/LrxiX4.png)](https://imgtu.com/i/LrxiX4)
+   ![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172748.png)
    生成 launch.json 文件。
-   [![Lrz3xU.png](https://s1.ax1x.com/2022/04/20/Lrz3xU.png)](https://imgtu.com/i/Lrz3xU)
+   ![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172803.png)
 
    空的？没事，点击右边的 `添加配置`，选择 `C/C++: (gdb) 启动`。
    > 之所以选择该选项，是在我尝试了各选项的配置后做出的决定。
@@ -155,30 +160,30 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
    > + 没有复杂 ~~（可能无用的）~~ 的配置选项 
 
 
-   [![LskEHU.png](https://s1.ax1x.com/2022/04/20/LskEHU.png)](https://imgtu.com/i/LskEHU)
+   ![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172825.png)
 
    然后生成的配置文件大致如图所示，不过还不能直接用，还需要修改其中部分字段。
-   [![LsAaoF.png](https://s1.ax1x.com/2022/04/20/LsAaoF.png)](https://imgtu.com/i/LsAaoF)
+   ![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172846.png)
 
    各字段的作用：
-   + name: 配置名称，用于显示在启动配置的下拉菜单中。
-   + type: 配置类型。
-   + request: 请求配置类型。可是 `启动` 或 `附加`，对应 `launch` 和 `attach`。
-   + program: 程序可执行的完整路径。
-   + args: 传递给程序的命令行参数。
-   + stopAtEntry: 可选参数。如果是为 true，则调试程序就会在目标的入口点处停止。如果传递了 processId，则不起任何作用。
-   + cwd: 目标的工作目录。
-   + environment: 要添加到程序环境的环境变量。
-   + externalConsole: 如果为 true，则为调试对象启动控制台；为 false，则会在 linux 和 Windows 上显示在集成控制台中。
+   + `name`: 配置名称，用于显示在启动配置的下拉菜单中。
+   + `type`: 配置类型。
+   + `request`: 请求配置类型。可是 `启动` 或 `附加`，对应 `launch` 和 `attach`。
+   + `program`: 程序可执行的完整路径。
+   + `args`: 传递给程序的命令行参数。
+   + `stopAtEntry`: 可选参数。如果是为 `true`，则调试程序就会在目标的入口点处停止。如果传递了 `processId`，则不起任何作用。
+   + `cwd`: 目标的工作目录。
+   + `environment`: 要添加到程序环境的环境变量。
+   + `externalConsole`: 如果为 `true`，则为调试对象启动控制台；为 `false`，则会在 `linux` 和 `Windows` 上显示在集成控制台中。
       > 意思就是：
-      > true: 额外开启一个控制台来显示结果。
-      > false: 直接在 VS code 的集成终端显示结果。 
-   + MIMode: 指示 MIDebugEngine 要连接到的控制台调试程序。允许的值，`gdb`、`lldb`。
-   + miDubuggerPath: MI 调试程序（如 gdb）的路径。如若未指定（如 gdb.exe），将首先在路径中搜索调试程序。
-   + setupCommands: 为了安装基础调试程序而执行一个或多个 GDB/LLDB 命令。
-     + description: 此命令的可选说明。
-     + text: 要执行的调试命令。
-     + ignoreFailures: 如果为 true，则会忽略该命令执行失败。默认值：false。
+      > `true`: 额外开启一个控制台来显示结果。
+      > `false`: 直接在 VS code 的集成终端显示结果。 
+   + `MIMode`: 指示 `MIDebugEngine` 要连接到的控制台调试程序。允许的值，`gdb`、`lldb`。
+   + `miDubuggerPath`: `MI` 调试程序（如 `gdb`）的路径。如若未指定（如 `gdb.exe`），将首先在路径中搜索调试程序。
+   + `setupCommands`: 为了安装基础调试程序而执行一个或多个 `GDB/LLDB` 命令。
+     + `description`: 此命令的可选说明。
+     + `text`: 要执行的调试命令。
+     + `ignoreFailures`: 如果为 `true`，则会忽略该命令执行失败。默认值：`false`。
 
    对 `program`、`miDebuggerPath`、`externalConsole` 等字段进行修改后。
    可得正常使用的 `launch.json`:
@@ -228,7 +233,7 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
    ```
    此时会到 C 文件，就可以点击 `运行(R) > 启动调试` 来调试程序，快捷键：`F5`，或是 `运行(R) > 以非调试模式运行` 来运行程序（不调试），快捷键：`Ctrl + F5`。结果如图：
 
-   [![LslIqH.png](https://s1.ax1x.com/2022/04/20/LslIqH.png)](https://imgtu.com/i/LslIqH)
+   ![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172909.png)
 
 至此，Windows 系统下 VS code 的 C/C++ 环境算是配置完成了。
 
@@ -311,7 +316,6 @@ banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
 }
 ```
 
-无
 
 ### 可直接使用的配置文件
 
