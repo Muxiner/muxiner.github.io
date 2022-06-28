@@ -1,12 +1,16 @@
 ---
 title: Windows 下包管理器 Scoop 的安装与使用
-math: true
 date: 2022-05-30 23:59:37
-categories:
+updated: 2022-06-28 21:52:30
+excerpt: 本文所写为 Windows 11 下包管理器 Scoop 的安装与使用，主要用于记录使用方法。
+categories: 
+- 教程
 tags:
+- software
+- 记录
 index_img:
 banner_img:
-excerpt: 本文所写为 Windows 11 下包管理器 Scoop 的安装与使用
+math: true
 ---
 
 

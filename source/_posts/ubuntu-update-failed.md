@@ -2,6 +2,8 @@
 title: 【水博客】Ubuntu Update 失败：Release file is not valid yet
 math: true
 date: 2022-05-09 13:59:13
+udpated: 2022-06-28 22:05:22
+excerpt: 本文所写记录 Ubuntu 使用过程中的问题 —— Ubuntu Update 失败：Release file is not valid yet。
 categories: 
  - linux
  - 水博客
@@ -49,7 +51,7 @@ E: Release file for https://mirrors.tuna.tsinghua.edu.cn/ubuntu/dists/focal-secu
 ```
 date
 ```
-![](https://s1.ax1x.com/2022/05/09/OGY5an.png)
+![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628221558.png)
 
 ### 问题解决
 
@@ -59,7 +61,7 @@ date
 ```
 sudo date -s 12:40:50
 ```
-![](https://s1.ax1x.com/2022/05/09/OGYzI1.png)
+![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628221120.png)
 
 > 我这知识时间不对，因而仅修改了时间。
 > 若是日期也不对就需要执行：
@@ -67,7 +69,7 @@ sudo date -s 12:40:50
 > sudo date -s 2022-5-9 12:40:50
 > ```
 
-![](https://s1.ax1x.com/2022/05/09/OGNElT.png)
+![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628222226.png)
 
 OK! 问题成功解决。
 

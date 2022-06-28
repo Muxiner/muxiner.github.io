@@ -1,6 +1,8 @@
 ---
 title: 多元线性回归 —— 波士顿房价预测
 date: 2022-04-30 15:31:04
+updated: 2022-06-28 22:39:30
+excerpt: 机器学习实验，使用多元线性回归实现波士顿房价的预测。
 categories: 机器学习
 tags: 
  - Python
@@ -59,8 +61,9 @@ math: true
 |  MEDV   |          同类房屋价格的中位数          |          连续值          |
 
 ### 实验详解
-[![LjShxH.png](https://s1.ax1x.com/2022/04/28/LjShxH.png)](https://imgtu.com/i/LjShxH)
-[![LjSoqI.png](https://s1.ax1x.com/2022/04/28/LjSoqI.png)](https://imgtu.com/i/LjSoqI)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230435.png)
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230614.png)
 
 简单的说就是，本次实验需要求得是：
 $$
@@ -203,7 +206,8 @@ $$
     plt.show()  # 显示图片
    ```
 ### 实验结果
-[![LjFWJP.png](https://s1.ax1x.com/2022/04/28/LjFWJP.png)](https://imgtu.com/i/LjFWJP)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230727.png)
 
 分析：
 

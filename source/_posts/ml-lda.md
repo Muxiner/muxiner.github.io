@@ -1,23 +1,30 @@
 ---
 title: 线性判别分析 —— 献血预测
-math: true
 date: 2022-05-14 23:12:12
+updated: 2022-06-28 22:39:30
+excerpt: 机器学习实验，使用线性判别分析实现献血预测。
 categories: 机器学习
 tags: 
  - Python
  - 机器学习
 index_img:
 banner_img:
+math: true
 ---
 
 ### 实验原理
 **线性判别分析（LDA）**
 
 LDA 的思想非常朴素: 给定训练样例，设法将样例投影到一条直线上，使得同样例的投影点尽可能接近、异类样例的投影点尽可能远离;在对新样本进行分类时，将其投影到同样的这条直线上，再根据投影点的位置来确定新样本的类别.
-![](https://s1.ax1x.com/2022/05/12/OwFl0P.png)
-![](https://s1.ax1x.com/2022/05/12/OwFGtS.png)
-![](https://s1.ax1x.com/2022/05/12/OwFaXn.png)
-![](https://s1.ax1x.com/2022/05/12/OwF000.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225538.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225610.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225634.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225650.png)
+
 ### 数据集介绍
 + 输血服务中心数据集：`data/输血服务中心数据集/blood_data.txt`
 + 该实验是个分类问题。本数据集共有 `748` 个样本，`5` 个属性，详见 `data/输血服务中心数据集/blood_names.txt`
@@ -278,7 +285,8 @@ def accuracy_score(y_true, y_pred):
 
 本图重在表示降维后，两类样本的位置情况。
 
-![](https://s1.ax1x.com/2022/05/12/OwoiWD.png)
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225723.png)
+
 ```python
     plt.rcParams['font.sans-serif'] = ['SimHei']
     plt.rcParams['axes.unicode_minus'] = False
@@ -298,7 +306,8 @@ def accuracy_score(y_true, y_pred):
 绘制测试集降维后的图表，以降维结果作为横坐标，0|1作为纵坐标。
 
 本图重在表示降维后，两类样本的位置情况。
-![](https://s1.ax1x.com/2022/05/12/OwokSe.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225740.png)
 
 ```python
  plt.scatter(test_x_handled[test_y == 0], np.ones((1, test_x_handled[test_y == 0].shape[0])),
@@ -323,7 +332,7 @@ def accuracy_score(y_true, y_pred):
 
 由图可得准确率：$1-frac{\text{位置不一致的条形个数}}{148}$
 
-![](https://s1.ax1x.com/2022/05/12/OwoKFf.png)
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225805.png)
 
 ```python
     y1 = test_y

@@ -2,6 +2,7 @@
 title: Windows PowerShell 美化
 math: true
 date: 2022-05-06 15:01:55
+updated: 2022-06-28 23:14:12
 categories: Terminal
 tags:
  - Beauty
@@ -38,42 +39,49 @@ Invoke-WebRequest get.scoop.sh | Invoke-Expression
 ```
 
 #### Oh My Posh
+
 通过 `scoop` 进行安装：
 ```shell
 scoop install https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/oh-my-posh.json
 ```
-![](https://s1.ax1x.com/2022/05/06/OKHemR.png)
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231646.png)
+
 当出现图示内容（绿色）时，说明安装成功。
 
 > 除了使用官方文档提到的方式进行安装。还可以使用 `scoop install oh-my-posh` 进行安装。
 > 这是 [scoop apps](https://scoop.sh/#/apps?q=oh-my-posh)中所提到的。
-> ![](https://s1.ax1x.com/2022/05/06/OKHWNV.png)
+> ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231715.png)
 > 使用此种方法时，要跟着文档的方法走哦。
 > 安装成功截图：
-> ![](https://s1.ax1x.com/2022/05/06/OKbA4f.png)
+> ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231734.png)
 
 > 如果想要卸载 Oh My Posh 的话，可以使用命令 `scoop uninstall oh-my-posh`，进行卸载。
 > 卸载成功截图：
-> ![](https://s1.ax1x.com/2022/05/06/OKbPHI.png)
+> ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231750.png)
 
 #### 字体
-![](https://s1.ax1x.com/2022/05/07/OKO35t.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231811.png)
+
 [Oh My Posh](https://ohmyposh.dev/docs/installation/windows) 提示到** 要显示所有图标，我们建议使用 `Nerd Font`。**
 
 所以咱就下载 [Nerd Font](https://www.nerdfonts.com/font-downloads) 字体吧。
 
 如果不适用 `Nerd Font` 的话，就会出现这种情况：
-![](https://s1.ax1x.com/2022/05/07/OKOhZ9.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231833.png)
+
 可见 icon 们均没有正常显示，而是显示的方框，这也是为什么要使用 `Nerd Font` 的原因了。
 > 人家自己也说了—— “To display all icons, we recommend the use of a Nerd Font.”
 
 
-![](https://s1.ax1x.com/2022/05/07/OKOxII.png)
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231854.png)
 
 进入官网后选择一个中意的字体下载就行。我自己使用的 [Hack Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip)（点击可直接下载该字体）
 
 然后进行安装啦，打开压缩包，选择喜欢的（细、粗）字体，然后点击安装。
-![](https://s1.ax1x.com/2022/05/07/OKXuWV.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231910.png)
 
 > 也可以使用 `scoop` 安装 `Nerd Font` 字体：
 > ```shell
@@ -87,7 +95,8 @@ scoop install https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/downl
 > 安装完成后需要重启 Windows Terminal 才可以设置字体哦，否则会设置失败。
 
 最后，在 `windows terminal` 中将字体选择为 `Hack Nerd Font`，即可。
-![](https://s1.ax1x.com/2022/05/07/OKXswd.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231927.png)
 
 #### posh-git
 [posh-git](https://github.com/dahlbyk/posh-git) 可以在 `PowerShell` 中显示 `Git` 状态的摘要信息并自动补全 `Git` 命令。
@@ -96,14 +105,19 @@ scoop install https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/downl
 ```shell
 scoop bucket add extras
 ```
-![](https://s1.ax1x.com/2022/05/07/OKjf41.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231945.png)
+
 ```shell
 scoop install posh-git
 ```
-![](https://s1.ax1x.com/2022/05/07/OKjcB4.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232008.png)
 
 #### Terminal-Icons
-![](https://s1.ax1x.com/2022/05/07/OKjHDe.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232029.png)
+
 [Terminal-Icons](https://github.com/devblackops/Terminal-Icons) 可以在 `PowerShell` 中显示项目图标并以颜色区分。让你的 `Powershell` 变得更加的花哨。
 
 通过 `scoop` 来安装，依次执行命令：
@@ -115,7 +129,8 @@ scoop bucket add extras
 ```shell
 scoop install terminal-icons
 ```
-![](https://s1.ax1x.com/2022/05/07/OKvMb4.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232046.png)
 
 > 安装完成后，还贴心的提示了如何使用呢。
 ### 配置 Oh My Posh
@@ -144,7 +159,8 @@ Import-Module Terminal-Icons
 Import-Module posh-git
 ```
 最后重新启动 `PowerShell`，或者是输入命令 `powershell` 即可查看美化后的界面。
-![](https://s1.ax1x.com/2022/05/07/OKxkLD.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232107.png)
 
 ### 配置主题
 完成全部安装和配置后，使用的是默认主题，如果想要切换成其它主题，可以去 [官方主题目录](https://ohmyposh.dev/docs/themes) 查看各种主题的效果，同时这些主题也被安装在 `Oh My Pos`h 的主题目录下。
@@ -159,7 +175,8 @@ Import-Module posh-git
 ```shell
 Get-PoshThemes ~\scoop\apps\oh-my-posh\current\themes 
 ```
-![](https://s1.ax1x.com/2022/05/07/OKxrmF.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232123.png)
 
 选择一个主题的名字，如 `paradox`，然后编辑 `PowerShell` 的配置文件，执行命令：
 ```shell
@@ -177,17 +194,22 @@ oh-my-posh init pwsh --config ~\scoop\apps\oh-my-posh\current\themes\paradox.jso
 因此需要设置 `VSCode` 的终端字体为 `Hack Nerd Font` 才能正常显示。
 
 首先打开**设置**，搜索 `Terminal > Integrated > Font Family`。
-![](https://s1.ax1x.com/2022/05/07/OKxh6K.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232142.png)
+
 然后添加 `Hack Nerd Font`。
 
 最后重新打开终端，或是执行 `powershell`，即可查看美化界面。
-![](https://s1.ax1x.com/2022/05/07/OKzaAH.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232205.png)
 
 ### 成品
 完成上述配置，以及对 `Windows Terminal` 的配置文件进行修改后，咱就获得了一个花哨的 `PowerShell`:
-![](https://s1.ax1x.com/2022/05/07/OMSsi9.png)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232221.png)
 
 ### 参考
+
 + [Oh My Posh | A prompt theme engine for any shell](https://ohmyposh.dev/)
 + [Scoop | A command-line installer for Windows](https://scoop.sh/#/)
 + [Oh My Posh：全平台终端提示符个性化工具](https://sspai.com/post/69911)

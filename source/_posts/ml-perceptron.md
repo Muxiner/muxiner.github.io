@@ -2,6 +2,8 @@
 title: 感知机学习算法
 math: true
 date: 2022-05-26 00:47:20
+updated: 2022-06-28 22:39:30
+excerpt: 机器学习实验，感知机学习算法的实践。
 categories: 机器学习
 tags: 
  - Python
@@ -39,7 +41,7 @@ banner_img:
 + 共有 98 个样本 2 个输入变量
 + 数据格式如下图：
   
-  <img src="https://s1.ax1x.com/2022/05/25/XANmo8.png" width = "40%">
+  <img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225935.png" width = "40%">
 
 ## 实验环境
 
@@ -254,11 +256,11 @@ def table_line(x_axis, y_axis, label, omega, theta, i):
 ```
 超平面：
 
-<img src="https://s1.ax1x.com/2022/05/25/XADaHs.jpg">
+<img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225958.png">
 
 迭代过程：
 
-![](https://www.imagehub.cc/image/GPmK3D)
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230114.png)
 
 ## 实验心得体会
 

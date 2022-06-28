@@ -1,7 +1,9 @@
 ---
-title: 有向图的连通性
+title: 离散数学笔记 —— 有向图的连通性
 math: true
 date: 2022-05-27 11:24:31
+updated: 2022-06-28 22:27:10
+excerpt: 就只是离散数学中有向图的连通性的知识点啦。
 categories: 课程笔记
 tags: 离散数学
 index_img:

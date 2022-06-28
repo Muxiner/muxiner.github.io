@@ -1,6 +1,9 @@
+---
 title: 【水博客】解决 Windows Powershell 中 SSH 远程连接失败问题
 author: Muxiner
 date: 2022-04-12 23:15:10
+updated: 2022-06-28 22:39:30
+excerpt: 如题所示，就是解决 PS 中 SSH 远程连接失败问题。
 categories: 水博客
 tags:
  - SSH
@@ -12,7 +15,7 @@ tags:
 
 终端出现：
 
-[![LnTJd1.md.png](https://s1.ax1x.com/2022/04/12/LnTJd1.md.png)](https://imgtu.com/i/LnTJd1)
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225106.png)
 
 > 上图使用的是他人的问题图片，自己这边忘记截图了。
 
@@ -37,7 +40,7 @@ ssh-keygen -R xx.xx.xx.xx
 # xx.xx.xx.xx 是需要使用 ssh 连接的 ip
 ```
 
-[![LnXWAH.md.png](https://s1.ax1x.com/2022/04/12/LnXWAH.md.png)](https://imgtu.com/i/LnXWAH)
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225125.png)
 
 然后重新连接：
 
@@ -53,7 +56,7 @@ Are you sure you want to continue connecting (yes/no)?
 
 输入：yes，并按回车。
 
-[![LupgDP.md.png](https://s1.ax1x.com/2022/04/12/LupgDP.md.png)](https://imgtu.com/i/LupgDP)
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225148.png)
 
 然后就能够成功建立远程连接，后续输入 `用户名` + `密码` 登录系统就行。
 
@@ -63,5 +66,6 @@ Are you sure you want to continue connecting (yes/no)?
 + 方法二：输入 `logout` (部分情况下需要多次输入) 
 
 ## 参考
+
 + [问题解决——SSH时出现WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!](https://blog.csdn.net/wangguchao/article/details/85614914)
 + [在终端ssh的断开方法](https://blog.csdn.net/weixin_39366112/article/details/78175873)

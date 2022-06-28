@@ -2,6 +2,8 @@
 title: 决策树 —— 隐形眼镜数据集预测
 math: true
 date: 2022-05-14 23:07:20
+updated: 2022-06-28 22:39:30
+excerpt: 机器学习实验，使用决策树算法实现隐形眼镜数据的预测。
 categories: 机器学习
 tags: 
  - Python
@@ -187,9 +189,9 @@ $$
 1. 采用 `C4.5` 算法建立决策树模型
 2. 将每个特征的信息增益率打印输出
 3. 输出最后建立的决策树模型结构图（可以用 `字典结构` 表示，也可以用 `matplotlib` 等图形库绘制出树形图）
-   > + 字典表示：![](https://s1.ax1x.com/2022/05/14/O6WkVA.png)
+   > + 字典表示：![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230841.png)
    > + 树形图表示：
-        <img src="https://s1.ax1x.com/2022/05/14/O6WKKg.png" width="60%"/>
+        <img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231217.png" width="60%"/>
 
 ## 实验代码详解
 

@@ -1,8 +1,11 @@
 ---
-title: C 语言链表的创建
+title: C 语言 —— 链表的创建
 date: 2021-03-29 23:57:25
+updated: 2022-06-28 22:39:30
+excerpt: C 语言创建链表的方法，（有、无头结点的）头插法和尾插法。
 categories: C
-tags: C
+tags:
+- 链表
 index_img: https://w.wallhaven.cc/full/47/wallhaven-477x9o.jpg
 banner_img: https://w.wallhaven.cc/full/42/wallhaven-42yxry.jpg
 ---

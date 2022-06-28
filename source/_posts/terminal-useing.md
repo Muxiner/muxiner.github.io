@@ -1,6 +1,9 @@
+---
 title: Windows Terminal 使用及美化记录
 author: Muxiner
 date: 2022-04-06 18:11:19
+updated: 2022-06-28 22:39:30
+excerpt: 用来记录使用 Windows Terminal 一路上遇到的问题以及解决的办法。
 categories: Terminal
 tags:
  - Beauty
@@ -39,7 +42,7 @@ tags:
 > 不过，在 22 年 4 月份的时候，Terminal 的配置文件部分就发生了一点变化。
 > 首先就是界面部分变得和 Windows 11 设置一样的 UI 风格
 > 其次，常规部分变成了如图所示样子：
-> [![OnwlJe.png](https://s1.ax1x.com/2022/05/06/OnwlJe.png)](https://imgtu.com/i/OnwlJe)
+> ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232410.png)
 > 外观 + 高级则隶属于其他设置（内容大致没有变化）。
 
 > 本文根据当前样式进行介绍。
@@ -47,7 +50,8 @@ tags:
 该部分共有 6 个字段：
 + 名称：下拉列表中显示的配置文件名称。
    
-  [![OnBa8g.png](https://s1.ax1x.com/2022/05/06/OnBa8g.png)](https://imgtu.com/i/OnBa8g)
+  ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232435.png)
+
 + 命令行：在配置文件中所使用的可执行文件。
    
    简单说就是，需要用到的命令行的可执行文件（路径），如：
@@ -59,7 +63,7 @@ tags:
   
   > 用人话说就是：打开该命令行后，所在的文件路径。
   默认值：`"%USERPROFILE%"`，该值是用户名的文件夹，即：
-  [![Onyii6.png](https://s1.ax1x.com/2022/05/06/Onyii6.png)](https://imgtu.com/i/Onyii6)
+  ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232455.png)
 
   > 备注：
   > 反斜杠需要转义。 例如，应以 `C:\\Users\\USERNAME\\Documents` 的形式输入 `C:\Users\USERNAME\Documents`。
@@ -67,19 +71,21 @@ tags:
 + 图标：配置文件中所使用的图标的表情符号或图像文件位置。
   > 这将设置在选项卡、下拉菜单、跳转列表和选项卡切换器中显示的图标。
   由此就可以将图标设置成喜欢的样子，例如：
-  [![OnyISO.png](https://s1.ax1x.com/2022/05/06/OnyISO.png)](https://imgtu.com/i/OnyISO)
+
+  ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232521.png)
+
   将 powershell 的图标设置成这个样子了。
 
 + 选项卡标题：将配置文件名称替换为标题，以在启动时传递给外壳。
   >设置后就会如图所示，标题一直是`cmd`、`powershell`。
 
-  [![On6Akq.png](https://s1.ax1x.com/2022/05/06/On6Akq.png)](https://imgtu.com/i/On6Akq)
+  ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232542.png)
   ~~似乎没有那么好看了，不过这是看情况的~~
 
 + 从下拉菜单中隐藏：如果启用，配置文件将不会显示在配置文件列表中。
 	> 这可用于**隐藏** `默认配置文件` 和 `动态生成的配置文件`，同时将他们保留在设置文件中。
 
-	[![OnBxsA.png](https://s1.ax1x.com/2022/05/06/OnBxsA.png)](https://imgtu.com/i/OnBxsA)
+	![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232556.png)
 
 更多关于该部分的信息，请详见 [**Windows 终端中的常规配置文件设置**](https://docs.microsoft.com/zh-cn/windows/terminal/customize-settings/profile-general)。
 ### 外观
@@ -111,28 +117,28 @@ tags:
 
 Windows Terminal 中有几个默认的配色方案可供使用：
 + `Campbell`
-  [![OnIeaD.png](https://s1.ax1x.com/2022/05/06/OnIeaD.png)](https://imgtu.com/i/OnIeaD)
+  ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232612.png)
 + `Campbell Powershell`
-  [![OnIEqK.png](https://s1.ax1x.com/2022/05/06/OnIEqK.png)](https://imgtu.com/i/OnIEqK)
+  ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232636.png)
 + `One Half Dark`
-  [![OnzeXD.png](https://s1.ax1x.com/2022/05/06/OnzeXD.png)](https://imgtu.com/i/OnzeXD)
+  ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232650.png)
 + `One Half Light`
-  [![OnzK7d.png](https://s1.ax1x.com/2022/05/06/OnzK7d.png)](https://imgtu.com/i/OnzK7d)
+  ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232710.png)
 + `Solarized Dark`
-  [![OuSFbQ.png](https://s1.ax1x.com/2022/05/06/OuSFbQ.png)](https://imgtu.com/i/OuSFbQ)
+  ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232727.png)
 + `Solarized Light`
-  [![OuS0qe.png](https://s1.ax1x.com/2022/05/06/OuS0qe.png)](https://imgtu.com/i/OuS0qe)
+  ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232742.png)
 + `Tango Dark`
-  [![OupCJ1.png](https://s1.ax1x.com/2022/05/06/OupCJ1.png)](https://imgtu.com/i/OupCJ1)
+  ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232757.png)
 + `Tango Light`
-  [![OupcTJ.png](https://s1.ax1x.com/2022/05/06/OupcTJ.png)](https://imgtu.com/i/OupcTJ)
+  ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232811.png)
 + `Vintage`
-  [![OupIOO.png](https://s1.ax1x.com/2022/05/06/OupIOO.png)](https://imgtu.com/i/OupIOO)
+  ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232826.png)
 
 
 如果默认的配色方案没法满足你的需求，还可以自己设置想要的配色方案哦（有时候可能会有一点点困难）。
 
-[![Ou9ikj.png](https://s1.ax1x.com/2022/05/06/Ou9ikj.png)](https://imgtu.com/i/Ou9ikj)
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232840.png)
 
 选择合适的终端颜色、系统颜色，再保存，就拥有自己喜欢的配色方案了。
 
@@ -142,7 +148,7 @@ Windows Terminal 中有几个默认的配色方案可供使用：
 
 没事，有大佬们设计了很多很多种华丽的配色方案: [Windows Terminal Themes](https://windowsterminalthemes.dev/)
 
-[![OuCm8I.png](https://s1.ax1x.com/2022/05/06/OuCm8I.png)](https://imgtu.com/i/OuCm8I)
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232855.png)
 
 一共有几十共不同的配色方案，一种配色方案还有 `Dark`，`Light` 两种选择，共有一款会是你喜欢的，或者是适合你的。
 
@@ -151,8 +157,9 @@ Windows Terminal 中有几个默认的配色方案可供使用：
 
 这里没有太多好说的，主要是需要使用**等宽字体**，不要使用中文字体，如宋体、幼圆、黑体。
 
-这是使用了**黑体**的结果，就一个字——丑。
-[![OuPzX6.png](https://s1.ax1x.com/2022/05/06/OuPzX6.png)](https://imgtu.com/i/OuPzX6)
+这是使用了**黑体**的结果，就一个字 —— 丑。
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232915.png)
 
 不过 terminal 也提供了很多不错的字体，如 `Cascadia Code`、`Cascadia Mono`、`Consolas` 等等。
 
@@ -169,7 +176,9 @@ Windows Terminal 中有几个默认的配色方案可供使用：
 背景图片可以让你的终端看起来更加的花里胡哨。
 
 你可以选择自己想要的图片，或者是桌面壁纸。
-[![OuEtG4.png](https://s1.ax1x.com/2022/05/06/OuEtG4.png)](https://imgtu.com/i/OuEtG4)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232959.png)
+
 选择使用背景图片后，还可以设置图片的一些属性：
 + 背景图像拉升模式
 + 背景图像对齐
@@ -184,7 +193,8 @@ Windows Terminal 中有几个默认的配色方案可供使用：
 #### 亚克力效果、透明效果
 设置该配置文件的窗口透明度。效果如下：
 
-[![OuZT2Q.png](https://s1.ax1x.com/2022/05/06/OuZT2Q.png)](https://imgtu.com/i/OuZT2Q)
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628233024.png)
+
 > 可以看见窗口下层关于 `Windows Terminal Themes` 的内容。
 > 透明度也是需要适当设置的，不然也会影响文字的阅读。
 > 这一点也是需要和配色方案协调起来，比如某些颜色的字更容易看清楚。
@@ -192,7 +202,9 @@ Windows Terminal 中有几个默认的配色方案可供使用：
 > 所以，最好还是合理的hi用该透明的效果。
 
 不过还有**亚克力效果**可以缓解上述问题：当启用亚克力效果时，终端会创建一个模糊的背景——应用一个半透明的纹理。
-[![OumEOs.png](https://s1.ax1x.com/2022/05/06/OumEOs.png)](https://imgtu.com/i/OumEOs)
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628233052.png)
+
 > 如图，窗口下层依然是关于 `Windows Terminal Themes` 的内容，但是仅能隐约的看到相关内容。
 ### 高级
 看了一下，似乎没有什么和美化有关的内容，所以就不在此叙述。

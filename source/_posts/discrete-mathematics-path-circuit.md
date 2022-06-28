@@ -1,7 +1,9 @@
 ---
-title: 通路与回路
+title: 离散数学笔记 —— 通路与回路
 math: true
 date: 2022-05-24 22:31:50
+updated: 2022-06-28 22:27:10
+excerpt: 就只是离散数学中通路和回路的知识点啦。
 categories: 课程笔记
 tags: 离散数学
 index_img:
