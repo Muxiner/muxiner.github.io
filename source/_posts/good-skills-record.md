@@ -1,7 +1,7 @@
 ---
 title: 好东西就记录下来
 date: 2022-07-12 16:38:19
-updated: 2022-07-12 16:38:19
+updated: 2022-07-12 19:44:07
 excerpt: The palest ink is better than the best memory. 好记性不如烂笔头。记不住那就记录下来。
 categories: 
 - 记录
