@@ -11,3 +11,7 @@ index_img:
 banner_img:
 math: true
 ---
+
+{% note primary %}
+**2022-07-12** 更新
+{% endnote %}
