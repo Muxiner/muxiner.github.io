@@ -1,7 +1,7 @@
 ---
 title: Visual Studio Code 插件使用记录
 date: 2022-07-12 16:35:59
-updated: 2022-07-12 19:44:07
+updated: 2022-07-16 17:30:32
 excerpt: 记录一下 vs code 好用的插件，以及开发环境需要的插件。
 categories: 
 - VS code
@@ -13,16 +13,29 @@ banner_img:
 math: true
 ---
 
+### 更新情况
+
 {% note primary %}
 **2022-07-12** 更新：
-+ 添加 <span class="label label-info"><a href="#C/C++Plugins" title="vs code C\C++插件">C\C++ Plugins</a></span>：<span class="label label-default"><a href="#C\C++">C\C++</a></span>、<span class="label label-default"><a href="#C/C++Extension-Pack">C/C++ Extension Pack</a></span>
-+ 添加 <span class="label label-info"><a href="#beauty-plugins" title="vs code 美化插件">美化</a></span>：
++ 添加 <span class="label label-info"><a href="#C-C-Plugins" title="vs code C\C++插件">C\C++ Plugins</a></span>：<span class="label label-default"><a href="#1-C-C">C\C++</a></span>、<span class="label label-default"><a href="#2-C-x2F-C-Extension-Pack">C/C++ Extension Pack</a></span>
++ 添加 <span class="label label-info"><a href="#美化" title="vs code 美化插件">美化</a></span>：<span class="label label-default"><a href="#2-One-Dark-Pro">One Dark Pro</a></span>、<span class="label label-default"><a href="#1-Beauty">Beauty</a></span>
++ 添加 <span class="label label-info"><a href="#汉化" title="vs code 汉化插件">汉化</a></span>：<span class="label label-default"><a href="#Chinese-Simplified-简体中文-Language-Pack-for-Visual-Studio">Chinese (Simplified) (简体中文) Language Pack for Visual Studio</a></span>
++ 添加 <span class="label label-info"><a href="#Markdown" title="vs code 汉化插件">Markdown</a></span>：<span class="label label-default"><a href="#1-Markdown-All-in-One">Markdown All in One</a></span>、<span class="label label-default"><a href="#2-Markdown-PDF">Markdown PDF</a></span>
++ 添加 <span class="label label-info"><a href="#Python" title="vs code python 插件">Python</a></span>：<span class="label label-default"><a href="#1-Python">Python</a></span>、<span class="label label-default"><a href="#2-Pylance">Pylance</a></span>
+
 {% endnote %}
 
 
+{% note primary %}
+**2022-07-16** 更新：
++ <span class="label label-info">美化</span> 添加：<span class="label label-default"><a href="#2-Material-Icon-Theme">Material Icon Theme</a></span>、<span class="label label-default"><a href="#3-vscode-icons">vscode-icons</a></span>
++ 添加 <span class="label label-info"><a href="#前端" title="vs code 前端插件">前端</a></span>：<span class="label label-default"><a href="#1-Live-Server">Live Server</a></span>、<span class="label label-default"><a href="#2-Auto-Complete-Tag">Auto Complete Tag</a></span>、<span class="label label-default"><a href="#3-Auto-Rename-Tag">Auto Rename Tag</a></span>、<span class="label label-default"><a href="#4-Auto-Close-Tag">Auto Close Tag</a></span>、<span class="label label-default"><a href="#5-CSS-Peek">CSS Peek</a></span>、<span class="label label-default"><a href="#6-HTML-CSS-Support">HTML CSS Support</a></span>
++ 添加 <span class="label label-info"><a href="#高效率工具" title="vs code 高效率工具插件">高效率工具</a></span>：<span class="label label-default"><a href="#1-Path-Intellisense">Path Intellisense</a></span>、<span class="label label-default"><a href="#2-Bracket-Pair-Colorization-Toggler">Bracket Pair Colorization Toggler</a></span>
+{% endnote %}
+
 
 ### C\C++ Plugins
-<a id='C/C++Plugins'></a>
+
 {% note info %}
 关于 windows 下 VS code C\C++ 环境的配置：{% btn https://muxiner.github.io/2022/04/19/vscode-env-c-new/#, Windows 下 VS code 配置 C/C++ 环境 %}
 {% endnote %}
@@ -58,11 +71,7 @@ C/C++ 扩展为 Visual Studio Code 添加了对 C/C++ 的语言支持，包括 I
 
 ### 美化
 
-<a id='beauty-plugins'></a>
-
 #### 1. Beauty
-
-<a id='Beauty'></a>
 
 ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712191137.png)
 
@@ -71,9 +80,8 @@ Beauty 是 Web 开发中 VSCODE 的代码美化器扩展。
 
 > 不格式化其他的编程语言吗。
 
-#### 2. One Dark Pro
 
-<a id="ondarkpro"></a>
+#### 2. One Dark Pro
 
 ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712191628.png)
 
@@ -81,14 +89,24 @@ Beauty 是 Web 开发中 VSCODE 的代码美化器扩展。
 
 > 很好看的主题呀。
 
+#### 2. Material Icon Theme
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716174638.png)
+
+Get the Material Design icons into your VS Code.
+
+> 这个图标还挺好看的呢。
+> 想看清楚的图标的话，需要去官方的 [MarketPlace](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme) 看一看吧。
+
+#### 3. vscode-icons
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716181801.png)
+
+vscode 团队设计的图标库，还可以，但是在我看来，没上一个好看哦。
 
 ### 汉化
 
-<a id="Sinicization"></a>
-
 #### Chinese (Simplified) (简体中文) Language Pack for Visual Studio
-
-<a id="Chinese-Simplified"></a>
 
 ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712192229.png)
 
@@ -96,13 +114,9 @@ Beauty 是 Web 开发中 VSCODE 的代码美化器扩展。
 
 > 英文不友好者狂喜插件。
 
-### MarkDown
-
-<a id="markdown"></a>
+### Markdown
 
 #### 1. Markdown All in One
-
-<a id="Markdown-All-in-One"></a>
 
 ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712192533.png)
 
@@ -112,7 +126,6 @@ Beauty 是 Web 开发中 VSCODE 的代码美化器扩展。
 
 #### 2. Markdown PDF
 
-<a id="markdown-pdf"></a>
 
 ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712192745.png)
 
@@ -126,11 +139,9 @@ Beauty 是 Web 开发中 VSCODE 的代码美化器扩展。
 
 ### Python
 
-<a id="python-plugins"></a>
 
 #### 1. Python
 
-<a id="python"></a>
 
 ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712193331.png)
 
@@ -140,7 +151,6 @@ Beauty 是 Web 开发中 VSCODE 的代码美化器扩展。
 
 #### 2. Pylance
 
-<a id="pylance"></a>
 
 ![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712193550.png)
 
@@ -172,3 +182,84 @@ Beauty 是 Web 开发中 VSCODE 的代码美化器扩展。
 + `IntelliCode` 兼容性
 + `Jupyter Notebooks` 兼容性
 + 语法高亮
+
+### 前端
+
+#### 1. Live Server
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716182133.png)
+
+模拟本地服务器，编写完网页代码后保存，浏览器的页面情况将自动刷新，就无需在浏览器中刷新。
+
+#### 2. Auto Complete Tag
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716184131.png)
+
+同时拥有**自动关闭标签**和**自动重命名标签**的功能。
+
+> 就是下面两个插件的功能，要么安装该插件，要么安装下面两个插件。
+
+#### 3. Auto Rename Tag
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716183614.png)
+
+自动重命名成对的 HTML/XML 标记。
+
+#### 4. Auto Close Tag
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716183810.png)
+
+自动添加 HTML/XMl 关闭标记。
+
+特征：
++ 键入开始标签的右括号时自动添加结束标签
++ 插入结束标签后，光标在开始和结束标签之间
++ 设置不自动关闭的标签列表
++ 自动关闭自关闭标签
++ 支持 `Sublime Text 3` 的自动关闭标签
++ 使用键盘快捷键或命令面板手动添加关闭标签
+
+
+#### 5. CSS Peek
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716184534.png)
+
+快速跳到CSS的定义处预览。
+
+特征：该扩展支持符号定义跟踪的所有正常功能，但它适用于 `css` 选择器（`类`、`ID` 和 `HTML` 标记）。这包括：
++ `Peek`：内联加载 `css` 文件并在此处进行快速编辑。( `Ctrl + Shift + F12` )
++ `转到`：直接跳转到 `css` 文件或在新编辑器中打开它 (`F12`)
++ `悬停`：悬停在符号 (`Ctrl + hover`)上显示定义
+
+
+#### 6. HTML CSS Support
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716184901.png)
+
+适用于 `HTML` 的 `Visual Studio Code CSS Intellisense`.
+
+特征: 
++ 完善 HTML `id` 和 `类`属性。
++ 支持链接和嵌入的样式表。
++ 支持模板继承。
++ 支持其他样式表。
++ 支持其他类似 `HTML` 的语言。
++ 按需验证 `CSS` 选择器。
+
+用法: 可以通过 `ctrl + 空格` 查看 `id` 和 `类` 属性建议列表。
+
+### 高效率工具
+
+#### 1. Path Intellisense
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716173750.png)
+
+该插件支持自动提示文件路径，支持各种文件无脑快速引入。
+
+#### 2. Bracket Pair Colorization Toggler
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716182853.png)
+
+给不同区域的括号加上不同的颜色，加以区分。
+
+仓库：[Bracket Pair Colorization Toggler](https://github.com/dzhavat/bracket-pair-toggler)
