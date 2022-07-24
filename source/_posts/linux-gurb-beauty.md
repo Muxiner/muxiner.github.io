@@ -3,7 +3,7 @@ title: 使用 Gurb 进行多系统引导，并使用主题美化 Grub 界面
 math: true
 hide: false
 date: 2022-07-24 21:48:44
-updated: 2022-07-24 22:50:40
+updated: 2022-07-24 22:50:55
 excerpt: 本记录用于记录 deepin 系统下对 Grub 启动页面进行美化。
 categories:
 - Archlinux
