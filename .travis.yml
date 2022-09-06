@@ -9,7 +9,7 @@ branches:
 
 env:
   global:
-    - GH_REF: https://${GH_TOKEN}@github.com/Muxiner/ResourceRepo.git
+    - GH_REF: https://Muxiner:${GH_TOKEN}@github.com/Muxiner/ResourceRepo.git
 
 before_install: 
   - export TZ='Asia/Shanghai' #配置时区为东八区 UTC+8
