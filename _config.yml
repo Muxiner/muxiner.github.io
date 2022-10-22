@@ -113,3 +113,13 @@ admin:
   username: muxiner
   password_hash: $2a$10$mH/LZL4Z2Vdt99icc4TxdeapdAFkZVN3aNUczvml8G96UEbyp.yq2
   secret: my super secret phrase
+
+# 安全
+encrypt: # hexo-blog-encrypt
+  abstract: 🐔 密码没有看什么
+  message: 🐔 密码呢
+  tags:
+  - {name: Pixiv, password: 520038}
+  template: <div id="hexo-blog-encrypt" data-wpm="{{hbeWrongPassMessage}}" data-whm="{{hbeWrongHashMessage}}"><div class="hbe-input-container"><input type="password" id="hbePass" placeholder="{{hbeMessage}}" /><label>{{hbeMessage}}</label><div class="bottom-line"></div></div><script id="hbeData" type="hbeData" data-hmacdigest="{{hbeHmacDigest}}">{{hbeEncryptedData}}</script></div>
+  wrong_pass_message: 🐔 密码输错了
+  wrong_hash_message: 🐔 这个文章不能被校验, 不过您还是能看看解密后的内容.
