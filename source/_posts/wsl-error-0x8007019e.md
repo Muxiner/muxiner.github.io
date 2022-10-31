@@ -10,6 +10,7 @@ categories:
 - 记录
 tags:
 - Ubuntu
+- install
 index_img:
 banner_img:
 sticky:
