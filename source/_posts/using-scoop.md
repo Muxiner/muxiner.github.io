@@ -1,13 +1,13 @@
 ---
 title: Windows 下包管理器 Scoop 的安装与使用
 date: 2022-05-30 23:59:37
-updated: 2022-06-28 21:52:30
+updated: 2022-11-17 21:10:22
 excerpt: 本文所写为 Windows 11 下包管理器 Scoop 的安装与使用，主要用于记录使用方法。
 categories: 
+- 记录
 - 教程
 tags:
-- software
-- 记录
+- Scoop
 index_img:
 banner_img:
 math: true
@@ -55,6 +55,7 @@ math: true
 
 ###  🍉 安装 Scoop
 
+
 ####  🍑 安装在默认位置
 
 默认安装在 `C:\Users\username\scoop` 路径下。
@@ -70,6 +71,41 @@ Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.
 ```powershell
 iwr -useb get.scoop.sh | iex
 ```
+{% note info%}
+<a id="install">**2022.11.17 更新：**</a>
+
+为加快 Scoop 的安装速度，主要是下载速度，使用代理进行加速下载。
+
++ **fastgit** 下载
+  + 进入用户主目录：`cd ~`
+  + 下载 `scoop_install.ps1`：
+     
+     ```powershell
+     curl -o scoop_install.ps1 https://raw.fastgit.org/scoopinstaller/install/master/install.ps1
+     ```
+  + 修改 `scoop_install.ps1` 中文件下载地址：
+    
+    ```powershell
+    (Get-Content scoop_install.ps1).replace('https://github.com/ScoopInstaller/', 'https://download.fastgit.org//ScoopInstaller/') | Set-Content scoop_install.ps1
+    ```
+  + 安装 Scoop：`./scoop_install.ps1`
+  + 删除 `scoop_install.ps1`：`rm scoop_install.ps1`
+
++ **github proxy** 下载
+  + 进入用户主目录：`cd ~`
+  + 下载 `scoop_install.ps1`：
+     
+     ```powershell
+     curl -o scoop_install.ps1 https://ghproxy.com/https://raw.githubusercontent.com/scoopinstaller/install/master/install.ps1
+     ```
+  + 修改 `scoop_install.ps1` 中文件下载地址：
+    
+    ```powershell
+    (Get-Content scoop_install.ps1).replace('https://github.com/ScoopInstaller/', 'https://ghproxy.com/https://github.com/ScoopInstaller/') | Set-Content scoop_install.ps1
+    ```
+  + 安装 Scoop：`./scoop_install.ps1`
+  + 删除 `scoop_install.ps1`：`rm scoop_install.ps1`
+{% endnote%}
 
 ####  🍑 自定义安装目录
 
@@ -100,11 +136,9 @@ $env:SCOOP='C:\scoop'
 ```powershell
 iwr -useb get.scoop.sh | iex
 ```
-![](https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/md_img/20220529150626.png)
-
-> 出现上图所示，且无错误提示，则安装成功。
-
-
+{% note info %}
+安装方式同上，<a href="#install">点此跳转到新的安装方式</a>
+{% endnote %}
 
 ####  🍑 自定义全局应用安装目录
 
@@ -170,7 +204,7 @@ Options:
 
 分为两种情况：
 
-#####  🫐 为当前用户安装
+#####  😃为当前用户安装
 
 安装路径：`scoop\apps` 
 
@@ -186,7 +220,7 @@ scoop install <app>
 # scoop install nano
 ```
 
-#####  🫐 为所有用户安装
+#####  😃为所有用户安装
 
 默认的安装路径：`C:\ProgramData\scoop`
 
@@ -204,25 +238,25 @@ scoop install <app> -g
 
 ####  🍒 卸载应用
 
-#####  🫐 卸载某一程序
+#####  😃卸载某一程序
 
 ```powershell
 scoop uninstall <app>
 ```
 
-#####  🫐 卸载程序并移除配置文件
+#####  😃卸载程序并移除配置文件
 
 ```powershell
 scoop uninstall <app> -p
 ```
 
-#####  🫐 卸载全局程序
+#####  😃卸载全局程序
 
 ```powershell
 scoop uninstall <app> -g
 ```
 
-#####  🫐 更多信息
+#####  😃更多信息
 
 ```powershell
 scoop help uninstall
@@ -232,31 +266,31 @@ scoop help uninstall
 
 ####  🍒 更新
 
-#####  🫐 更新 scoop 及所有 bucket 但不更新 app
+#####  😃更新 scoop 及所有 bucket 但不更新 app
 
 ```powershell
 scoop update
 ```
 
-##### 🫐 更新某一 app
+##### 😃更新某一 app
 
 ```powershell
 scoop update <app>
 ```
 
-##### 🫐 更新 scoop、bucket、app
+##### 😃更新 scoop、bucket、app
 
 ```powershell
 scoop update *
 ```
 
-##### 🫐 更新全局 app
+##### 😃更新全局 app
 
 ```powershell
 scoop update <app> -g
 ```
 
-##### 🫐 更多信息
+##### 😃更多信息
 
 ```powershell
 scoop help update
@@ -266,61 +300,61 @@ scoop help update
 
 ####  🍒 其他有用操作
 
-##### 🫐 查看已安装 app
+##### 😃查看已安装 app
 
 ```powershell
 scoop list
 ```
 
-##### 🫐 查看可更新 app
+##### 😃查看可更新 app
 
 ```powershell
 scoop status
 ```
 
-##### 🫐 查看某 app 主页
+##### 😃查看某 app 主页
 
 ```powershell
 scoop home <app>
 ```
 
-##### 🫐 查看「已知库」
+##### 😃查看「已知库」
 
 ```powershell
 scoop bucket known
 ```
 
-##### 🫐 添加「已知库」
+##### 😃添加「已知库」
 
 ```powershell
 scoop bucket add <bucket>
 ```
 
-##### 🫐 查看已添加的库
+##### 😃查看已添加的库
 
 ```powershell
 scoop bucket list
 ```
 
-##### 🫐 删除已添加的库
+##### 😃删除已添加的库
 
 ```powershell
 scoop bucket rm <bucket>
 ```
 
-##### 🫐 添加第三方库
+##### 😃添加第三方库
 
 ```powershell
 scoop bucket add <bucket> <bucket_url>
 ```
 
-#####  🫐 删除已安装软件的旧版本
+#####  😃删除已安装软件的旧版本
 
 ```powershell
 scoop cleanup *
 ```
 
-#####  🫐 清理软件缓存
+#####  😃清理软件缓存
 
 通常是下载的软件安装包。
 
