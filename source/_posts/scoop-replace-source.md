@@ -3,7 +3,7 @@ title: Windows 包管理工具 Scoop 更换国内可用源
 hide: false
 date: 2022-11-17 19:17:24
 updated: 2022-11-17 19:25:45
-excerpt: 你好
+excerpt: 乱记录之为什么咱需要更换 scoop 源以及如何更换 scoop 源。
 categories:
 - 记录
 tags:
