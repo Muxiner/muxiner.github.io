@@ -91,7 +91,7 @@ git clone https://ghproxy.com/https://github.com/your_name/your_repo
 ### Scoop 源
 
 ```bash
-scoop config SCOOP_REPO 'https://ghproxy.com/ScoopInstaller/Scoop'
+scoop config SCOOP_REPO 'https://ghproxy.com/github.com/ScoopInstaller/Scoop'
 ```
 
 ### bucket 源
