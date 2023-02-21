@@ -62,3 +62,53 @@ echo 'Function now {get-date -format "yyyy-MM-d HH:mm:ss"}' >> $profile
 now
 # 2022-07-12 18:01:15
 ```
+
+{% note primary %}
+**2023-02-21** 更新
+{% endnote %}
+
+### Windows 下的 Redis 安装及简单使用
+
+平台：**Windows**
+
+#### 安装 Redis
+
+Redis 下载地址：[https://github.com/tporadowski/redis/releases](https://github.com/tporadowski/redis/releases)
+
+选择 `Redis-x64-x.x.xxx.msi` 下载，安装。
+
+使用 msi 安装可自行添加**系统环境变量**。
+
+#### Redis 使用
+
+未添加 Redis 的路径到系统环境变量，需要在 Redis 的安装路径启动 CMD/Powershell 等等。
+
+添加了环境变量可直接使用下述指令：
++ 启动 redis：
+  ```
+  redis-server.exe redis.windows.conf
+  # 或 redis-server redis.windows.conf
+  # 或 redis-server
+  ```
++ 关闭 redis：
+  任选一：
+  + 关掉命令行窗口
+  + `Ctrl + C`
++ 访问 redis 服务端：
+  ```
+  redis-cli.exe -h 127.0.0.1 -p 6379
+  或 redis-cli -h 127.0.0.1 -p 6379
+  ```
+
++ redis 作为 windows 服务启动方式
+  ```
+  redis-server --service-install redis.windows.conf
+  ```
+  启动服务：`redis-server --service-start`
+  停止服务：`redis-server --service-stop`
+
++ 移除 redis 的 Windows 服务
+  ```
+  redis-server.exe --service-uninstall
+  # 或 redis-server --service-uninstall
+  ```
