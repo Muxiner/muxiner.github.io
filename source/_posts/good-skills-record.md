@@ -1,7 +1,7 @@
 ---
-title: 好东西就记录下来
+title: 好东西就记录下来.jpg
 date: 2022-07-12 16:38:19
-updated: 2022-07-12 19:44:07
+updated: 2023-02-22 11:39:07
 excerpt: The palest ink is better than the best memory. 好记性不如烂笔头。记不住那就记录下来。
 categories: 
 - 记录
@@ -10,6 +10,7 @@ tags:
 index_img:
 banner_img:
 math: true
+sticky: 100
 ---
 
 {% note primary %}
@@ -62,6 +63,7 @@ echo 'Function now {get-date -format "yyyy-MM-d HH:mm:ss"}' >> $profile
 now
 # 2022-07-12 18:01:15
 ```
+----------------------------------
 
 {% note primary %}
 **2023-02-21** 更新
