@@ -3,7 +3,7 @@ title: Ubuntu 安装 zsh + oh my zsh 美化终端
 math: true
 hide: false
 date: 2022-11-01 13:58:52
-updated: 2022-11-1 14:01:34
+updated: 2023-02-24 01:10:03
 excerpt: Ubuntu 上安装“终极”终端 —— ZSH，并安装 oh my zsh + powerlevel10k 进行美化。
 categories: 
 - 记录
@@ -147,9 +147,9 @@ p10k configure
 > 看到别人推荐，自己试了确实不错。
 > zsh 插件确实挺多，可以去 wiki 看看：[zsh Plugins | github wiki](https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins)
 
-这里咱就只说俩，**自动补全** + **代码高亮**。
+~~这里咱就只说俩，**自动补全** + **代码高亮**。~~
 
-安装自动补全 —— `zsh-autosuggestions`
+#### 安装自动补全 —— `zsh-autosuggestions`
 先下载到 oh my zsh 插件中
 ```zsh
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -162,7 +162,8 @@ plugins=(
 )
 ```
 
-安装代码高亮 —— `zsh-syntax-highlighting`
+#### 安装代码高亮 —— `zsh-syntax-highlighting`
+
 还是先下载到 oh my zsh 的插件中
 ```zsh
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
@@ -171,6 +172,63 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 ```txt
 plugins=( [plugins...] zsh-syntax-highlighting)
 ```
+
+#### 允许在命令历史记录中搜索子串 —— `history-substring-search`
+```zsh
+git clone https://github.com/zsh-users/zsh-history-substring-search.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/history-substring-search
+```
+然后还是在配置文件 `.zshrc` 对应位置：
+```txt
+plugins=( [plugins...] history-substring-search)
+```
+
+#### 目录导航 —— `zsh-navigation-tools`
+
+安装 `zsh-navigation-tools` 可以提供一些在命令行中浏览和编辑不同内容的工具，包括浏览别名、目录、函数、历史记录、进程、环境变量等。
+
+安装：
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh)"
+```
+更新该插件就再运行该指令。
+
+{% note info %}
+
+The tools are:
++ `n-aliases` - 浏览别名，并将编辑委托给 `vared`
++ `n-cd` - 浏览 `dirstack` 和已标记的目录，并允许进入所选目录
++ `n-functions` - 浏览函数，并将编辑委托给 `zed` 或 `vared`
++ `n-history` - 浏览历史记录，并允许编辑和运行其中的命令
++ `n-kill` - 浏览进程列表，并允许向所选进程发送信号
++ `n-env` - 浏览环境，并将编辑委托给 `vared`
++ `n-options` - 浏览选项，并允许切换其状态
++ `n-panelize` - 将给定命令的输出加载到浏览列表中
+所有工具都支持使用 `<`, `>`, `{`, `}`, `h`, `l` 或**左右光标**进行水平滚动。其他键包括：
+
++ `H`，`?`（来自 `n-history`） - 运行 `n-help`
++ `Ctrl-R` - 启动 `n-history`，增量、多关键字历史搜索器（`Zsh` 绑定）
++ `Ctrl-A` - 旋转输入的单词（1+2+3 -> 3+1+2）
++ `Ctrl-F` - 修正模式（近似匹配）
++ `Ctrl-L` - 重新绘制整个显示
++ `Ctrl-T` - 浏览主题（下一个主题）
++ `Ctrl-G` - 浏览主题（上一个主题）
++ `Ctrl-U` - 上半页
++ `Ctrl-D` - 下半页
++ `Ctrl-P` - 上一个元素（也可以使用vim的k）
++ `Ctrl-N` - 下一个元素（也可以使用vim的j）
++ `[`，`]` - 在  `n-cd` 中跳转目录书签，在 `n-kill` 中跳转典型信号
++ `g`，`G` - 列表的开始和结尾
++ `/` - 显示增量搜索
++ `F3` - 显示/隐藏增量搜索
++ `Esc` - 退出增量搜索，并清除过滤器
++ `Ctrl-W`（在增量搜索中） - 删除整个单词
++ `Ctrl-K`（在增量搜索中） - 删除整行
++ `Ctrl-O`，`o` - 进入唯一模式（无重复行）
++ `Ctrl-E`，`e` - 编辑私有历史记录（当在私有历史记录视图中时）
++ `F1` - （在 `n-history` 中） - 切换视图
++ `F2`，`Ctrl-X`，`Ctrl-/` - 搜索预定义关键字（在配置文件中定义）
+
+{% endnote %}
 
 结束。
 
