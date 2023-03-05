@@ -3,7 +3,7 @@ title: Git 学习......
 math: true
 hide: false
 date: 2023-02-22 22:35:06
-updated: 2023-02-22 22:35:42
+updated: 2023-03-5 22:40:15
 excerpt: Git 学习过程的记录，烂笔头持续记录。
 categories: Git
 tags: Git
@@ -133,26 +133,23 @@ $ tree
 可以发现，进行了 `git add` 和 `git commit` 操作后的文件夹多出了：`COMMIT_EDITMSG` 文件、`index` 文件、`logs` 文件夹等等，`logs`、`objects`、`refs` 等文件夹下还会多出了子目录及文件。
 
 简单介绍 .git 文件夹中内容：
-+ `COMMIT_EDITMSG`：保存有最新一次提交的 `commit message`，`git` 系统不会用上，仅是给用户一个参考。 
-+ HEAD
-+ branches
-+ config
-+ description
-+ hooks
-+ index
-+ info
-  + exclude
-+ logs
-  + HEAD
-  + refs
-    + heads
-+ objects
-  + info
-  + pack
-+ refs
-  + heads
-  + tags
-
+- `COMMIT_EDITMSG`：保存有最新一次提交的 `commit message`，`git` 系统不会用上，仅是给用户一个参考。 
+- `HEAD`：指向目前被检出的分支或提交记录。
+- `branches`：存储本地分支的目录。
+- `config`：包含项目特定的配置文件，例如例如用户名、邮箱、远程仓库等。
+- `description`：GitWeb 程序使用此文件来获取 Git 仓库的简短描述。
+- `hooks`：存储客户端或服务端的 Git 钩子（hooks）脚本的目录。Git 钩子是在 Git 特定的动作发生时自动运行的脚本程序，例如提交前、提交后、合并时等。
+- `index`：包含一个暂存区域，用于在提交之前暂存更改。
+- `info`：存放一些 Git 的临时信息，例如排除一些不需要版本控制的文件、记录 Git 所有分支的最后一次提交的时间戳等。
+- `info/exclude`：指定 Git 忽略文件的规则。
+- `logs`：存放 Git 引用日志，记录每个引用的提交历史。
+- `logs/HEAD`：存储引用的更改历史。
+- `logs/refs/heads`：存储本地分支的更改历史。
+- `objects`：存储 Git 数据库中的所有内容。
+  - `info`：存储 Git 数据库的一些元数据信息。
+  - `pack`：存储 Git 压缩的对象文件。
+- `refs/heads`：存储本地分支引用的目录。
+- `refs/tags`：存储标签引用的目录。
 
 {% endnote %}
 
