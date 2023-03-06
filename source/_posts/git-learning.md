@@ -3,7 +3,7 @@ title: Git 学习......
 math: true
 hide: false
 date: 2023-02-22 22:35:06
-updated: 2023-03-6 21:40:17
+updated: 2023-03-6 21:50:55
 excerpt: Git 学习过程的记录，烂笔头持续记录。
 categories: Git
 tags: Git
@@ -15,24 +15,24 @@ sticky: 99
 ### 常用 Git 命令
 以下是一些常用的 Git 命令：
 
-`git init`：初始化一个 Git 仓库
-`git clone [url]`：从远程仓库克隆代码到本地
-`git add [file]`：将文件添加到暂存区
-`git commit -m "[message]"`：提交暂存区中的文件到版本库，并添加一条提交信息
-`git status`：查看当前仓库状态
-`git log`：查看提交日志
-`git pull`：从远程仓库拉取最新代码
-`git push`：将本地代码推送到远程仓库
-`git branch`：查看当前仓库的所有分支
-`git checkout [branch]`：切换分支
-`git merge [branch]`：将指定分支合并到当前分支
-`git diff [file]`：查看文件差异
-`git stash`：将当前未提交的改动暂存起来
-`git reset [file]`：将文件从暂存区中移除
-`git revert [commit]`：撤销指定的提交
-`git tag [name]`：给当前提交打标签
-`git remote`：查看远程仓库信息
-`git config`：配置 Git
++ `git init`：初始化一个 Git 仓库
++ `git clone [url]`：从远程仓库克隆代码到本地
++ `git add [file]`：将文件添加到暂存区
++ `git commit -m "[message]"`：提交暂存区中的文件到版本库，并添加一条提交信息
++ `git status`：查看当前仓库状态
++ `git log`：查看提交日志
++ `git pull`：从远程仓库拉取最新代码
++ `git push`：将本地代码推送到远程仓库
++ `git branch`：查看当前仓库的所有分支
++ `git checkout [branch]`：切换分支
++ `git merge [branch]`：将指定分支合并到当前分支
++ `git diff [file]`：查看文件差异
++ `git stash`：将当前未提交的改动暂存起来
++ `git reset [file]`：将文件从暂存区中移除
++ `git revert [commit]`：撤销指定的提交
++ `git tag [name]`：给当前提交打标签
++ `git remote`：查看远程仓库信息
++ `git config`：配置 Git
 
 以上只是一些常用的 Git 命令，Git 还有很多其他命令和选项，可以通过 `git --help` 查看 Git 的帮助文档来了解更多信息。
 
