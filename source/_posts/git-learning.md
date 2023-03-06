@@ -176,6 +176,19 @@ git clone https://xxxxxx.xxx/<repo>
 
 ### git branch
 
+`git branch` 是 Git 中用来管理分支的命令。
+
+以下是常见的 `git branch` 用法：
++ `git branch`: 查看本地分支列表。
++ `git branch <branch_name>`: 创建一个新的分支。
++ `git branch -d <branch_name>`: 删除指定的分支。
++ `git branch -r`: 查看远程分支列表。
++ `git branch -a`: 查看所有分支（本地和远程）的列表。
++ `git branch -m <old_branch_name> <new_branch_name>`: 将分支重命名。
++ `git branch --merged`: 查看已经合并到当前分支的分支。
++ `git branch --no-merged`: 查看尚未合并到当前分支的分支。
++ `git branch -vv`: 查看本地分支的详细信息，包括与远程分支的关联关系和最后一次提交。
+
 {% note info %}
 
 **新建分支时报错：**
