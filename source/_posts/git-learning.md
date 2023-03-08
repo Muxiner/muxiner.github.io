@@ -3,7 +3,7 @@ title: Git 学习......
 math: true
 hide: false
 date: 2023-02-22 22:35:06
-updated: 2023-03-08 23:16:32
+updated: 2023-03-09 00:22:27
 excerpt: Git 学习过程的记录，烂笔头持续记录。
 categories: Git
 tags: Git
@@ -214,13 +214,13 @@ fatal: Not a valid object name: 'master'.
 
 `git checkout` 是 Git 中的一个重要命令，用于切换分支、回退版本、创建分支等操作。以下是 `git checkout` 常见的用法和问题：
 
-1. `git checkout <branch_name>`：用于切换到另一个分支，例如 `git checkout dev` 将当前分支切换到名为 dev 的分支。
++ `git checkout <branch_name>`：用于切换到另一个分支，例如 `git checkout dev` 将当前分支切换到名为 dev 的分支。
 
-2. `git checkout <commit_id>`：用于切换到指定的提交版本，例如 `git checkout abc123` 将当前代码库切换到提交 ID 为 abc123 的版本。这个操作也称为“撤销”或“还原”代码。
++ `git checkout <commit_id>`：用于切换到指定的提交版本，例如 `git checkout abc123` 将当前代码库切换到提交 ID 为 abc123 的版本。这个操作也称为“撤销”或“还原”代码。
 
-3. `git checkout -b <new_branch_name>`：用于创建新的分支并切换到该分支，例如 `git checkout -b feature` 将创建一个名为 feature 的新分支，并将当前分支切换到 feature 分支。
++ `git checkout -b <new_branch_name>`：用于创建新的分支并切换到该分支，例如 `git checkout -b feature` 将创建一个名为 feature 的新分支，并将当前分支切换到 feature 分支。
 
-4. `git checkout -- <file>`：用于丢弃本地未提交的更改，例如 `git checkout -- index.html` 将丢弃 index.html 文件中未提交的更改。
++ `git checkout -- <file>`：用于丢弃本地未提交的更改，例如 `git checkout -- index.html` 将丢弃 index.html 文件中未提交的更改。
 
 {% note info %}
 
