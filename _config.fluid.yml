@@ -18,11 +18,11 @@
 
 # 用于浏览器标签的图标
 # Icon for browser tab
-favicon: /img/hello.svg
+favicon: /img/fluid.png
 
 # 用于苹果设备的图标
 # Icon for Apple touch
-apple_touch_icon: /img/hello.svg
+apple_touch_icon: /img/fluid.png
 
 # 浏览器标签页中的标题分隔符，效果： 文章名 - 站点名
 # Title separator in browser tab, eg: article - site
@@ -39,8 +39,14 @@ code:
   # Enable copy code button
   copy_btn: true
 
+  # 代码语言
+  # Code language
+  language:
+    enable: true
+    default: "TEXT"
+
   # 代码高亮
-  # Code highlights
+  # Code highlight
   highlight:
     enable: true
 
@@ -57,21 +63,19 @@ code:
       # 在链接中挑选 style 填入
       # Select a style in the link
       # See: https://highlightjs.org/static/demo/
-      style: "Github Dark Dimmed"
-
-      # 是否根据 style 改变代码背景色（如果 style 是深色背景别忘了开启此项）
-      # If true, the code background will change color based on the style (If style has a dark background, don't forget to true)
-      bg_color: false
+      style: "github gist"
+      style_dark: "dark"
 
     prismjs:
       # 在下方链接页面右侧的圆形按钮挑选 style 填入，也可以直接填入 css 链接
       # Select the style button on the right side of the link page, you can also set the CSS link
       # See: https://prismjs.com/
       style: "default"
+      style_dark: "tomorrow night"
 
-      # 设为 true 高亮将本地静态生成（并只支持部分 prismjs 插件），设为 false 高亮将在浏览器通过 js 生成
+      # 设为 true 高亮将本地静态生成（但只支持部分 prismjs 插件），设为 false 高亮将在浏览器通过 js 生成
       # If true, it will be generated locally (but some prismjs plugins are not supported). If false, it will be generated via JS in the browser
-      preprocess: false
+      preprocess: true
 
 # 一些好玩的功能
 # Some fun features
@@ -83,7 +87,7 @@ fun_features:
 
     # 打印速度，数字越大越慢
     # Typing speed, the larger the number, the slower
-    typeSpeed: 90
+    typeSpeed: 70
 
     # 游标字符
     # Cursor character
@@ -91,24 +95,30 @@ fun_features:
 
     # 是否循环播放效果
     # If true, loop animation
-    loop: true
+    loop: false
+
+    # 在指定页面开启，不填则在所有页面开启
+    # Enable in specified page, all pages by default
+    # Options: home | post | tag | category | about | links | page | 404
+    scope: []
 
   # 为文章内容中的标题添加锚图标
   # Add an anchor icon to the title on the post page
   anchorjs:
     enable: true
     element: h1,h2,h3,h4,h5,h6
-    placement: right
+    # Options: left | right
+    placement: left
     # Options: hover | always | touch
     visible: hover
-    # Option：§ | # | ❡
-    icon: "🚩"
+    # Options: § | # | ❡
+    icon: "§"
 
   # 加载进度条
   # Progress bar when loading
   progressbar:
     enable: true
-    height_px: 3
+    height_px: 5
     color: "#29d"
     # See: https://github.com/rstacruz/nprogress
     options: { showSpinner: false, trickleSpeed: 100 }
@@ -135,13 +145,18 @@ color:
 
   # 顶部菜单背景色
   # Color of navigation bar background
-  navbar_bg_color: "#1a1a1a"
+  navbar_bg_color: "#2f4154"
   navbar_bg_color_dark: "#1f3144"
 
   # 顶部菜单字体色
   # Color of navigation bar text
-  navbar_text_color: "#d0d0d0"
+  navbar_text_color: "#fff"
   navbar_text_color_dark: "#d0d0d0"
+
+  # 副标题字体色
+  # Color of navigation bar text
+  subtitle_color: "#fff"
+  subtitle_color_dark: "#d0d0d0"
 
   # 全局字体色
   # Color of global text
@@ -152,6 +167,11 @@ color:
   # Color of global secondary text (excerpt, introduction, etc.)
   sec_text_color: "#718096"
   sec_text_color_dark: "#a7a9ad"
+
+  # 主面板背景色
+  # Color of main board
+  board_color: "#fff"
+  board_color_dark: "#252d38"
 
   # 文章正文字体色
   # Color of post text
@@ -178,23 +198,34 @@ color:
   link_hover_bg_color: "#f8f9fa"
   link_hover_bg_color_dark: "#364151"
 
-  # 主面板背景色
-  # Color of main board
-  board_color: "#fff"
-  board_color_dark: "#252d38"
+  # 分隔线和表格边线的颜色
+  # Color of horizontal rule and table border
+  line_color: "#eaecef"
+  line_color_dark: "#435266"
 
   # 滚动条颜色
   # Color of scrollbar
   scrollbar_color: "#c4c6c9"
   scrollbar_color_dark: "#687582"
+  # 滚动条悬浮颜色
+  # Color of scrollbar when hovering
   scrollbar_hover_color: "#a6a6a6"
   scrollbar_hover_color_dark: "#9da8b3"
+
+  # 按钮背景色
+  # Color of button
+  button_bg_color: "transparent"
+  button_bg_color_dark: "transparent"
+  # 按钮悬浮背景色
+  # Color of button when hovering
+  button_hover_bg_color: "#f2f3f5"
+  button_hover_bg_color_dark: "#46647e"
 
 # 主题字体配置
 # Font
 font:
   font_size: 16px
-  font_family: 
+  font_family:
   letter_spacing: 0.02em
   code_font_size: 85%
 
@@ -206,18 +237,15 @@ custom_js:
 # The usage is the same as custom_js
 custom_css:
 
-# 自定义 <head> 节点中的 HTML 内容
-# Customize <head> HTML content
-custom_head: ''
-
-# 自定义底部 HTML 内容（位于 footer 上方），注意不要和 `post: custom` 配置冲突
-# Customize the HTML content at the bottom (located above the footer), be careful not to conflict with `post: custom`
-custom_html: ''
-
 # 网页访问统计
 # Analysis of website visitors
 web_analytics:  # 网页访问统计
   enable: false
+
+  # 遵循访客浏览器"请勿追踪"的设置，如果开启则不统计其访问
+  # Follow the "Do Not Track" setting of the visitor's browser
+  # See: https://www.w3.org/TR/tracking-dnt/
+  follow_dnt: true
 
   # 百度统计的 Key，值需要获取下方链接中 `hm.js?` 后边的字符串
   # Baidu analytics, get the string behind `hm.js?`
@@ -263,7 +291,7 @@ web_analytics:  # 网页访问统计
     # Get the attribute of the page path during statistics
     path: window.location.pathname
     # 开启后不统计本地路径( localhost 与 127.0.0.1 )
-    # If ture, ignore localhost & 127.0.0.1
+    # If true, ignore localhost & 127.0.0.1
     ignore_local: false
 
 # 对页面中的图片和评论插件进行懒加载处理，可见范围外的元素不会提前加载
@@ -303,7 +331,7 @@ navbar:
   # 导航栏毛玻璃特效，实验性功能，可能会造成页面滚动掉帧和抖动，部分浏览器不支持会自动不生效
   # Navigation bar frosted glass special animation. It is an experimental feature
   ground_glass:
-    enable: false
+    enable: true
 
     # 模糊像素，只能为数字，数字越大模糊度越高
     # Number of blurred pixel. the larger the number, the higher the blur
@@ -313,6 +341,7 @@ navbar:
     # Ratio of opacity, 1.0 is completely opaque
     # available: 0 - 1.0
     alpha: 0.7
+
   # 导航栏菜单，可自行增减，key 用来关联 languages/*.yml，如不存在关联则显示 key 本身的值；icon 是 css class，可以省略；增加 name 可以强制显示指定名称
   # Navigation bar menu. `key` is used to associate languages/*.yml. If there is no association, the value of `key` itself will be displayed; if `icon` is a css class, it can be omitted; adding `name` can force the display of the specified name
   menu:
@@ -404,7 +433,6 @@ footer:
       <script src="/js/duration.js"></script>
     </div>
   '
-
   # 展示网站的 PV、UV 统计数
   # Display website PV and UV statistics
   statistics:
@@ -414,11 +442,6 @@ footer:
     # Data source. If use leancloud, you need to set the parameter in `web_analytics: leancloud`
     # Options: busuanzi | leancloud
     source: "busuanzi"
-
-    # 页面显示的文本，{}是数字的占位符（必须包含)，下同
-    # Displayed text, {} is a placeholder for numbers (must be included), the same below
-    pv_format: "总访问量 {} 次"
-    uv_format: "总访客数 {} 人"
 
   # 国内大陆服务器的备案信息
   # For Chinese mainland website policy, other areas keep disable
@@ -442,7 +465,6 @@ index:
   # 首页 Banner 头图，可以是相对路径或绝对路径，以下相同
   # Path of Banner image, can be a relative path or an absolute path, the same on other pages
   banner_img: https://raw.githubusercontent.com/Muxiner/BlogImages/main/img/banner.png
-  
 
   # 头图高度，屏幕百分比
   # Height ratio of banner image
@@ -521,6 +543,7 @@ post:
   # 文章在首页的默认封面图，当没有指定 index_img 时会使用该图片，若两者都为空则不显示任何图片
   # Path of the default post cover when `index_img` is not set. If both are empty, no image will be displayed
   default_index_img: https://s1.ax1x.com/2022/05/14/OgC7wQ.png
+
   # 文章标题下方的元信息
   # Meta information below title
   meta:
@@ -542,15 +565,11 @@ post:
     # Word count
     wordcount:
       enable: true
-      # 显示的文本，{}是数字的占位符（必须包含)，下同
-      # Displayed text, {} is a placeholder for numbers (must be included), the same below
-      format: "{} 字"
 
     # 估计阅读全文需要的时长
     # Estimated reading time
     min2read:
       enable: true
-      format: "{} 分钟"
       # 每个字词的长度，建议：中文≈2，英文≈5，中英混合可自行调节
       # Average word length (chars count in word), ZH ≈ 2, EN ≈ 5
       awl: 2
@@ -561,33 +580,68 @@ post:
     # 浏览量计数
     # Number of visits
     views:
-      enable: true
+      enable: false
       # 统计数据来源
       # Data Source
       # Options: busuanzi | leancloud
       source: "busuanzi"
-      format: "{} 次"
 
   # 在文章开头显示文章更新时间，该时间默认是 md 文件更新时间，可通过 front-matter 中 `updated` 手动指定（和 date 一样格式）
   # Update date is displayed at the beginning of the post. The default date is the update date of the md file, which can be manually specified by `updated` in front-matter (same format as date)
   updated:
     enable: true
 
-    # 描述文字
-    # Descriptive text before date
-    content: 本文最后更新于：
+    # 格式参照 ISO-8601 日期格式化
+    # ISO-8601 date format
+    # See: http://momentjs.cn/docs/#/parsing/string-format/
+    date_format: "LL a"
 
     # 是否使用相对时间表示，比如："3 天前"
     # If true, it will be a relative time, such as: "3 days ago"
     relative: true
 
-  # 文章右侧目录
-  # Table of contents (TOC)
+    # 提示标签类型
+    # Note class
+    # Options: default | primary | info | success | warning | danger | light
+    note_class: info
+
+  # 侧边栏展示当前分类下的文章
+  # Sidebar of category
+  category_bar:
+    enable: true
+
+    # 开启后，只有在文章 Front-matter 里指定 `category_bar: true` 才会展示分类，也可以通过 `category_bar: ["分类A"]` 来指定分类
+    # If true, only set `category_bar: true` in Front-matter will enable sidebar of category, also set `category_bar: ["CategoryA"]` to specify categories
+    specific: true
+
+    # 置于板块的左侧或右侧
+    # place in the board
+    # Options: left | right
+    placement: left
+
+    # 文章的排序字段，前面带减号是倒序，不带减号是正序
+    # Sort field for posts, with a minus sign is reverse order
+    # Options: date | title | or other field of front-matter
+    post_order_by: "title"
+
+    # 单个分类中折叠展示文章数的最大值，超过限制会显示 More，0 则不限制
+    # The maximum number of posts in a single category. If the limit is exceeded, it will be displayed More. If 0 no limit
+    post_limit: 0
+
+  # 侧边栏展示文章目录
+  # Table of contents (TOC) in the sidebar
   toc:
     enable: true
+
+    # 置于板块的左侧或右侧
+    # place in the board
+    # Options: left | right
+    placement: right
+
     # 目录会选择这些节点作为标题
     # TOC will select these nodes as headings
     headingSelector: "h1,h2,h3,h4,h5,h6"
+
     # 层级的折叠深度，0 是全部折叠，大于 0 后如果存在下级标题则默认展开
     # Collapse depth. If 0, all headings collapsed. If greater than 0, it will be expanded by default if there are sub headings
     collapseDepth: 0
@@ -596,18 +650,36 @@ post:
   # Copyright, will be displayed at the end of each post
   copyright:
     enable: true
-    content: '本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！'
+
+    # CreativeCommons license
+    # Options: BY | BY-SA | BY-ND | BY-NC | BY-NC-SA | BY-NC-ND
+    license: 'BY'
+
+    # 显示作者
+    author:
+      enable: true
+
+    # 显示发布日期
+    # Show post date
+    post_date:
+      enable: true
+      format: "LL"
+
+    # 显示更新日期
+    # Show update date
+    update_date:
+      enable: false
+      format: "LL"
 
   # 文章底部上一篇下一篇功能
   # Link to previous/next post
   prev_next:
     enable: true
 
-  # 文章底部自定义区域（位于 footer 上方），支持 HTML，可插入赞赏码、公众号这类内容内容
-  # Custom content at the bottom of the post page (located above the footer)
-  custom:
-    enable: false
-    content: '<img src="https://octodex.github.com/images/jetpacktocat.png" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">'
+  # 文章图片标题
+  # Image caption
+  image_caption:
+    enable: true
 
   # 文章图片可点击放大
   # Zoom feature of images
@@ -659,7 +731,7 @@ post:
     enable: false
     # 指定的插件，需要同时设置对应插件的必要参数
     # The specified plugin needs to set the necessary parameters at the same time
-    # Options: utterances | disqus | gitalk | valine | waline | changyan | livere | remark42 | twikoo | cusdis
+    # Options: utterances | disqus | gitalk | valine | waline | changyan | livere | remark42 | twikoo | cusdis | giscus
     type: disqus
 
 
@@ -681,7 +753,6 @@ utterances:
   label: utterances
   theme: github-light
   theme_dark: github-dark
-  crossorigin: anonymous
 
 # Disqus
 # 基于第三方的服务，国内用户直接使用容易被墙，建议配合 Disqusjs
@@ -745,18 +816,13 @@ valine:
 waline:
   serverURL: ''
   path: window.location.pathname
-  placeholder:
   meta: ['nick', 'mail', 'link']
   requiredMeta: ['nick']
   lang: 'zh-CN'
   emoji: ['https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo']
   dark: 'html[data-user-color-scheme="dark"]'
-  avatar: 'retro'
-  avatarCDN: 'https://seccdn.libravatar.org/avatar/'
-  avatarForce: false
   wordLimit: 0
   pageSize: 10
-  highlight: true
 
 # 畅言 Changyan
 # 基于第三方的服务
@@ -802,6 +868,23 @@ cusdis:
   app_id:
   lang: zh-cn
 
+# Giscus
+# 基于 GitHub Discussions，类似于 Utterances
+# Based on GitHub Discussions, similar to Utterances
+# See: https://giscus.app/
+giscus:
+  repo:
+  repo-id:
+  category:
+  category-id:
+  theme-light: light
+  theme-dark: dark
+  mapping: pathname
+  reactions-enabled: 1
+  emit-metadata: 0
+  input-position: top
+  lang: zh-CN
+
 #---------------------------
 # 归档页
 # Archive Page
@@ -810,7 +893,6 @@ archive:
   banner_img: https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/img/wallhaven-3zvdzv.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
-  subtitle:
 
 
 #---------------------------
@@ -819,10 +901,9 @@ archive:
 #---------------------------
 category:
   enable: true
-  banner_img: https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/img/wallhaven-3z8p3v.jpg
+  banner_img: /img/default.png
   banner_img_height: 60
   banner_mask_alpha: 0.3
-  subtitle:
 
   # 分类的排序字段，前面带减号是倒序，不带减号是正序
   # Sort field for categories, with a minus sign is reverse order
@@ -849,10 +930,9 @@ category:
 #---------------------------
 tag:
   enable: true
-  banner_img: https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/img/wallhaven-z8982y.jpg
+  banner_img: /img/default.png
   banner_img_height: 80
   banner_mask_alpha: 0.3
-  subtitle:
   tagcloud:
     min_font: 15
     max_font: 30
@@ -867,19 +947,19 @@ tag:
 #---------------------------
 about:
   enable: true
-  banner_img: https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/img/wallhaven-1kzdew.jpg
+  banner_img: /img/default.png
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle: 我只是一只又丧又废废的小猪咪
-  avatar: https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/56918082
+  avatar: /img/avatar.png
   name: "Muxiner"
   intro: "别的不太会，只会摆烂，漫无目的地活着，就这样活着。"
   # 更多图标可从 https://hexo.fluid-dev.com/docs/icon/ 查找，`class` 代表图标的 css class，添加 `qrcode` 后，图标不再是链接而是悬浮二维码
   # More icons can be found from https://hexo.fluid-dev.com/docs/en/icon/  `class` is the css class of the icon. If adding `qrcode`, The icon is no longer a link, but a hovering QR code
-  icons:
+  icons: # 不要把 icon 注释掉，否则无法覆盖配置
     - { class: "iconfont icon-github-fill", link: "https://github.com/muxiner", tip: "GitHub" }
-
-
+    # - { class: 'iconfont icon-github-fill', link: 'https://github.com' }
+    # - { class: 'iconfont icon-wechat-fill', qrcode: '/img/favicon.png' }
 
 #---------------------------
 # 自定义页
@@ -900,10 +980,15 @@ page:
 #---------------------------
 page404:
   enable: true
+  menu: '404 - 页面不存在'
+  title: '页面不存在'
+  subtitle: '页面不存在'
   banner_img: /img/default.png
   banner_img_height: 85
   banner_mask_alpha: 0.3
-  subtitle: "Page not found"
+  # 重定向到首页的延迟(毫秒)
+  # Delay in redirecting to home page (milliseconds)
+  redirect_delay: 5000
 
 
 #---------------------------
@@ -915,7 +1000,6 @@ links:
   banner_img: /img/default.png
   banner_img_height: 60
   banner_mask_alpha: 0.3
-  subtitle:
   # 友链的成员项
   # Member item of page
   items:
@@ -954,13 +1038,13 @@ links:
     enable: false
     # 指定的插件，需要同时设置对应插件的必要参数
     # The specified plugin needs to set the necessary parameters at the same time
-    # Options: utterances | disqus | gitalk | valine | waline | changyan | livere | remark42 | twikoo | cusdis
+    # Options: utterances | disqus | gitalk | valine | waline | changyan | livere | remark42 | twikoo | cusdis | giscus
     type: disqus
 
 
 #---------------------------
 # 以下是配置 JS CSS 等静态资源的 URL 前缀，可以自定义成 CDN 地址，
-# 默认的 jsDelivr CDN 可能在部分地区无法访问，如果需要修改，最好使用与默认配置相同的版本，以避免潜在的问题，
+# 如果需要修改，最好使用与默认配置相同的版本，以避免潜在的问题，
 # ** 如果你不知道如何设置，请不要做任何改动 **
 #
 # Here is the url prefix to configure the static assets. Set CDN addresses you want to customize.
@@ -983,7 +1067,7 @@ static_prefix:
 
   bootstrap: https://lib.baomitu.com/twitter-bootstrap/4.6.1/
 
-  prismjs: https://lib.baomitu.com/prism/1.27.0/
+  prismjs: https://lib.baomitu.com/prism/1.29.0/
 
   tocbot: https://lib.baomitu.com/tocbot/4.18.2/
 
@@ -993,24 +1077,24 @@ static_prefix:
 
   nprogress: https://lib.baomitu.com/nprogress/0.2.0/
 
-  mathjax: https://lib.baomitu.com/mathjax/3.2.1/
+  mathjax: https://lib.baomitu.com/mathjax/3.2.2/
 
-  katex: https://lib.baomitu.com/KaTeX/0.15.6/
+  katex: https://lib.baomitu.com/KaTeX/0.16.2/
 
   busuanzi: https://busuanzi.ibruce.info/busuanzi/2.3/
 
-  clipboard: https://lib.baomitu.com/clipboard.js/2.0.10/
+  clipboard: https://lib.baomitu.com/clipboard.js/2.0.11/
 
   mermaid: https://lib.baomitu.com/mermaid/8.14.0/
 
-  valine: https://lib.baomitu.com/valine/1.4.17/
+  valine: https://lib.baomitu.com/valine/1.5.1/
 
-  waline: https://lib.baomitu.com/waline/2.5.1/
+  waline: https://lib.baomitu.com/waline/2.14.1/
 
-  gitalk: https://lib.baomitu.com/gitalk/1.7.2/
+  gitalk: https://lib.baomitu.com/gitalk/1.8.0/
 
   disqusjs: https://lib.baomitu.com/disqusjs/1.3.0/
 
-  twikoo: https://lib.baomitu.com/twikoo/1.5.11/
+  twikoo: https://lib.baomitu.com/twikoo/1.6.8/
 
   hint: https://lib.baomitu.com/hint.css/2.7.0/
