@@ -3,7 +3,7 @@ title: Git 学习......
 math: true
 hide: false
 date: 2023-02-22 22:35:06
-updated: 2023-03-09 00:22:27
+updated: 2023-03-10 22:53:00
 excerpt: Git 学习过程的记录，烂笔头持续记录。
 categories: Git
 tags: Git
@@ -212,20 +212,17 @@ fatal: Not a valid object name: 'master'.
 
 ### git checout
 
-`git checkout` 是 Git 中的一个重要命令，用于切换分支、回退版本、创建分支等操作。以下是 `git checkout` 常见的用法和问题：
+**`git checkout` 是 Git 中的一个重要命令，用于切换分支、回退版本、创建分支等操作。**
 
+以下是 `git checkout` 常见的用法和问题：
 + `git checkout <branch_name>`：用于切换到另一个分支，例如 `git checkout dev` 将当前分支切换到名为 dev 的分支。
-
 + `git checkout <commit_id>`：用于切换到指定的提交版本，例如 `git checkout abc123` 将当前代码库切换到提交 ID 为 abc123 的版本。这个操作也称为“撤销”或“还原”代码。
-
 + `git checkout -b <new_branch_name>`：用于创建新的分支并切换到该分支，例如 `git checkout -b feature` 将创建一个名为 feature 的新分支，并将当前分支切换到 feature 分支。
-
 + `git checkout -- <file>`：用于丢弃本地未提交的更改，例如 `git checkout -- index.html` 将丢弃 index.html 文件中未提交的更改。
 
 {% note info %}
 
 **常见的关于 `git checkout` 的问题：**
-
 + 报错“error: Your local changes to the following files would be overwritten by checkout”
 
   如果在切换分支时出现此错误，表示您当前分支上的某些更改将覆盖目标分支上的文件。您可以使用以下命令保存本地更改，并在切换分支后再应用它们：
@@ -241,4 +238,32 @@ fatal: Not a valid object name: 'master'.
 
 {% endnote %}
 
+
+### git add
+
+`git add` 命令用于将文件或文件夹添加到 Git 的暂存区（也称为索引）中，以便在提交时将其包含在版本控制中。
+
+常见用法：
++ `git add <file_path>`：添加单个文件
++ `git add <folder_path>`：添加整个文件夹
++ `git add .`：添加当前目录下的所有文件和文件夹
++ `git add *.txt`：添加指定类型的文件，例如只添加 .txt 文件
++ `git add <folder_path>/`：添加指定文件夹下的所有文件和文件夹
++ `git add -A`：添加所有已修改的文件，包括删除的文件
+
+在提交前，需要使用 `git status` 命令检查已暂存的文件和未暂存的文件的状态。如果文件已暂存，则它们将包括在下一次提交中。如果文件未暂存，则需要使用 `git add` 命令将其添加到暂存区中。
+
+### git status
+
+`git status` 命令用于显示当前 Git 仓库的状态，包括哪些文件已被修改、哪些文件已被添加到暂存区、哪些文件尚未被跟踪等信息。
+
+常见用法：
++ `git status`：显示当前 Git 仓库的状态
++ `git status -v`：显示当前 Git 仓库的状态，并包括更详细的信息
++ `git status --short`：以简洁的方式显示当前 Git 仓库的状态
++ `git status --untracked-files`：显示未跟踪的文件
++ `git status --modified`：显示已修改的文件
++ `git status --staged`：显示已添加到暂存区的文件
+
+`git status` 命令是 Git 中最常用的命令之一，它可以帮助您了解当前仓库的状态，以便您决定是否需要执行其他操作，比如使用 `git add` 添加文件到暂存区或使用 `git commit` 提交更改。
 
