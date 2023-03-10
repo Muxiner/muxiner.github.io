@@ -5,17 +5,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout              # 拉取当前执行 Actions 仓库的指定分支
+    - name: Checkout | 拉取当前执行 Actions 仓库的指定分支             # 拉取当前执行 Actions 仓库的指定分支
       uses: actions/checkout@v2
       with:
         ref: source
 
-    - name: Setup Node            # 安装 Node 环境
+    - name: Setup Node | 安装 Node 环境           # 安装 Node 环境
       uses: actions/setup-node@v1
       with:
         node-version: "16.x"
 
-    - name: Prepare SSH Env       # 写入部署 SSH 密钥
+    - name: Prepare SSH Env | 写入部署 SSH 密钥      # 写入部署 SSH 密钥
       env:
         SSH_PRIVATE: ${{ secrets.GH_ACTIONS }}
       run: |
@@ -24,7 +24,7 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-    - name: Prepare Git Env      # 配置 git 用户，用户邮箱
+    - name: Prepare Git Env | 配置 git 用户名、邮箱     # 配置 git 用户，用户邮箱
       env:
         GIT_NAME: muxiner
         GIT_EMAIL: muxinerhuang@gmail.com
@@ -32,7 +32,7 @@ jobs:
         git config --global user.name "$GIT_NAME"
         git config --global user.email "$GIT_EMAIL"
 
-    - name: Use Hexo And Deploy Blog            # 安装 Hexo 依赖并且生成静态文件
+    - name: Use Hexo And Deploy Blog | 安装 Hexo 依赖并且生成静态文件           # 安装 Hexo 依赖并且生成静态文件
       run: |
         rm -f .yarnclean
         yarn --frozen-lockfile --ignore-engines --ignore-optional --non-interactive --silent --ignore-scripts --production=false
