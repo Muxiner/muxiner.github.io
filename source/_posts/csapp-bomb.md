@@ -6,7 +6,6 @@ categories: 实验记录
 tags:
 - 计算机基础
 - Csapp
-- Blog
 ---
 
 -------

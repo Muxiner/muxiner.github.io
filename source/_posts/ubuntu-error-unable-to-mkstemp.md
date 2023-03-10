@@ -7,7 +7,6 @@ updated: 2022-10-19 09:32:41
 excerpt: 在 ubuntu 更新软件，下载软件时，出现问题 Unable to mkstemp /tmp/clearsigned.message.r1RilL - GetTempFile  等解决办法（疑似误删了/tmp 文件夹）
 categories: Linux
 tags: 
-- BLog
 - Ubuntu
 index_img:
 banner_img:

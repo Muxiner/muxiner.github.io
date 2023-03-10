@@ -9,7 +9,6 @@ categories: 教程
 tags: 
 - VS code
 - C/C++
-- Blog
 math: true
 hide: false
 ---

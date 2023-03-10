@@ -6,9 +6,9 @@ date: 2022-07-24 21:48:44
 updated: 2022-07-24 22:50:55
 excerpt: 本记录用于记录 deepin 系统下对 Grub 启动页面进行美化。
 categories:
-- Archlinux
+- Linux
 tags:
-- Deepin
+- Arch Linux
 - Grub
 - Beauty
 index_img:

@@ -7,8 +7,7 @@ excerpt: 如题所示，就是解决 PS 中 SSH 远程连接失败问题。
 categories: 水博客
 tags:
  - SSH
- - Blog
- - PowerShell
+ - PoweerShell
 ---
 
 ## 问题描述

@@ -7,7 +7,6 @@ excerpt: 博客网站图床的使用。
 categories: 水博客
 tags: 
    - Markdown
-   - Blog
 ---
 <p class="note note-primary">
 2022-06-28 更新：现已不使用该文章提示的方法托管博文图片，而是使用 github + picgo ~~+ coding~~，不过 coding 出了点小问题。

@@ -7,7 +7,6 @@ categories: 教程
 tags: 
 - VS code
 - C/C++
-- Blog
 
 index_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg
 banner_img: https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg

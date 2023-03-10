@@ -3,10 +3,9 @@ title: 使用 Github Actions 实现 Hexo 博客在 Github 上的自动部署
 date: 2020-11-30 16:55:45
 updated: 2022-06-28 21:58:30
 excerpt: 本文简单的记录和介绍一个使用 Github Actions 实现网站的自动部署。
-categories: Blog
+categories: GitHub
 tags: 
 - Github
-- Blog
 - CI/CD
 ---
 **文档存在信息滞后，部分信息可能与实际不符**
