@@ -108,7 +108,7 @@ deploy:
   repo: git@github.com:Muxiner/muxiner.github.io.git
   branch: master
   # 提交信息可以自定义，不填的则默认为提交时间
-  message: 😶‍🌫️ update my blog site
+  message:
 
 # hexo-admin authentification
 admin:
