@@ -5,8 +5,7 @@ date: 2022-05-09 13:59:13
 udpated: 2022-06-28 22:05:22
 excerpt: 本文所写记录 Ubuntu 使用过程中的问题 —— Ubuntu Update 失败：Release file is not valid yet。
 categories: 
- - linux
- - 水博客
+ - Linux
 tags:
  - Ubuntu
 index_img: 
