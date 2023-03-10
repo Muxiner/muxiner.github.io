@@ -262,8 +262,6 @@ fatal: Not a valid object name: 'master'.
 + `git status -v`：显示当前 Git 仓库的状态，并包括更详细的信息
 + `git status --short`：以简洁的方式显示当前 Git 仓库的状态
 + `git status --untracked-files`：显示未跟踪的文件
-+ `git status --modified`：显示已修改的文件
-+ `git status --staged`：显示已添加到暂存区的文件
 
 `git status` 命令是 Git 中最常用的命令之一，它可以帮助您了解当前仓库的状态，以便您决定是否需要执行其他操作，比如使用 `git add` 添加文件到暂存区或使用 `git commit` 提交更改。
 
