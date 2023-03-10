@@ -1,42 +1,54 @@
-name: Deploy Muxiner's Blog       # Actions 显示的名字，随意设置
-on: [push]                        # 监听到 push 事件后触发
+# Actions 显示的名字，随意设置
+name: Deploy Muxiner's Blog
+# 监听到 push 事件后触发
+on:
+  push:
+    branches:
+      - source
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout | 拉取当前执行 Actions 仓库的指定分支             # 拉取当前执行 Actions 仓库的指定分支
+    # 拉取当前执行 Actions 仓库的指定分支
+    - name: Checkout Actions Branch
       uses: actions/checkout@v2
-      with:
-        ref: source
 
-    - name: Setup Node | 安装 Node 环境           # 安装 Node 环境
+    # 安装 Node 环境
+    - name: Setup Node Env
       uses: actions/setup-node@v1
       with:
         node-version: "16.x"
 
-    - name: Prepare SSH Env | 写入部署 SSH 密钥      # 写入部署 SSH 密钥
-      env:
-        SSH_PRIVATE: ${{ secrets.GH_ACTIONS }}
+    # 写入部署 SSH 密钥
+    - name: Prepare SSH Env 
       run: |
         mkdir -p ~/.ssh/
-        echo "$SSH_PRIVATE" | tr -d '\r' > ~/.ssh/id_rsa
+        echo "${{ secrets.GH_ACTIONS }}" | tr -d '\r' > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-    - name: Prepare Git Env | 配置 git 用户名、邮箱     # 配置 git 用户，用户邮箱
-      env:
-        GIT_NAME: muxiner
-        GIT_EMAIL: muxinerhuang@gmail.com
+    # 配置 git 用户，用户邮箱
+    - name: Prepare Git Env 
       run: |
-        git config --global user.name "$GIT_NAME"
-        git config --global user.email "$GIT_EMAIL"
+        git config --global user.name "muxiner"
+        git config --global user.email "muxinerhuang@gmail.com"
 
-    - name: Use Hexo And Deploy Blog | 安装 Hexo 依赖并且生成静态文件           # 安装 Hexo 依赖并且生成静态文件
+    # 安装 Hexo 依赖
+    - name: Use Hexo      
       run: |
         rm -f .yarnclean
-        yarn --frozen-lockfile --ignore-engines --ignore-optional --non-interactive --silent --ignore-scripts --production=false
+        npm ci --ignore-scripts --production=false
         rm -rf ./public
-        yarn run hexo clean
-        yarn run hexo generate
-        yarn run hexo deploy
+    
+    # hexo clean 清除文件
+    - name: Clean Public Blog Files
+      run: npx hexo clean
+
+    # hexo generate 生成静态博客文件
+    - name: Generate Public Blog Files
+      run: npx hexo generate
+
+    # hexo deplay 部署博客文件
+    - name: Deplay Public Blog
+      run: npx hexo deplay
