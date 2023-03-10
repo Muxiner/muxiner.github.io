@@ -603,7 +603,7 @@ post:
     # 提示标签类型
     # Note class
     # Options: default | primary | info | success | warning | danger | light
-    note_class: info
+    note_class: success
 
   # 侧边栏展示当前分类下的文章
   # Sidebar of category
