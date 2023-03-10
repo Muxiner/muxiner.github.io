@@ -49,6 +49,6 @@ jobs:
     - name: Generate Public Blog Files
       run: npx hexo generate
 
-    # hexo deplay 部署博客文件
-    - name: Deplay Public Blog
-      run: npx hexo deplay
+    # hexo deploy 部署博客文件
+    - name: Deploy Public Blog
+      run: npx hexo deploy
