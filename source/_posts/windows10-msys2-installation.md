@@ -10,7 +10,7 @@ banner_img:
 sticky:
 ---
 
-### MSYS2 是什么
+## MSYS2 是什么
 
 **[MSYS2](https://www.msys2.org/)** 是一个工具和库的集合，为用户提供一个易于使用的环境来构建、安装和运行本机 Windows 软件。
 
@@ -34,7 +34,7 @@ For more details see '[What is MSYS2?](https://www.msys2.org/docs/what-is-msys2/
 
 {% endnote %}
 
-### MSYS2 的安装
+## MSYS2 的安装
 
 就直接下载文件 —— [msys2-x86_64-20230127.exe](https://github.com/msys2/msys2-installer/releases/download/2023-01-27/msys2-x86_64-20230127.exe)。
 
@@ -47,9 +47,42 @@ For more details see '[What is MSYS2?](https://www.msys2.org/docs/what-is-msys2/
 安装完成后，启动 `MSYS2` 会是一个单独的 `terminal`，我们可以将其使用 `Windows Terminal` 打开 `MSYS2`。
 
 
-### MSYS2 terminal 的设置
+## 环境
 
-#### Mintty
+当咱们安装完 MSYS2 后就发现好几个应用，MSYS2 带有不同的后缀如 `CLANG64`、`CLANG32`、`CLANGARM64`、`MINGW32`、`MINGW64`、`MSYS`、`UCRT64`等。
+
+都是些啥，区别是什么。
+
+MSYS2 提供了不同的**环境/子系统**，首先用户需要决定要使用哪个环境。
+
+这些环境之间的区别主要在于**环境变量**、**默认编译器**/**链接器**、**架构**、使用的**系统库**等方面。
++ `environment variables`：环境变量
++ `default compilers/linkers`：默认编译器/链接器
++ `architecture`：架构
++ `system libraries used etc`：使用的系统库
+
+**如果不确定，建议选择 `UCRT64` 环境。**
+
+MSYS 环境包含基于类 `Unix/cygwin` 的工具，存储在 `/usr` 目录下，并且它是特殊的，因为它始终处于活动状态。
+
+所有其他环境都继承自 `MSYS` 环境并在其基础上添加各种功能。
+
+例如，在 `UCRT64` 环境中，`$PATH` 变量以 `/ucrt64/bin:/usr/bin` 开头，因此可以使用所有 `ucrt64` 和 `msys` 工具。
+
+**简单展示**：
+|                                                                           |    Name    |    Prefix     | Toolchain | Architecture | C Library | C++ Library |
+| :-----------------------------------------------------------------------: | :--------: | :-----------: | :-------: | :----------: | :-------: | :---------: |
+|  <img src="https://www.msys2.org/docs/msys.png" width="30" height="30">   |    MSYS    |    `/usr`     |    gcc    |    x86_64    |  cygwin   |  libstdc++  |
+| <img src="https://www.msys2.org/docs/ucrt64.png" width="30" height="30">  |   UCRT64   |   `/ucrt64`   |    gcc    |    x86_64    |   ucrt    |  libstdc++  |
+| <img src="https://www.msys2.org/docs/clang64.png" width="30" height="30"> |  CLANG64   |  `/clang64`   |   llvm    |    x86_64    |   ucrt    |   libc++    |
+| <img src="https://www.msys2.org/docs/clang64.png" width="30" height="30"> | CLANGARM64 | `/clangarm64` |   llvm    |   aarch64    |   ucrt    |   libc++    |
+| <img src="https://www.msys2.org/docs/clang32.png" width="30" height="30"> |  CLANG32   |  `/clang32`   |   llvm    |     i686     |   ucrt    |   libc++    |
+| <img src="https://www.msys2.org/docs/mingw64.png" width="30" height="30"> |  MINGW64   |  `/mingw64`   |    gcc    |    x86_64    |  msvcrt   |  libstdc++  |
+| <img src="https://www.msys2.org/docs/mingw32.png" width="30" height="30"> |  MINGW32   |  `/mingw32`   |    gcc    |     i686     |  msvcrt   |  libstdc++  |
+
+## MSYS2 terminal 的设置
+
+## Mintty
 
 `MSYS2` 中**默认的终端应用程序**是 [Mintty](https://mintty.github.io/)，并包含在安装程序中。
 
@@ -57,7 +90,7 @@ For more details see '[What is MSYS2?](https://www.msys2.org/docs/what-is-msys2/
 
 有关更多详细信息，请参见 [https://github.com/msys2/msys2-launcher](https://github.com/msys2/msys2-launcher) 和 [https://mintty.github.io](https://mintty.github.io)。
 
-#### Windows Terminal
+## Windows Terminal
 
 `Windows Terminal` 默认支持 `cmd`、`PowerShell` 和 `WSL`，还可以扩展支持 `MSYS2 shell`。
 
