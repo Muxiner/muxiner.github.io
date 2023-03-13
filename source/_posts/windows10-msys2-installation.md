@@ -212,18 +212,135 @@ GCC、LLVM、Clang 都是是默认的编译器/工具链，用于在各自的存
 
 MSVCRT 和 UCRT 是在 Microsoft Windows 上的 C 标准库变体。
 
-+ **MSVCRT（Microsoft Visual C++ Runtime）**在所有 Microsoft Windows 版本上默认可用，但由于向后兼容性问题而停留在过去，不兼容 `C99`，并且缺少一些功能：
++ **MSVCRT（Microsoft Visual C++ Runtime）** 在所有 Microsoft Windows 版本上默认可用，但由于向后兼容性问题而停留在过去，不兼容 `C99`，并且缺少一些功能：
   + 例如，它不兼容 `C99` 的 `printf()` 函数族，但是...
   + `mingw-w64` 提供了替代函数，在许多情况下使事情兼容 `C99`
   + 不支持 `UTF-8` 区域设置
   + 使用 `MSVCRT` 链接的二进制文件不应与使用 `UCRT` 的二进制文件混合使用，因为内部结构和数据类型不同。（更严格地说，针对不同目标构建的对象文件或静态库不应混合使用。构建为不同 CRT 的 DLL 可以混合使用，只要它们不跨 DLL 边界共享 CRT 对象，例如 FILE*。）同样的规则适用于 `MSVC` 编译的二进制文件，因为 `MSVC` 默认使用 `UCRT`（如果未更改）。
   + 在每个 Microsoft Windows 版本上开箱即用。
 
-+ **UCRT（Universal C Runtime）**是一个较新版本，也是 Microsoft Visual Studio 默认使用的版本。它应该像使用 `MSVC` 编译代码一样工作和运行。
++ **UCRT（Universal C Runtime）** 是一个较新版本，也是 Microsoft Visual Studio 默认使用的版本。它应该像使用 `MSVC` 编译代码一样工作和运行。
   + 在构建时和运行时与 `MSVC` 的兼容性更好。
   + 它仅默认在 Windows 10 上提供，对于旧版本，您必须自己提供或取决于安装它的用户。
 
 ### MSYS2 切换环境
+
+{% note info %}
+
+想要直接看切换的命令，[点击一下，直接跳转](#env-change)。
+
+{% endnote %}
+
+经过一番简单的研究，如果想要在终端直接切换 MSYS2 的**环境**，使用 `export MSYSTEM=UCRT64` 之类的命令，就只能忽悠自己，该命令只是改变了终端的**提示符(prompt)**处的环境名称：
+```bash
+Username@Hostname CLANG64 ~
+$ export MSYSTEM=UCRT64
+
+Username@Hostname UCRT64 ~
+$ echo $PATH | tr ':' '\n'
+/clang64/bin
+/usr/local/bin
+...
+```
+你使用 `echo $PATH | tr ':' '\n'` 命令查看环境变量，你就发现，这还是 `CLANG64` 的环境变量，说明完全没有切换成功，上述的命令就只是欺骗了你。
+
+{% note indo %}
+
+`echo $PATH | tr ':' '\n'` 命令是将 `echo $PATH` 输出的内容碰到 ":" 替换为 "\n".
+
+`tr` 命令的**第一个参数**是要替换的字符，**第二个参数**是替换成的字符。
+
+就是实现了**每个路径一行输出的效果**。
+
+不然就是：
+```bash
+Username@Hostname CLANG64 ~
+$ echo $PATH
+/clang64/bin:/usr/local/bin:/usr/bin:/bin:/c/Windows/System32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0/:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+```
+
+{% endnote %}
+
+回归正题，上述命令效果不明显，咱就去 MSYS2 那找，找到个：
+> If you need to start a shell correctly, but none of the ways above suit you, devise your own way based on this knowledge:
+> + set `MSYSTEM=...` into the environment, with the value of either `MSYS`, `MINGW32`, or `MINGW64`
+> + then run a login shell
+> 
+> The typical one-liner if your options are limited is `C:\\msys64\\usr\\bin\\env MSYSTEM=MSYS /usr/bin/bash -li`.
+>
+> 如果以上提到的方法都不适用于你，你可以根据以下知识自己设计启动 shell 的方法：
+> + 将 `MSYSTEM=...` 设置为环境变量，并将值设为 `MSYS`、`MINGW32` 或 `MINGW64`
+> + 然后启动一个登录 shell
+> 
+> 如果你的选择受限，一种常见的方法是运行以下一行命令：`C:\\msys64\\usr\\bin\\env MSYSTEM=MSYS /usr/bin/bash -li`
+
+简单介绍一下原理，如何自行设计启动 shell —— **先设置 `MSYSTEM=...` 环境变量，再启动一个登录 shell。**
+
+所以咱们就执行 `env MSYSTEM=UCRT64 /usr/bin/bash -li`...再 `echo $PATH | tr ':' '\n'`：
+```bash
+Username@Hostname CLANG64 ~
+$ env MSYSTEM=UCRT64 /usr/bin/bash -li
+
+Username@Hostname UCRT64 ~
+$ echo $PATH | tr ':' '\n'
+/ucrt64/bin
+/usr/local/bin
+...
+```
+显然，环境切换成功。
+
+等等，咱再试试 `export MSYSTEM=CLANG64`，再执行 `/usr/bin/bash -li`，最后检查成功否 `echo $PATH | tr ':' '\n'`：
+```bash
+Username@Hostname UCRT64 ~
+$ export MSYSTEM=CLANG64
+
+Username@Hostname CLANG64 ~
+$ /usr/bin/bash -li
+
+Username@Hostname CLANG64 ~
+$ echo $PATH | tr ':' '\n'
+/clang64/bin
+/usr/local/bin
+```
+😯 woc，傻逼竟是我自己。
+
+**先设置 `MSYSTEM=...` 环境变量，再启动一个登录 shell。**
+
+咱没有重新启动 bash。没有使用命令重新启动 bash。
+
+结束结束，不多BB。
+
+
+<scan id="env-change" style="font-weight: bold;">更换环境的话直接使用：</scan>
+
++ `MSYS`
+  ```bash
+  env MSYSTEM=MSYS /usr/bin/bash -li
+  ```
++ `UCRT64`
+  ```bash
+  env MSYSTEM=UCRT64 /usr/bin/bash -li
+  ```
++ `CLANG64`
+  ```bash
+  env MSYSTEM=CLANG64 /usr/bin/bash -li
+  ```
++ `CLANGARM64`
+  ```bash
+  env MSYSTEM=CLANGARM64 /usr/bin/bash -li
+  ```
++ `CLANG32`
+  ```bash
+  env MSYSTEM=CLANG32 /usr/bin/bash -li
+  ```
++ `MINGW64`
+  ```bash
+  env MSYSTEM=MINGW64 /usr/bin/bash -li
+  ```
++ `MINGW32`
+  ```bash
+  env MSYSTEM=MINGW32 /usr/bin/bash -li
+  ```
 
 
 
@@ -325,3 +442,7 @@ Windows Terminal 的安装，Windows11 是默认安装了的，Windows10 的话�
 有关不同配置文件设置的更多信息，请参见 [Windows Termial 自定义设置](https://learn.microsoft.com/zh-cn/windows/terminal/customize-settings/startup)。
 
 {% endnote %}
+
+
+
+## 6. MSYS2 各环境编译工具的安装
