@@ -1,7 +1,7 @@
 ---
 title: Windows10 安装 MSYS2
 date: 2023-03-12 11:49:09
-updated: 2023-03-12 11:54:11
+updated: 2023-03-13 10:57:01
 excerpt: MSYS2 —— Windows 的软件分发和构建平台，是一个为 Windows 操作系统提供类似于 Unix 环境的软件开发环境的软件。
 categories: Linux
 tags: MSYS2
@@ -10,7 +10,7 @@ banner_img:
 sticky:
 ---
 
-## MSYS2 是什么
+## 1. MSYS2 是什么
 
 **[MSYS2](https://www.msys2.org/)** 是一个工具和库的集合，为用户提供一个易于使用的环境来构建、安装和运行本机 Windows 软件。
 
@@ -34,7 +34,7 @@ For more details see '[What is MSYS2?](https://www.msys2.org/docs/what-is-msys2/
 
 {% endnote %}
 
-## MSYS2 的安装
+## 2. MSYS2 的安装
 
 就直接下载文件 —— [msys2-x86_64-20230127.exe](https://github.com/msys2/msys2-installer/releases/download/2023-01-27/msys2-x86_64-20230127.exe)。
 
@@ -47,7 +47,117 @@ For more details see '[What is MSYS2?](https://www.msys2.org/docs/what-is-msys2/
 安装完成后，启动 `MSYS2` 会是一个单独的 `terminal`，我们可以将其使用 `Windows Terminal` 打开 `MSYS2`。
 
 
-## 环境
+## 3. pacman 更换源
+
+一般的，pacman 的镜像源文件位置位于 `/etc/pacman.d/`，所以咱直接去看：
+```bash
+$ ls /etc/pacman.d
+gnupg               mirrorlist.clang64  mirrorlist.mingw32  mirrorlist.msys
+mirrorlist.clang32  mirrorlist.mingw    mirrorlist.mingw64  mirrorlist.ucrt64
+```
+哈哈，镜像源文件还挺多，对应着不同的环境。
+
+以 `mirrorlist.ucrt64` 为例，进行修改，**咱主要使用清华源和科大源，主要是网速问题，那个快哪个好**：
+```bash
+$ cat /etc/pacman.d/mirrorlist.ucrt64
+# See https://www.msys2.org/dev/mirrors
+
+## Primary
+Server = https://mirror.msys2.org/mingw/ucrt64/
+Server = https://repo.msys2.org/mingw/ucrt64/
+
+## Tier 1
+Server = https://mirror.umd.edu/msys2/mingw/ucrt64/
+Server = https://mirror.yandex.ru/mirrors/msys2/mingw/ucrt64/
+Server = https://download.nus.edu.sg/mirror/msys2/mingw/ucrt64/
+Server = https://ftp.acc.umu.se/mirror/msys2.org/mingw/ucrt64/
+Server = https://ftp.nluug.nl/pub/os/windows/msys2/builds/mingw/ucrt64/
+Server = https://ftp.osuosl.org/pub/msys2/mingw/ucrt64/
+Server = https://mirror.internet.asn.au/pub/msys2/mingw/ucrt64/
+Server = https://mirror.selfnet.de/msys2/mingw/ucrt64/
+Server = https://mirror.ufro.cl/msys2/mingw/ucrt64/
+Server = https://mirrors.dotsrc.org/msys2/mingw/ucrt64/
+Server = https://mirrors.bfsu.edu.cn/msys2/mingw/ucrt64/
+Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/ucrt64/
+Server = https://mirrors.ustc.edu.cn/msys2/mingw/ucrt64/
+Server = https://mirror.nju.edu.cn/msys2/mingw/ucrt64/
+Server = https://repo.extreme-ix.org/msys2/mingw/ucrt64/
+Server = https://mirrors.hit.edu.cn/msys2/mingw/ucrt64/
+Server = https://mirror.clarkson.edu/msys2/mingw/ucrt64/
+Server = https://quantum-mirror.hu/mirrors/pub/msys2/mingw/ucrt64/
+Server = https://mirror2.sandyriver.net/pub/software/msys2/mingw/ucrt64/
+Server = https://mirror.archlinux.tw/MSYS2/mingw/ucrt64/
+
+## Tier 2
+Server = https://fastmirror.pp.ua/msys2/mingw/ucrt64/
+Server = https://ftp.cc.uoc.gr/mirrors/msys2/mingw/ucrt64/
+Server = https://mirror.jmu.edu/pub/msys2/mingw/ucrt64/
+Server = https://mirrors.piconets.webwerks.in/msys2-mirror/mingw/ucrt64/
+Server = https://www2.futureware.at/~nickoe/msys2-mirror/mingw/ucrt64/
+Server = https://mirrors.sjtug.sjtu.edu.cn/msys2/mingw/ucrt64/
+Server = https://mirrors.bit.edu.cn/msys2/mingw/ucrt64/
+Server = https://repo.casualgamer.ca/mingw/ucrt64/
+Server = https://mirrors.aliyun.com/msys2/mingw/ucrt64/
+Server = https://mirror.iscas.ac.cn/msys2/mingw/ucrt64/
+Server = https://mirrors.tencent.com/msys2/mingw/ucrt64/
+```
+基本上所有镜像源都有，不过弱水三千咱只取一瓢，就选**科大源**吧，原因呀。就是快：
+
+把除科大源的都给注释掉就行：
+```bash
+# See https://www.msys2.org/dev/mirrors
+
+## Primary
+# Server = https://mirror.msys2.org/mingw/ucrt64/
+# Server = https://repo.msys2.org/mingw/ucrt64/
+
+## Tier 1
+# # Server = https://mirror.umd.edu/msys2/mingw/ucrt64/
+# Server = https://mirror.yandex.ru/mirrors/msys2/mingw/ucrt64/
+# Server = https://download.nus.edu.sg/mirror/msys2/mingw/ucrt64/
+# Server = https://ftp.acc.umu.se/mirror/msys2.org/mingw/ucrt64/
+# Server = https://ftp.nluug.nl/pub/os/windows/msys2/builds/mingw/ucrt64/
+# Server = https://ftp.osuosl.org/pub/msys2/mingw/ucrt64/
+# Server = https://mirror.internet.asn.au/pub/msys2/mingw/ucrt64/
+# Server = https://mirror.selfnet.de/msys2/mingw/ucrt64/
+# Server = https://mirror.ufro.cl/msys2/mingw/ucrt64/
+# Server = https://mirrors.dotsrc.org/msys2/mingw/ucrt64/
+# Server = https://mirrors.bfsu.edu.cn/msys2/mingw/ucrt64/
+# Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/ucrt64/
+Server = https://mirrors.ustc.edu.cn/msys2/mingw/ucrt64/
+# Server = https://mirror.nju.edu.cn/msys2/mingw/ucrt64/
+# Server = https://repo.extreme-ix.org/msys2/mingw/ucrt64/
+# Server = https://mirrors.hit.edu.cn/msys2/mingw/ucrt64/
+# Server = https://mirror.clarkson.edu/msys2/mingw/ucrt64/
+# Server = https://quantum-mirror.hu/mirrors/pub/msys2/mingw/ucrt64/
+# Server = https://mirror2.sandyriver.net/pub/software/msys2/mingw/ucrt64/
+# Server = https://mirror.archlinux.tw/MSYS2/mingw/ucrt64/
+
+## Tier 2
+# Server = https://fastmirror.pp.ua/msys2/mingw/ucrt64/
+# Server = https://ftp.cc.uoc.gr/mirrors/msys2/mingw/ucrt64/
+# Server = https://mirror.jmu.edu/pub/msys2/mingw/ucrt64/
+# Server = https://mirrors.piconets.webwerks.in/msys2-mirror/mingw/ucrt64/
+# Server = https://www2.futureware.at/~nickoe/msys2-mirror/mingw/ucrt64/
+# Server = https://mirrors.sjtug.sjtu.edu.cn/msys2/mingw/ucrt64/
+# Server = https://mirrors.bit.edu.cn/msys2/mingw/ucrt64/
+# Server = https://repo.casualgamer.ca/mingw/ucrt64/
+# Server = https://mirrors.aliyun.com/msys2/mingw/ucrt64/
+# Server = https://mirror.iscas.ac.cn/msys2/mingw/ucrt64/
+# Server = https://mirrors.tencent.com/msys2/mingw/ucrt64/
+```
+
+其他的镜像源文件以此重复上述注释就行，因为无论在哪个环境模式下执行 `pacman -Syyu` 等等之类的命令都是同步更新所有环境的软件包数据库。
+
+所以所以，统统换源。
+
+然后：
+```bash
+pacman -Syyu
+```
+
+
+## 4. 环境
 
 当咱们安装完 MSYS2 后就发现好几个应用，MSYS2 带有不同的后缀如 `CLANG64`、`CLANG32`、`CLANGARM64`、`MINGW32`、`MINGW64`、`MSYS`、`UCRT64`等。
 
@@ -69,7 +179,7 @@ MSYS 环境包含基于类 `Unix/cygwin` 的工具，存储在 `/usr` 目录下�
 
 例如，在 `UCRT64` 环境中，`$PATH` 变量以 `/ucrt64/bin:/usr/bin` 开头，因此可以使用所有 `ucrt64` 和 `msys` 工具。
 
-**简单展示**：
+**各环境及其细节的简单展示**：
 |                                                                           |    Name    |    Prefix     | Toolchain | Architecture | C Library | C++ Library |
 | :-----------------------------------------------------------------------: | :--------: | :-----------: | :-------: | :----------: | :-------: | :---------: |
 |  <img src="https://www.msys2.org/docs/msys.png" width="30" height="30">   |    MSYS    |    `/usr`     |    gcc    |    x86_64    |  cygwin   |  libstdc++  |
@@ -80,9 +190,46 @@ MSYS 环境包含基于类 `Unix/cygwin` 的工具，存储在 `/usr` 目录下�
 | <img src="https://www.msys2.org/docs/mingw64.png" width="30" height="30"> |  MINGW64   |  `/mingw64`   |    gcc    |    x86_64    |  msvcrt   |  libstdc++  |
 | <img src="https://www.msys2.org/docs/mingw32.png" width="30" height="30"> |  MINGW32   |  `/mingw32`   |    gcc    |     i686     |  msvcrt   |  libstdc++  |
 
-## MSYS2 terminal 的设置
+活动环境是通过 `MSYSTEM` **环境变量**选择的。
 
-## Mintty
+#### GCC vs LLVM/Clang
+
+GCC、LLVM、Clang 都是是默认的编译器/工具链，用于在各自的存储库中构建所有软件包。
+
++ 基于 GCC 的环境：
+  + 目前被广泛测试和使用
+  + 支持 `Fortran`
+  + 虽然 `MINGW` 环境中也存在 `Clang` 软件包，但该软件包仍使用 `GNU` 链接器和 `GNU C++` 库。在某些情况下，例如上游开发者更喜欢 `Clang` 而不是 `GCC`，也会使用 `Clang` 来构建软件包。
++ 基于 LLVM/Clang 的环境：
+  + 仅使用 `LLVM` 工具，`LLD` 作为链接器，`LIBC++` 作为 `C++` 标准库
+  + `Clang` 提供 `ASAN` 支持
+  + 本地支持 `TLS` —— 线程本地存储（Thread-local storage）
+  + `LLD` 比 `LD` 更快，但不支持 `LD` 支持的所有功能
+  + 某些工具缺乏与等效的 `GNU` 工具相同的功能
+  + Microsoft Windows 10 支持 `ARM64/AArch64` 架构
+
+#### MSVCRT vs UCRT
+
+MSVCRT 和 UCRT 是在 Microsoft Windows 上的 C 标准库变体。
+
++ **MSVCRT（Microsoft Visual C++ Runtime）**在所有 Microsoft Windows 版本上默认可用，但由于向后兼容性问题而停留在过去，不兼容 `C99`，并且缺少一些功能：
+  + 例如，它不兼容 `C99` 的 `printf()` 函数族，但是...
+  + `mingw-w64` 提供了替代函数，在许多情况下使事情兼容 `C99`
+  + 不支持 `UTF-8` 区域设置
+  + 使用 `MSVCRT` 链接的二进制文件不应与使用 `UCRT` 的二进制文件混合使用，因为内部结构和数据类型不同。（更严格地说，针对不同目标构建的对象文件或静态库不应混合使用。构建为不同 CRT 的 DLL 可以混合使用，只要它们不跨 DLL 边界共享 CRT 对象，例如 FILE*。）同样的规则适用于 `MSVC` 编译的二进制文件，因为 `MSVC` 默认使用 `UCRT`（如果未更改）。
+  + 在每个 Microsoft Windows 版本上开箱即用。
+
++ **UCRT（Universal C Runtime）**是一个较新版本，也是 Microsoft Visual Studio 默认使用的版本。它应该像使用 `MSVC` 编译代码一样工作和运行。
+  + 在构建时和运行时与 `MSVC` 的兼容性更好。
+  + 它仅默认在 Windows 10 上提供，对于旧版本，您必须自己提供或取决于安装它的用户。
+
+### MSYS2 切换环境
+
+
+
+## 5. MSYS2 terminal 的设置
+
+### Mintty
 
 `MSYS2` 中**默认的终端应用程序**是 [Mintty](https://mintty.github.io/)，并包含在安装程序中。
 
@@ -90,7 +237,7 @@ MSYS 环境包含基于类 `Unix/cygwin` 的工具，存储在 `/usr` 目录下�
 
 有关更多详细信息，请参见 [https://github.com/msys2/msys2-launcher](https://github.com/msys2/msys2-launcher) 和 [https://mintty.github.io](https://mintty.github.io)。
 
-## Windows Terminal
+### Windows Terminal
 
 `Windows Terminal` 默认支持 `cmd`、`PowerShell` 和 `WSL`，还可以扩展支持 `MSYS2 shell`。
 
