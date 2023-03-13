@@ -1,7 +1,7 @@
 ---
 title: Windows10 安装 MSYS2
 date: 2023-03-12 11:49:09
-updated: 2023-03-13 10:57:01
+updated: 2023-03-13 18:58:55
 excerpt: MSYS2 —— Windows 的软件分发和构建平台，是一个为 Windows 操作系统提供类似于 Unix 环境的软件开发环境的软件。
 categories: Linux
 tags: MSYS2
@@ -10,7 +10,7 @@ banner_img:
 sticky:
 ---
 
-## 1. MSYS2 是什么
+## 1. MSYS2 是什么 
 
 **[MSYS2](https://www.msys2.org/)** 是一个工具和库的集合，为用户提供一个易于使用的环境来构建、安装和运行本机 Windows 软件。
 
@@ -157,7 +157,7 @@ pacman -Syyu
 ```
 
 
-## 4. 环境
+## 4. MSYS2 中的环境
 
 当咱们安装完 MSYS2 后就发现好几个应用，MSYS2 带有不同的后缀如 `CLANG64`、`CLANG32`、`CLANGARM64`、`MINGW32`、`MINGW64`、`MSYS`、`UCRT64`等。
 
@@ -194,7 +194,7 @@ MSYS 环境包含基于类 `Unix/cygwin` 的工具，存储在 `/usr` 目录下�
 
 #### GCC vs LLVM/Clang
 
-GCC、LLVM、Clang 都是是默认的编译器/工具链，用于在各自的存储库中构建所有软件包。
+GCC、LLVM/Clang 都是是默认的编译器/工具链，用于在各自的存储库中构建所有软件包。
 
 + 基于 GCC 的环境：
   + 目前被广泛测试和使用
@@ -310,6 +310,15 @@ $ echo $PATH | tr ':' '\n'
 
 结束结束，不多BB。
 
+{% note info %}
+
+再多 BB 一声：
+
+`/usr/bin/bash -li` 是启动一个 Bash shell 的命令。其中 `-l` 选项代表要启动一个 **login shell**，这将读取登录 shell 的启动文件（如 `/etc/profile` 和 `~/.bash_profile`），并在其后面加上 `-i` 选项，表示这是一个交互式的 shell，可以接受来自用户的输入。`-i` 选项通常用于设置别名和环境变量。
+
+加上 `/usr/bin/` 是 bash 的路径，其在环境变量里的话，直接 `bash -li` 就可以。
+
+{% endnote %}
 
 <scan id="env-change" style="font-weight: bold;">更换环境的话直接使用：</scan>
 
@@ -443,6 +452,185 @@ Windows Terminal 的安装，Windows11 是默认安装了的，Windows10 的话�
 
 {% endnote %}
 
-
-
 ## 6. MSYS2 各环境编译工具的安装
+
+不同的 MSYS 环境需要的编译器等等工具不经相同，所需要安装的包也不经相同，看了让人头大。现简单列举一下各环境所需要的包，嗯，应该说是最基础的包，具体需要哪些包取决于要编译的代码和程序所依赖的库。
+
+以下表格根据各自的环境列出了包名，安装时，通常会使用下面列出的包前缀加完整包名：
+|                                                                   |  Name[^1]  |     Package prefix[^2]     |
+| :---------------------------------------------------------------: | :--------: | :------------------------: |
+|    <img src="https://www.msys2.org/docs/msys.png" width="30"/>    |    MSYS    |            None            |
+|  <img src="https://www.msys2.org/docs/mingw64.png" width="30"/>   |  MINGW64   |    `mingw-w64-x86_64-`     |
+|   <img src="https://www.msys2.org/docs/ucrt64.png" width="30"/>   |   UCRT64   |  `mingw-w64-ucrt-x86_64-`  |
+|  <img src="https://www.msys2.org/docs/clang64.png" width="30"/>   |  CLANG64   | `mingw-w64-clang-x86_64-`  |
+|  <img src="https://www.msys2.org/docs/mingw32.png" width="30"/>   |  MINGW32   |     `mingw-w64-i686-`      |
+|  <img src="https://www.msys2.org/docs/clang32.png" width="30"/>   |  CLANG32   |  `mingw-w64-clang-i686-`   |
+| <img src="https://www.msys2.org/docs/clangarm64.png" width="30"/> | CLANGARM64 | `mingw-w64-clang-aarch64-` |
+
+[^1]: 环境变量 `MSYSTEM`
+[^2]: 环境变量 `MINGW_PACKAGE_PREFIX`
+
+然后就是结合之前**环境**信息的表，上述表，以及 `pacman -Ss` 和搜索，给出各环境安装相应的**编译工具链**需要的**包名**：
+
++ `MSYS`：`None`
++ `MINGW64`：
+
+  `mingw-w64-x86_64-toolchain`，一般直接安装 `mingw-w64-x86_64-gcc`，包管理器就会自动分析其需要的依赖，并进行安装：
+  ```bash
+  Username@Hostname MINGW64 ~
+  $ pacman -S mingw-w64-x86_64-gcc
+  正在解析依赖关系...
+  正在查找软件包冲突...
+
+  软件包 (15) mingw-w64-x86_64-binutils-2.40-2  mingw-w64-x86_64-crt-git-10.0.0.r234.g283e5b23a-1
+              mingw-w64-x86_64-gcc-libs-12.2.0-10  mingw-w64-x86_64-gmp-6.2.1-5
+              mingw-w64-x86_64-headers-git-10.0.0.r234.g283e5b23a-1  mingw-w64-x86_64-isl-0.25-1
+              mingw-w64-x86_64-libiconv-1.17-3  mingw-w64-x86_64-libwinpthread-git-10.0.0.r234.g283e5b23a-1
+              mingw-w64-x86_64-mpc-1.3.1-1  mingw-w64-x86_64-mpfr-4.2.0-1
+              mingw-w64-x86_64-windows-default-manifest-6.4-4
+              mingw-w64-x86_64-winpthreads-git-10.0.0.r234.g283e5b23a-1  mingw-w64-x86_64-zlib-1.2.13-3
+              mingw-w64-x86_64-zstd-1.5.4-1  mingw-w64-x86_64-gcc-12.2.0-10
+
+  全部安装大小：  402.29 MiB
+  ```
+  还可以根据需要安装如，`mingw-w64-x86_64-make`、 `mingw-w64-x86_64-gdb`、 `mingw-w64-x86_64-cmake`、 `mingw-w64-x86_64-pkg-config` 等包。
+
++ `MINGW32`：
+
+  `mingw-w64-i686-toolchain`，
+  ```bash
+  Username@Hostname MINGW32 ~
+  $ pacman -S mingw-w64-i686-gcc
+  正在解析依赖关系...
+  正在查找软件包冲突...
+
+  软件包 (15) mingw-w64-i686-binutils-2.40-2  mingw-w64-i686-crt-git-10.0.0.r234.g283e5b23a-1
+              mingw-w64-i686-gcc-libs-12.2.0-10  mingw-w64-i686-gmp-6.2.1-5
+              mingw-w64-i686-headers-git-10.0.0.r234.g283e5b23a-1  mingw-w64-i686-isl-0.25-1
+              mingw-w64-i686-libiconv-1.17-3  mingw-w64-i686-libwinpthread-git-10.0.0.r234.g283e5b23a-1
+              mingw-w64-i686-mpc-1.3.1-1  mingw-w64-i686-mpfr-4.2.0-1
+              mingw-w64-i686-windows-default-manifest-6.4-4
+              mingw-w64-i686-winpthreads-git-10.0.0.r234.g283e5b23a-1  mingw-w64-i686-zlib-1.2.13-3
+              mingw-w64-i686-zstd-1.5.4-1  mingw-w64-i686-gcc-12.2.0-10
+
+  下载大小：       55.12 MiB
+  全部安装大小：  392.16 MiB
+  ```
+  还可以根据需要安装如，`mingw-w64-i686-pkgconf`，`mingw-w64-i686-gdb`，`mingw-w64-i686-make`，`mingw-w64-i686-cmake` 等包。
+
++ `UCRT64`：
+  
+  `mingw-w64-ucrt-x86_64-toolchain`，一般直接安装 `mingw-w64-ucrt-x86_64-gcc`，包管理器就会自动分析其需要的依赖，并进行安装：
+  ```bash
+  Username@Hostname UCRT64 ~
+  $ pacman -S mingw-w64-ucrt-x86_64-gcc
+  正在解析依赖关系...
+  正在查找软件包冲突...
+
+  软件包 (10) mingw-w64-ucrt-x86_64-binutils-2.40-2  mingw-w64-ucrt-x86_64-crt-git-10.0.0.r234.g283e5b23a-1
+              mingw-w64-ucrt-x86_64-gmp-6.2.1-5  mingw-w64-ucrt-x86_64-headers-git-10.0.0.r234.g283e5b23a-1
+              mingw-w64-ucrt-x86_64-isl-0.25-1  mingw-w64-ucrt-x86_64-mpc-1.3.1-1
+              mingw-w64-ucrt-x86_64-mpfr-4.2.0-1  mingw-w64-ucrt-x86_64-windows-default-manifest-6.4-4
+              mingw-w64-ucrt-x86_64-winpthreads-git-10.0.0.r234.g283e5b23a-1
+              mingw-w64-ucrt-x86_64-gcc-12.2.0-10
+
+  全部安装大小：  393.62 MiB
+  ```
+  还可以根据需要安装如，`mingw-w64-ucrt-x86_64-make`，`mingw-w64-ucrt-x86_64-gdb`，`mingw-w64-ucrt-x86_64-cmake`，`mingw-w64-ucrt-x86_64-pkgconf` 等包。
+
++ `CLANG32`：
+
+  `mingw-w64-clang-i686-toolchain`，一般直接安装 `mingw-w64-i686-clang`，包管理器就会自动分析其需要的依赖，并进行安装：
+  ```bash
+  Username@Hostname CLANG32 ~
+  $ pacman -S mingw-w64-clang-i686-clang
+  正在解析依赖关系...
+  正在查找软件包冲突...
+
+  软件包 (18) mingw-w64-clang-i686-compiler-rt-15.0.7-3  mingw-w64-clang-i686-crt-git-10.0.0.r234.g283e5b23a-1
+              mingw-w64-clang-i686-expat-2.5.0-1  mingw-w64-clang-i686-gettext-0.21.1-1
+              mingw-w64-clang-i686-headers-git-10.0.0.r234.g283e5b23a-1  mingw-w64-clang-i686-libc++-15.0.7-3
+              mingw-w64-clang-i686-libffi-3.4.4-1  mingw-w64-clang-i686-libiconv-1.17-3
+              mingw-w64-clang-i686-libunwind-15.0.7-3
+              mingw-w64-clang-i686-libwinpthread-git-10.0.0.r234.g283e5b23a-1
+              mingw-w64-clang-i686-libxml2-2.10.3-1  mingw-w64-clang-i686-lld-15.0.7-3
+              mingw-w64-clang-i686-llvm-15.0.7-3  mingw-w64-clang-i686-winpthreads-git-10.0.0.r234.g283e5b23a-1
+              mingw-w64-clang-i686-xz-5.4.1-1  mingw-w64-clang-i686-zlib-1.2.13-3
+              mingw-w64-clang-i686-zstd-1.5.4-1  mingw-w64-clang-i686-clang-15.0.7-3
+
+  下载大小：      128.94 MiB
+  全部安装大小：  882.98 MiB
+  ```
+  还可以根据需要安装如，`mingw-w64-clang-i686-pkgconf`，`mingw-w64-clang-i686-make`，`mingw-w64-clang-i686-lldb`，`mingw-w64-clang-i686-cmake` 等包。
+
++ `CLANG64`：
+
+  `mingw-w64-clang-x86_64-toolchain`，一般直接安装 `mingw-w64-clang-x86_64-clang`，包管理器就会自动分析其需要的依赖，并进行安装：
+  ```bash
+  Username@Hostname CLANG64 ~
+  $ pacman -S mingw-w64-clang-x86_64-clang
+  正在解析依赖关系...
+  正在查找软件包冲突...
+
+  软件包 (7) mingw-w64-clang-x86_64-compiler-rt-15.0.7-3
+            mingw-w64-clang-x86_64-crt-git-10.0.0.r234.g283e5b23a-1
+            mingw-w64-clang-x86_64-headers-git-10.0.0.r234.g283e5b23a-1
+            mingw-w64-clang-x86_64-libwinpthread-git-10.0.0.r234.g283e5b23a-1
+            mingw-w64-clang-x86_64-lld-15.0.7-3
+            mingw-w64-clang-x86_64-winpthreads-git-10.0.0.r234.g283e5b23a-1
+            mingw-w64-clang-x86_64-clang-15.0.7-3
+
+  全部安装大小：  478.21 MiB
+  ```
+  还可以根据需要安装如，`mingw-w64-clang-x86_64-make`，`mingw-w64-clang-x86_64-pkgconf`，`mingw-w64-clang-x86_64-lldb`，`mingw-w64-clang-x86_64-cmake` 等包。
+
++ `CLANGARM64`：
+  
+  `mingw-w64-clang-aarch64-toolchain`，一般直接安装 `mingw-w64-clang-aarch64-clang`，包管理器就会自动分析其需要的依赖，并进行安装：
+  ```bash
+  Username@Hostname CLANGARM64 ~
+  $ pacman -S mingw-w64-clang-aarch64-clang
+  正在解析依赖关系...
+  正在查找软件包冲突...
+
+  软件包 (18) mingw-w64-clang-aarch64-compiler-rt-15.0.7-3
+              mingw-w64-clang-aarch64-crt-git-10.0.0.r234.g283e5b23a-1  mingw-w64-clang-aarch64-expat-2.5.0-1
+              mingw-w64-clang-aarch64-gettext-0.21.1-1
+              mingw-w64-clang-aarch64-headers-git-10.0.0.r234.g283e5b23a-1
+              mingw-w64-clang-aarch64-libc++-15.0.7-3  mingw-w64-clang-aarch64-libffi-3.4.4-1
+              mingw-w64-clang-aarch64-libiconv-1.17-3  mingw-w64-clang-aarch64-libunwind-15.0.7-3
+              mingw-w64-clang-aarch64-libwinpthread-git-10.0.0.r234.g283e5b23a-1
+              mingw-w64-clang-aarch64-libxml2-2.10.3-1  mingw-w64-clang-aarch64-lld-15.0.7-3
+              mingw-w64-clang-aarch64-llvm-15.0.7-3
+              mingw-w64-clang-aarch64-winpthreads-git-10.0.0.r234.g283e5b23a-1
+              mingw-w64-clang-aarch64-xz-5.4.1-1  mingw-w64-clang-aarch64-zlib-1.2.13-3
+              mingw-w64-clang-aarch64-zstd-1.5.4-1  mingw-w64-clang-aarch64-clang-15.0.7-3
+
+  下载大小：      125.33 MiB
+  全部安装大小：  861.81 MiB
+  ```
+  还可以根据需要安装如，`mingw-w64-clang-aarch64-make`，`mingw-w64-clang-aarch64-pkgconf`，`mingw-w64-clang-aarch64-lldb`，`mingw-w64-clang-aarch64-cmake` 等包。
+
+{% note info %}
+
+在 MSYS 环境下，一般需要安装以下工具来支持 **C 语言**的编译：
++ **`gcc` 编译器**：用于编译 C 语言代码。
++ **`make` 工具**：用于自动化构建和编译程序，通常需要根据 `Makefile` 文件来执行构建和编译操作。
++ **`gdb` 调试器**：用于调试程序，可以在程序运行过程中对变量和内存进行查看和修改。
++ **`pkg-config`** 工具：用于检测和获取已安装的库的信息，通常在编译程序时需要指定库的路径和编译选项。
+
+`CMake` 是一款跨平台的开源构建工具，用于管理和构建软件项目。它可以自动生成与操作系统、编译器和库相关的 `Makefile` 或者 `Project` 文件，从而简化了项目的构建和移植。
+
+`CMake` 不直接构建软件，而是通过生成 `Makefile` 或者项目文件来让构建工具完成具体的构建过程。
+
+`CMake` 支持的平台非常广泛，包括 `Windows`、`Linux`、`macOS`、`Android` 等。
+
+{% endnote %}
+
+## 7. 摸鱼，累了
+
+## 参考
++ [MSYS2](https://www.msys2.org/)
++ [Package Naming | MSYS2](https://www.msys2.org/docs/package-naming/)
++ [Environments | MSYS2](https://www.msys2.org/docs/environments/)
+
