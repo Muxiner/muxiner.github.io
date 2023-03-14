@@ -627,7 +627,45 @@ Windows Terminal 的安装，Windows11 是默认安装了的，Windows10 的话�
 
 {% endnote %}
 
-## 7. 摸鱼，累了
+## 个人 Windows Terminal 的 MSYS2 配置
+
+### 安装 zsh
+
+```bash
+pacman -S zsh
+```
+
+### 安装 oh my zsh
+
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+编辑 oh my zsh 配置文件 `nano ~/.zshrc`：
++ 修改 `ZSH_THEME=ys`
++ 修改插件：
+  ```
+  plugins=( 
+      git
+      zsh-autosuggestions
+      zsh-syntax-highlighting
+      history-substring-search
+  )
+  ```
+  并下载相关代码：
+  ```zsh
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-history-substring-search.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/history-substring-search
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  ```
+  下载完成后，执行下一步。
++ 使配置生效：`source ~/.zshrc`
+  
+### 安装 lsd
+
+一个 Rust 编写的 ls 替代品，支持彩色输出、图标显示、Git 状态显示等。
+
+## 继续摸鱼
 
 ## 参考
 + [MSYS2](https://www.msys2.org/)
