@@ -665,6 +665,52 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 一个 Rust 编写的 ls 替代品，支持彩色输出、图标显示、Git 状态显示等。
 
+搜索 lsd：
+```zsh
+$ pacman -Ss lsd
+mingw32/mingw-w64-i686-lsd 0.23.1-1
+    The next gen ls command (mingw-w64)
+mingw64/mingw-w64-x86_64-lsd 0.23.1-1
+    The next gen ls command (mingw-w64)
+ucrt64/mingw-w64-ucrt-x86_64-lsd 0.23.1-1
+    The next gen ls command (mingw-w64)
+clang32/mingw-w64-clang-i686-lsd 0.23.1-1
+    The next gen ls command (mingw-w64)
+clang64/mingw-w64-clang-x86_64-lsd 0.23.1-1
+    The next gen ls command (mingw-w64)
+```
+
+有不同版本的 lsd。不过还是推荐使用 rust 安装或者直接编译：
+
+安装 rust (ucrt 环境)：
+```zsh
+pacman -S mingw-w64-ucrt-x86_64-rust
+```
+使用 cargo 命令安装 lsd：
+```zsh
+cargo install lsd
+```
+如果想安装最新的 lsd：
+```
+cargo install --git https://github.com/Peltoche/lsd.git --branch master
+```
+如果不出意外的话，这样应该就能直接使用 lsd。
+
+如果出现问题，就自行解决吧。
+同时也可以自行编译：
+```zsh
+git clone https://github.com/lsd-rs/lsd.git
+## 上述克隆不了，可使用下述命令
+## git clone https://ghproxy.com/github.com/lsd-rs/lsd.git
+```
+开始编译：
+```zsh
+cd lsd
+cargo build
+```
+
+更多信息详见：[lsd | github](https://github.com/lsd-rs/lsd)
+
 ## 继续摸鱼
 
 ## 参考
