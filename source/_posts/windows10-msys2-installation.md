@@ -1,7 +1,7 @@
 ---
 title: Windows10 安装 MSYS2
 date: 2023-03-12 11:49:09
-updated: 2023-03-13 18:58:55
+updated: 2023-03-17 23:11:35
 excerpt: MSYS2 —— Windows 的软件分发和构建平台，是一个为 Windows 操作系统提供类似于 Unix 环境的软件开发环境的软件。
 categories: Linux
 tags: MSYS2
