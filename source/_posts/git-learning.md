@@ -3,7 +3,7 @@ title: Git 学习......
 math: true
 hide: false
 date: 2023-02-22 22:35:06
-updated: 2023-03-10 22:53:00
+updated: 2023-03-17 23:11:35
 excerpt: Git 学习过程的记录，烂笔头持续记录。
 categories: Git
 tags: Git
@@ -12,7 +12,7 @@ banner_img:
 sticky: 99
 ---
 
-### 常用 Git 命令
+## 常用 Git 命令
 以下是一些常用的 Git 命令：
 
 + `git init`：初始化一个 Git 仓库
@@ -39,7 +39,7 @@ sticky: 99
 -----
 
 
-### git init
+## git init
 
 `Git` 使用 `git init` 命令来初始化一个 `Git` 仓库，`Git` 的很多命令都需要在 `Git` 的仓库中运行，所以 `git init` 是使用 `Git` 的第一个命令。
 
@@ -153,7 +153,7 @@ $ tree
 
 {% endnote %}
 
-### git clone 
+## git clone 
 
 `git clone` 以为**克隆**或**拷贝**，用作从现有的 Git 仓库克隆（下载）项目到本地。
 
@@ -174,7 +174,7 @@ git clone https://xxxxxx.xxx/<repo>
 # git clone https://ghproxy.com/https://github.com/xxxxx/xxxxx.git
 ```
 
-### git branch
+## git branch
 
 `git branch` 是 Git 中用来管理分支的命令。
 
@@ -210,7 +210,7 @@ fatal: Not a valid object name: 'master'.
 -----------
 
 
-### git checout
+## git checout
 
 **`git checkout` 是 Git 中的一个重要命令，用于切换分支、回退版本、创建分支等操作。**
 
@@ -239,7 +239,7 @@ fatal: Not a valid object name: 'master'.
 {% endnote %}
 
 
-### git add
+## git add
 
 `git add` 命令用于将文件或文件夹添加到 Git 的暂存区（也称为索引）中，以便在提交时将其包含在版本控制中。
 
@@ -253,7 +253,7 @@ fatal: Not a valid object name: 'master'.
 
 在提交前，需要使用 `git status` 命令检查已暂存的文件和未暂存的文件的状态。如果文件已暂存，则它们将包括在下一次提交中。如果文件未暂存，则需要使用 `git add` 命令将其添加到暂存区中。
 
-### git status
+## git status
 
 `git status` 命令用于显示当前 Git 仓库的状态，包括哪些文件已被修改、哪些文件已被添加到暂存区、哪些文件尚未被跟踪等信息。
 
@@ -265,3 +265,16 @@ fatal: Not a valid object name: 'master'.
 
 `git status` 命令是 Git 中最常用的命令之一，它可以帮助您了解当前仓库的状态，以便您决定是否需要执行其他操作，比如使用 `git add` 添加文件到暂存区或使用 `git commit` 提交更改。
 
+
+## git commit
+
+`git commit` 命令是 Git 中最常用的命令之一，用于将暂存区中的修改提交到本地仓库中。
+
+常见用法：
++ `git commit -m "commit message"`：提交暂存区中的所有修改，并添加提交说明。
++ `git commit -a -m "commit message"`：直接将所有已跟踪的修改提交到本地仓库中，无需先执行 `git add`。
++ `git commit --amend`：修改最近一次提交的提交说明。
++ `git commit -v`：提交时显示文件的差异。
++ `git commit --no-verify`：提交时跳过 Git 钩子的验证。
++ `git commit --allow-empty`：允许提交空的提交记录。
++ `git commit --signoff`：提交时添加签名，通常用于公开的开源项目。
