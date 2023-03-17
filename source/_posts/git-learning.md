@@ -278,3 +278,4 @@ fatal: Not a valid object name: 'master'.
 + `git commit --no-verify`：提交时跳过 Git 钩子的验证。
 + `git commit --allow-empty`：允许提交空的提交记录。
 + `git commit --signoff`：提交时添加签名，通常用于公开的开源项目。
++ `git commit --fixup <commit>`：创建一个针对指定提交的 fixup 提交，用于后续使用 rebase 进行合并操作。
