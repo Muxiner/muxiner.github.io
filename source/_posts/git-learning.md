@@ -3,7 +3,7 @@ title: Git 学习......
 math: true
 hide: false
 date: 2023-02-22 22:35:06
-updated: 2023-03-17 23:11:35
+updated: 2023-03-19 08:46:29
 excerpt: Git 学习过程的记录，烂笔头持续记录。
 categories: Git
 tags: Git
@@ -279,3 +279,21 @@ fatal: Not a valid object name: 'master'.
 + `git commit --allow-empty`：允许提交空的提交记录。
 + `git commit --signoff`：提交时添加签名，通常用于公开的开源项目。
 + `git commit --fixup <commit>`：创建一个针对指定提交的 fixup 提交，用于后续使用 rebase 进行合并操作。
+
+
+## git log
+
+`git log` 是 Git 中用于查看提交历史的命令。它可以显示 Git 仓库中提交记录的详细信息，包括提交的 SHA 值、作者、提交时间、提交信息等。
+
+常见的用法：
++ `git log`：显示所有提交记录，最近的提交记录排在最上面。
++ `git log -n`：显示最近的 n 个提交记录。
++ `git log --since=yyyy-mm-dd`：显示从指定日期开始的所有提交记录。
++ `git log --until=yyyy-mm-dd`：显示截止到指定日期为止的所有提交记录。
++ `git log --author=name`：显示指定作者的所有提交记录。
++ `git log --grep=pattern`：显示提交信息中包含指定模式的所有提交记录。
++ `git log --oneline`：以一行的形式显示提交记录，包括 SHA 值和提交信息。
++ `git log --graph`：以图形化的方式显示提交历史，可以更清晰地查看分支合并情况。
++ `git log --pretty=format:"format"`：使用指定的格式显示提交记录。format 是格式化字符串，可以包含各种占位符，如 %h 表示提交的短 SHA 值，%an 表示作者名等。
++ `git log --follow <file>`：显示指定文件的提交历史，包括文件的改名和移动。
++ `git log <branch1>..<branch2>`：显示两个分支之间的提交记录。
