@@ -310,3 +310,26 @@ fatal: Not a valid object name: 'master'.
 + `git pull --rebase origin <branch>`：拉取并将本地未提交的修改变基到指定的远程分支之上。
 
 需要注意的是，如果本地分支与远程分支之间存在冲突，则 `git pull` 会失败，并提示用户手动解决冲突后再进行提交。
+
+## 部分问题
+
+### remote rejected
+
+```zsh
+To https://github.com/Muxiner/muxiner.github.io.git
+ ! [remote rejected] source -> source (refusing to allow a Personal Access Token to create or update workflow `.github/workflows/acitons.yml` without `workflow` scope)
+```
+上述是 `git push` 时的报错。
+
+这个错误提示说明在使用 Personal Access Token(PAT) 授权推送代码时，没有为该令牌授予 workflow 权限，导致 GitHub Actions 无法更新或创建 workflows。
+
+解决该问题的办法是，重新为 PAT 添加 workflow 权限：
++ 打开 GitHub Settings 页面。
++ 选择 Developer settings > Personal access tokens。
++ 找到所使用的 PAT，并且点击 Edit 按钮。
++ 在 Scopes 栏中，勾选 workflow 权限。
++ 点击 Update token 保存修改。
++ 现在，再次推送代码，就应该可以成功触发 GitHub Actions 并自动部署了。
+
+![](https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/2023-03-20-gitpush.png)
+
