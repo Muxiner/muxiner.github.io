@@ -3,7 +3,7 @@ title: Git 学习......
 math: true
 hide: false
 date: 2023-02-22 22:35:06
-updated: 2023-03-19 08:46:29
+updated: 2023-03-20 12:22:41
 excerpt: Git 学习过程的记录，烂笔头持续记录。
 categories: Git
 tags: Git
@@ -297,3 +297,16 @@ fatal: Not a valid object name: 'master'.
 + `git log --pretty=format:"format"`：使用指定的格式显示提交记录。format 是格式化字符串，可以包含各种占位符，如 %h 表示提交的短 SHA 值，%an 表示作者名等。
 + `git log --follow <file>`：显示指定文件的提交历史，包括文件的改名和移动。
 + `git log <branch1>..<branch2>`：显示两个分支之间的提交记录。
+
+
+## git pull
+
+`git pull` 是 Git 中用于从远程代码仓库中拉取最新代码到本地代码仓库中的命令。它会自动合并远程分支到当前分支，并更新本地代码仓库中的文件。
+
+常见用法：
++ `git pull`：直接拉取并合并远程分支到当前分支。
++ `git pull origin <branch>`：拉取并合并指定远程分支到当前分支。
++ `git pull --rebase`：拉取并将本地未提交的修改变基到拉取的代码之上。
++ `git pull --rebase origin <branch>`：拉取并将本地未提交的修改变基到指定的远程分支之上。
+
+需要注意的是，如果本地分支与远程分支之间存在冲突，则 `git pull` 会失败，并提示用户手动解决冲突后再进行提交。
