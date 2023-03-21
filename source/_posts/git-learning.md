@@ -3,7 +3,7 @@ title: Git 学习......
 math: true
 hide: false
 date: 2023-02-22 22:35:06
-updated: 2023-03-20 12:22:41
+updated: 2023-03-21 23:52:23
 excerpt: Git 学习过程的记录，烂笔头持续记录。
 categories: Git
 tags: Git
@@ -310,6 +310,19 @@ fatal: Not a valid object name: 'master'.
 + `git pull --rebase origin <branch>`：拉取并将本地未提交的修改变基到指定的远程分支之上。
 
 需要注意的是，如果本地分支与远程分支之间存在冲突，则 `git pull` 会失败，并提示用户手动解决冲突后再进行提交。
+
+## git push
+
+`git push` 命令用于将本地仓库的代码推送到远程仓库，以便在多个开发者之间共享代码。
+
+通常情况下，`git push` 命令将本地代码推送到与之关联的远程仓库的默认分支。
+
+常见用法：
++ `git push`: 将当前分支的代码推送到关联的远程仓库的默认分支。
++ `git push <remote> <branch>`: 将本地指定分支的代码推送到关联的远程仓库的指定分支。
++ `git push --all`: 将所有本地分支的代码推送到关联的远程仓库。
++ `git push --force`: 强制推送本地代码到远程仓库。该命令会覆盖远程仓库上的修改，慎用。
++ `git push --tags`: 将本地的标签推送到关联的远程仓库。
 
 ## 部分问题
 
