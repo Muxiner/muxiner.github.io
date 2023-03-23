@@ -3,7 +3,7 @@ title: Git 学习......
 math: true
 hide: false
 date: 2023-02-22 22:35:06
-updated: 2023-03-21 23:52:23
+updated: 2023-03-23 23:39:05
 excerpt: Git 学习过程的记录，烂笔头持续记录。
 categories: Git
 tags: Git
@@ -323,6 +323,23 @@ fatal: Not a valid object name: 'master'.
 + `git push --all`: 将所有本地分支的代码推送到关联的远程仓库。
 + `git push --force`: 强制推送本地代码到远程仓库。该命令会覆盖远程仓库上的修改，慎用。
 + `git push --tags`: 将本地的标签推送到关联的远程仓库。
+
+## git merge
+
+`git merge` 命令用于将一个分支的修改合并到另一个分支上。
+
+使用 `git merge` 命令，可以将当前分支（通常是 `master` 分支）与其他分支合并。例如，假设你有一个 `feature` 分支，想将它合并到 `master` 分支，可以使用以下命令：
+
+```zsh
+git checkout master
+git merge feature
+```
+这将把 `feature` 分支上的所有更改合并到 `master` 分支上。如果在合并过程中发生冲突，Git 将提示你进行手动解决冲突。
+
+`git merge` 命令有多种选项，常用的选项包括：
++ `--no-ff`：禁用快进合并（Fast-forward merge），这样可以保留分支合并历史，便于查看。
++ `--squash`：将分支上的多个提交压缩为一个提交，并将它们合并到目标分支上。
++ `-m`：当合并冲突时，指定合并信息的格式。
 
 ## 部分问题
 
