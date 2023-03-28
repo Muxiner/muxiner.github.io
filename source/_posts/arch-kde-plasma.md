@@ -2,7 +2,7 @@
 title: Arch Linux 桌面环境的一些设置
 date: 2023-03-28 02:27:43
 updated: 2023-03-28 02:28:55
-excerpt:暂无
+excerpt: 暂无
 categories: Linux
 tags: 
 - Arch Linux
