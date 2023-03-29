@@ -1,7 +1,7 @@
 ---
 title: Windows10 安装 MSYS2
 date: 2023-03-12 11:49:09
-updated: 2023-03-29 17:51:26
+updated: 2023-03-29 21:53:25
 excerpt: MSYS2 —— Windows 的软件分发和构建平台，是一个为 Windows 操作系统提供类似于 Unix 环境的软件开发环境的软件。
 categories: Linux
 tags: MSYS2
@@ -627,7 +627,7 @@ Windows Terminal 的安装，Windows11 是默认安装了的，Windows10 的话�
 
 {% endnote %}
 
-## 个人 Windows Terminal 的 MSYS2 配置
+## 7. 个人 Windows Terminal 的 MSYS2 配置
 
 ### 安装 zsh
 
