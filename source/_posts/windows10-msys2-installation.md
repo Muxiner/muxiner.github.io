@@ -1,7 +1,7 @@
 ---
 title: Windows10 安装 MSYS2
 date: 2023-03-12 11:49:09
-updated: 2023-03-17 23:11:35
+updated: 2023-03-29 17:51:26
 excerpt: MSYS2 —— Windows 的软件分发和构建平台，是一个为 Windows 操作系统提供类似于 Unix 环境的软件开发环境的软件。
 categories: Linux
 tags: MSYS2
@@ -710,6 +710,34 @@ cargo build
 ```
 
 更多信息详见：[lsd | github](https://github.com/lsd-rs/lsd)
+
+{% note info %}
+
+如果提示添加 cargo 路径到环境变量，那就添加 cargo 路径到环境变量：
+```zsh
+export PATH="$PATH:/c/Users/USERNAME/.cargo/bin"
+```
+添加在 `.bashrc` 或者 `.zshrc` 文件中。
+
+{% endnote %}
+
+### 使用 Visual Studio Code 打开文件或文件夹
+
+直接让 MSYS 使用 Windows 安装的 Visual Studio Code 就行，将 VS code 的路径添加到环境变量中：
+```zsh
+export PATH="$PATH:/c/Program Files (x86)/Microsoft VS Code/bin"
+```
+或者是：
+```zsh
+export PATH="$PATH:/c/Users/$USER/AppData/Local/Programs/Microsoft VS Code/bin"
+```
+根据自身情况进行修改。
+
+将上述加入 `~/.zshrc` 中。
+最后再生效：
+```zsh
+source ~/.zshrc
+```
 
 ## 继续摸鱼
 
