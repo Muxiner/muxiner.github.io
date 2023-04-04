@@ -1,7 +1,7 @@
 ---
 title: Windows10 安装 MSYS2
 date: 2023-03-12 11:49:09
-updated: 2023-03-29 21:53:25
+updated: 2023-04-05 00:55:11
 excerpt: MSYS2 —— Windows 的软件分发和构建平台，是一个为 Windows 操作系统提供类似于 Unix 环境的软件开发环境的软件。
 categories: Linux
 tags: MSYS2
@@ -629,13 +629,13 @@ Windows Terminal 的安装，Windows11 是默认安装了的，Windows10 的话�
 
 ## 7. 个人 Windows Terminal 的 MSYS2 配置
 
-### 安装 zsh
+### 1）安装 zsh
 
 ```bash
 pacman -S zsh
 ```
 
-### 安装 oh my zsh
+### 2）安装 oh my zsh
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -661,7 +661,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
   下载完成后，执行下一步。
 + 使配置生效：`source ~/.zshrc`
   
-### 安装 lsd
+### 3）安装 lsd
 
 一个 Rust 编写的 ls 替代品，支持彩色输出、图标显示、Git 状态显示等。
 
@@ -721,7 +721,7 @@ export PATH="$PATH:/c/Users/USERNAME/.cargo/bin"
 
 {% endnote %}
 
-### 使用 Visual Studio Code 打开文件或文件夹
+### 3）使用 Visual Studio Code 打开文件或文件夹
 
 直接让 MSYS 使用 Windows 安装的 Visual Studio Code 就行，将 VS code 的路径添加到环境变量中：
 ```zsh
@@ -739,10 +739,196 @@ export PATH="$PATH:/c/Users/$USER/AppData/Local/Programs/Microsoft VS Code/bin"
 source ~/.zshrc
 ```
 
+### 4）安装 node.js、 npm、 yarn 
+
+先更新软件源：
+```zsh
+pacman -Syu
+```
+然后根据自己 Msys2 的环境安装 node.js，比如安装 UCRT64 环境的：
+```zsh
+pacman -S mingw-w64-ucrt-x86_64-nodejs
+```
+> 如果是其他环境的 node.js 安装，就先搜索都有什么 node.js 可以安装：
+> ```zsh
+> pacman -Ss nodejs
+> ```
+> 然后选择需要的 node.js 进行安装。
+
+npm 会和 node.js 一起安装，当安装完 node.js 时，npm 也会安装完，可以使用 `npm -v` 检测是否安装完成。
+
+使用 `node -v` 检测 node.js 是否安装成功。
+
+安装 yarn 的话使用：
+```zsh
+npm install -g yarn
+```
+检测 yarn 是否安装成功 `yarn -v`。
+
+好家伙，结果给我返回一个：**zsh: command not found: yarn**，仔细一看发现应该是 npm 的安装路路径并不在 PATH 中，看来还需要小小设置一下，然后经查询可以使用下述命令查询 npm 安装路径：
+```zsh
+npm root -g
+```
+返回给我 `C:\msys64\ucrt64\lib\node_modules`，那咱就在 ~/.zshrc 文件中添加一行:
+```.zshrc
+export PATH="$PATH:/ucrt64/lib/node_modules"
+```
+再使文件生效。`yarn -v` 继续检测，好家伙还有问题 —— zsh: permission denied: yarn，咱知道这是没有 yarn 的可执行权限，一般都是加上 `sudo` 命令就好了，不过咱们 msys2 中没有 `sudo` 命令，害，咋回事呢。先不管这个吧，咱先去 npm 安装路径里看看：
+```zsh
+$ ls /ucrt64/lib/node_modules/                 
+ corepack   hexo-cli   npm   yarn
+```
+> 咱的 ls 是给 lsd 加上别名了。`alias ls="lsd"`
+
+说明咱是安装了 yarn 的，我还安装了 hexo-cil 呢，再进去看看：
+```zsh
+$ ls /ucrt64/lib/node_modules/yarn    
+ bin   lib   LICENSE   package.json   preinstall.js   README.md
+```
+还有个可执行文件的文件夹，再进去看看：
+```zsh
+$ ls /ucrt64/lib/node_modules/yarn/bin
+ yarn   yarn.cmd   yarn.js   yarnpkg   yarnpkg.cmd
+```
+有个 yarn 文件呀，看看文件类型：
+```zsh
+$ file /ucrt64/lib/node_modules/yarn/bin/yarn
+/ucrt64/lib/node_modules/yarn/bin/yarn: POSIX shell script, ASCII text executable
+```
+这是一个 ASCII 码编写的 POSIX shell 脚本文件，其中包含了一些 Linux/Unix 系统下可执行的 shell 命令。
+
+执行一下看看：
+```zsh
+$ /ucrt64/lib/node_modules/yarn/bin/yarn -v
+1.22.19
+```
+
+是可以的哦。难道说是因为可执行文件太深了？
+将 `/ucrt64/lib/node_modules/yarn/bin` 加入环境变量试试，在 `~/.zshrc` 文件加入下面内容，并生效：
+```zsh
+export PATH="$PATH:/ucrt64/lib/node_modules/yarn/bin"
+```
+看看能使用 yarn 了没：
+```zsh
+$ yarn -v
+1.22.19
+```
+好家伙，成了，但是这也太麻烦了吧，我是用 npm 安装应用后，还得添加路径到环境变量，这也太麻烦了。
+
+stackoverflow 里有多个回答，其中有一个就是要使用 Windows 安装的 node.js 和 npm 然后并添加 node.js 和 npm 的安装路径，二者默认的路径是：
++ `node.js`: `C:\Program Files\nodejs`，包含 `node`、`npm`。
++ `npm`: `C:\Users\<USERNAME>\AppData\Roaming\npm`，这是使用 `npm install xxxx` 后所安装应用的安装位置。
+
+我查看自己 Windows 10 中的上述路径的文件，差不多就如我所说了，有 npm 以及使用 npm 安装的应用。咱是用 msys2 查看一下都有啥：
+```zsh
+$ ls /c/Program\ Files/nodejs
+ node_modules   corepack   corepack.cmd   install_tools.bat   node.exe   node_etw_provider.man   nodevars.bat   npm   npm.cmd   npx   npx.cmd
+
+$ ls /c/Program\ Files/nodejs/node_modules
+ corepack   npm
+
+$ ls /c/Program\ Files/nodejs/node_modules/npm
+ bin   docs   lib   man   node_modules   index.js   LICENSE   npmrc   package.json   README.md
+
+$ ls /c/Program\ Files/nodejs/node_modules/npm/bin
+ node-gyp-bin   npm   npm-cli.js   npm.cmd   npx   npx-cli.js   npx.cmd
+```
+尝试执行一下 `npm -v` 命令，执行的是上述 Windows 中的 npm:
+```zsh
+$ /c/Program\ Files/nodejs/node_modules/npm/bin/npm -v
+node:internal/modules/cjs/loader:1078
+  throw err;
+  ^
+
+Error: Cannot find module 'C:\msys64\ucrt64\bin\node_modules\npm\bin\npm-cli.js'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1075:15)
+    at Module._load (node:internal/modules/cjs/loader:920:27)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:23:47 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+
+Node.js v18.15.0
+Could not determine Node.js install directory
+```
+看来是之前安装的 node.js 和 Windows 下的冲突了，把已经安装的卸载：`pacman -Rns mingw-w64-ucrt-x86_64-nodejs` 连同依赖也都删除了，再把之前所添加的和 npm 相关的环境变量也删除，并使 `.zshrc` 文件生效，再执行 `/c/Program\ Files/nodejs/node_modules/npm/bin/npm -v`:
+```zsh
+$ /c/Program\ Files/nodejs/node_modules/npm/bin/npm -v
+9.3.1
+```
+OK，看来是冲突解决了，那再将上述所说的 Windows 的 node.js 和 npm 路径添加到 msys2 的环境变量：
+```zsh
+export PATH="$PATH:/c/Program Files/nodejs"
+export PATH="$PATH:/c/Users/<USERNAME>/AppData/Roaming/npm"
+```
+> <USERNAME> 是自己 Windows 的用户名哦，注意一下。
+
+然后再试 `.zshrc` 文件生效。
+
+```zsh
+$ node -v
+v18.14.0
+
+$ npm -v 
+9.3.1
+
+$ yarn -v
+1.22.19
+
+$ hexo -v
+INFO  Validating config
+hexo: 6.3.0
+hexo-cli: 4.3.0
+os: win32 10.0.19044
+node: 18.14.0
+v8: 10.2.154.23-node.22
+uv: 1.44.2
+zlib: 1.2.13
+brotli: 1.0.9
+ares: 1.18.1
+modules: 108
+nghttp2: 1.51.0
+napi: 8
+llhttp: 6.0.10
+uvwasi: 0.0.14
+acorn: 8.8.1
+simdutf: 3.1.0
+undici: 5.14.0
+openssl: 3.0.7+quic
+cldr: 42.0
+icu: 72.1
+tz: 2022g
+unicode: 15.0
+ngtcp2: 0.8.1
+nghttp3: 0.7.0
+```
+好哦，显而易见的，这养的方法比之前使用包管理器 `pacman` 安装的方便多了，只需要一次性添加两条环境变量就好了，不像之前 npm 安装一次就需要添加一次环境变量。
+
+哦，再看一下 npm 安装路径里都有什么：
+```zsh
+$ ls /c/Users/<USERNAME>/AppData/Roaming/npm
+ etc   node_modules   hexo   hexo.cmd   hexo.ps1   vue   vue.cmd   vue.ps1   yarn   yarn.cmd   yarn.ps1   yarnpkg   yarnpkg.cmd   yarnpkg.ps1
+```
+
+#### （1）Node.js 和 npm 安装步骤
+
+不错不错，特别的好使。现在综上所述一下，将 Windows 安装 Node.js 和 npm 以及添加环境变量的方法总结一下：
+
+{% note danger %}
+
+~~TMD，先不写了，有空再写，TMD。~~
+
+~~我 TMD 本来是想再 MSYS UCRT64 环境使用 hexo 新生成一篇 post 的，结果发现没有 hexo、npm、nodejs，🍀，然后就写了上述内容 —— 关于 MSYS 中 nodejs 的安装。TMD，一下子直接花了好多时间，😭😭😭😭😭😭。~~
+
+
+{% endnote %}
+
+
 ## 继续摸鱼
 
 ## 参考
 + [MSYS2](https://www.msys2.org/)
 + [Package Naming | MSYS2](https://www.msys2.org/docs/package-naming/)
 + [Environments | MSYS2](https://www.msys2.org/docs/environments/)
-
++ [Installing nodejs and npm on MSYS2 | stack**overflow**](https://stackoverflow.com/questions/46473196/installing-nodejs-and-npm-on-msys2)
