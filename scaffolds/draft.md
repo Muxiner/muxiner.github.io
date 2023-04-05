@@ -9,4 +9,5 @@ banner_img:
 sticky:
 math: true
 hide: false
+comment: 'giscus'
 ---
