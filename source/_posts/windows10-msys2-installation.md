@@ -1,7 +1,7 @@
 ---
 title: Windows10 安装 MSYS2
 date: 2023-03-12 11:49:09
-updated: 2023-04-05 00:55:11
+updated: 2023-04-05 15:31:10
 excerpt: MSYS2 —— Windows 的软件分发和构建平台，是一个为 Windows 操作系统提供类似于 Unix 环境的软件开发环境的软件。
 categories: Linux
 tags: MSYS2
@@ -924,6 +924,66 @@ $ ls /c/Users/<USERNAME>/AppData/Roaming/npm
 
 {% endnote %}
 
+
+### 5）Visual Studio Code 使用 MSYS2 作为默认终端
+
+{% note info %}
+
+该部分的编写时间是：**2023-04-05 15:31:10**，注意时效性，可能不是那么适用。
+
+官方文档有专门关于终端的内容，可以自行查看：[Terminal Basics - TERMINAL | Visual Studio Code Docs](https://code.visualstudio.com/docs/terminal/basics)。
+
+{% endnote %}
+
+主要是修改 VS code 的设置文件 —— `settings.json`，以及该文件中 `terminal.integrated.profiles.windows` 字段的内容，记录时所参照的系统是 Windows 10。
+
+啊吧啊吧，我 TM 直接贴出我的 `settings.json` 文件的 `terminal.integrated.profiles.windows` 字段内容，不继续多讲了，懒了懒了：
+```json
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "source": "Git Bash"
+        },
+        "MSYS2(URCT64)": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [
+                "/c",
+                "C:/msys64/msys2_shell.cmd -defterm -here -no-start -ucrt64"
+            ],
+            "icon": "terminal-bash",
+            "color": "terminal.ansiRed"
+        }
+    }
+```
+咱使用 UCRT64 环境，同时为了显示出某些 icons 啥的，需要使用 nerdfonts 字体，所以咱设置一下终端所使用的字体：
+```json
+"terminal.integrated.fontFamily": "'mononoki NFM', '微软雅黑'"
+```
+
+同时也方便直接对 VS code 所打开项目进行某些命令行操作呢，还需要**设置一下终端打开时所处于的路径**：
+```json
+"terminal.integrated.defaultLocation": "editor"
+```
+哦。还需要设置一下默认终端：
+```json
+"terminal.integrated.defaultProfile.windows": "MSYS2(URCT64)"
+```
+
+暂且这样。
 
 ## 继续摸鱼
 
