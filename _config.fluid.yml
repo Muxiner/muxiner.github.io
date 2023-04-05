@@ -875,8 +875,8 @@ cusdis:
 giscus:
   repo: Muxiner/muxiner.github.io
   repo-id: MDEwOlJlcG9zaXRvcnkzMTU5MTM1NzY=
-  category: Announcements
-  category-id: DIC_kwDOEtR1aM4CVjN2
+  category: 博客文章评论
+  category-id: DIC_kwDOEtR1aM4CVjN6
   theme-light: light
   theme-dark: dark
   mapping: title
