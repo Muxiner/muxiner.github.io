@@ -1,7 +1,7 @@
 ---
 title: Windows10 安装 MSYS2
 date: 2023-03-12 11:49:09
-updated: 2023-04-05 15:31:10
+updated: 2023-04-10 15:08:16
 excerpt: MSYS2 —— Windows 的软件分发和构建平台，是一个为 Windows 操作系统提供类似于 Unix 环境的软件开发环境的软件。
 categories: Linux
 tags: MSYS2
@@ -984,6 +984,39 @@ $ ls /c/Users/<USERNAME>/AppData/Roaming/npm
 ```
 
 暂且这样。
+
+### 6）.zshrc 文件配置
+
+主要记录一下环境变量的设置，以及命令别名设置，直接上文件：
+```.zshrc
+# Environment Variable
+# export ALL_PROXY=http://127.0.0.1:10809
+# export PATH="$PATH:/home/{UserName}/.local/share/gem/ruby/3.1.0/bin"
+export PATH="$PATH:/c/Users/{UserName}/.cargo/bin"
+export PATH="$PATH:/c/Program Files (x86)/Microsoft VS Code/bin"
+export PATH="$PATH:/c/Android/platform-tools"
+export PATH="$PATH:/c/Users/{UserName}/scoop/apps/scrcpy/current"
+export PATH="$PATH:/c/Program Files/nodejs"
+export PATH="$PATH:/c/Users/{UserName}/AppData/Roaming/npm"
+# export PATH="$PATH:/ucrt64/lib/node_modules"
+# export PATH="$PATH:/ucrt64/lib/node_modules/yarn/bin"
+
+# Aliases
+alias ls="lsd --config-file /home/{UserName}/.config/lsd/config.yaml"
+alias datetime='echo $(date +%F%n%T)'
+alias path='echo $PATH | tr ":" "\n" | sort -u'
+alias msysenv='echo $MSYSTEM'
+alias zshconfig='echo "sourcing ~/.zshrc..." && source ~/.zshrc'
+alias all_proxy='ALL_PROXY=http://127.0.0.1:10809'
+```
+添加了一些常用的环境变量：
++ VS code
++ adb
++ scrcpy
++ nodejs
++ npm
+
+等等，这个都在本文中有所描述，基本上就是在自己使用 msys2 的过程中，将觉得有用的东西使用上，并进行记录。
 
 ## 继续摸鱼
 
