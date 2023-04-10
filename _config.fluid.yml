@@ -890,7 +890,7 @@ giscus:
 # Archive Page
 #---------------------------
 archive:
-  banner_img: https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/img/wallhaven-3zvdzv.jpg
+  banner_img: 
   banner_img_height: 60
   banner_mask_alpha: 0.3
 
