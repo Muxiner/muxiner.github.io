@@ -671,7 +671,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 + 修改 `ZSH_THEME=ys`
 + 修改插件：
 
-  ```
+  ```.zshrc
   plugins=( 
       git
       zsh-autosuggestions
@@ -727,7 +727,7 @@ cargo install lsd
 
 如果想安装最新的 lsd：
 
-```
+```zsh
 cargo install --git https://github.com/Peltoche/lsd.git --branch master
 ```
 
@@ -943,7 +943,7 @@ export PATH="$PATH:/c/Program Files/nodejs"
 export PATH="$PATH:/c/Users/<USERNAME>/AppData/Roaming/npm"
 ```
 
-> <USERNAME> 是自己 Windows 的用户名哦，注意一下。
+> \<USERNAME\> 是自己 Windows 的用户名哦，注意一下。
 
 然后再试 `.zshrc` 文件生效。
 
