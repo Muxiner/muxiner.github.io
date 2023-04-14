@@ -12,7 +12,6 @@ banner_img:
 sticky: 999
 ---
 
-## 没有了，该睡觉了，本来是打算简单写写的，结果写 nodejs 安装去了，我敲
 
 ## Why 记录
 
@@ -23,6 +22,15 @@ sticky: 999
 嗯，没错，~~ShaBee is me~~
 
 暂且说这么多。
+
+## Rust 环境
+
+### vscode rust 插件
+
++ `rust-analyzer`：社区驱动的 Rust 语言的插件，就是好用。
++ `Even Better TOML`：支持 .toml 文件完整特性
++ `Error Lens`：更好的获得错误展示
++ `CodeLLDB`：Debugger 程序
 
 {% note primary %}
 test
