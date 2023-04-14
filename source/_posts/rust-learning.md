@@ -153,3 +153,44 @@ impl Solution {
     }
 }
 ```
+
+{% note info %}
+还有这个可以学习。
+在 Rust 中，.rev()是一个方法，它返回一个反转（reverse）迭代器。该方法可以应用于任何实现了 std::iter::Iterator trait 的对象。调用 .rev() 方法后，将返回一个产生与原始迭代器相同元素，但顺序相反的迭代器。在给定示例代码中，.rev() 用于将索引从大到小遍历。
+
+在这个例子中，for i in (0..digits.len()).rev() 意味着 i 变量将从 digits 中最后一个元素的索引开始（即 digits.len() - 1），并递减到第一个元素的索引（即 0）。
+
+有个骚逼炫技，真他妈的骚，代码格式也不好好搞：
+
++ 是指除了题目给定的有指令的行数。
++ 用的是“数 9 法”，先找出从右到左第一个非9的下标i，然后懂的都懂。
++ None表示全都是 9！
++ `[a,b,c].concat()` 表示将 a, b ,c 三个切片连城一个Vec数组。
+
+```rust
+impl Solution {
+    pub fn plus_one(digits: Vec<i32>) -> Vec<i32> {
+        match digits
+            .iter()
+            .enumerate()
+            .rev()
+            .skip_while(|(i, &x)| 9 == x)
+            .next()
+        {
+            Some((i, &a)) => [
+                digits[..i]
+                    .iter()
+                    .map(|x| x.clone())
+                    .collect::<Vec<i32>>()
+                    .as_slice(),
+                vec![digits[i] + 1].as_slice(),
+                vec![0; digits.len() - (i + 1)].as_slice(),
+            ]
+            .concat(),
+            None => [vec![1].as_slice(), vec![0; digits.len()].as_slice()].concat(),
+        }
+    }
+}
+```
+
+{% endnote %}
