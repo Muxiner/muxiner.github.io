@@ -8,6 +8,7 @@ tags:
 index_img:
 banner_img:
 sticky:
+comment: 'giscus'
 math: true
 hide: false
 ---

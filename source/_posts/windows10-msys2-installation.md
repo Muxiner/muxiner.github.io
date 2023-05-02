@@ -1,7 +1,7 @@
 ---
 title: Windows10 安装 MSYS2
 date: 2023-03-12 11:49:09
-updated: 2023-03-17 23:11:35
+updated: 2023-04-11 21:36:33
 excerpt: MSYS2 —— Windows 的软件分发和构建平台，是一个为 Windows 操作系统提供类似于 Unix 环境的软件开发环境的软件。
 categories: Linux
 tags: MSYS2
@@ -10,7 +10,7 @@ banner_img:
 sticky:
 ---
 
-## 1. MSYS2 是什么 
+## 1. MSYS2 是什么
 
 **[MSYS2](https://www.msys2.org/)** 是一个工具和库的集合，为用户提供一个易于使用的环境来构建、安装和运行本机 Windows 软件。
 
@@ -46,18 +46,21 @@ For more details see '[What is MSYS2?](https://www.msys2.org/docs/what-is-msys2/
 
 安装完成后，启动 `MSYS2` 会是一个单独的 `terminal`，我们可以将其使用 `Windows Terminal` 打开 `MSYS2`。
 
-
 ## 3. pacman 更换源
 
 一般的，pacman 的镜像源文件位置位于 `/etc/pacman.d/`，所以咱直接去看：
+
 ```bash
 $ ls /etc/pacman.d
 gnupg               mirrorlist.clang64  mirrorlist.mingw32  mirrorlist.msys
 mirrorlist.clang32  mirrorlist.mingw    mirrorlist.mingw64  mirrorlist.ucrt64
+
 ```
+
 哈哈，镜像源文件还挺多，对应着不同的环境。
 
 以 `mirrorlist.ucrt64` 为例，进行修改，**咱主要使用清华源和科大源，主要是网速问题，那个快哪个好**：
+
 ```bash
 $ cat /etc/pacman.d/mirrorlist.ucrt64
 # See https://www.msys2.org/dev/mirrors
@@ -101,9 +104,11 @@ Server = https://mirrors.aliyun.com/msys2/mingw/ucrt64/
 Server = https://mirror.iscas.ac.cn/msys2/mingw/ucrt64/
 Server = https://mirrors.tencent.com/msys2/mingw/ucrt64/
 ```
+
 基本上所有镜像源都有，不过弱水三千咱只取一瓢，就选**科大源**吧，原因呀。就是快：
 
 把除科大源的都给注释掉就行：
+
 ```bash
 # See https://www.msys2.org/dev/mirrors
 
@@ -152,10 +157,10 @@ Server = https://mirrors.ustc.edu.cn/msys2/mingw/ucrt64/
 所以所以，统统换源。
 
 然后：
+
 ```bash
 pacman -Syyu
 ```
-
 
 ## 4. MSYS2 中的环境
 
@@ -166,6 +171,7 @@ pacman -Syyu
 MSYS2 提供了不同的**环境/子系统**，首先用户需要决定要使用哪个环境。
 
 这些环境之间的区别主要在于**环境变量**、**默认编译器**/**链接器**、**架构**、使用的**系统库**等方面。
+
 + `environment variables`：环境变量
 + `default compilers/linkers`：默认编译器/链接器
 + `architecture`：架构
@@ -192,7 +198,7 @@ MSYS 环境包含基于类 `Unix/cygwin` 的工具，存储在 `/usr` 目录下�
 
 活动环境是通过 `MSYSTEM` **环境变量**选择的。
 
-#### GCC vs LLVM/Clang
+### GCC vs LLVM/Clang
 
 GCC、LLVM/Clang 都是是默认的编译器/工具链，用于在各自的存储库中构建所有软件包。
 
@@ -232,6 +238,7 @@ MSVCRT 和 UCRT 是在 Microsoft Windows 上的 C 标准库变体。
 {% endnote %}
 
 经过一番简单的研究，如果想要在终端直接切换 MSYS2 的**环境**，使用 `export MSYSTEM=UCRT64` 之类的命令，就只能忽悠自己，该命令只是改变了终端的**提示符(prompt)**处的环境名称：
+
 ```bash
 Username@Hostname CLANG64 ~
 $ export MSYSTEM=UCRT64
@@ -242,6 +249,7 @@ $ echo $PATH | tr ':' '\n'
 /usr/local/bin
 ...
 ```
+
 你使用 `echo $PATH | tr ':' '\n'` 命令查看环境变量，你就发现，这还是 `CLANG64` 的环境变量，说明完全没有切换成功，上述的命令就只是欺骗了你。
 
 {% note indo %}
@@ -253,6 +261,7 @@ $ echo $PATH | tr ':' '\n'
 就是实现了**每个路径一行输出的效果**。
 
 不然就是：
+
 ```bash
 Username@Hostname CLANG64 ~
 $ echo $PATH
@@ -263,20 +272,23 @@ $ echo $PATH
 
 回归正题，上述命令效果不明显，咱就去 MSYS2 那找，找到个：
 > If you need to start a shell correctly, but none of the ways above suit you, devise your own way based on this knowledge:
+>
 > + set `MSYSTEM=...` into the environment, with the value of either `MSYS`, `MINGW32`, or `MINGW64`
 > + then run a login shell
-> 
+>
 > The typical one-liner if your options are limited is `C:\\msys64\\usr\\bin\\env MSYSTEM=MSYS /usr/bin/bash -li`.
 >
 > 如果以上提到的方法都不适用于你，你可以根据以下知识自己设计启动 shell 的方法：
+>
 > + 将 `MSYSTEM=...` 设置为环境变量，并将值设为 `MSYS`、`MINGW32` 或 `MINGW64`
 > + 然后启动一个登录 shell
-> 
+>
 > 如果你的选择受限，一种常见的方法是运行以下一行命令：`C:\\msys64\\usr\\bin\\env MSYSTEM=MSYS /usr/bin/bash -li`
 
 简单介绍一下原理，如何自行设计启动 shell —— **先设置 `MSYSTEM=...` 环境变量，再启动一个登录 shell。**
 
 所以咱们就执行 `env MSYSTEM=UCRT64 /usr/bin/bash -li`...再 `echo $PATH | tr ':' '\n'`：
+
 ```bash
 Username@Hostname CLANG64 ~
 $ env MSYSTEM=UCRT64 /usr/bin/bash -li
@@ -287,9 +299,11 @@ $ echo $PATH | tr ':' '\n'
 /usr/local/bin
 ...
 ```
+
 显然，环境切换成功。
 
 等等，咱再试试 `export MSYSTEM=CLANG64`，再执行 `/usr/bin/bash -li`，最后检查成功否 `echo $PATH | tr ':' '\n'`：
+
 ```bash
 Username@Hostname UCRT64 ~
 $ export MSYSTEM=CLANG64
@@ -302,6 +316,7 @@ $ echo $PATH | tr ':' '\n'
 /clang64/bin
 /usr/local/bin
 ```
+
 😯 woc，傻逼竟是我自己。
 
 **先设置 `MSYSTEM=...` 环境变量，再启动一个登录 shell。**
@@ -323,35 +338,46 @@ $ echo $PATH | tr ':' '\n'
 <scan id="env-change" style="font-weight: bold;">更换环境的话直接使用：</scan>
 
 + `MSYS`
+
   ```bash
   env MSYSTEM=MSYS /usr/bin/bash -li
   ```
+
 + `UCRT64`
+
   ```bash
   env MSYSTEM=UCRT64 /usr/bin/bash -li
   ```
+
 + `CLANG64`
+
   ```bash
   env MSYSTEM=CLANG64 /usr/bin/bash -li
   ```
+
 + `CLANGARM64`
+
   ```bash
   env MSYSTEM=CLANGARM64 /usr/bin/bash -li
   ```
+
 + `CLANG32`
+
   ```bash
   env MSYSTEM=CLANG32 /usr/bin/bash -li
   ```
+
 + `MINGW64`
+
   ```bash
   env MSYSTEM=MINGW64 /usr/bin/bash -li
   ```
+
 + `MINGW32`
+
   ```bash
   env MSYSTEM=MINGW32 /usr/bin/bash -li
   ```
-
-
 
 ## 5. MSYS2 terminal 的设置
 
@@ -380,7 +406,7 @@ Windows Terminal 的安装，Windows11 是默认安装了的，Windows10 的话�
 {% endnote %}
 
 1. **通过图形化界面点点点**：
-   
+
    `设置 > 添加新配置文件 > 新建空的配置文件`，然后就是根据每一行的字段输入内容就行了。
 
    咱这给予一个示例：
@@ -394,16 +420,17 @@ Windows Terminal 的安装，Windows11 是默认安装了的，Windows10 的话�
 
    + **启动目录**：`C:/msys64/home/%USERNAME%`，加载配置文件时启动的目录。
    + **图标**：`C:/msys64/ucrt64.ico`，配置文件中所使用图标的表情符号或者图像文件位置，可自行更换，选择所喜欢的图标。
-   
+
    以上是必要的配置，还有如**选项卡标题**、**以管理员身份运行此配置文件**、**从下拉菜单中隐藏**，可根据自身需要选择。
 
    **外观**和**高级**属于终端美化，暂不介绍。
 
 2. **通过在 JSON 配置文件敲敲敲**：
-   
+
    进入 `设置`，点击 `打开 JSON 文件`，然后找到 `"profiles"` 下面的 `"list"`，仿照其他的 `{}` 的内容进行修改或添加就行了。
 
    咱继续给个例子：
+
    ```json
     // defaultProfile: 默认 shell 的 guid，这使 UCRT64 成为默认 shell
     "defaultProfile": "{17da3cac-b318-431e-8a3e-7fcdefe6d114}",
@@ -429,21 +456,26 @@ Windows Terminal 的安装，Windows11 是默认安装了的，Windows10 的话�
     ]
     }
    ```
+
    上述各字段分别是，**全局唯一标识符** —— `guid`、**名称** —— `name`、**命令行** —— `commandline`、**启动目录** —— `startingDirectory`、**图标** —— `icon`。
 
    {% note info %}
-   
+
    **该配置文件中的命令行默认会启动 `bash shell`。**
-   
+
    要更改默认的登录 shell，请安装相应的 shell 包，并在命令行中附加 -shell 选项。例如，
    + 要将 `fish shell` 设置为默认 shell：
+
      ```json
      "commandline": "C:/msys64/msys2_shell.cmd -defterm -here -no-start -ucrt64 -shell fish"
      ```
+
    + 要将 `zsh shell` 设置为默认 shell：
+
      ```json
      "commandline": "C:/msys64/msys2_shell.cmd -defterm -here -no-start -ucrt64 -shell zsh"
      ```
+
     {% endnote %}
 
 {% note info %}
@@ -470,150 +502,139 @@ Windows Terminal 的安装，Windows11 是默认安装了的，Windows10 的话�
 [^1]: 环境变量 `MSYSTEM`
 [^2]: 环境变量 `MINGW_PACKAGE_PREFIX`
 
-然后就是结合之前**环境**信息的表，上述表，以及 `pacman -Ss` 和搜索，给出各环境安装相应的**编译工具链**需要的**包名**：
+### 1）C 语言编译器
 
-+ `MSYS`：`None`
-+ `MINGW64`：
+在 msys2 中安装编译器的话，主要需要安装这几个包：
 
-  `mingw-w64-x86_64-toolchain`，一般直接安装 `mingw-w64-x86_64-gcc`，包管理器就会自动分析其需要的依赖，并进行安装：
-  ```bash
-  Username@Hostname MINGW64 ~
-  $ pacman -S mingw-w64-x86_64-gcc
++ gcc: GCC（GNU Compiler Collection）是由 GNU 开发的编程语言编译器，这是 GCC 编译器的 Mingw-w64 版本。
++ gdb: 是一个用于调试 C 代码的 GNU 调试器。
++ make: GNU Make 工具的 Mingw-w64 版本。它用于构建和管理代码库。
++ cmake: 是一个用于自动生成 Makefile 的工具，支持 Windows 和 Unix 系统。
+
+开始说明 msys2 各环境的 C 语言编译器安装。
+
++ `MSYS`：包名没有前缀。
+
+  安装 `gcc`、`gdb`、`make`等等工具。
+
+  ```zsh
+  $ pacman -S gcc
   正在解析依赖关系...
   正在查找软件包冲突...
 
-  软件包 (15) mingw-w64-x86_64-binutils-2.40-2  mingw-w64-x86_64-crt-git-10.0.0.r234.g283e5b23a-1
-              mingw-w64-x86_64-gcc-libs-12.2.0-10  mingw-w64-x86_64-gmp-6.2.1-5
-              mingw-w64-x86_64-headers-git-10.0.0.r234.g283e5b23a-1  mingw-w64-x86_64-isl-0.25-1
-              mingw-w64-x86_64-libiconv-1.17-3  mingw-w64-x86_64-libwinpthread-git-10.0.0.r234.g283e5b23a-1
-              mingw-w64-x86_64-mpc-1.3.1-1  mingw-w64-x86_64-mpfr-4.2.0-1
-              mingw-w64-x86_64-windows-default-manifest-6.4-4
-              mingw-w64-x86_64-winpthreads-git-10.0.0.r234.g283e5b23a-1  mingw-w64-x86_64-zlib-1.2.13-3
-              mingw-w64-x86_64-zstd-1.5.4-1  mingw-w64-x86_64-gcc-12.2.0-10
-
-  全部安装大小：  402.29 MiB
+  软件包 (8) binutils-2.40-1  isl-0.25-3  mpc-1.3.1-1  msys2-runtime-devel-3.4.6-2  msys2-w32api-headers-10.0.0.r16.g49a56d453-1
+            msys2-w32api-runtime-10.0.0.r16.g49a56d453-1  windows-default-manifest-6.4-1  gcc-11.3.0-3
   ```
-  还可以根据需要安装如，`mingw-w64-x86_64-make`、 `mingw-w64-x86_64-gdb`、 `mingw-w64-x86_64-cmake`、 `mingw-w64-x86_64-pkg-config` 等包。
 
-+ `MINGW32`：
-
-  `mingw-w64-i686-toolchain`，
-  ```bash
-  Username@Hostname MINGW32 ~
-  $ pacman -S mingw-w64-i686-gcc
+  ```zsh
+  $ pacman -S gdb
   正在解析依赖关系...
   正在查找软件包冲突...
 
-  软件包 (15) mingw-w64-i686-binutils-2.40-2  mingw-w64-i686-crt-git-10.0.0.r234.g283e5b23a-1
-              mingw-w64-i686-gcc-libs-12.2.0-10  mingw-w64-i686-gmp-6.2.1-5
-              mingw-w64-i686-headers-git-10.0.0.r234.g283e5b23a-1  mingw-w64-i686-isl-0.25-1
-              mingw-w64-i686-libiconv-1.17-3  mingw-w64-i686-libwinpthread-git-10.0.0.r234.g283e5b23a-1
-              mingw-w64-i686-mpc-1.3.1-1  mingw-w64-i686-mpfr-4.2.0-1
-              mingw-w64-i686-windows-default-manifest-6.4-4
-              mingw-w64-i686-winpthreads-git-10.0.0.r234.g283e5b23a-1  mingw-w64-i686-zlib-1.2.13-3
-              mingw-w64-i686-zstd-1.5.4-1  mingw-w64-i686-gcc-12.2.0-10
-
-  下载大小：       55.12 MiB
-  全部安装大小：  392.16 MiB
+  软件包 (8) expat-2.5.0-1  libgc-8.2.2-1  libguile-3.0.9-1  libxxhash-0.8.1-1  mpdecimal-2.5.1-1  python-3.11.2-1  xxhash-0.8.1-1
+            gdb-11.1-6
   ```
-  还可以根据需要安装如，`mingw-w64-i686-pkgconf`，`mingw-w64-i686-gdb`，`mingw-w64-i686-make`，`mingw-w64-i686-cmake` 等包。
 
-+ `UCRT64`：
-  
-  `mingw-w64-ucrt-x86_64-toolchain`，一般直接安装 `mingw-w64-ucrt-x86_64-gcc`，包管理器就会自动分析其需要的依赖，并进行安装：
-  ```bash
-  Username@Hostname UCRT64 ~
-  $ pacman -S mingw-w64-ucrt-x86_64-gcc
+  执行 `pacman -S gcc` 命令后，`pacman` 会分析依赖关系，然后下载所需要的依赖，如 `binutils`、`isl`、`mpc`、`msys2-runtime-devel`、`msys2-w32api-headers`、`msys2-w32api-runtime`、`windows-default-manifest`，最后下载 `gcc`。
+
+  > 如果需要的 `make`、`cmake` 的话：
+  >
+  > ```zsh
+  > $ pacman -S make
+  > 正在解析依赖关系...
+  > 正在查找软件包冲突...
+  >
+  > 软件包 (1) make-4.4.1-1
+  > ```
+  >
+  > ```zsh
+  > $ pacman -S cmake
+  > 正在解析依赖关系...
+  > 正在查找软件包冲突...
+  >
+  > 软件包 (6) jsoncpp-1.9.5-1  libarchive-3.6.2-3  librhash-1.4.3-1  libuv-1.44.2-1  pkgconf-1.9.4-1  cmake-3.26.3-1
+  > ```
+
++ `MINGW64`: 包前缀是 `mingw-w64-x86_64-`。
+
+  安装 MINGW64 环境的 GCC 可以直接安装 `mingw-w64-x86_64-toolchain` 这个包，这是 MSYS2 所定义的一个 Group，简单说就是一个包组，是包含 MINGW64 环境 C 编译器的软件包的一个组合包。包含了：
+
+  ```txt
+  mingw-w64-x86_64-binutils
+  mingw-w64-x86_64-crt-git
+  mingw-w64-x86_64-gcc
+  mingw-w64-x86_64-gcc-ada
+  mingw-w64-x86_64-gcc-fortran
+  mingw-w64-x86_64-gcc-libgfortran
+  mingw-w64-x86_64-gcc-libs
+  mingw-w64-x86_64-gcc-objc
+  mingw-w64-x86_64-libgccjit
+  mingw-w64-x86_64-gdb
+  mingw-w64-x86_64-gdb-multiarch
+  mingw-w64-x86_64-headers-git
+  mingw-w64-x86_64-libmangle-git
+  mingw-w64-x86_64-libwinpthread-git
+  mingw-w64-x86_64-winpthreads-git
+  mingw-w64-x86_64-make
+  mingw-w64-x86_64-pkgconf
+  mingw-w64-x86_64-tools-git
+  mingw-w64-x86_64-winstorecompat-git
+  ```
+
+  安装命令：
+
+  ```zsh
+  pacman -S mingw-w64-x86_64-toolchain
+  ```
+
+  ```zsh
+  $ pacman -S mingw-w64-x86_64-toolchain
+  :: 在组 mingw-w64-x86_64-toolchain 中有 19 成员：
+  :: 软件仓库 mingw64
+    1) mingw-w64-x86_64-binutils  2) mingw-w64-x86_64-crt-git  3) mingw-w64-x86_64-gcc  4) mingw-w64-x86_64-gcc-ada
+    5) mingw-w64-x86_64-gcc-fortran  6) mingw-w64-x86_64-gcc-libgfortran  7) mingw-w64-x86_64-gcc-libs
+    8) mingw-w64-x86_64-gcc-objc  9) mingw-w64-x86_64-gdb  10) mingw-w64-x86_64-gdb-multiarch  11) mingw-w64-x86_64-headers-git
+    12) mingw-w64-x86_64-libgccjit  13) mingw-w64-x86_64-libmangle-git  14) mingw-w64-x86_64-libwinpthread-git
+    15) mingw-w64-x86_64-make  16) mingw-w64-x86_64-pkgconf  17) mingw-w64-x86_64-tools-git  18) mingw-w64-x86_64-winpthreads-git
+    19) mingw-w64-x86_64-winstorecompat-git
+
+  输入某个选择 ( 默认=全部选定 ):
+  ```
+
+  直接安装所有就行。
+
+  如果还需要安装如 `cmake` 等等包，就直接 + 包名前缀 `mingw-w64-x86_64-` 就行了：
+
+  ```zsh
+  $ pacman -S mingw-w64-x86_64-cmake
   正在解析依赖关系...
   正在查找软件包冲突...
 
-  软件包 (10) mingw-w64-ucrt-x86_64-binutils-2.40-2  mingw-w64-ucrt-x86_64-crt-git-10.0.0.r234.g283e5b23a-1
-              mingw-w64-ucrt-x86_64-gmp-6.2.1-5  mingw-w64-ucrt-x86_64-headers-git-10.0.0.r234.g283e5b23a-1
-              mingw-w64-ucrt-x86_64-isl-0.25-1  mingw-w64-ucrt-x86_64-mpc-1.3.1-1
-              mingw-w64-ucrt-x86_64-mpfr-4.2.0-1  mingw-w64-ucrt-x86_64-windows-default-manifest-6.4-4
-              mingw-w64-ucrt-x86_64-winpthreads-git-10.0.0.r234.g283e5b23a-1
-              mingw-w64-ucrt-x86_64-gcc-12.2.0-10
-
-  全部安装大小：  393.62 MiB
+  软件包 (7) mingw-w64-x86_64-jsoncpp-1.9.5-2  mingw-w64-x86_64-libarchive-3.6.2-2  mingw-w64-x86_64-libb2-0.98.1-2
+            mingw-w64-x86_64-lz4-1.9.4-1  mingw-w64-x86_64-ninja-1.11.1-3  mingw-w64-x86_64-rhash-1.4.3-1
+            mingw-w64-x86_64-cmake-3.26.3-2
   ```
-  还可以根据需要安装如，`mingw-w64-ucrt-x86_64-make`，`mingw-w64-ucrt-x86_64-gdb`，`mingw-w64-ucrt-x86_64-cmake`，`mingw-w64-ucrt-x86_64-pkgconf` 等包。
 
-+ `CLANG32`：
+  {% note info %}
 
-  `mingw-w64-clang-i686-toolchain`，一般直接安装 `mingw-w64-i686-clang`，包管理器就会自动分析其需要的依赖，并进行安装：
-  ```bash
-  Username@Hostname CLANG32 ~
-  $ pacman -S mingw-w64-clang-i686-clang
-  正在解析依赖关系...
-  正在查找软件包冲突...
+  所有安装的 MINGW64 环境的工具都位于 `/mingw64` 这个路径下，若是 msys2 的安装路径是 `C:/msys64`，那么 MINGW64 的工具都在 `C:/msys64/mingw64` 下。
 
-  软件包 (18) mingw-w64-clang-i686-compiler-rt-15.0.7-3  mingw-w64-clang-i686-crt-git-10.0.0.r234.g283e5b23a-1
-              mingw-w64-clang-i686-expat-2.5.0-1  mingw-w64-clang-i686-gettext-0.21.1-1
-              mingw-w64-clang-i686-headers-git-10.0.0.r234.g283e5b23a-1  mingw-w64-clang-i686-libc++-15.0.7-3
-              mingw-w64-clang-i686-libffi-3.4.4-1  mingw-w64-clang-i686-libiconv-1.17-3
-              mingw-w64-clang-i686-libunwind-15.0.7-3
-              mingw-w64-clang-i686-libwinpthread-git-10.0.0.r234.g283e5b23a-1
-              mingw-w64-clang-i686-libxml2-2.10.3-1  mingw-w64-clang-i686-lld-15.0.7-3
-              mingw-w64-clang-i686-llvm-15.0.7-3  mingw-w64-clang-i686-winpthreads-git-10.0.0.r234.g283e5b23a-1
-              mingw-w64-clang-i686-xz-5.4.1-1  mingw-w64-clang-i686-zlib-1.2.13-3
-              mingw-w64-clang-i686-zstd-1.5.4-1  mingw-w64-clang-i686-clang-15.0.7-3
+  如果需要使用 msys2 中的工具在 Windows 使用，比如 GCC 编译器，那就使用 `C:/msys64/mingw64` 下的相关工具了。
 
-  下载大小：      128.94 MiB
-  全部安装大小：  882.98 MiB
-  ```
-  还可以根据需要安装如，`mingw-w64-clang-i686-pkgconf`，`mingw-w64-clang-i686-make`，`mingw-w64-clang-i686-lldb`，`mingw-w64-clang-i686-cmake` 等包。
+  {% endnote %}
 
-+ `CLANG64`：
+其他环境下的包都是类似的，只是包名前缀不一样，下面只是简单介绍一下安装命令：
 
-  `mingw-w64-clang-x86_64-toolchain`，一般直接安装 `mingw-w64-clang-x86_64-clang`，包管理器就会自动分析其需要的依赖，并进行安装：
-  ```bash
-  Username@Hostname CLANG64 ~
-  $ pacman -S mingw-w64-clang-x86_64-clang
-  正在解析依赖关系...
-  正在查找软件包冲突...
-
-  软件包 (7) mingw-w64-clang-x86_64-compiler-rt-15.0.7-3
-            mingw-w64-clang-x86_64-crt-git-10.0.0.r234.g283e5b23a-1
-            mingw-w64-clang-x86_64-headers-git-10.0.0.r234.g283e5b23a-1
-            mingw-w64-clang-x86_64-libwinpthread-git-10.0.0.r234.g283e5b23a-1
-            mingw-w64-clang-x86_64-lld-15.0.7-3
-            mingw-w64-clang-x86_64-winpthreads-git-10.0.0.r234.g283e5b23a-1
-            mingw-w64-clang-x86_64-clang-15.0.7-3
-
-  全部安装大小：  478.21 MiB
-  ```
-  还可以根据需要安装如，`mingw-w64-clang-x86_64-make`，`mingw-w64-clang-x86_64-pkgconf`，`mingw-w64-clang-x86_64-lldb`，`mingw-w64-clang-x86_64-cmake` 等包。
-
-+ `CLANGARM64`：
-  
-  `mingw-w64-clang-aarch64-toolchain`，一般直接安装 `mingw-w64-clang-aarch64-clang`，包管理器就会自动分析其需要的依赖，并进行安装：
-  ```bash
-  Username@Hostname CLANGARM64 ~
-  $ pacman -S mingw-w64-clang-aarch64-clang
-  正在解析依赖关系...
-  正在查找软件包冲突...
-
-  软件包 (18) mingw-w64-clang-aarch64-compiler-rt-15.0.7-3
-              mingw-w64-clang-aarch64-crt-git-10.0.0.r234.g283e5b23a-1  mingw-w64-clang-aarch64-expat-2.5.0-1
-              mingw-w64-clang-aarch64-gettext-0.21.1-1
-              mingw-w64-clang-aarch64-headers-git-10.0.0.r234.g283e5b23a-1
-              mingw-w64-clang-aarch64-libc++-15.0.7-3  mingw-w64-clang-aarch64-libffi-3.4.4-1
-              mingw-w64-clang-aarch64-libiconv-1.17-3  mingw-w64-clang-aarch64-libunwind-15.0.7-3
-              mingw-w64-clang-aarch64-libwinpthread-git-10.0.0.r234.g283e5b23a-1
-              mingw-w64-clang-aarch64-libxml2-2.10.3-1  mingw-w64-clang-aarch64-lld-15.0.7-3
-              mingw-w64-clang-aarch64-llvm-15.0.7-3
-              mingw-w64-clang-aarch64-winpthreads-git-10.0.0.r234.g283e5b23a-1
-              mingw-w64-clang-aarch64-xz-5.4.1-1  mingw-w64-clang-aarch64-zlib-1.2.13-3
-              mingw-w64-clang-aarch64-zstd-1.5.4-1  mingw-w64-clang-aarch64-clang-15.0.7-3
-
-  下载大小：      125.33 MiB
-  全部安装大小：  861.81 MiB
-  ```
-  还可以根据需要安装如，`mingw-w64-clang-aarch64-make`，`mingw-w64-clang-aarch64-pkgconf`，`mingw-w64-clang-aarch64-lldb`，`mingw-w64-clang-aarch64-cmake` 等包。
++ `MINGW32`: 包名前缀 `mingw-w64-i686-`，安装 toolchain：`pacman -S mingw-w64-i686-toolchain`。
++ `UCRT64`: 包名前缀 `mingw-w64-ucrt-x86_64-`，安装 toolchain：`pacman -S mingw-w64-ucrt-x86_64-toolchain`。
++ `CLANG64`: 包名前缀 `mingw-w64-clang-x86_64-`，安装 toolchain：`pacman -S mingw-w64-clang-x86_64-toolchain`。
++ `CLANGARM64`: 包名前缀 `mingw-w64-clang-aarch64-`，安装 toolchain：`pacman -S mingw-w64-clang-aarch64-toolchain`。
++ `CLANG32`: 包名前缀 `mingw-w64-clang-i686-`，安装 toolchain：`pacman -S mingw-w64-clang-i686-toolchain`。
 
 {% note info %}
 
 在 MSYS 环境下，一般需要安装以下工具来支持 **C 语言**的编译：
+
 + **`gcc` 编译器**：用于编译 C 语言代码。
 + **`make` 工具**：用于自动化构建和编译程序，通常需要根据 `Makefile` 文件来执行构建和编译操作。
 + **`gdb` 调试器**：用于调试程序，可以在程序运行过程中对变量和内存进行查看和修改。
@@ -627,24 +648,30 @@ Windows Terminal 的安装，Windows11 是默认安装了的，Windows10 的话�
 
 {% endnote %}
 
-## 个人 Windows Terminal 的 MSYS2 配置
+### 2）Rust
 
-### 安装 zsh
+先鸽
+
+## 7. 个人 Windows Terminal 的 MSYS2 配置
+
+### 1）安装 zsh
 
 ```bash
 pacman -S zsh
 ```
 
-### 安装 oh my zsh
+### 2）安装 oh my zsh
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 编辑 oh my zsh 配置文件 `nano ~/.zshrc`：
+
 + 修改 `ZSH_THEME=ys`
 + 修改插件：
-  ```
+
+  ```.zshrc
   plugins=( 
       git
       zsh-autosuggestions
@@ -652,20 +679,24 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
       history-substring-search
   )
   ```
+
   并下载相关代码：
+
   ```zsh
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
   git clone https://github.com/zsh-users/zsh-history-substring-search.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/history-substring-search
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
   ```
+
   下载完成后，执行下一步。
 + 使配置生效：`source ~/.zshrc`
   
-### 安装 lsd
+### 3）安装 lsd
 
 一个 Rust 编写的 ls 替代品，支持彩色输出、图标显示、Git 状态显示等。
 
 搜索 lsd：
+
 ```zsh
 $ pacman -Ss lsd
 mingw32/mingw-w64-i686-lsd 0.23.1-1
@@ -683,27 +714,36 @@ clang64/mingw-w64-clang-x86_64-lsd 0.23.1-1
 有不同版本的 lsd。不过还是推荐使用 rust 安装或者直接编译：
 
 安装 rust (ucrt 环境)：
+
 ```zsh
 pacman -S mingw-w64-ucrt-x86_64-rust
 ```
+
 使用 cargo 命令安装 lsd：
+
 ```zsh
 cargo install lsd
 ```
+
 如果想安装最新的 lsd：
-```
+
+```zsh
 cargo install --git https://github.com/Peltoche/lsd.git --branch master
 ```
+
 如果不出意外的话，这样应该就能直接使用 lsd。
 
 如果出现问题，就自行解决吧。
 同时也可以自行编译：
+
 ```zsh
 git clone https://github.com/lsd-rs/lsd.git
 ## 上述克隆不了，可使用下述命令
 ## git clone https://ghproxy.com/github.com/lsd-rs/lsd.git
 ```
+
 开始编译：
+
 ```zsh
 cd lsd
 cargo build
@@ -711,10 +751,368 @@ cargo build
 
 更多信息详见：[lsd | github](https://github.com/lsd-rs/lsd)
 
+{% note info %}
+
+如果提示添加 cargo 路径到环境变量，那就添加 cargo 路径到环境变量：
+
+```zsh
+export PATH="$PATH:/c/Users/USERNAME/.cargo/bin"
+```
+
+添加在 `.bashrc` 或者 `.zshrc` 文件中。
+
+{% endnote %}
+
+### 3）使用 Visual Studio Code 打开文件或文件夹
+
+直接让 MSYS 使用 Windows 安装的 Visual Studio Code 就行，将 VS code 的路径添加到环境变量中：
+
+```zsh
+export PATH="$PATH:/c/Program Files (x86)/Microsoft VS Code/bin"
+```
+
+或者是：
+
+```zsh
+export PATH="$PATH:/c/Users/$USER/AppData/Local/Programs/Microsoft VS Code/bin"
+```
+
+根据自身情况进行修改。
+
+将上述加入 `~/.zshrc` 中。
+最后再生效：
+
+```zsh
+source ~/.zshrc
+```
+
+### 4）安装 node.js、 npm、 yarn
+
+先更新软件源：
+
+```zsh
+pacman -Syu
+```
+
+然后根据自己 Msys2 的环境安装 node.js，比如安装 UCRT64 环境的：
+
+```zsh
+pacman -S mingw-w64-ucrt-x86_64-nodejs
+```
+
+> 如果是其他环境的 node.js 安装，就先搜索都有什么 node.js 可以安装：
+>
+> ```zsh
+> pacman -Ss nodejs
+> ```
+>
+> 然后选择需要的 node.js 进行安装。
+
+npm 会和 node.js 一起安装，当安装完 node.js 时，npm 也会安装完，可以使用 `npm -v` 检测是否安装完成。
+
+使用 `node -v` 检测 node.js 是否安装成功。
+
+安装 yarn 的话使用：
+
+```zsh
+npm install -g yarn
+```
+
+检测 yarn 是否安装成功 `yarn -v`。
+
+好家伙，结果给我返回一个：**zsh: command not found: yarn**，仔细一看发现应该是 npm 的安装路路径并不在 PATH 中，看来还需要小小设置一下，然后经查询可以使用下述命令查询 npm 安装路径：
+
+```zsh
+npm root -g
+```
+
+返回给我 `C:\msys64\ucrt64\lib\node_modules`，那咱就在 ~/.zshrc 文件中添加一行:
+
+```.zshrc
+export PATH="$PATH:/ucrt64/lib/node_modules"
+```
+
+再使文件生效。`yarn -v` 继续检测，好家伙还有问题 —— zsh: permission denied: yarn，咱知道这是没有 yarn 的可执行权限，一般都是加上 `sudo` 命令就好了，不过咱们 msys2 中没有 `sudo` 命令，害，咋回事呢。先不管这个吧，咱先去 npm 安装路径里看看：
+
+```zsh
+$ ls /ucrt64/lib/node_modules/                 
+ corepack   hexo-cli   npm   yarn
+```
+
+> 咱的 ls 是给 lsd 加上别名了。`alias ls="lsd"`
+
+说明咱是安装了 yarn 的，我还安装了 hexo-cil 呢，再进去看看：
+
+```zsh
+$ ls /ucrt64/lib/node_modules/yarn    
+ bin   lib   LICENSE   package.json   preinstall.js   README.md
+```
+
+还有个可执行文件的文件夹，再进去看看：
+
+```zsh
+$ ls /ucrt64/lib/node_modules/yarn/bin
+ yarn   yarn.cmd   yarn.js   yarnpkg   yarnpkg.cmd
+```
+
+有个 yarn 文件呀，看看文件类型：
+
+```zsh
+$ file /ucrt64/lib/node_modules/yarn/bin/yarn
+/ucrt64/lib/node_modules/yarn/bin/yarn: POSIX shell script, ASCII text executable
+```
+
+这是一个 ASCII 码编写的 POSIX shell 脚本文件，其中包含了一些 Linux/Unix 系统下可执行的 shell 命令。
+
+执行一下看看：
+
+```zsh
+$ /ucrt64/lib/node_modules/yarn/bin/yarn -v
+1.22.19
+```
+
+是可以的哦。难道说是因为可执行文件太深了？
+将 `/ucrt64/lib/node_modules/yarn/bin` 加入环境变量试试，在 `~/.zshrc` 文件加入下面内容，并生效：
+
+```zsh
+export PATH="$PATH:/ucrt64/lib/node_modules/yarn/bin"
+```
+
+看看能使用 yarn 了没：
+
+```zsh
+$ yarn -v
+1.22.19
+```
+
+好家伙，成了，但是这也太麻烦了吧，我是用 npm 安装应用后，还得添加路径到环境变量，这也太麻烦了。
+
+stackoverflow 里有多个回答，其中有一个就是要使用 Windows 安装的 node.js 和 npm 然后并添加 node.js 和 npm 的安装路径，二者默认的路径是：
+
++ `node.js`: `C:\Program Files\nodejs`，包含 `node`、`npm`。
++ `npm`: `C:\Users\<USERNAME>\AppData\Roaming\npm`，这是使用 `npm install xxxx` 后所安装应用的安装位置。
+
+我查看自己 Windows 10 中的上述路径的文件，差不多就如我所说了，有 npm 以及使用 npm 安装的应用。咱是用 msys2 查看一下都有啥：
+
+```zsh
+$ ls /c/Program\ Files/nodejs
+ node_modules   corepack   corepack.cmd   install_tools.bat   node.exe   node_etw_provider.man   nodevars.bat   npm   npm.cmd   npx   npx.cmd
+
+$ ls /c/Program\ Files/nodejs/node_modules
+ corepack   npm
+
+$ ls /c/Program\ Files/nodejs/node_modules/npm
+ bin   docs   lib   man   node_modules   index.js   LICENSE   npmrc   package.json   README.md
+
+$ ls /c/Program\ Files/nodejs/node_modules/npm/bin
+ node-gyp-bin   npm   npm-cli.js   npm.cmd   npx   npx-cli.js   npx.cmd
+```
+
+尝试执行一下 `npm -v` 命令，执行的是上述 Windows 中的 npm:
+
+```zsh
+$ /c/Program\ Files/nodejs/node_modules/npm/bin/npm -v
+node:internal/modules/cjs/loader:1078
+  throw err;
+  ^
+
+Error: Cannot find module 'C:\msys64\ucrt64\bin\node_modules\npm\bin\npm-cli.js'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1075:15)
+    at Module._load (node:internal/modules/cjs/loader:920:27)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:23:47 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+
+Node.js v18.15.0
+Could not determine Node.js install directory
+```
+
+看来是之前安装的 node.js 和 Windows 下的冲突了，把已经安装的卸载：`pacman -Rns mingw-w64-ucrt-x86_64-nodejs` 连同依赖也都删除了，再把之前所添加的和 npm 相关的环境变量也删除，并使 `.zshrc` 文件生效，再执行 `/c/Program\ Files/nodejs/node_modules/npm/bin/npm -v`:
+
+```zsh
+$ /c/Program\ Files/nodejs/node_modules/npm/bin/npm -v
+9.3.1
+```
+
+OK，看来是冲突解决了，那再将上述所说的 Windows 的 node.js 和 npm 路径添加到 msys2 的环境变量：
+
+```zsh
+export PATH="$PATH:/c/Program Files/nodejs"
+export PATH="$PATH:/c/Users/<USERNAME>/AppData/Roaming/npm"
+```
+
+> \<USERNAME\> 是自己 Windows 的用户名哦，注意一下。
+
+然后再试 `.zshrc` 文件生效。
+
+```zsh
+$ node -v
+v18.14.0
+
+$ npm -v 
+9.3.1
+
+$ yarn -v
+1.22.19
+
+$ hexo -v
+INFO  Validating config
+hexo: 6.3.0
+hexo-cli: 4.3.0
+os: win32 10.0.19044
+node: 18.14.0
+v8: 10.2.154.23-node.22
+uv: 1.44.2
+zlib: 1.2.13
+brotli: 1.0.9
+ares: 1.18.1
+modules: 108
+nghttp2: 1.51.0
+napi: 8
+llhttp: 6.0.10
+uvwasi: 0.0.14
+acorn: 8.8.1
+simdutf: 3.1.0
+undici: 5.14.0
+openssl: 3.0.7+quic
+cldr: 42.0
+icu: 72.1
+tz: 2022g
+unicode: 15.0
+ngtcp2: 0.8.1
+nghttp3: 0.7.0
+```
+
+好哦，显而易见的，这养的方法比之前使用包管理器 `pacman` 安装的方便多了，只需要一次性添加两条环境变量就好了，不像之前 npm 安装一次就需要添加一次环境变量。
+
+哦，再看一下 npm 安装路径里都有什么：
+
+```zsh
+$ ls /c/Users/<USERNAME>/AppData/Roaming/npm
+ etc   node_modules   hexo   hexo.cmd   hexo.ps1   vue   vue.cmd   vue.ps1   yarn   yarn.cmd   yarn.ps1   yarnpkg   yarnpkg.cmd   yarnpkg.ps1
+```
+
+#### （1）Node.js 和 npm 安装步骤
+
+不错不错，特别的好使。现在综上所述一下，将 Windows 安装 Node.js 和 npm 以及添加环境变量的方法总结一下：
+
+{% note danger %}
+
+~~TMD，先不写了，有空再写，TMD。~~
+
+~~我 TMD 本来是想再 MSYS UCRT64 环境使用 hexo 新生成一篇 post 的，结果发现没有 hexo、npm、nodejs，🍀，然后就写了上述内容 —— 关于 MSYS 中 nodejs 的安装。TMD，一下子直接花了好多时间，😭😭😭😭😭😭。~~
+
+{% endnote %}
+
+### 5）Visual Studio Code 使用 MSYS2 作为默认终端
+
+{% note info %}
+
+该部分的编写时间是：**2023-04-05 15:31:10**，注意时效性，可能不是那么适用。
+
+官方文档有专门关于终端的内容，可以自行查看：[Terminal Basics - TERMINAL | Visual Studio Code Docs](https://code.visualstudio.com/docs/terminal/basics)。
+
+{% endnote %}
+
+主要是修改 VS code 的设置文件 —— `settings.json`，以及该文件中 `terminal.integrated.profiles.windows` 字段的内容，记录时所参照的系统是 Windows 10。
+
+啊吧啊吧，我 TM 直接贴出我的 `settings.json` 文件的 `terminal.integrated.profiles.windows` 字段内容，不继续多讲了，懒了懒了：
+
+```json
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "source": "Git Bash"
+        },
+        "MSYS2(URCT64)": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [
+                "/c",
+                "C:/msys64/msys2_shell.cmd -defterm -here -no-start -ucrt64"
+            ],
+            "icon": "terminal-bash",
+            "color": "terminal.ansiRed"
+        }
+    }
+```
+
+咱使用 UCRT64 环境，同时为了显示出某些 icons 啥的，需要使用 nerdfonts 字体，所以咱设置一下终端所使用的字体：
+
+```json
+"terminal.integrated.fontFamily": "'mononoki NFM', '微软雅黑'"
+```
+
+同时也方便直接对 VS code 所打开项目进行某些命令行操作呢，还需要**设置一下终端打开时所处于的路径**：
+
+```json
+"terminal.integrated.defaultLocation": "editor"
+```
+
+哦。还需要设置一下默认终端：
+
+```json
+"terminal.integrated.defaultProfile.windows": "MSYS2(URCT64)"
+```
+
+暂且这样。
+
+### 6）.zshrc 文件配置
+
+主要记录一下环境变量的设置，以及命令别名设置，直接上文件：
+
+```.zshrc
+# Environment Variable
+# export ALL_PROXY=http://127.0.0.1:10809
+# export PATH="$PATH:/home/{UserName}/.local/share/gem/ruby/3.1.0/bin"
+export PATH="$PATH:/c/Users/{UserName}/.cargo/bin"
+export PATH="$PATH:/c/Program Files (x86)/Microsoft VS Code/bin"
+export PATH="$PATH:/c/Android/platform-tools"
+export PATH="$PATH:/c/Users/{UserName}/scoop/apps/scrcpy/current"
+export PATH="$PATH:/c/Program Files/nodejs"
+export PATH="$PATH:/c/Users/{UserName}/AppData/Roaming/npm"
+# export PATH="$PATH:/ucrt64/lib/node_modules"
+# export PATH="$PATH:/ucrt64/lib/node_modules/yarn/bin"
+
+# Aliases
+alias ls="lsd --config-file /home/{UserName}/.config/lsd/config.yaml"
+alias datetime='echo $(date +%F%n%T)'
+alias path='echo $PATH | tr ":" "\n" | sort -u'
+alias msysenv='echo $MSYSTEM'
+alias zshconfig='echo "sourcing ~/.zshrc..." && source ~/.zshrc'
+alias all_proxy='ALL_PROXY=http://127.0.0.1:10809'
+```
+
+添加了一些常用的环境变量：
+
++ VS code
++ adb
++ scrcpy
++ nodejs
++ npm
+
+等等，这个都在本文中有所描述，基本上就是在自己使用 msys2 的过程中，将觉得有用的东西使用上，并进行记录。
+
 ## 继续摸鱼
 
 ## 参考
+
 + [MSYS2](https://www.msys2.org/)
 + [Package Naming | MSYS2](https://www.msys2.org/docs/package-naming/)
 + [Environments | MSYS2](https://www.msys2.org/docs/environments/)
-
++ [Installing nodejs and npm on MSYS2 | stack**overflow**](https://stackoverflow.com/questions/46473196/installing-nodejs-and-npm-on-msys2)
