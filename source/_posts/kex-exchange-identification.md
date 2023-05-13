@@ -54,6 +54,8 @@ git remote set-url origin https://github.com/muxiner/muxiner.github.io.git
 
 最后，`git push`。
 
+可能还需要适当配合科学上网进行使用。
+
 ### 参考
 
 + [连接GitHub提示远程主机关闭连接](https://blog.csdn.net/qq_43431735/article/details/106031021)
