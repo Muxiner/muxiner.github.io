@@ -194,3 +194,283 @@ impl Solution {
 ```
 
 {% endnote %}
+
+
+## Rust 小练习 —— rustlings
+
+项目地址：[rust-lang/rustlings: Small exercises to get you used to reading and writing Rust code!](https://github.com/rust-lang/rustlings)
+
+中文项目地址：[rust-lang-cn/rustlings-cn: Rustlings 非官方中文翻译(Rustlings unofficial chinese verion)。🦀 让你熟悉阅读和编写 Rust 代码的小练习。源仓库：https://github.com/rust-lang/rustlings](https://github.com/rust-lang-cn/rustlings-cn)
+
+项目作用：Rust 小练习，Rust 官方推出的交互式练习工具，边阅读、修改和运行代码，边学习概念。
+
+### 简单开始
+
+### 难题记录
+
+#### exercises/error_handling/errors6.rs
+
+题目链接：[exercises/error_handling/errors6.rs](https://github.com/rust-lang/rustlings/blob/main/exercises/error_handling/errors6.rs)
+非官方翻译题目链接：[exercises/error_handling/errors6.rs](https://github.com/rust-lang-cn/rustlings-cn/blob/main/exercises/error_handling/errors6.rs)
+
+```rust
+// errors6.rs
+
+// 使用能够捕获所有错误的类型，比如说 `Box<dyn error::Error>`，在库代码中是不推荐的，
+// 其调用者可能想要基于错误的内容做决定，而不是将错误打印出来或向前传播。
+// 这里，我们定义了一个自定义错误类型，使调用者在我们的函数返回错误时做判断成为可能。
+
+// 执行 `rustlings hint errors6` 或在观察模式下使用 `hint` 子命令来获取提示。
+
+// I AM NOT DONE
+
+use std::num::ParseIntError;
+
+// 这是一个我们将会在 `parse_pos_nonzero()` 用到的自定义错误类型。
+#[derive(PartialEq, Debug)]
+enum ParsePosNonzeroError {
+    Creation(CreationError),
+    ParseInt(ParseIntError),
+}
+
+impl ParsePosNonzeroError {
+    fn from_creation(err: CreationError) -> ParsePosNonzeroError {
+        ParsePosNonzeroError::Creation(err)
+    }
+    // TODO: 在这里添加另一个错误转换函数。
+    // fn from_parseint...
+}
+
+fn parse_pos_nonzero(s: &str) -> Result<PositiveNonzeroInteger, ParsePosNonzeroError> {
+    // TODO: 改变这里以返回一个适当的错误，而不是在
+    // `parse()` 返回错误时发生 panic。
+    let x: i64 = s.parse().unwrap();
+    PositiveNonzeroInteger::new(x).map_err(ParsePosNonzeroError::from_creation)
+}
+
+// 不要改变这行以下的任何东西。
+
+#[derive(PartialEq, Debug)]
+struct PositiveNonzeroInteger(u64);
+
+#[derive(PartialEq, Debug)]
+enum CreationError {
+    Negative,
+    Zero,
+}
+
+impl PositiveNonzeroInteger {
+    fn new(value: i64) -> Result<PositiveNonzeroInteger, CreationError> {
+        match value {
+            x if x < 0 => Err(CreationError::Negative),
+            x if x == 0 => Err(CreationError::Zero),
+            x => Ok(PositiveNonzeroInteger(x as u64)),
+        }
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_parse_error() {
+        // 我们不能构造一个 ParseIntError，所以只能进行模式匹配。
+        assert!(matches!(
+            parse_pos_nonzero("not a number"),
+            Err(ParsePosNonzeroError::ParseInt(_))
+        ));
+    }
+
+    #[test]
+    fn test_negative() {
+        assert_eq!(
+            parse_pos_nonzero("-555"),
+            Err(ParsePosNonzeroError::Creation(CreationError::Negative))
+        );
+    }
+
+    #[test]
+    fn test_zero() {
+        assert_eq!(
+            parse_pos_nonzero("0"),
+            Err(ParsePosNonzeroError::Creation(CreationError::Zero))
+        );
+    }
+
+    #[test]
+    fn test_positive() {
+        let x = PositiveNonzeroInteger::new(42);
+        assert!(x.is_ok());
+        assert_eq!(parse_pos_nonzero("42"), Ok(x.unwrap()));
+    }
+}
+```
+
+本题主要修改两处地方，即 `TODO` ：
+
+```rust
+impl ParsePosNonzeroError {
+    fn from_creation(err: CreationError) -> ParsePosNonzeroError {
+        ParsePosNonzeroError::Creation(err)
+    }
+    // TODO: 在这里添加另一个错误转换函数。
+    // fn from_parseint...
+}
+
+fn parse_pos_nonzero(s: &str) -> Result<PositiveNonzeroInteger, ParsePosNonzeroError> {
+    // TODO: 改变这里以返回一个适当的错误，而不是在
+    // `parse()` 返回错误时发生 panic。
+    let x: i64 = s.parse().unwrap();
+    PositiveNonzeroInteger::new(x).map_err(ParsePosNonzeroError::from_creation)
+}
+```
+
+解题思路：
+
+根据测试函数中的内容，调用的 `parse_pos_nonzero()` 函数，接受一个字符串参数，返回 `Ok` 或 `Err` 的情况，且 `Err` 还有不同的类型，如：
+
++ `Err(ParsePosNonzeroError::Creation(CreationError::Negative))`
++ `Err(ParsePosNonzeroError::Creation(CreationError::Zero))`
++ `Err(ParsePosNonzeroError::ParseInt(_))`
+
+共三种类型。
+
+第一个 `TODO` 需要实现**另一个错误转换函数** —— `from_parseint()`，转换为 `ParsePosNonzeroError::ParseInt(err)` 类型。
+
+参考前文的 `from_creation()` 方法:
+
+```rust
+fn from_creation(err: CreationError) -> ParsePosNonzeroError {
+        ParsePosNonzeroError::Creation(err)
+}
+```
+
+照葫芦画瓢即可：
+
+```rust
+fn from_parseint(err: ParseIntError) -> ParsePosNonzeroError {
+    ParsePosNonzeroError::ParseIntError(err)
+}
+```
+
+第二个 `TODO` 处检查发现是没有返回 `Err(ParsePosNonzeroError::ParseInt(_))`，即接收 `"not a number"` 等非数字的字符串时，无法正常转换成整数，需要返回一个错误转换的错误信息。
+
+而原题中可正常转换 `"123"`、`"0"`、`"-555"` 等正常的整数情况从而返回：
+
++ `Ok(PositiveNonzeroInteger(u64))`
++ `Err(ParsePosNonzeroError::Creation(CreationError::Zero))`
++ `Err(ParsePosNonzeroError::Creation(CreationError::Negative))`
+
+三个 `Ok` 和 `Err` 的信息。
+
+未修改的代码的测试结果为：
+
+```rust
+thread 'test::test_parse_error' panicked at 'called `Result::unwrap()` on an `Err` value: ParseIntError { kind: InvalidDigit }',
+```
+
+解释为：测试函数 `test_parse_error` 调用 `parse_pos_nonzero` 函数时，字符串转换出错 —— 调用 `Result::unwrap()` 函数时接收了一个 `Err(ParseIntError::InvalidDigit)`，这就出错了:
+
+```rust
+#[test]
+fn test_parse_error() {
+    assert!(matches!(
+        parse_pos_nonzero("not a number"),
+        Err(ParsePosNonzeroError::ParseInt(_))
+    ));
+}
+```
+
+查阅 Rust 官方标准库 —— `Struct std::num::ParseIntError`，地址：[Struct std::num::ParseIntError | 中文](https://rustwiki.org/zh-CN/std/num/struct.ParseIntError.html)，并查看其[源码内容](https://rustwiki.org/zh-CN/src/core/num/error.rs.html#69-71)，可知 `ParseIntError::InvalidDigit` 表示**在其上下文中包含无效数字** —— 除其他原因外，当解析包含非 ASCII 字符的字符串时，将创建这个变体。当 `+` 或 `-` 单独放置在字符串中或放置在数字中间时，也会创建此变体。
+
+而 `std::result::Result` 的 `unwrap()` 方法是返回包含 `self` 值的包含的 `Ok` 值:
+
+```txt
+返回包含 self 值的包含的 Ok 值。
+
+由于此函数可能为 panic，因此通常不建议使用该函数。 相反，更喜欢使用模式匹配并显式处理 Err 大小写，或者调用 unwrap_or，unwrap_or_else 或 unwrap_or_default。
+
+Panics
+如果该值为 Err，就会出现 Panics，并由 Err 的值提供 panic 消息。
+```
+
+所以，不应当使用 `unwrap()` 方法了。可以使用**匹配**或者 `map_err()` 方法进行处理。
+
+```txt
+pub fn map_err<F, O>(self, op: O) -> Result<T, F>
+
+通过对包含的 Err 值应用函数，将 Ok 值 Maps 转换为 Result<T, F>，而保持 Ok 值不变。
+
+此函数可用于在处理错误时传递成功的结果。
+```
+
+##### 答案
+
+故而对于 `parse_pos_error()` 函数的修改方案有如下几种：
+
+**分情况进行嵌套匹配**
+
+```rust
+fn parse_pos_nonzero(s: &str) -> Result<PositiveNonzeroInteger, ParsePosNonzeroError> {
+    match s.parse() {
+        Ok(x) => {
+            match PositiveNonzeroInteger::new(x) {
+                Ok(PositiveNonzeroInteger(x)) => Ok(PositiveNonzeroInteger(x)),
+                Err(CreationError::Zero) => Err(ParsePosNonzeroError::from_creation(CreationError::Zero)),
+                Err(CreationError::Negative) => Err(ParsePosNonzeroError::from_creation(CreationError::Negative)),
+            }
+        },
+        Err(ParseIntError) => Err(ParsePosNonzeroError::from_parseint(ParseIntError)),
+    }
+}
+```
+
+或者稍微简化一下代码 —— 使用 `message` 表示 `Ok` 或 `Err` 中的内容：
+
+```rust
+fn parse_pos_nonzero(s: &str) -> Result<PositiveNonzeroInteger, ParsePosNonzeroError> {
+    match s.parse() {
+        Ok(x) => {
+            match PositiveNonzeroInteger::new(x) {
+                Ok(message) => Ok(message),
+                Err(message) => Err(ParsePosNonzeroError::from_creation(message)),
+            }
+        },
+        Err(message) => Err(ParsePosNonzeroError::from_parseint(message)),
+    }
+}
+```
+
+**使用 `map_err()` 和 嵌套匹配**
+
+```rust
+fn parse_pos_nonzero(s: &str) -> Result<PositiveNonzeroInteger, ParsePosNonzeroError> {
+    match s.parse() {
+        Ok(x) => PositiveNonzeroInteger::new(x).map_err(ParsePosNonzeroError::from_creation),
+        Err(err) => Err(ParsePosNonzeroError::from_parseint(err)),
+    }
+}
+```
+
+或者是直接返回 `Err(ParsePosNonzeroError::ParseInt(err))`:
+
+```rust
+fn parse_pos_nonzero(s: &str) -> Result<PositiveNonzeroInteger, ParsePosNonzeroError> {
+    match s.parse() {
+        Ok(x) => PositiveNonzeroInteger::new(x).map_err(ParsePosNonzeroError::from_creation),
+        Err(err) => Err(ParsePosNonzeroError::ParseInt(err)),
+    }
+}
+```
+
+**第三种方法，使用 `?` 操作符使函数提前返回和使用 `map_err()` 方法**
+
+```rust
+fn parse_pos_nonzero(s: &str) -> Result<PositiveNonzeroInteger, ParsePosNonzeroError> {
+    let x: i64 = s.parse().map_err(ParsePosNonzeroError::from_parseint)?;
+    PositiveNonzeroInteger::new(x).map_err(ParsePosNonzeroError::from_creation)
+}
+```
+
+简单说就是，当时转换失败时，使用 map_err() 方法处理 `ParsePosNonzeroError::ParseInt(err)` 并使用 `?` 操作符提前返回；正常转换后，再使用 `PositiveNonzeroInteger::new(x).map_err(ParsePosNonzeroError::from_creation)` 处理正常的结果。
