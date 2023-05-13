@@ -38,6 +38,22 @@ Connection closed by xx.xxx.xxx.xxx port 22
 
 瞎记录点内容，不过好在又让我知道，遇到和 git、GitHub 相关的问题可以去 [GitHub 文档 | 中文](https://docs.github.com/zh) 进行查阅。
 
+### 再逼逼
+
+目前使用的 git 为 MSYS2 中下载的 git，听大佬说，该 git 的有些功能有那么些问题，似乎包括 ssh。
+
+于是乎，果断 `pacman -Rns git` 卸载 git 相关内容。
+
+然后使用 Windows 版的 git，并将其加入到 MSYS2 的环境变量中。
+
+生效后，再将之前的远程仓库地址改为 https：
+
+```zsh
+git remote set-url origin https://github.com/muxiner/muxiner.github.io.git
+```
+
+最后，`git push`。
+
 ### 参考
 
 + [连接GitHub提示远程主机关闭连接](https://blog.csdn.net/qq_43431735/article/details/106031021)
