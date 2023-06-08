@@ -52,7 +52,7 @@ const resolveModule = require('../../utils/resolve');
 
 [ERROR Script load failed: themes\fluid\scripts\events\lib\highlight.js](https://github.com/fluid-dev/hexo-theme-fluid/issues/952)
 
-在此中，主题贡献者[zkqiang](https://github.com/zkqiang)解释道：
+在此中，主题作者[zkqiang](https://github.com/zkqiang)解释道：
 
 ```txt
 This is because the new version of hexo-renderer-stylus no longer includes css module (stylus/stylus@043d404)
@@ -69,3 +69,27 @@ npm install css --save
 尝试后，成功解决问题，Nice。
 
 
+### 碎碎念
+
+
+作者在 `develop` 分支中进行了修改：
+
++ 修改文件：`scripts/events/lib/highlight.js`
++ 删除代码：`const css = require('css');`
++ 添加代码：
+    ```js
+    let css;
+    try {
+        css = require('css');
+    } catch (error) {
+        if (error.code === 'MODULE_NOT_FOUND') {
+            css = require('@adobe/css-tools');
+        } else {
+            throw error;
+        }
+    }
+    ```
+
+没升级 hexo-renderer-stylus 就使用 `css = require('css');`，反之，`css = require('@adobe/css-tools');`。
+
+不过咱这就还是自己安装 css 吧。
