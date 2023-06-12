@@ -1,7 +1,7 @@
 ---
 title: 好东西就记录下来.jpg
 date: 2022-07-12 16:38:19
-updated: 2023-03-29 17:51:26
+updated: 2023-06-12 20:29:38
 excerpt: The palest ink is better than the best memory. 好记性不如烂笔头。记不住那就记录下来。
 categories: 
 - 记录
@@ -254,4 +254,15 @@ alias datetime='echo $(date +%F%n%T)'
 ```zsh
 $ datetime
 2023-03-29 21:40:39
+```
+
+### MV 使用
+
+{ % note info % }
+2023-06-12 20:29:38 更新。
+{ % endnote % }
+
+```bash
+# 使用 find 命令查找源目录下的所有文件，并使用 mv 命令移动到目标目录
+find "$source_dir" -type f -exec mv {} "$target_dir" \;
 ```
