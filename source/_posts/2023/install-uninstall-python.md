@@ -22,3 +22,8 @@ sticky:
 
 #### 配置环境变量
 
+{% note danger %}
+**To Be Continued:**
+
+还没写完涅。
+{% endnote %}

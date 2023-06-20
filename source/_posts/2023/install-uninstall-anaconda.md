@@ -53,3 +53,8 @@ appwiz.cpl
 
 如此 Anaconda 的卸载基本上就已经完成了。
 
+{% note danger %}
+**To Be Continued:**
+
+还没写完涅。
+{% endnote %}

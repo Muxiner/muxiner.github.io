@@ -32,4 +32,9 @@ yay -S latte-dock
 ```
 > 卸载的话，似乎不是那么能够轻易地卸载感觉
 
-... To Be Continue...
+
+{% note danger %}
+**To Be Continued:**
+
+还没写完涅。
+{% endnote %}

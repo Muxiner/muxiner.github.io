@@ -79,3 +79,8 @@ Android 调试桥 (`adb`) 是一种功能多样的命令行工具，可让您与
 再使用 USB 连接设备。
 
 
+{% note danger %}
+**To Be Continued:**
+
+还没写完涅。
+{% endnote %}

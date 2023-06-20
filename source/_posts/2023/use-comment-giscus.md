@@ -16,3 +16,8 @@ banner_img:
 sticky:
 ---
 
+{% note danger %}
+**To Be Continued:**
+
+还没写完涅。
+{% endnote %}
