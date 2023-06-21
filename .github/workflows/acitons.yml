@@ -47,8 +47,13 @@ jobs:
 
     # hexo generate 生成静态博客文件
     - name: Generate Public Blog Files
-      run: npx hexo generate
+      run: | 
+        npx hexo generate
+        ls -al
+        pwd
 
     # hexo deploy 部署博客文件
     - name: Deploy Public Blog
-      run: npx hexo deploy
+      run: | 
+        npx hexo deploy
+        
