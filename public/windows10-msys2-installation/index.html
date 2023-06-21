@@ -1,0 +1,1595 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Muxiner">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="MSYS2 —— Windows 的软件分发和构建平台，是一个为 Windows 操作系统提供类似于 Unix 环境的软件开发环境的软件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows10 安装 MSYS2">
+<meta property="og:url" content="https://muxiner.github.io/windows10-msys2-installation/index.html">
+<meta property="og:site_name" content="Muxiner&#39;s Blog">
+<meta property="og:description" content="MSYS2 —— Windows 的软件分发和构建平台，是一个为 Windows 操作系统提供类似于 Unix 环境的软件开发环境的软件。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.msys2.org/docs/msys.png">
+<meta property="og:image" content="https://www.msys2.org/docs/ucrt64.png">
+<meta property="og:image" content="https://www.msys2.org/docs/clang64.png">
+<meta property="og:image" content="https://www.msys2.org/docs/clang64.png">
+<meta property="og:image" content="https://www.msys2.org/docs/clang32.png">
+<meta property="og:image" content="https://www.msys2.org/docs/mingw64.png">
+<meta property="og:image" content="https://www.msys2.org/docs/mingw32.png">
+<meta property="og:image" content="https://www.msys2.org/docs/msys.png">
+<meta property="og:image" content="https://www.msys2.org/docs/mingw64.png">
+<meta property="og:image" content="https://www.msys2.org/docs/ucrt64.png">
+<meta property="og:image" content="https://www.msys2.org/docs/clang64.png">
+<meta property="og:image" content="https://www.msys2.org/docs/mingw32.png">
+<meta property="og:image" content="https://www.msys2.org/docs/clang32.png">
+<meta property="og:image" content="https://www.msys2.org/docs/clangarm64.png">
+<meta property="article:published_time" content="2023-03-12T03:49:09.000Z">
+<meta property="article:modified_time" content="2023-04-11T13:36:33.000Z">
+<meta property="article:author" content="Muxiner">
+<meta property="article:tag" content="MSYS2">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.msys2.org/docs/msys.png">
+  
+  
+  
+  <title>Windows10 安装 MSYS2 - Muxiner&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"muxiner.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":5,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Muxiner&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Windows10 安装 MSYS2"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Muxiner
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-12 11:49" pubdate>
+          2023年3月12日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          25k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          212 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Windows10 安装 MSYS2</h1>
+            
+              <p class="note note-success">
+                
+                  
+                    本文最后更新于：2023年4月11日星期二晚上9点36分
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="1-MSYS2-是什么"><a href="#1-MSYS2-是什么" class="headerlink" title="1. MSYS2 是什么"></a>1. MSYS2 是什么</h2><p><strong><a target="_blank" rel="noopener" href="https://www.msys2.org/">MSYS2</a></strong> 是一个工具和库的集合，为用户提供一个易于使用的环境来构建、安装和运行本机 Windows 软件。</p>
+<p>它包括一个名为 <a target="_blank" rel="noopener" href="https://mintty.github.io/">mintty</a> 的<code>命令行终端</code>、<code>bash</code>、<code>版本控制系统</code>如 <code>git</code> 和 <code>subversion</code>、<code>工具</code>如 <code>tar</code> 和 <code>awk</code>，甚至构建系统如 <code>autotools</code>，都是基于修改版的 <a target="_blank" rel="noopener" href="https://cygwin.com/">Cygwin</a> 实现的。尽管其中一些核心部分基于 <code>Cygwin</code>，但 <code>MSYS2</code> 的主要重点是为本机 <code>Windows</code> 软件提供构建环境，<code>Cygwin</code> 使用的部分被保持在最小限度。</p>
+<p>为了提供易于安装软件包的方式以及保持其更新，MSYS2 提供了一个的包管理系统 —— <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/pacman">Pacman</a>。</p>
+<p><strong><a target="_blank" rel="noopener" href="https://www.msys2.org/">MSYS2</a></strong> 提供了最新的 <code>GCC</code>、<code>mingw-w64</code>、<code>CPython</code>、<code>CMake</code>、<code>Meson</code>、<code>OpenSSL</code>、<code>FFmpeg</code>、<code>Rust</code>、<code>Ruby</code> 等本地构建工具。</p>
+<div class="note note-info">
+            <p><strong>MSYS2 官方网站介绍</strong>：</p><p><strong><a target="_blank" rel="noopener" href="https://www.msys2.org/">MSYS2</a></strong> is a collection of tools and libraries providing you with an easy-to-use environment for building, installing and running native Windows software.</p><p>It consists of a command line terminal called <a target="_blank" rel="noopener" href="https://mintty.github.io/">mintty</a>, bash, version control systems like git and subversion, tools like tar and awk and even build systems like autotools, all based on a modified version of Cygwin. Despite some of these central parts being based on <a target="_blank" rel="noopener" href="https://cygwin.com/">Cygwin</a>, the main focus of MSYS2 is to provide a build environment for native Windows software and the Cygwin-using parts are kept at a minimum. MSYS2 provides up-to-date native builds for GCC, mingw-w64, CPython, CMake, Meson, OpenSSL, FFmpeg, Rust, Ruby, just to name a few.</p><p>To provide easy installation of packages and a way to keep them updated it features a package management system called <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/pacman">Pacman</a>, which should be familiar to Arch Linux users. It brings many powerful features such as dependency resolution and simple complete system upgrades, as well as straight-forward and reproducible package building. Our package repository contains <a target="_blank" rel="noopener" href="https://packages.msys2.org/base">more than 2800 pre-built packages</a> ready to install.</p><p>For more details see ‘<a target="_blank" rel="noopener" href="https://www.msys2.org/docs/what-is-msys2/">What is MSYS2?</a>‘ which also compares MSYS2 to other software distributions and development environments like <a target="_blank" rel="noopener" href="https://cygwin.com/">Cygwin</a>, <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux">WSL</a>, <a target="_blank" rel="noopener" href="https://chocolatey.org/">Chocolatey</a>, <a target="_blank" rel="noopener" href="https://scoop.sh/">Scoop</a>, … and ‘<a target="_blank" rel="noopener" href="https://www.msys2.org/docs/who-is-using-msys2/">Who Is Using MSYS2?</a>‘ to see which projects are using MSYS2 and what for.</p>
+          </div>
+
+<h2 id="2-MSYS2-的安装"><a href="#2-MSYS2-的安装" class="headerlink" title="2. MSYS2 的安装"></a>2. MSYS2 的安装</h2><p>就直接下载文件 —— <a target="_blank" rel="noopener" href="https://github.com/msys2/msys2-installer/releases/download/2023-01-27/msys2-x86_64-20230127.exe">msys2-x86_64-20230127.exe</a>。</p>
+<blockquote>
+<p>上面链接可能不是最新的，建议去 MSYS2 官网下载 —— 指个路 —— <a target="_blank" rel="noopener" href="https://www.msys2.org/#installation">MSYS2 Installation</a></p>
+<p>建议使用魔法下载，不然容易出问题 —— 指下不下来。</p>
+</blockquote>
+<p>下载完成后，点击运行，然后一路点击，需要修改设置的话，自行注意界面就行了。</p>
+<p>安装完成后，启动 <code>MSYS2</code> 会是一个单独的 <code>terminal</code>，我们可以将其使用 <code>Windows Terminal</code> 打开 <code>MSYS2</code>。</p>
+<h2 id="3-pacman-更换源"><a href="#3-pacman-更换源" class="headerlink" title="3. pacman 更换源"></a>3. pacman 更换源</h2><p>一般的，pacman 的镜像源文件位置位于 <code>/etc/pacman.d/</code>，所以咱直接去看：</p>
+<div class="code-wrapper"><pre><code class="hljs bash">$ <span class="hljs-built_in">ls</span> /etc/pacman.d
+gnupg               mirrorlist.clang64  mirrorlist.mingw32  mirrorlist.msys
+mirrorlist.clang32  mirrorlist.mingw    mirrorlist.mingw64  mirrorlist.ucrt64
+</code></pre></div>
+
+<p>哈哈，镜像源文件还挺多，对应着不同的环境。</p>
+<p>以 <code>mirrorlist.ucrt64</code> 为例，进行修改，<strong>咱主要使用清华源和科大源，主要是网速问题，那个快哪个好</strong>：</p>
+<div class="code-wrapper"><pre><code class="hljs bash">$ <span class="hljs-built_in">cat</span> /etc/pacman.d/mirrorlist.ucrt64
+<span class="hljs-comment"># See https://www.msys2.org/dev/mirrors</span>
+
+<span class="hljs-comment">## Primary</span>
+Server = https://mirror.msys2.org/mingw/ucrt64/
+Server = https://repo.msys2.org/mingw/ucrt64/
+
+<span class="hljs-comment">## Tier 1</span>
+Server = https://mirror.umd.edu/msys2/mingw/ucrt64/
+Server = https://mirror.yandex.ru/mirrors/msys2/mingw/ucrt64/
+Server = https://download.nus.edu.sg/mirror/msys2/mingw/ucrt64/
+Server = https://ftp.acc.umu.se/mirror/msys2.org/mingw/ucrt64/
+Server = https://ftp.nluug.nl/pub/os/windows/msys2/builds/mingw/ucrt64/
+Server = https://ftp.osuosl.org/pub/msys2/mingw/ucrt64/
+Server = https://mirror.internet.asn.au/pub/msys2/mingw/ucrt64/
+Server = https://mirror.selfnet.de/msys2/mingw/ucrt64/
+Server = https://mirror.ufro.cl/msys2/mingw/ucrt64/
+Server = https://mirrors.dotsrc.org/msys2/mingw/ucrt64/
+Server = https://mirrors.bfsu.edu.cn/msys2/mingw/ucrt64/
+Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/ucrt64/
+Server = https://mirrors.ustc.edu.cn/msys2/mingw/ucrt64/
+Server = https://mirror.nju.edu.cn/msys2/mingw/ucrt64/
+Server = https://repo.extreme-ix.org/msys2/mingw/ucrt64/
+Server = https://mirrors.hit.edu.cn/msys2/mingw/ucrt64/
+Server = https://mirror.clarkson.edu/msys2/mingw/ucrt64/
+Server = https://quantum-mirror.hu/mirrors/pub/msys2/mingw/ucrt64/
+Server = https://mirror2.sandyriver.net/pub/software/msys2/mingw/ucrt64/
+Server = https://mirror.archlinux.tw/MSYS2/mingw/ucrt64/
+
+<span class="hljs-comment">## Tier 2</span>
+Server = https://fastmirror.pp.ua/msys2/mingw/ucrt64/
+Server = https://ftp.cc.uoc.gr/mirrors/msys2/mingw/ucrt64/
+Server = https://mirror.jmu.edu/pub/msys2/mingw/ucrt64/
+Server = https://mirrors.piconets.webwerks.in/msys2-mirror/mingw/ucrt64/
+Server = https://www2.futureware.at/~nickoe/msys2-mirror/mingw/ucrt64/
+Server = https://mirrors.sjtug.sjtu.edu.cn/msys2/mingw/ucrt64/
+Server = https://mirrors.bit.edu.cn/msys2/mingw/ucrt64/
+Server = https://repo.casualgamer.ca/mingw/ucrt64/
+Server = https://mirrors.aliyun.com/msys2/mingw/ucrt64/
+Server = https://mirror.iscas.ac.cn/msys2/mingw/ucrt64/
+Server = https://mirrors.tencent.com/msys2/mingw/ucrt64/</code></pre></div>
+
+<p>基本上所有镜像源都有，不过弱水三千咱只取一瓢，就选<strong>科大源</strong>吧，原因呀。就是快：</p>
+<p>把除科大源的都给注释掉就行：</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># See https://www.msys2.org/dev/mirrors</span>
+
+<span class="hljs-comment">## Primary</span>
+<span class="hljs-comment"># Server = https://mirror.msys2.org/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://repo.msys2.org/mingw/ucrt64/</span>
+
+<span class="hljs-comment">## Tier 1</span>
+<span class="hljs-comment"># # Server = https://mirror.umd.edu/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirror.yandex.ru/mirrors/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://download.nus.edu.sg/mirror/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://ftp.acc.umu.se/mirror/msys2.org/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://ftp.nluug.nl/pub/os/windows/msys2/builds/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://ftp.osuosl.org/pub/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirror.internet.asn.au/pub/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirror.selfnet.de/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirror.ufro.cl/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirrors.dotsrc.org/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirrors.bfsu.edu.cn/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/ucrt64/</span>
+Server = https://mirrors.ustc.edu.cn/msys2/mingw/ucrt64/
+<span class="hljs-comment"># Server = https://mirror.nju.edu.cn/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://repo.extreme-ix.org/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirrors.hit.edu.cn/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirror.clarkson.edu/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://quantum-mirror.hu/mirrors/pub/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirror2.sandyriver.net/pub/software/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirror.archlinux.tw/MSYS2/mingw/ucrt64/</span>
+
+<span class="hljs-comment">## Tier 2</span>
+<span class="hljs-comment"># Server = https://fastmirror.pp.ua/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://ftp.cc.uoc.gr/mirrors/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirror.jmu.edu/pub/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirrors.piconets.webwerks.in/msys2-mirror/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://www2.futureware.at/~nickoe/msys2-mirror/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirrors.sjtug.sjtu.edu.cn/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirrors.bit.edu.cn/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://repo.casualgamer.ca/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirrors.aliyun.com/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirror.iscas.ac.cn/msys2/mingw/ucrt64/</span>
+<span class="hljs-comment"># Server = https://mirrors.tencent.com/msys2/mingw/ucrt64/</span></code></pre></div>
+
+<p>其他的镜像源文件以此重复上述注释就行，因为无论在哪个环境模式下执行 <code>pacman -Syyu</code> 等等之类的命令都是同步更新所有环境的软件包数据库。</p>
+<p>所以所以，统统换源。</p>
+<p>然后：</p>
+<div class="code-wrapper"><pre><code class="hljs bash">pacman -Syyu</code></pre></div>
+
+<h2 id="4-MSYS2-中的环境"><a href="#4-MSYS2-中的环境" class="headerlink" title="4. MSYS2 中的环境"></a>4. MSYS2 中的环境</h2><p>当咱们安装完 MSYS2 后就发现好几个应用，MSYS2 带有不同的后缀如 <code>CLANG64</code>、<code>CLANG32</code>、<code>CLANGARM64</code>、<code>MINGW32</code>、<code>MINGW64</code>、<code>MSYS</code>、<code>UCRT64</code>等。</p>
+<p>都是些啥，区别是什么。</p>
+<p>MSYS2 提供了不同的<strong>环境&#x2F;子系统</strong>，首先用户需要决定要使用哪个环境。</p>
+<p>这些环境之间的区别主要在于<strong>环境变量</strong>、<strong>默认编译器</strong>&#x2F;<strong>链接器</strong>、<strong>架构</strong>、使用的<strong>系统库</strong>等方面。</p>
+<ul>
+<li><code>environment variables</code>：环境变量</li>
+<li><code>default compilers/linkers</code>：默认编译器&#x2F;链接器</li>
+<li><code>architecture</code>：架构</li>
+<li><code>system libraries used etc</code>：使用的系统库</li>
+</ul>
+<p><strong>如果不确定，建议选择 <code>UCRT64</code> 环境。</strong></p>
+<p>MSYS 环境包含基于类 <code>Unix/cygwin</code> 的工具，存储在 <code>/usr</code> 目录下，并且它是特殊的，因为它始终处于活动状态。</p>
+<p>所有其他环境都继承自 <code>MSYS</code> 环境并在其基础上添加各种功能。</p>
+<p>例如，在 <code>UCRT64</code> 环境中，<code>$PATH</code> 变量以 <code>/ucrt64/bin:/usr/bin</code> 开头，因此可以使用所有 <code>ucrt64</code> 和 <code>msys</code> 工具。</p>
+<p><strong>各环境及其细节的简单展示</strong>：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">Name</th>
+<th align="center">Prefix</th>
+<th align="center">Toolchain</th>
+<th align="center">Architecture</th>
+<th align="center">C Library</th>
+<th align="center">C++ Library</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="https://www.msys2.org/docs/msys.png" srcset="/img/loading.gif" lazyload width="30" height="30"></td>
+<td align="center">MSYS</td>
+<td align="center"><code>/usr</code></td>
+<td align="center">gcc</td>
+<td align="center">x86_64</td>
+<td align="center">cygwin</td>
+<td align="center">libstdc++</td>
+</tr>
+<tr>
+<td align="center"><img src="https://www.msys2.org/docs/ucrt64.png" srcset="/img/loading.gif" lazyload width="30" height="30"></td>
+<td align="center">UCRT64</td>
+<td align="center"><code>/ucrt64</code></td>
+<td align="center">gcc</td>
+<td align="center">x86_64</td>
+<td align="center">ucrt</td>
+<td align="center">libstdc++</td>
+</tr>
+<tr>
+<td align="center"><img src="https://www.msys2.org/docs/clang64.png" srcset="/img/loading.gif" lazyload width="30" height="30"></td>
+<td align="center">CLANG64</td>
+<td align="center"><code>/clang64</code></td>
+<td align="center">llvm</td>
+<td align="center">x86_64</td>
+<td align="center">ucrt</td>
+<td align="center">libc++</td>
+</tr>
+<tr>
+<td align="center"><img src="https://www.msys2.org/docs/clang64.png" srcset="/img/loading.gif" lazyload width="30" height="30"></td>
+<td align="center">CLANGARM64</td>
+<td align="center"><code>/clangarm64</code></td>
+<td align="center">llvm</td>
+<td align="center">aarch64</td>
+<td align="center">ucrt</td>
+<td align="center">libc++</td>
+</tr>
+<tr>
+<td align="center"><img src="https://www.msys2.org/docs/clang32.png" srcset="/img/loading.gif" lazyload width="30" height="30"></td>
+<td align="center">CLANG32</td>
+<td align="center"><code>/clang32</code></td>
+<td align="center">llvm</td>
+<td align="center">i686</td>
+<td align="center">ucrt</td>
+<td align="center">libc++</td>
+</tr>
+<tr>
+<td align="center"><img src="https://www.msys2.org/docs/mingw64.png" srcset="/img/loading.gif" lazyload width="30" height="30"></td>
+<td align="center">MINGW64</td>
+<td align="center"><code>/mingw64</code></td>
+<td align="center">gcc</td>
+<td align="center">x86_64</td>
+<td align="center">msvcrt</td>
+<td align="center">libstdc++</td>
+</tr>
+<tr>
+<td align="center"><img src="https://www.msys2.org/docs/mingw32.png" srcset="/img/loading.gif" lazyload width="30" height="30"></td>
+<td align="center">MINGW32</td>
+<td align="center"><code>/mingw32</code></td>
+<td align="center">gcc</td>
+<td align="center">i686</td>
+<td align="center">msvcrt</td>
+<td align="center">libstdc++</td>
+</tr>
+</tbody></table>
+<p>活动环境是通过 <code>MSYSTEM</code> <strong>环境变量</strong>选择的。</p>
+<h3 id="GCC-vs-LLVM-x2F-Clang"><a href="#GCC-vs-LLVM-x2F-Clang" class="headerlink" title="GCC vs LLVM&#x2F;Clang"></a>GCC vs LLVM&#x2F;Clang</h3><p>GCC、LLVM&#x2F;Clang 都是是默认的编译器&#x2F;工具链，用于在各自的存储库中构建所有软件包。</p>
+<ul>
+<li>基于 GCC 的环境：<ul>
+<li>目前被广泛测试和使用</li>
+<li>支持 <code>Fortran</code></li>
+<li>虽然 <code>MINGW</code> 环境中也存在 <code>Clang</code> 软件包，但该软件包仍使用 <code>GNU</code> 链接器和 <code>GNU C++</code> 库。在某些情况下，例如上游开发者更喜欢 <code>Clang</code> 而不是 <code>GCC</code>，也会使用 <code>Clang</code> 来构建软件包。</li>
+</ul>
+</li>
+<li>基于 LLVM&#x2F;Clang 的环境：<ul>
+<li>仅使用 <code>LLVM</code> 工具，<code>LLD</code> 作为链接器，<code>LIBC++</code> 作为 <code>C++</code> 标准库</li>
+<li><code>Clang</code> 提供 <code>ASAN</code> 支持</li>
+<li>本地支持 <code>TLS</code> —— 线程本地存储（Thread-local storage）</li>
+<li><code>LLD</code> 比 <code>LD</code> 更快，但不支持 <code>LD</code> 支持的所有功能</li>
+<li>某些工具缺乏与等效的 <code>GNU</code> 工具相同的功能</li>
+<li>Microsoft Windows 10 支持 <code>ARM64/AArch64</code> 架构</li>
+</ul>
+</li>
+</ul>
+<h4 id="MSVCRT-vs-UCRT"><a href="#MSVCRT-vs-UCRT" class="headerlink" title="MSVCRT vs UCRT"></a>MSVCRT vs UCRT</h4><p>MSVCRT 和 UCRT 是在 Microsoft Windows 上的 C 标准库变体。</p>
+<ul>
+<li><p><strong>MSVCRT（Microsoft Visual C++ Runtime）</strong> 在所有 Microsoft Windows 版本上默认可用，但由于向后兼容性问题而停留在过去，不兼容 <code>C99</code>，并且缺少一些功能：</p>
+<ul>
+<li>例如，它不兼容 <code>C99</code> 的 <code>printf()</code> 函数族，但是…</li>
+<li><code>mingw-w64</code> 提供了替代函数，在许多情况下使事情兼容 <code>C99</code></li>
+<li>不支持 <code>UTF-8</code> 区域设置</li>
+<li>使用 <code>MSVCRT</code> 链接的二进制文件不应与使用 <code>UCRT</code> 的二进制文件混合使用，因为内部结构和数据类型不同。（更严格地说，针对不同目标构建的对象文件或静态库不应混合使用。构建为不同 CRT 的 DLL 可以混合使用，只要它们不跨 DLL 边界共享 CRT 对象，例如 FILE*。）同样的规则适用于 <code>MSVC</code> 编译的二进制文件，因为 <code>MSVC</code> 默认使用 <code>UCRT</code>（如果未更改）。</li>
+<li>在每个 Microsoft Windows 版本上开箱即用。</li>
+</ul>
+</li>
+<li><p><strong>UCRT（Universal C Runtime）</strong> 是一个较新版本，也是 Microsoft Visual Studio 默认使用的版本。它应该像使用 <code>MSVC</code> 编译代码一样工作和运行。</p>
+<ul>
+<li>在构建时和运行时与 <code>MSVC</code> 的兼容性更好。</li>
+<li>它仅默认在 Windows 10 上提供，对于旧版本，您必须自己提供或取决于安装它的用户。</li>
+</ul>
+</li>
+</ul>
+<h3 id="MSYS2-切换环境"><a href="#MSYS2-切换环境" class="headerlink" title="MSYS2 切换环境"></a>MSYS2 切换环境</h3><div class="note note-info">
+            <p>想要直接看切换的命令，<a href="#env-change">点击一下，直接跳转</a>。</p>
+          </div>
+
+<p>经过一番简单的研究，如果想要在终端直接切换 MSYS2 的<strong>环境</strong>，使用 <code>export MSYSTEM=UCRT64</code> 之类的命令，就只能忽悠自己，该命令只是改变了终端的**提示符(prompt)**处的环境名称：</p>
+<div class="code-wrapper"><pre><code class="hljs bash">Username@Hostname CLANG64 ~
+$ <span class="hljs-built_in">export</span> MSYSTEM=UCRT64
+
+Username@Hostname UCRT64 ~
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span> | <span class="hljs-built_in">tr</span> <span class="hljs-string">&#x27;:&#x27;</span> <span class="hljs-string">&#x27;\n&#x27;</span>
+/clang64/bin
+/usr/local/bin
+...</code></pre></div>
+
+<p>你使用 <code>echo $PATH | tr &#39;:&#39; &#39;\n&#39;</code> 命令查看环境变量，你就发现，这还是 <code>CLANG64</code> 的环境变量，说明完全没有切换成功，上述的命令就只是欺骗了你。</p>
+<div class="note note-indo">
+            <p><code>echo $PATH | tr &#39;:&#39; &#39;\n&#39;</code> 命令是将 <code>echo $PATH</code> 输出的内容碰到 “:” 替换为 “\n”.</p><p><code>tr</code> 命令的<strong>第一个参数</strong>是要替换的字符，<strong>第二个参数</strong>是替换成的字符。</p><p>就是实现了<strong>每个路径一行输出的效果</strong>。</p><p>不然就是：</p><div class="code-wrapper"><pre><code class="hljs bash">Username@Hostname CLANG64 ~
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span>
+/clang64/bin:/usr/local/bin:/usr/bin:/bin:/c/Windows/System32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0/:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl</code></pre></div>
+          </div>
+
+<p>回归正题，上述命令效果不明显，咱就去 MSYS2 那找，找到个：</p>
+<blockquote>
+<p>If you need to start a shell correctly, but none of the ways above suit you, devise your own way based on this knowledge:</p>
+<ul>
+<li>set <code>MSYSTEM=...</code> into the environment, with the value of either <code>MSYS</code>, <code>MINGW32</code>, or <code>MINGW64</code></li>
+<li>then run a login shell</li>
+</ul>
+<p>The typical one-liner if your options are limited is <code>C:\\msys64\\usr\\bin\\env MSYSTEM=MSYS /usr/bin/bash -li</code>.</p>
+<p>如果以上提到的方法都不适用于你，你可以根据以下知识自己设计启动 shell 的方法：</p>
+<ul>
+<li>将 <code>MSYSTEM=...</code> 设置为环境变量，并将值设为 <code>MSYS</code>、<code>MINGW32</code> 或 <code>MINGW64</code></li>
+<li>然后启动一个登录 shell</li>
+</ul>
+<p>如果你的选择受限，一种常见的方法是运行以下一行命令：<code>C:\\msys64\\usr\\bin\\env MSYSTEM=MSYS /usr/bin/bash -li</code></p>
+</blockquote>
+<p>简单介绍一下原理，如何自行设计启动 shell —— <strong>先设置 <code>MSYSTEM=...</code> 环境变量，再启动一个登录 shell。</strong></p>
+<p>所以咱们就执行 <code>env MSYSTEM=UCRT64 /usr/bin/bash -li</code>…再 <code>echo $PATH | tr &#39;:&#39; &#39;\n&#39;</code>：</p>
+<div class="code-wrapper"><pre><code class="hljs bash">Username@Hostname CLANG64 ~
+$ <span class="hljs-built_in">env</span> MSYSTEM=UCRT64 /usr/bin/bash -li
+
+Username@Hostname UCRT64 ~
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span> | <span class="hljs-built_in">tr</span> <span class="hljs-string">&#x27;:&#x27;</span> <span class="hljs-string">&#x27;\n&#x27;</span>
+/ucrt64/bin
+/usr/local/bin
+...</code></pre></div>
+
+<p>显然，环境切换成功。</p>
+<p>等等，咱再试试 <code>export MSYSTEM=CLANG64</code>，再执行 <code>/usr/bin/bash -li</code>，最后检查成功否 <code>echo $PATH | tr &#39;:&#39; &#39;\n&#39;</code>：</p>
+<div class="code-wrapper"><pre><code class="hljs bash">Username@Hostname UCRT64 ~
+$ <span class="hljs-built_in">export</span> MSYSTEM=CLANG64
+
+Username@Hostname CLANG64 ~
+$ /usr/bin/bash -li
+
+Username@Hostname CLANG64 ~
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span> | <span class="hljs-built_in">tr</span> <span class="hljs-string">&#x27;:&#x27;</span> <span class="hljs-string">&#x27;\n&#x27;</span>
+/clang64/bin
+/usr/local/bin</code></pre></div>
+
+<p>😯 woc，傻逼竟是我自己。</p>
+<p><strong>先设置 <code>MSYSTEM=...</code> 环境变量，再启动一个登录 shell。</strong></p>
+<p>咱没有重新启动 bash。没有使用命令重新启动 bash。</p>
+<p>结束结束，不多BB。</p>
+<div class="note note-info">
+            <p>再多 BB 一声：</p><p><code>/usr/bin/bash -li</code> 是启动一个 Bash shell 的命令。其中 <code>-l</code> 选项代表要启动一个 <strong>login shell</strong>，这将读取登录 shell 的启动文件（如 <code>/etc/profile</code> 和 <code>~/.bash_profile</code>），并在其后面加上 <code>-i</code> 选项，表示这是一个交互式的 shell，可以接受来自用户的输入。<code>-i</code> 选项通常用于设置别名和环境变量。</p><p>加上 <code>/usr/bin/</code> 是 bash 的路径，其在环境变量里的话，直接 <code>bash -li</code> 就可以。</p>
+          </div>
+
+<p><scan id="env-change" style="font-weight: bold;">更换环境的话直接使用：</scan></p>
+<ul>
+<li><p><code>MSYS</code></p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">env</span> MSYSTEM=MSYS /usr/bin/bash -li</code></pre></div>
+</li>
+<li><p><code>UCRT64</code></p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">env</span> MSYSTEM=UCRT64 /usr/bin/bash -li</code></pre></div>
+</li>
+<li><p><code>CLANG64</code></p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">env</span> MSYSTEM=CLANG64 /usr/bin/bash -li</code></pre></div>
+</li>
+<li><p><code>CLANGARM64</code></p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">env</span> MSYSTEM=CLANGARM64 /usr/bin/bash -li</code></pre></div>
+</li>
+<li><p><code>CLANG32</code></p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">env</span> MSYSTEM=CLANG32 /usr/bin/bash -li</code></pre></div>
+</li>
+<li><p><code>MINGW64</code></p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">env</span> MSYSTEM=MINGW64 /usr/bin/bash -li</code></pre></div>
+</li>
+<li><p><code>MINGW32</code></p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">env</span> MSYSTEM=MINGW32 /usr/bin/bash -li</code></pre></div></li>
+</ul>
+<h2 id="5-MSYS2-terminal-的设置"><a href="#5-MSYS2-terminal-的设置" class="headerlink" title="5. MSYS2 terminal 的设置"></a>5. MSYS2 terminal 的设置</h2><h3 id="Mintty"><a href="#Mintty" class="headerlink" title="Mintty"></a>Mintty</h3><p><code>MSYS2</code> 中<strong>默认的终端应用程序</strong>是 <a target="_blank" rel="noopener" href="https://mintty.github.io/">Mintty</a>，并包含在安装程序中。</p>
+<p><code>MSYS2</code> 还通过提供相应的 <code>.ini</code> 配置文件和分别对应的启动器（msys2{.exe,.ini}&#x2F;ucrt64{.exe,.ini}&#x2F;…）提供了一些自定义的 <code>Mintty</code> 集成，因此用户可以轻松地配置的环境并将启动器固定到 <code>Windows</code> 任务栏。</p>
+<p>有关更多详细信息，请参见 <a target="_blank" rel="noopener" href="https://github.com/msys2/msys2-launcher">https://github.com/msys2/msys2-launcher</a> 和 <a target="_blank" rel="noopener" href="https://mintty.github.io/">https://mintty.github.io</a>。</p>
+<h3 id="Windows-Terminal"><a href="#Windows-Terminal" class="headerlink" title="Windows Terminal"></a>Windows Terminal</h3><p><code>Windows Terminal</code> 默认支持 <code>cmd</code>、<code>PowerShell</code> 和 <code>WSL</code>，还可以扩展支持 <code>MSYS2 shell</code>。</p>
+<blockquote>
+<p>Windows Terminal 支持美化，可以让终端更加的好看。</p>
+</blockquote>
+<p>Windows Terminal 的安装，Windows11 是默认安装了的，Windows10 的话可以去 Microsoft Store 进行安装。</p>
+<p>在 Windows Terminal 中添加 MSYS2 有两种方法：</p>
+<div class="note note-danger">
+            <p>咱先默认 MSYS2 的安装路径是 <code>C:\msys64</code></p>
+          </div>
+
+<ol>
+<li><p><strong>通过图形化界面点点点</strong>：</p>
+<p><code>设置 &gt; 添加新配置文件 &gt; 新建空的配置文件</code>，然后就是根据每一行的字段输入内容就行了。</p>
+<p>咱这给予一个示例：</p>
+<ul>
+<li><p><strong>名称</strong>：<code>UCRT64 | MSYS2</code>，下拉列表中配置文件显示的名称。</p>
+</li>
+<li><p><strong>命令行</strong>：<code>C:/msys64/msys2_shell.cmd -defterm -here -no-start -ucrt64</code>，在配置文件中所使用的可执行文件。各参数的含义：</p>
+<ul>
+<li><code>C:/msys64/msys2_shell.cmd</code>: 这是要运行的 <code>MSYS2 shell</code> 脚本的路径。</li>
+<li><code>-defterm</code>: 使用 <strong>Windows 默认终端</strong>作为 shell 的终端，而不是使用 <code>mintty</code> 终端。</li>
+<li><code>-here</code>: 将当前目录设置为 shell 的起始目录。</li>
+<li><code>-no-start</code>: 不启动 shell 窗口。</li>
+<li><code>-ucrt64</code>: 使用 <code>ucrt64.dll</code> 作为 <code>C/C++</code> 运行时库，而不是使用默认的 <code>msvcrt.dll</code>。这可以解决一些兼容性问题。</li>
+</ul>
+</li>
+<li><p><strong>启动目录</strong>：<code>C:/msys64/home/%USERNAME%</code>，加载配置文件时启动的目录。</p>
+</li>
+<li><p><strong>图标</strong>：<code>C:/msys64/ucrt64.ico</code>，配置文件中所使用图标的表情符号或者图像文件位置，可自行更换，选择所喜欢的图标。</p>
+</li>
+</ul>
+<p>以上是必要的配置，还有如<strong>选项卡标题</strong>、<strong>以管理员身份运行此配置文件</strong>、<strong>从下拉菜单中隐藏</strong>，可根据自身需要选择。</p>
+<p><strong>外观</strong>和<strong>高级</strong>属于终端美化，暂不介绍。</p>
+</li>
+<li><p><strong>通过在 JSON 配置文件敲敲敲</strong>：</p>
+<p>进入 <code>设置</code>，点击 <code>打开 JSON 文件</code>，然后找到 <code>&quot;profiles&quot;</code> 下面的 <code>&quot;list&quot;</code>，仿照其他的 <code>&#123;&#125;</code> 的内容进行修改或添加就行了。</p>
+<p>咱继续给个例子：</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-comment">// defaultProfile: 默认 shell 的 guid，这使 UCRT64 成为默认 shell</span>
+<span class="hljs-attr">&quot;defaultProfile&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&#123;17da3cac-b318-431e-8a3e-7fcdefe6d114&#125;&quot;</span><span class="hljs-punctuation">,</span>
+<span class="hljs-attr">&quot;profiles&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+<span class="hljs-attr">&quot;list&quot;</span><span class="hljs-punctuation">:</span>
+<span class="hljs-punctuation">[</span>
+    <span class="hljs-comment">// ...</span>
+    <span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;guid&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&#123;17da3cac-b318-431e-8a3e-7fcdefe6d114&#125;&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;UCRT64 / MSYS2&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;commandline&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:/msys64/msys2_shell.cmd -defterm -here -no-start -ucrt64&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;startingDirectory&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:/msys64/home/%USERNAME%&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:/msys64/ucrt64.ico&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;guid&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&#123;71160544-14d8-4194-af25-d05feeac7233&#125;&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;MSYS / MSYS2&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;commandline&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:/msys64/msys2_shell.cmd -defterm -here -no-start -msys&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;startingDirectory&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:/msys64/home/%USERNAME%&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:/msys64/msys2.ico&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-comment">// ...</span>
+<span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+<p>上述各字段分别是，<strong>全局唯一标识符</strong> —— <code>guid</code>、<strong>名称</strong> —— <code>name</code>、<strong>命令行</strong> —— <code>commandline</code>、<strong>启动目录</strong> —— <code>startingDirectory</code>、<strong>图标</strong> —— <code>icon</code>。</p>
+<div class="note note-info">
+            <p><strong>该配置文件中的命令行默认会启动 <code>bash shell</code>。</strong></p><p>要更改默认的登录 shell，请安装相应的 shell 包，并在命令行中附加 -shell 选项。例如，</p><ul><li><p>要将 <code>fish shell</code> 设置为默认 shell：</p><div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-attr">&quot;commandline&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:/msys64/msys2_shell.cmd -defterm -here -no-start -ucrt64 -shell fish&quot;</span></code></pre></div></li><li><p>要将 <code>zsh shell</code> 设置为默认 shell：</p><div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-attr">&quot;commandline&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:/msys64/msys2_shell.cmd -defterm -here -no-start -ucrt64 -shell zsh&quot;</span></code></pre></div></li></ul>
+          </div></li>
+</ol>
+<div class="note note-info">
+            <p>有关不同配置文件设置的更多信息，请参见 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/terminal/customize-settings/startup">Windows Termial 自定义设置</a>。</p>
+          </div>
+
+<h2 id="6-MSYS2-各环境编译工具的安装"><a href="#6-MSYS2-各环境编译工具的安装" class="headerlink" title="6. MSYS2 各环境编译工具的安装"></a>6. MSYS2 各环境编译工具的安装</h2><p>不同的 MSYS 环境需要的编译器等等工具不经相同，所需要安装的包也不经相同，看了让人头大。现简单列举一下各环境所需要的包，嗯，应该说是最基础的包，具体需要哪些包取决于要编译的代码和程序所依赖的库。</p>
+<p>以下表格根据各自的环境列出了包名，安装时，通常会使用下面列出的包前缀加完整包名：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">Name<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="环境变量 `MSYSTEM`">[1]</span></a></sup></th>
+<th align="center">Package prefix<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="环境变量 `MINGW_PACKAGE_PREFIX`">[2]</span></a></sup></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="https://www.msys2.org/docs/msys.png" srcset="/img/loading.gif" lazyload width="30"/></td>
+<td align="center">MSYS</td>
+<td align="center">None</td>
+</tr>
+<tr>
+<td align="center"><img src="https://www.msys2.org/docs/mingw64.png" srcset="/img/loading.gif" lazyload width="30"/></td>
+<td align="center">MINGW64</td>
+<td align="center"><code>mingw-w64-x86_64-</code></td>
+</tr>
+<tr>
+<td align="center"><img src="https://www.msys2.org/docs/ucrt64.png" srcset="/img/loading.gif" lazyload width="30"/></td>
+<td align="center">UCRT64</td>
+<td align="center"><code>mingw-w64-ucrt-x86_64-</code></td>
+</tr>
+<tr>
+<td align="center"><img src="https://www.msys2.org/docs/clang64.png" srcset="/img/loading.gif" lazyload width="30"/></td>
+<td align="center">CLANG64</td>
+<td align="center"><code>mingw-w64-clang-x86_64-</code></td>
+</tr>
+<tr>
+<td align="center"><img src="https://www.msys2.org/docs/mingw32.png" srcset="/img/loading.gif" lazyload width="30"/></td>
+<td align="center">MINGW32</td>
+<td align="center"><code>mingw-w64-i686-</code></td>
+</tr>
+<tr>
+<td align="center"><img src="https://www.msys2.org/docs/clang32.png" srcset="/img/loading.gif" lazyload width="30"/></td>
+<td align="center">CLANG32</td>
+<td align="center"><code>mingw-w64-clang-i686-</code></td>
+</tr>
+<tr>
+<td align="center"><img src="https://www.msys2.org/docs/clangarm64.png" srcset="/img/loading.gif" lazyload width="30"/></td>
+<td align="center">CLANGARM64</td>
+<td align="center"><code>mingw-w64-clang-aarch64-</code></td>
+</tr>
+</tbody></table>
+<h3 id="1）C-语言编译器"><a href="#1）C-语言编译器" class="headerlink" title="1）C 语言编译器"></a>1）C 语言编译器</h3><p>在 msys2 中安装编译器的话，主要需要安装这几个包：</p>
+<ul>
+<li>gcc: GCC（GNU Compiler Collection）是由 GNU 开发的编程语言编译器，这是 GCC 编译器的 Mingw-w64 版本。</li>
+<li>gdb: 是一个用于调试 C 代码的 GNU 调试器。</li>
+<li>make: GNU Make 工具的 Mingw-w64 版本。它用于构建和管理代码库。</li>
+<li>cmake: 是一个用于自动生成 Makefile 的工具，支持 Windows 和 Unix 系统。</li>
+</ul>
+<p>开始说明 msys2 各环境的 C 语言编译器安装。</p>
+<ul>
+<li><p><code>MSYS</code>：包名没有前缀。</p>
+<p>安装 <code>gcc</code>、<code>gdb</code>、<code>make</code>等等工具。</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">$ pacman -S gcc
+正在解析依赖关系...
+正在查找软件包冲突...
+
+软件包 (8) binutils-2.40-1  isl-0.25-3  mpc-1.3.1-1  msys2-runtime-devel-3.4.6-2  msys2-w32api-headers-10.0.0.r16.g49a56d453-1
+          msys2-w32api-runtime-10.0.0.r16.g49a56d453-1  windows-default-manifest-6.4-1  gcc-11.3.0-3</code></pre></div>
+
+<div class="code-wrapper"><pre><code class="hljs zsh">$ pacman -S gdb
+正在解析依赖关系...
+正在查找软件包冲突...
+
+软件包 (8) expat-2.5.0-1  libgc-8.2.2-1  libguile-3.0.9-1  libxxhash-0.8.1-1  mpdecimal-2.5.1-1  python-3.11.2-1  xxhash-0.8.1-1
+          gdb-11.1-6</code></pre></div>
+
+<p>执行 <code>pacman -S gcc</code> 命令后，<code>pacman</code> 会分析依赖关系，然后下载所需要的依赖，如 <code>binutils</code>、<code>isl</code>、<code>mpc</code>、<code>msys2-runtime-devel</code>、<code>msys2-w32api-headers</code>、<code>msys2-w32api-runtime</code>、<code>windows-default-manifest</code>，最后下载 <code>gcc</code>。</p>
+<blockquote>
+<p>如果需要的 <code>make</code>、<code>cmake</code> 的话：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">$ pacman -S make
+正在解析依赖关系...
+正在查找软件包冲突...
+
+软件包 (1) make-4.4.1-1</code></pre></div>
+
+<div class="code-wrapper"><pre><code class="hljs zsh">$ pacman -S cmake
+正在解析依赖关系...
+正在查找软件包冲突...
+
+软件包 (6) jsoncpp-1.9.5-1  libarchive-3.6.2-3  librhash-1.4.3-1  libuv-1.44.2-1  pkgconf-1.9.4-1  cmake-3.26.3-1</code></pre></div>
+</blockquote>
+</li>
+<li><p><code>MINGW64</code>: 包前缀是 <code>mingw-w64-x86_64-</code>。</p>
+<p>安装 MINGW64 环境的 GCC 可以直接安装 <code>mingw-w64-x86_64-toolchain</code> 这个包，这是 MSYS2 所定义的一个 Group，简单说就是一个包组，是包含 MINGW64 环境 C 编译器的软件包的一个组合包。包含了：</p>
+<div class="code-wrapper"><pre><code class="hljs txt">mingw-w64-x86_64-binutils
+mingw-w64-x86_64-crt-git
+mingw-w64-x86_64-gcc
+mingw-w64-x86_64-gcc-ada
+mingw-w64-x86_64-gcc-fortran
+mingw-w64-x86_64-gcc-libgfortran
+mingw-w64-x86_64-gcc-libs
+mingw-w64-x86_64-gcc-objc
+mingw-w64-x86_64-libgccjit
+mingw-w64-x86_64-gdb
+mingw-w64-x86_64-gdb-multiarch
+mingw-w64-x86_64-headers-git
+mingw-w64-x86_64-libmangle-git
+mingw-w64-x86_64-libwinpthread-git
+mingw-w64-x86_64-winpthreads-git
+mingw-w64-x86_64-make
+mingw-w64-x86_64-pkgconf
+mingw-w64-x86_64-tools-git
+mingw-w64-x86_64-winstorecompat-git</code></pre></div>
+
+<p>安装命令：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">pacman -S mingw-w64-x86_64-toolchain</code></pre></div>
+
+<div class="code-wrapper"><pre><code class="hljs zsh">$ pacman -S mingw-w64-x86_64-toolchain
+:: 在组 mingw-w64-x86_64-toolchain 中有 19 成员：
+:: 软件仓库 mingw64
+  1) mingw-w64-x86_64-binutils  2) mingw-w64-x86_64-crt-git  3) mingw-w64-x86_64-gcc  4) mingw-w64-x86_64-gcc-ada
+  5) mingw-w64-x86_64-gcc-fortran  6) mingw-w64-x86_64-gcc-libgfortran  7) mingw-w64-x86_64-gcc-libs
+  8) mingw-w64-x86_64-gcc-objc  9) mingw-w64-x86_64-gdb  10) mingw-w64-x86_64-gdb-multiarch  11) mingw-w64-x86_64-headers-git
+  12) mingw-w64-x86_64-libgccjit  13) mingw-w64-x86_64-libmangle-git  14) mingw-w64-x86_64-libwinpthread-git
+  15) mingw-w64-x86_64-make  16) mingw-w64-x86_64-pkgconf  17) mingw-w64-x86_64-tools-git  18) mingw-w64-x86_64-winpthreads-git
+  19) mingw-w64-x86_64-winstorecompat-git
+
+输入某个选择 ( 默认=全部选定 ):</code></pre></div>
+
+<p>直接安装所有就行。</p>
+<p>如果还需要安装如 <code>cmake</code> 等等包，就直接 + 包名前缀 <code>mingw-w64-x86_64-</code> 就行了：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">$ pacman -S mingw-w64-x86_64-cmake
+正在解析依赖关系...
+正在查找软件包冲突...
+
+软件包 (7) mingw-w64-x86_64-jsoncpp-1.9.5-2  mingw-w64-x86_64-libarchive-3.6.2-2  mingw-w64-x86_64-libb2-0.98.1-2
+          mingw-w64-x86_64-lz4-1.9.4-1  mingw-w64-x86_64-ninja-1.11.1-3  mingw-w64-x86_64-rhash-1.4.3-1
+          mingw-w64-x86_64-cmake-3.26.3-2</code></pre></div>
+
+<div class="note note-info">
+            <p>所有安装的 MINGW64 环境的工具都位于 <code>/mingw64</code> 这个路径下，若是 msys2 的安装路径是 <code>C:/msys64</code>，那么 MINGW64 的工具都在 <code>C:/msys64/mingw64</code> 下。</p><p>如果需要使用 msys2 中的工具在 Windows 使用，比如 GCC 编译器，那就使用 <code>C:/msys64/mingw64</code> 下的相关工具了。</p>
+          </div></li>
+</ul>
+<p>其他环境下的包都是类似的，只是包名前缀不一样，下面只是简单介绍一下安装命令：</p>
+<ul>
+<li><code>MINGW32</code>: 包名前缀 <code>mingw-w64-i686-</code>，安装 toolchain：<code>pacman -S mingw-w64-i686-toolchain</code>。</li>
+<li><code>UCRT64</code>: 包名前缀 <code>mingw-w64-ucrt-x86_64-</code>，安装 toolchain：<code>pacman -S mingw-w64-ucrt-x86_64-toolchain</code>。</li>
+<li><code>CLANG64</code>: 包名前缀 <code>mingw-w64-clang-x86_64-</code>，安装 toolchain：<code>pacman -S mingw-w64-clang-x86_64-toolchain</code>。</li>
+<li><code>CLANGARM64</code>: 包名前缀 <code>mingw-w64-clang-aarch64-</code>，安装 toolchain：<code>pacman -S mingw-w64-clang-aarch64-toolchain</code>。</li>
+<li><code>CLANG32</code>: 包名前缀 <code>mingw-w64-clang-i686-</code>，安装 toolchain：<code>pacman -S mingw-w64-clang-i686-toolchain</code>。</li>
+</ul>
+<div class="note note-info">
+            <p>在 MSYS 环境下，一般需要安装以下工具来支持 <strong>C 语言</strong>的编译：</p><ul><li><strong><code>gcc</code> 编译器</strong>：用于编译 C 语言代码。</li><li><strong><code>make</code> 工具</strong>：用于自动化构建和编译程序，通常需要根据 <code>Makefile</code> 文件来执行构建和编译操作。</li><li><strong><code>gdb</code> 调试器</strong>：用于调试程序，可以在程序运行过程中对变量和内存进行查看和修改。</li><li><strong><code>pkg-config</code></strong> 工具：用于检测和获取已安装的库的信息，通常在编译程序时需要指定库的路径和编译选项。</li></ul><p><code>CMake</code> 是一款跨平台的开源构建工具，用于管理和构建软件项目。它可以自动生成与操作系统、编译器和库相关的 <code>Makefile</code> 或者 <code>Project</code> 文件，从而简化了项目的构建和移植。</p><p><code>CMake</code> 不直接构建软件，而是通过生成 <code>Makefile</code> 或者项目文件来让构建工具完成具体的构建过程。</p><p><code>CMake</code> 支持的平台非常广泛，包括 <code>Windows</code>、<code>Linux</code>、<code>macOS</code>、<code>Android</code> 等。</p>
+          </div>
+
+<h3 id="2）Rust"><a href="#2）Rust" class="headerlink" title="2）Rust"></a>2）Rust</h3><p>先鸽</p>
+<h2 id="7-个人-Windows-Terminal-的-MSYS2-配置"><a href="#7-个人-Windows-Terminal-的-MSYS2-配置" class="headerlink" title="7. 个人 Windows Terminal 的 MSYS2 配置"></a>7. 个人 Windows Terminal 的 MSYS2 配置</h2><h3 id="1）安装-zsh"><a href="#1）安装-zsh" class="headerlink" title="1）安装 zsh"></a>1）安装 zsh</h3><div class="code-wrapper"><pre><code class="hljs bash">pacman -S zsh</code></pre></div>
+
+<h3 id="2）安装-oh-my-zsh"><a href="#2）安装-oh-my-zsh" class="headerlink" title="2）安装 oh my zsh"></a>2）安装 oh my zsh</h3><div class="code-wrapper"><pre><code class="hljs bash">sh -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>&quot;</span></code></pre></div>
+
+<p>编辑 oh my zsh 配置文件 <code>nano ~/.zshrc</code>：</p>
+<ul>
+<li><p>修改 <code>ZSH_THEME=ys</code></p>
+</li>
+<li><p>修改插件：</p>
+<div class="code-wrapper"><pre><code class="hljs .zshrc">plugins=( 
+    git
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    history-substring-search
+)</code></pre></div>
+
+<p>并下载相关代码：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-history-substring-search.git $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/history-substring-search
+git clone https://github.com/zsh-users/zsh-autosuggestions $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-autosuggestions</code></pre></div>
+
+<p>下载完成后，执行下一步。</p>
+</li>
+<li><p>使配置生效：<code>source ~/.zshrc</code></p>
+</li>
+</ul>
+<h3 id="3）安装-lsd"><a href="#3）安装-lsd" class="headerlink" title="3）安装 lsd"></a>3）安装 lsd</h3><p>一个 Rust 编写的 ls 替代品，支持彩色输出、图标显示、Git 状态显示等。</p>
+<p>搜索 lsd：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">$ pacman -Ss lsd
+mingw32/mingw-w64-i686-lsd 0.23.1-1
+    The next gen ls command (mingw-w64)
+mingw64/mingw-w64-x86_64-lsd 0.23.1-1
+    The next gen ls command (mingw-w64)
+ucrt64/mingw-w64-ucrt-x86_64-lsd 0.23.1-1
+    The next gen ls command (mingw-w64)
+clang32/mingw-w64-clang-i686-lsd 0.23.1-1
+    The next gen ls command (mingw-w64)
+clang64/mingw-w64-clang-x86_64-lsd 0.23.1-1
+    The next gen ls command (mingw-w64)</code></pre></div>
+
+<p>有不同版本的 lsd。不过还是推荐使用 rust 安装或者直接编译：</p>
+<p>安装 rust (ucrt 环境)：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">pacman -S mingw-w64-ucrt-x86_64-rust</code></pre></div>
+
+<p>使用 cargo 命令安装 lsd：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">cargo install lsd</code></pre></div>
+
+<p>如果想安装最新的 lsd：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">cargo install --git https://github.com/Peltoche/lsd.git --branch master</code></pre></div>
+
+<p>如果不出意外的话，这样应该就能直接使用 lsd。</p>
+<p>如果出现问题，就自行解决吧。<br>同时也可以自行编译：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">git clone https://github.com/lsd-rs/lsd.git
+## 上述克隆不了，可使用下述命令
+## git clone https://ghproxy.com/github.com/lsd-rs/lsd.git</code></pre></div>
+
+<p>开始编译：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">cd lsd
+cargo build</code></pre></div>
+
+<p>更多信息详见：<a target="_blank" rel="noopener" href="https://github.com/lsd-rs/lsd">lsd | github</a></p>
+<div class="note note-info">
+            <p>如果提示添加 cargo 路径到环境变量，那就添加 cargo 路径到环境变量：</p><div class="code-wrapper"><pre><code class="hljs zsh">export PATH=&quot;$PATH:/c/Users/USERNAME/.cargo/bin&quot;</code></pre></div><p>添加在 <code>.bashrc</code> 或者 <code>.zshrc</code> 文件中。</p>
+          </div>
+
+<h3 id="3）使用-Visual-Studio-Code-打开文件或文件夹"><a href="#3）使用-Visual-Studio-Code-打开文件或文件夹" class="headerlink" title="3）使用 Visual Studio Code 打开文件或文件夹"></a>3）使用 Visual Studio Code 打开文件或文件夹</h3><p>直接让 MSYS 使用 Windows 安装的 Visual Studio Code 就行，将 VS code 的路径添加到环境变量中：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">export PATH=&quot;$PATH:/c/Program Files (x86)/Microsoft VS Code/bin&quot;</code></pre></div>
+
+<p>或者是：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">export PATH=&quot;$PATH:/c/Users/$USER/AppData/Local/Programs/Microsoft VS Code/bin&quot;</code></pre></div>
+
+<p>根据自身情况进行修改。</p>
+<p>将上述加入 <code>~/.zshrc</code> 中。<br>最后再生效：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">source ~/.zshrc</code></pre></div>
+
+<h3 id="4）安装-node-js、-npm、-yarn"><a href="#4）安装-node-js、-npm、-yarn" class="headerlink" title="4）安装 node.js、 npm、 yarn"></a>4）安装 node.js、 npm、 yarn</h3><p>先更新软件源：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">pacman -Syu</code></pre></div>
+
+<p>然后根据自己 Msys2 的环境安装 node.js，比如安装 UCRT64 环境的：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">pacman -S mingw-w64-ucrt-x86_64-nodejs</code></pre></div>
+
+<blockquote>
+<p>如果是其他环境的 node.js 安装，就先搜索都有什么 node.js 可以安装：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">pacman -Ss nodejs</code></pre></div>
+
+<p>然后选择需要的 node.js 进行安装。</p>
+</blockquote>
+<p>npm 会和 node.js 一起安装，当安装完 node.js 时，npm 也会安装完，可以使用 <code>npm -v</code> 检测是否安装完成。</p>
+<p>使用 <code>node -v</code> 检测 node.js 是否安装成功。</p>
+<p>安装 yarn 的话使用：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">npm install -g yarn</code></pre></div>
+
+<p>检测 yarn 是否安装成功 <code>yarn -v</code>。</p>
+<p>好家伙，结果给我返回一个：<strong>zsh: command not found: yarn</strong>，仔细一看发现应该是 npm 的安装路路径并不在 PATH 中，看来还需要小小设置一下，然后经查询可以使用下述命令查询 npm 安装路径：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">npm root -g</code></pre></div>
+
+<p>返回给我 <code>C:\msys64\ucrt64\lib\node_modules</code>，那咱就在 ~&#x2F;.zshrc 文件中添加一行:</p>
+<div class="code-wrapper"><pre><code class="hljs .zshrc">export PATH=&quot;$PATH:/ucrt64/lib/node_modules&quot;</code></pre></div>
+
+<p>再使文件生效。<code>yarn -v</code> 继续检测，好家伙还有问题 —— zsh: permission denied: yarn，咱知道这是没有 yarn 的可执行权限，一般都是加上 <code>sudo</code> 命令就好了，不过咱们 msys2 中没有 <code>sudo</code> 命令，害，咋回事呢。先不管这个吧，咱先去 npm 安装路径里看看：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">$ ls /ucrt64/lib/node_modules/                 
+ corepack   hexo-cli   npm   yarn</code></pre></div>
+
+<blockquote>
+<p>咱的 ls 是给 lsd 加上别名了。<code>alias ls=&quot;lsd&quot;</code></p>
+</blockquote>
+<p>说明咱是安装了 yarn 的，我还安装了 hexo-cil 呢，再进去看看：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">$ ls /ucrt64/lib/node_modules/yarn    
+ bin   lib   LICENSE   package.json   preinstall.js   README.md</code></pre></div>
+
+<p>还有个可执行文件的文件夹，再进去看看：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">$ ls /ucrt64/lib/node_modules/yarn/bin
+ yarn   yarn.cmd   yarn.js   yarnpkg   yarnpkg.cmd</code></pre></div>
+
+<p>有个 yarn 文件呀，看看文件类型：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">$ file /ucrt64/lib/node_modules/yarn/bin/yarn
+/ucrt64/lib/node_modules/yarn/bin/yarn: POSIX shell script, ASCII text executable</code></pre></div>
+
+<p>这是一个 ASCII 码编写的 POSIX shell 脚本文件，其中包含了一些 Linux&#x2F;Unix 系统下可执行的 shell 命令。</p>
+<p>执行一下看看：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">$ /ucrt64/lib/node_modules/yarn/bin/yarn -v
+1.22.19</code></pre></div>
+
+<p>是可以的哦。难道说是因为可执行文件太深了？<br>将 <code>/ucrt64/lib/node_modules/yarn/bin</code> 加入环境变量试试，在 <code>~/.zshrc</code> 文件加入下面内容，并生效：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">export PATH=&quot;$PATH:/ucrt64/lib/node_modules/yarn/bin&quot;</code></pre></div>
+
+<p>看看能使用 yarn 了没：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">$ yarn -v
+1.22.19</code></pre></div>
+
+<p>好家伙，成了，但是这也太麻烦了吧，我是用 npm 安装应用后，还得添加路径到环境变量，这也太麻烦了。</p>
+<p>stackoverflow 里有多个回答，其中有一个就是要使用 Windows 安装的 node.js 和 npm 然后并添加 node.js 和 npm 的安装路径，二者默认的路径是：</p>
+<ul>
+<li><code>node.js</code>: <code>C:\Program Files\nodejs</code>，包含 <code>node</code>、<code>npm</code>。</li>
+<li><code>npm</code>: <code>C:\Users\&lt;USERNAME&gt;\AppData\Roaming\npm</code>，这是使用 <code>npm install xxxx</code> 后所安装应用的安装位置。</li>
+</ul>
+<p>我查看自己 Windows 10 中的上述路径的文件，差不多就如我所说了，有 npm 以及使用 npm 安装的应用。咱是用 msys2 查看一下都有啥：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">$ ls /c/Program\ Files/nodejs
+ node_modules   corepack   corepack.cmd   install_tools.bat   node.exe   node_etw_provider.man   nodevars.bat   npm   npm.cmd   npx   npx.cmd
+
+$ ls /c/Program\ Files/nodejs/node_modules
+ corepack   npm
+
+$ ls /c/Program\ Files/nodejs/node_modules/npm
+ bin   docs   lib   man   node_modules   index.js   LICENSE   npmrc   package.json   README.md
+
+$ ls /c/Program\ Files/nodejs/node_modules/npm/bin
+ node-gyp-bin   npm   npm-cli.js   npm.cmd   npx   npx-cli.js   npx.cmd</code></pre></div>
+
+<p>尝试执行一下 <code>npm -v</code> 命令，执行的是上述 Windows 中的 npm:</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">$ /c/Program\ Files/nodejs/node_modules/npm/bin/npm -v
+node:internal/modules/cjs/loader:1078
+  throw err;
+  ^
+
+Error: Cannot find module &#x27;C:\msys64\ucrt64\bin\node_modules\npm\bin\npm-cli.js&#x27;
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1075:15)
+    at Module._load (node:internal/modules/cjs/loader:920:27)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:23:47 &#123;
+  code: &#x27;MODULE_NOT_FOUND&#x27;,
+  requireStack: []
+&#125;
+
+Node.js v18.15.0
+Could not determine Node.js install directory</code></pre></div>
+
+<p>看来是之前安装的 node.js 和 Windows 下的冲突了，把已经安装的卸载：<code>pacman -Rns mingw-w64-ucrt-x86_64-nodejs</code> 连同依赖也都删除了，再把之前所添加的和 npm 相关的环境变量也删除，并使 <code>.zshrc</code> 文件生效，再执行 <code>/c/Program\ Files/nodejs/node_modules/npm/bin/npm -v</code>:</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">$ /c/Program\ Files/nodejs/node_modules/npm/bin/npm -v
+9.3.1</code></pre></div>
+
+<p>OK，看来是冲突解决了，那再将上述所说的 Windows 的 node.js 和 npm 路径添加到 msys2 的环境变量：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">export PATH=&quot;$PATH:/c/Program Files/nodejs&quot;
+export PATH=&quot;$PATH:/c/Users/&lt;USERNAME&gt;/AppData/Roaming/npm&quot;</code></pre></div>
+
+<blockquote>
+<p>&lt;USERNAME&gt; 是自己 Windows 的用户名哦，注意一下。</p>
+</blockquote>
+<p>然后再试 <code>.zshrc</code> 文件生效。</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">$ node -v
+v18.14.0
+
+$ npm -v 
+9.3.1
+
+$ yarn -v
+1.22.19
+
+$ hexo -v
+INFO  Validating config
+hexo: 6.3.0
+hexo-cli: 4.3.0
+os: win32 10.0.19044
+node: 18.14.0
+v8: 10.2.154.23-node.22
+uv: 1.44.2
+zlib: 1.2.13
+brotli: 1.0.9
+ares: 1.18.1
+modules: 108
+nghttp2: 1.51.0
+napi: 8
+llhttp: 6.0.10
+uvwasi: 0.0.14
+acorn: 8.8.1
+simdutf: 3.1.0
+undici: 5.14.0
+openssl: 3.0.7+quic
+cldr: 42.0
+icu: 72.1
+tz: 2022g
+unicode: 15.0
+ngtcp2: 0.8.1
+nghttp3: 0.7.0</code></pre></div>
+
+<p>好哦，显而易见的，这养的方法比之前使用包管理器 <code>pacman</code> 安装的方便多了，只需要一次性添加两条环境变量就好了，不像之前 npm 安装一次就需要添加一次环境变量。</p>
+<p>哦，再看一下 npm 安装路径里都有什么：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">$ ls /c/Users/&lt;USERNAME&gt;/AppData/Roaming/npm
+ etc   node_modules   hexo   hexo.cmd   hexo.ps1   vue   vue.cmd   vue.ps1   yarn   yarn.cmd   yarn.ps1   yarnpkg   yarnpkg.cmd   yarnpkg.ps1</code></pre></div>
+
+<h4 id="（1）Node-js-和-npm-安装步骤"><a href="#（1）Node-js-和-npm-安装步骤" class="headerlink" title="（1）Node.js 和 npm 安装步骤"></a>（1）Node.js 和 npm 安装步骤</h4><p>不错不错，特别的好使。现在综上所述一下，将 Windows 安装 Node.js 和 npm 以及添加环境变量的方法总结一下：</p>
+<div class="note note-danger">
+            <p><del>TMD，先不写了，有空再写，TMD。</del></p><p><del>我 TMD 本来是想再 MSYS UCRT64 环境使用 hexo 新生成一篇 post 的，结果发现没有 hexo、npm、nodejs，🍀，然后就写了上述内容 —— 关于 MSYS 中 nodejs 的安装。TMD，一下子直接花了好多时间，😭😭😭😭😭😭。</del></p>
+          </div>
+
+<h3 id="5）Visual-Studio-Code-使用-MSYS2-作为默认终端"><a href="#5）Visual-Studio-Code-使用-MSYS2-作为默认终端" class="headerlink" title="5）Visual Studio Code 使用 MSYS2 作为默认终端"></a>5）Visual Studio Code 使用 MSYS2 作为默认终端</h3><div class="note note-info">
+            <p>该部分的编写时间是：<strong>2023-04-05 15:31:10</strong>，注意时效性，可能不是那么适用。</p><p>官方文档有专门关于终端的内容，可以自行查看：<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/terminal/basics">Terminal Basics - TERMINAL | Visual Studio Code Docs</a>。</p>
+          </div>
+
+<p>主要是修改 VS code 的设置文件 —— <code>settings.json</code>，以及该文件中 <code>terminal.integrated.profiles.windows</code> 字段的内容，记录时所参照的系统是 Windows 10。</p>
+<p>啊吧啊吧，我 TM 直接贴出我的 <code>settings.json</code> 文件的 <code>terminal.integrated.profiles.windows</code> 字段内容，不继续多讲了，懒了懒了：</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-attr">&quot;terminal.integrated.profiles.windows&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;PowerShell&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+        <span class="hljs-attr">&quot;source&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;PowerShell&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;terminal-powershell&quot;</span>
+    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Command Prompt&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+        <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+            <span class="hljs-string">&quot;$&#123;env:windir&#125;\\Sysnative\\cmd.exe&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-string">&quot;$&#123;env:windir&#125;\\System32\\cmd.exe&quot;</span>
+        <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;terminal-cmd&quot;</span>
+    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Git Bash&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+        <span class="hljs-attr">&quot;source&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Git Bash&quot;</span>
+    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;MSYS2(URCT64)&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+        <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+            <span class="hljs-string">&quot;$&#123;env:windir&#125;\\Sysnative\\cmd.exe&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-string">&quot;$&#123;env:windir&#125;\\System32\\cmd.exe&quot;</span>
+        <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+            <span class="hljs-string">&quot;/c&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-string">&quot;C:/msys64/msys2_shell.cmd -defterm -here -no-start -ucrt64&quot;</span>
+        <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;terminal-bash&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;terminal.ansiRed&quot;</span>
+    <span class="hljs-punctuation">&#125;</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+<p>咱使用 UCRT64 环境，同时为了显示出某些 icons 啥的，需要使用 nerdfonts 字体，所以咱设置一下终端所使用的字体：</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-attr">&quot;terminal.integrated.fontFamily&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&#x27;mononoki NFM&#x27;, &#x27;微软雅黑&#x27;&quot;</span></code></pre></div>
+
+<p>同时也方便直接对 VS code 所打开项目进行某些命令行操作呢，还需要<strong>设置一下终端打开时所处于的路径</strong>：</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-attr">&quot;terminal.integrated.defaultLocation&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;editor&quot;</span></code></pre></div>
+
+<p>哦。还需要设置一下默认终端：</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-attr">&quot;terminal.integrated.defaultProfile.windows&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;MSYS2(URCT64)&quot;</span></code></pre></div>
+
+<p>暂且这样。</p>
+<h3 id="6）-zshrc-文件配置"><a href="#6）-zshrc-文件配置" class="headerlink" title="6）.zshrc 文件配置"></a>6）.zshrc 文件配置</h3><p>主要记录一下环境变量的设置，以及命令别名设置，直接上文件：</p>
+<div class="code-wrapper"><pre><code class="hljs .zshrc"># Environment Variable
+# export ALL_PROXY=http://127.0.0.1:10809
+# export PATH=&quot;$PATH:/home/&#123;UserName&#125;/.local/share/gem/ruby/3.1.0/bin&quot;
+export PATH=&quot;$PATH:/c/Users/&#123;UserName&#125;/.cargo/bin&quot;
+export PATH=&quot;$PATH:/c/Program Files (x86)/Microsoft VS Code/bin&quot;
+export PATH=&quot;$PATH:/c/Android/platform-tools&quot;
+export PATH=&quot;$PATH:/c/Users/&#123;UserName&#125;/scoop/apps/scrcpy/current&quot;
+export PATH=&quot;$PATH:/c/Program Files/nodejs&quot;
+export PATH=&quot;$PATH:/c/Users/&#123;UserName&#125;/AppData/Roaming/npm&quot;
+# export PATH=&quot;$PATH:/ucrt64/lib/node_modules&quot;
+# export PATH=&quot;$PATH:/ucrt64/lib/node_modules/yarn/bin&quot;
+
+# Aliases
+alias ls=&quot;lsd --config-file /home/&#123;UserName&#125;/.config/lsd/config.yaml&quot;
+alias datetime=&#x27;echo $(date +%F%n%T)&#x27;
+alias path=&#x27;echo $PATH | tr &quot;:&quot; &quot;\n&quot; | sort -u&#x27;
+alias msysenv=&#x27;echo $MSYSTEM&#x27;
+alias zshconfig=&#x27;echo &quot;sourcing ~/.zshrc...&quot; &amp;&amp; source ~/.zshrc&#x27;
+alias all_proxy=&#x27;ALL_PROXY=http://127.0.0.1:10809&#x27;</code></pre></div>
+
+<p>添加了一些常用的环境变量：</p>
+<ul>
+<li>VS code</li>
+<li>adb</li>
+<li>scrcpy</li>
+<li>nodejs</li>
+<li>npm</li>
+</ul>
+<p>等等，这个都在本文中有所描述，基本上就是在自己使用 msys2 的过程中，将觉得有用的东西使用上，并进行记录。</p>
+<h2 id="继续摸鱼"><a href="#继续摸鱼" class="headerlink" title="继续摸鱼"></a>继续摸鱼</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.msys2.org/">MSYS2</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.msys2.org/docs/package-naming/">Package Naming | MSYS2</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.msys2.org/docs/environments/">Environments | MSYS2</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/46473196/installing-nodejs-and-npm-on-msys2">Installing nodejs and npm on MSYS2 | stack<strong>overflow</strong></a><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>环境变量 <code>MSYSTEM</code>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>环境变量 <code>MINGW_PACKAGE_PREFIX</code>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/MSYS2/">#MSYS2</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Windows10 安装 MSYS2</div>
+      <div>https://muxiner.github.io/windows10-msys2-installation/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Muxiner</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月12日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/yay-instead-pacman/" title="使用 Yay 替换 Pacman 作为更加好使的包管理器">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">使用 Yay 替换 Pacman 作为更加好使的包管理器</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/archlinux-beauty/" title="Arch Linux 系统桌面环境美化记录">
+                        <span class="hidden-mobile">Arch Linux 系统桌面环境美化记录</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"Muxiner/muxiner.github.io","repo-id":"MDEwOlJlcG9zaXRvcnkzMTU5MTM1NzY=","category":"博客文章评论","category-id":"DIC_kwDOEtR1aM4CVjN6","theme-light":"light","theme-dark":"dark","mapping":"title","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

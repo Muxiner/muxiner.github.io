@@ -1,0 +1,1113 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Muxiner">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="实验开始下载 lab1-handout.tar  (可由老师提供，或者在 http:&#x2F;&#x2F;csapp.cs.cmu.edu&#x2F;3e&#x2F;labs.html csapp下载,获取方法是点击实验后面的 Self-Study Handout)，存放在下载目录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机系统基础实验之datalab-handout">
+<meta property="og:url" content="https://muxiner.github.io/datalab-handout/index.html">
+<meta property="og:site_name" content="Muxiner&#39;s Blog">
+<meta property="og:description" content="实验开始下载 lab1-handout.tar  (可由老师提供，或者在 http:&#x2F;&#x2F;csapp.cs.cmu.edu&#x2F;3e&#x2F;labs.html csapp下载,获取方法是点击实验后面的 Self-Study Handout)，存放在下载目录">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s1.ax1x.com/2022/04/06/qvVsYD.png">
+<meta property="article:published_time" content="2020-11-10T12:13:04.000Z">
+<meta property="article:modified_time" content="2022-06-28T15:33:10.000Z">
+<meta property="article:author" content="Muxiner">
+<meta property="article:tag" content="Csapp">
+<meta property="article:tag" content="计算机系统">
+<meta property="article:tag" content="位计算">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s1.ax1x.com/2022/04/06/qvVsYD.png">
+  
+  
+  
+  <title>计算机系统基础实验之datalab-handout - Muxiner&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"muxiner.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":5,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Muxiner&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="计算机系统基础实验之datalab-handout"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Muxiner
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-11-10 20:13" pubdate>
+          2020年11月10日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          74 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">计算机系统基础实验之datalab-handout</h1>
+            
+              <p class="note note-success">
+                
+                  
+                    本文最后更新于：2022年6月28日星期二晚上11点33分
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="实验开始"><a href="#实验开始" class="headerlink" title="实验开始"></a>实验开始</h2><p>下载 <code>lab1-handout.tar</code></p>
+<blockquote>
+<p>(可由老师提供，或者在 <code>http://csapp.cs.cmu.edu/3e/labs.html</code> <a target="_blank" rel="noopener" href="http://csapp.cs.cmu.edu/3e/labs.html">csapp</a>下载,获取方法是点击实验后面的 <code>Self-Study Handout</code>)，存放在下载目录</p>
+</blockquote>
+<span id="more"></span>
+<p>点击左侧 <code>dock</code> 图标，键入 <code>term</code> ，打开终端</p>
+<ul>
+<li><code>cd ~</code>    进入主目录      键入 </li>
+<li><code>ls</code> 查看是否有下载文件</li>
+<li><code>tar vxf lab1-handout.tar</code>   解压代码框架  </li>
+<li><code>cd lab1-handout</code></li>
+<li><code>ls</code>    显示当前目录文件</li>
+<li><code>make</code>   编译生成可执行文件</li>
+<li><code>ls</code>  看看多了几个文件</li>
+<li><code>./btest</code> 试试运行</li>
+</ul>
+<p>本实验是默认在 32 位机上进行测试。</p>
+<h2 id="实验分析"><a href="#实验分析" class="headerlink" title="实验分析"></a>实验分析</h2><h3 id="1-bitBor函数"><a href="#1-bitBor函数" class="headerlink" title="1. bitBor函数"></a>1. bitBor函数</h3><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* </span>
+<span class="hljs-comment"> * bitXor - x^y using only ~ and &amp; </span>
+<span class="hljs-comment"> *   Example: bitXor(4, 5) = 1</span>
+<span class="hljs-comment"> *   Legal ops: ~ &amp;</span>
+<span class="hljs-comment"> *   Max ops: 14</span>
+<span class="hljs-comment"> *   Rating: 1</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">bitXor</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+&#125;</code></pre></div>
+<ul>
+<li>使用 <code>~</code> 和 <code>&amp;</code> 实现 <code>x^y</code></li>
+</ul>
+<p>法1：  </p>
+<ul>
+<li>题意：用 <code>~</code> 和 <code>&amp;</code> 运算符实现 <code>Xor</code> 运算符</li>
+<li>思路：我们知道 <code>Xor</code> 运算符是对每一个位，相同的话返回 <code>0</code> ，不同的话返回 <code>1</code> ，即 <code>((~x)&amp;y)|(x&amp;(~y))</code> 。但不能使用 <code>|</code> 运算，故采用德摩根律将或运算转为与运算。</li>
+</ul>
+<p>法2：</p>
+<ul>
+<li>利用《数字逻辑》的知识：异或运算 德摩根律<blockquote>
+<p>x ^ y &#x3D; (x &amp; ~y) | (~x &amp; y)<br>&#x3D; ~((x &amp; ~y) | (~x &amp; y))<br>&#x3D; ~(~(x &amp; ~y) &amp; ~(~x &amp; y))  D</p>
+</blockquote>
+</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">bitXor</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;
+  <span class="hljs-keyword">return</span> ~(~(x &amp; ~y) &amp; ~(~x &amp; y));
+&#125;</code></pre></div>
+
+<h3 id="2-tmim函数"><a href="#2-tmim函数" class="headerlink" title="2. tmim函数"></a>2. tmim函数</h3><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* </span>
+<span class="hljs-comment"> * tmin - return minimum two&#x27;s complement integer </span>
+<span class="hljs-comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span>
+<span class="hljs-comment"> *   Max ops: 4</span>
+<span class="hljs-comment"> *   Rating: 1</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">tmin</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> &#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+&#125;</code></pre></div>
+<ul>
+<li>题意：输出反码下的最小值</li>
+<li>思路：直接由定义得最小值</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">tmin</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> &#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">31</span>;
+&#125;</code></pre></div>
+<h3 id="3-isTmax函数"><a href="#3-isTmax函数" class="headerlink" title="3. isTmax函数"></a>3. isTmax函数</h3><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/*</span>
+<span class="hljs-comment"> * isTmax - returns 1 if x is the maximum, two&#x27;s complement number,</span>
+<span class="hljs-comment"> *     and 0 otherwise </span>
+<span class="hljs-comment"> *   Legal ops: ! ~ &amp; ^ | +</span>
+<span class="hljs-comment"> *   Max ops: 10</span>
+<span class="hljs-comment"> *   Rating: 1</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">isTmax</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+&#125;</code></pre></div>
+<p>判断一个数是否为有符号数的最大值 <code>Tmax</code> ，即  </p>
+<blockquote>
+<p>0x7FFFFFFF   16进制<br>2147483647   10进制<br>0111 1111 1111 1111 1111 1111 1111 1111    2进制(32位系统)</p>
+</blockquote>
+<blockquote>
+<p>Tmax满足:  Tmax &#x3D; ~(Tmax + 1)    Tmax ^ (~(Tmax + 1)) &#x3D; 0<br><code>0xFFFFFFFF</code> 也满足上述关系，但 <code>0xFFFFFFFF + 1</code> 为 <code>0</code>, 所以要排除这种情况。  </p>
+</blockquote>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">inTmax</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;
+    <span class="hljs-keyword">return</span> !(x ^ ~(x + <span class="hljs-number">1</span>)) &amp; !!(x + <span class="hljs-number">1</span>); 
+&#125;</code></pre></div>
+
+<h3 id="4-allOddBits函数"><a href="#4-allOddBits函数" class="headerlink" title="4. allOddBits函数"></a>4. allOddBits函数</h3><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* </span>
+<span class="hljs-comment"> * allOddBits - return 1 if all odd-numbered bits in word set to 1</span>
+<span class="hljs-comment"> *   where bits are numbered from 0 (least significant) to 31 (most significant)</span>
+<span class="hljs-comment"> *   Examples allOddBits(0xFFFFFFFD) = 0, allOddBits(0xAAAAAAAA) = 1</span>
+<span class="hljs-comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span>
+<span class="hljs-comment"> *   Max ops: 12</span>
+<span class="hljs-comment"> *   Rating: 2</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">allOddBits</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+&#125;</code></pre></div>
+<p>判断一个二进制数奇数位是否全为 <code>1</code><br>思路:<br>若 <code>x</code> 奇数位全为 <code>1</code>，则 <code>~x</code> 的奇数位全为 <code>0</code> ，则 <code>~x &amp; 0xaaaaaaaa</code> 使得全部为 <code>0</code>。</p>
+<div class="code-wrapper"><pre><code class="hljs arduino"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">allOddBits</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;
+  <span class="hljs-keyword">return</span> !(~x &amp; <span class="hljs-number">0xaaaaaaaa</span>);
+&#125;</code></pre></div>
+
+<h3 id="5-negate函数"><a href="#5-negate函数" class="headerlink" title="5. negate函数"></a>5. negate函数</h3><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* </span>
+<span class="hljs-comment"> * negate - return -x </span>
+<span class="hljs-comment"> *   Example: negate(1) = -1.</span>
+<span class="hljs-comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span>
+<span class="hljs-comment"> *   Max ops: 5</span>
+<span class="hljs-comment"> *   Rating: 2</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">negate</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+&#125;</code></pre></div>
+
+<p>求一个数的相反数。<br>思路: <code>-x = ~x + 1</code>  (取反加一)</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">negate</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;
+  <span class="hljs-keyword">return</span> ~x + <span class="hljs-number">1</span>;
+&#125;</code></pre></div>
+
+<h3 id="6-isAsciiDigit函数"><a href="#6-isAsciiDigit函数" class="headerlink" title="6. isAsciiDigit函数"></a>6. isAsciiDigit函数</h3><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* </span>
+<span class="hljs-comment"> * isAsciiDigit - return 1 if 0x30 &lt;= x &lt;= 0x39 (ASCII codes for characters &#x27;0&#x27; to &#x27;9&#x27;)</span>
+<span class="hljs-comment"> *   Example: isAsciiDigit(0x35) = 1.</span>
+<span class="hljs-comment"> *            isAsciiDigit(0x3a) = 0.</span>
+<span class="hljs-comment"> *            isAsciiDigit(0x05) = 0.</span>
+<span class="hljs-comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span>
+<span class="hljs-comment"> *   Max ops: 15</span>
+<span class="hljs-comment"> *   Rating: 3</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">isAsciiDigit</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+&#125;</code></pre></div>
+<p>判断一个数字是否在 <code>0x30</code> 到 <code>0x39</code> 范围之内。<br>思路:<br>判断差值是否大于等于 <code>x - y &gt;= 0</code> 即 <code>取符号位且取逻辑反</code>  </p>
+<blockquote>
+<p>!(x + (<del>y + 1) &gt;&gt; 31)<br>x + (</del>y + 1) &gt;&gt; 31   取符号位</p>
+</blockquote>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">isAsciiDigit</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;
+  <span class="hljs-keyword">return</span> !(x + (~<span class="hljs-number">0x30</span> + <span class="hljs-number">1</span>) &gt;&gt; <span class="hljs-number">31</span>) &amp; !(<span class="hljs-number">0x39</span> + (~x + <span class="hljs-number">1</span>) &gt;&gt; <span class="hljs-number">31</span>);
+&#125;</code></pre></div>
+
+<h3 id="7-conditional函数"><a href="#7-conditional函数" class="headerlink" title="7. conditional函数"></a>7. conditional函数</h3><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* </span>
+<span class="hljs-comment"> * conditional - same as x ? y : z </span>
+<span class="hljs-comment"> *   Example: conditional(2,4,5) = 4</span>
+<span class="hljs-comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span>
+<span class="hljs-comment"> *   Max ops: 16</span>
+<span class="hljs-comment"> *   Rating: 3</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">conditional</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> z)</span> &#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+&#125;</code></pre></div>
+
+<p>题意：实现一个三目运算符 <code>x ? y : z</code><br>思路：用 <code>!</code> 判断 <code>x</code> 的真假；<code>x ? y : z</code> 的关系转换为 <code>(a &amp; y) | (b &amp; z)</code> ，当 <code>x</code> 为 <code>0</code> 时，<code>a</code> 为 <code>0x0</code> ，<code>b</code> 为 <code>0xffffffff</code> ；当 <code>x</code> 非零时，<code>a</code> 为<code>0xffffffff</code> , <code>b</code> 为 <code>0x0</code> 。即  </p>
+<blockquote>
+<p>0x0 &amp; 0xaaa &#x3D; 0<br>0xffffffff &amp; 0xaaa &#x3D; 0xaaa   </p>
+</blockquote>
+<p>所以得使得 <code>a = !x + 0xffffffff</code> , <code>b = !!x + 0xffffffff</code> ，这样 <code>a</code> <code>b</code> 就会要么是 <code>0x0</code> <code>0xffffffff</code>。  </p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">conditional</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> z)</span> &#123;
+  <span class="hljs-keyword">return</span> ((!x + <span class="hljs-number">0xffffffff</span>)&amp; y) | (z &amp; (!!x + <span class="hljs-number">0xffffffff</span>));
+&#125;</code></pre></div>
+
+<h3 id="8-isLessOrEqual函数"><a href="#8-isLessOrEqual函数" class="headerlink" title="8. isLessOrEqual函数"></a>8. isLessOrEqual函数</h3><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* </span>
+<span class="hljs-comment"> * isLessOrEqual - if x &lt;= y  then return 1, else return 0 </span>
+<span class="hljs-comment"> *   Example: isLessOrEqual(4,5) = 1.</span>
+<span class="hljs-comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span>
+<span class="hljs-comment"> *   Max ops: 24</span>
+<span class="hljs-comment"> *   Rating: 3</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">isLessOrEqual</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+&#125;</code></pre></div>
+
+<p>题意：若 <code>x &lt;= y</code> ，则返回 <code>1</code> ，反之返回 <code>0</code>。<br>思路：直接用 <code>y-x</code> 可能会超出 <code>int</code> 的表示范围，故而：</p>
+<blockquote>
+<p>1.在x与y同号的情况下转换为p&#x3D;y-x&gt;&#x3D;0，然后对p符号位进行(p&gt;&gt;31)&amp;1操作，符号位为0则返回1，符号位1则返回0；<br>2.x，y异号时，只要x&gt;&#x3D;0，就要返回0，否则返回1，由(x&gt;&gt;31)&amp;1能达到该效果；<br>3.c&#x3D;a+b可作为x，y同号异号的判断。</p>
+</blockquote>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">isLessOrEqual</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;
+  <span class="hljs-type">int</span> sign_bit_x = x &gt;&gt; <span class="hljs-number">31</span>;
+  <span class="hljs-type">int</span> sign_bit_y = y &gt;&gt; <span class="hljs-number">31</span>;
+  <span class="hljs-type">int</span> sign_bit_xy = sign_bit_x + sign_bit_y;
+  <span class="hljs-type">int</span> sign_bit_subyx = ((y + ~x + <span class="hljs-number">1</span>) &gt;&gt; <span class="hljs-number">31</span>) &amp; <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">return</span> (sign_bit_xy &amp; (sign_bit_x &amp; <span class="hljs-number">1</span>)) | ((~sign_bit_xy) &amp; !sign_bit_subyx);
+&#125;</code></pre></div>
+
+<h3 id="9-logicalNeg函数"><a href="#9-logicalNeg函数" class="headerlink" title="9. logicalNeg函数"></a>9. logicalNeg函数</h3><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* </span>
+<span class="hljs-comment"> * logicalNeg - implement the ! operator, using all of </span>
+<span class="hljs-comment"> *              the legal operators except !</span>
+<span class="hljs-comment"> *   Examples: logicalNeg(3) = 0, logicalNeg(0) = 1</span>
+<span class="hljs-comment"> *   Legal ops: ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span>
+<span class="hljs-comment"> *   Max ops: 12</span>
+<span class="hljs-comment"> *   Rating: 4 </span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">logicalNeg</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+&#125;</code></pre></div>
+
+<p>题意：计算 <code>!x</code> ：当 <code>x = 0</code> 时返回 <code>1</code>；当 <code>x ≠ 0</code> 时返回 <code>0</code>。<br>思路：<code>0</code>和<code>Tmin</code>的补码都是其本身，而其他数的补码则是符号位相反。所以要区别<code>0</code>和<code>Tmin</code>的区别  </p>
+<blockquote>
+<p>0x0000 0000<br>0x8000 0000    </p>
+</blockquote>
+<p>即最高位不同，故用算数右移取符号位判断。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">logicalNeg</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;
+  <span class="hljs-keyword">return</span> ((~x &amp; ~(~x + <span class="hljs-number">1</span>)) &gt;&gt; <span class="hljs-number">31</span>) &amp; <span class="hljs-number">1</span>;
+&#125;</code></pre></div>
+
+<h3 id="10-haoManyBits函数"><a href="#10-haoManyBits函数" class="headerlink" title="10. haoManyBits函数"></a>10. haoManyBits函数</h3><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* howManyBits - return the minimum number of bits required to represent x in</span>
+<span class="hljs-comment"> *             two&#x27;s complement</span>
+<span class="hljs-comment"> *  Examples: howManyBits(12) = 5</span>
+<span class="hljs-comment"> *            howManyBits(298) = 10</span>
+<span class="hljs-comment"> *            howManyBits(-5) = 4</span>
+<span class="hljs-comment"> *            howManyBits(0)  = 1</span>
+<span class="hljs-comment"> *            howManyBits(-1) = 1</span>
+<span class="hljs-comment"> *            howManyBits(0x80000000) = 32</span>
+<span class="hljs-comment"> *  Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span>
+<span class="hljs-comment"> *  Max ops: 90</span>
+<span class="hljs-comment"> *  Rating: 4</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">howManyBits</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+&#125;</code></pre></div>
+
+<p>题意：  给一个数字x,求出要表示出x需要的最少的位数。  </p>
+<p>思路：  使用二分法。  </p>
+<p> 若<code>x</code>是负数，那么对其取反，因为所需要的位数是一样的。  </p>
+<blockquote>
+<p>即  x &#x3D; (((x &gt;&gt; 31) &amp; <del>x) | ((</del>!(x &gt;&gt; 31) + 1) &amp; x)) </p>
+</blockquote>
+<p>然后是用二分法，先向右位移16位，即<code>half_x = x &gt;&gt; 16</code>，再判断<code>half_x</code>是否为<code>0</code>，即<code>!!half_x</code>。若为<code>0</code>，则<code>x</code>的最高位数为<code>16</code>；反之，其最低位数为<code>16</code>。依此类推，继续对其右移<code>8</code>、<code>4</code>、<code>2</code>、<code>1</code>位，得到<code>bit8</code>, <code>bit4</code>, <code>bit2</code>, <code>bit1</code>,分别表示一分为二后其中的一半是否存在，而另一半继续循环直至1，这时还剩下<code>x</code>，最后还需要再加上符号位<code>0</code>。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">howManyBits</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;
+  x = (((x &gt;&gt; <span class="hljs-number">31</span>) &amp; ~x) | ((~!(x &gt;&gt; <span class="hljs-number">31</span>) + <span class="hljs-number">1</span>) &amp; x));
+  <span class="hljs-type">int</span> bit16, bit8, bit4, bit2, bit1;
+  <span class="hljs-type">int</span> half_x;
+  
+  half_x = x &gt;&gt; <span class="hljs-number">16</span>;
+  bit16 = !!half_x &lt;&lt; <span class="hljs-number">4</span>;
+  x = x &gt;&gt; bit16;
+
+  half_x = x &gt;&gt; <span class="hljs-number">8</span>;
+  bit8 = !!half_x &lt;&lt; <span class="hljs-number">3</span>;
+  x = x &gt;&gt; bit8;
+
+  half_x = x &gt;&gt; <span class="hljs-number">4</span>;
+  bit4 = !!half_x &lt;&lt; <span class="hljs-number">2</span>;
+  x = x &gt;&gt; bit4;
+
+  half_x = x &gt;&gt; <span class="hljs-number">2</span>;
+  bit2 = !!half_x &lt;&lt; <span class="hljs-number">1</span>;
+  x = x &gt;&gt; bit2;
+
+  half_x = x &gt;&gt; <span class="hljs-number">1</span>;
+  bit1 = !!half_x &lt;&lt; <span class="hljs-number">0</span>;
+  x = x &gt;&gt; bit1;
+  
+  <span class="hljs-keyword">return</span> bit16 + bit8 + bit4 + bit2 + bit1 + <span class="hljs-number">1</span> + x;
+&#125;</code></pre></div>
+
+<h3 id="11-floatScale2函数"><a href="#11-floatScale2函数" class="headerlink" title="11. floatScale2函数"></a>11. floatScale2函数</h3><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">//float</span>
+<span class="hljs-comment">/* </span>
+<span class="hljs-comment"> * floatScale2 - Return bit-level equivalent of expression 2*f for</span>
+<span class="hljs-comment"> *   floating point argument f.</span>
+<span class="hljs-comment"> *   Both the argument and result are passed as unsigned int&#x27;s, but</span>
+<span class="hljs-comment"> *   they are to be interpreted as the bit-level representation of</span>
+<span class="hljs-comment"> *   single-precision floating point values.</span>
+<span class="hljs-comment"> *   When argument is NaN, return argument</span>
+<span class="hljs-comment"> *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while</span>
+<span class="hljs-comment"> *   Max ops: 30</span>
+<span class="hljs-comment"> *   Rating: 4</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">unsigned</span> <span class="hljs-title function_">floatScale2</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> uf)</span> &#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;  
+&#125;</code></pre></div>
+<p>题意：  给出一个无符号整数<code>x</code>，将其看作一个浮点数，返回此数的两倍<code>x*2</code>。<br>思路： 取出符号<code>s</code>、阶码<code>exp</code>、尾数<code>frac</code>   </p>
+<blockquote>
+<p>sgn &#x3D; uf &amp; 0x80000000<br>exp &#x3D; uf &amp; 0x7F800000<br>frac &#x3D; uf &amp; 0x007FFFFF  </p>
+</blockquote>
+<p>若<code>exp</code>为0，则是非规格，直接左移。<br>若<code>exp</code>不是<code>0x7F80 0000</code>，即有效，则直接阶码加一。 </p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">unsigned</span> <span class="hljs-title function_">floatScale2</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> uf)</span> &#123;
+  <span class="hljs-type">unsigned</span> f = uf;
+  <span class="hljs-type">unsigned</span> sgn = uf &amp; <span class="hljs-number">0x80000000</span>;<span class="hljs-comment">//符号位</span>
+  <span class="hljs-type">unsigned</span> <span class="hljs-built_in">exp</span> = uf &amp; <span class="hljs-number">0x7F800000</span>;<span class="hljs-comment">//阶码</span>
+  <span class="hljs-type">unsigned</span> frac = uf &amp; <span class="hljs-number">0x007FFFFF</span>;<span class="hljs-comment">//位数</span>
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exp</span> == <span class="hljs-number">0</span>)  
+    f = (frac &lt;&lt; <span class="hljs-number">1</span>) | sgn;
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exp</span> != <span class="hljs-number">0x7F800000</span>) 
+     f = f + <span class="hljs-number">0x00800000</span>;<span class="hljs-comment">//阶码+1</span>
+  <span class="hljs-keyword">return</span> f;   
+&#125;</code></pre></div>
+
+<h3 id="12-floatFloat2Int函数"><a href="#12-floatFloat2Int函数" class="headerlink" title="12. floatFloat2Int函数"></a>12. floatFloat2Int函数</h3><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* </span>
+<span class="hljs-comment"> * floatFloat2Int - Return bit-level equivalent of expression (int) f</span>
+<span class="hljs-comment"> *   for floating point argument f.</span>
+<span class="hljs-comment"> *   Argument is passed as unsigned int, but</span>
+<span class="hljs-comment"> *   it is to be interpreted as the bit-level representation of a</span>
+<span class="hljs-comment"> *   single-precision floating point value.</span>
+<span class="hljs-comment"> *   Anything out of range (including NaN and infinity) should return</span>
+<span class="hljs-comment"> *   0x80000000u.</span>
+<span class="hljs-comment"> *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while</span>
+<span class="hljs-comment"> *   Max ops: 30</span>
+<span class="hljs-comment"> *   Rating: 4</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">floatFloat2Int</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> uf)</span> &#123;
+ <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+&#125;</code></pre></div>
+
+<p>题意：给出一个无符号整数x，将其看作一个浮点数，实现一个(int)x的功能。  </p>
+<p>思路：</p>
+<p>主要是思考上下界溢出的问题。</p>
+<p>下界溢出的临界是<code>bin(x) = 0 0111 1111 0000 0000 0000 0000 0000 000</code>，此时<code>s = 0</code>，<code>exp = 127</code>，<code>frac = 0</code>。表示的数字刚好是<code>1.0</code>。小于这个数直接返回<code>0</code>。</p>
+<p>上界溢出的条件是<code>bin(x) = 0 1001 1101 0000 0000 0000 0000 0000 000</code>，此时<code>s = 0</code>，<code>exp = 127 + 31</code>，<code>frac = 0</code>。表示的数是<code>1.0*2**32</code>，也就是<code>TMax</code>，大于这个数就直接返回<code>TMax</code>。</p>
+<p>其他数字考虑<code>exp = 127 + 23</code>这个临界。如果大于这个数，需要将<code>frac</code>右移。如果小于这个数，需要将<code>frac</code>左移。   </p>
+<p>法一：</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">floatFloat2Int</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> uf)</span>
+&#123;
+  <span class="hljs-type">int</span> s = (uf &gt;&gt; <span class="hljs-number">31</span>) &amp; <span class="hljs-number">1</span>;
+  <span class="hljs-type">int</span> <span class="hljs-built_in">exp</span> = ((uf &gt;&gt; <span class="hljs-number">23</span>) &amp; <span class="hljs-number">0xFF</span>) - <span class="hljs-number">127</span>; <span class="hljs-comment">//exp的真实值</span>
+  <span class="hljs-type">int</span> frac = (uf &amp; <span class="hljs-number">0x007FFFFF</span>) | <span class="hljs-number">0x00800000</span>;
+  <span class="hljs-type">int</span> tar = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">if</span> (s) s = <span class="hljs-number">-1</span>;
+  <span class="hljs-keyword">else</span> s = <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exp</span> &gt; <span class="hljs-number">31</span>)
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0x80000000</span>;
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exp</span> &lt; <span class="hljs-number">0</span>)
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exp</span> &gt; <span class="hljs-number">23</span>)
+    tar = s * (frac &lt;&lt; (<span class="hljs-built_in">exp</span> - <span class="hljs-number">23</span>));
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exp</span> &lt; <span class="hljs-number">23</span>)
+    tar = s * (frac &gt;&gt; (<span class="hljs-number">23</span> - <span class="hljs-built_in">exp</span>));
+  <span class="hljs-keyword">return</span> tar;
+&#125;</code></pre></div>
+
+<p>法二：  </p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">floatFloat2Int</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> uf)</span> 
+&#123;
+    <span class="hljs-type">unsigned</span> INF = <span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">31</span>;   <span class="hljs-comment">// INF = MaxInt+1</span>
+    <span class="hljs-type">int</span> e = (uf&gt;&gt;<span class="hljs-number">23</span>) &amp; <span class="hljs-number">0xff</span>;<span class="hljs-comment">// 阶码</span>
+    <span class="hljs-type">int</span> s = (uf&gt;&gt;<span class="hljs-number">31</span>) &amp; <span class="hljs-number">1</span>;   <span class="hljs-comment">// 符号位</span>
+    <span class="hljs-keyword">if</span> (uf == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    uf &lt;&lt;= <span class="hljs-number">8</span>;       <span class="hljs-comment">// 左移保留至阶码最后1位</span>
+    uf |= <span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">31</span>;    <span class="hljs-comment">// 阶码最后一位设为1</span>
+    uf &gt;&gt;= <span class="hljs-number">8</span>;       <span class="hljs-comment">// 高八位全0</span>
+    e -= <span class="hljs-number">127</span>;       <span class="hljs-comment">// 阶数</span>
+    <span class="hljs-keyword">if</span> ((uf &amp; <span class="hljs-number">0x7f80000</span>) == <span class="hljs-number">0x7f80000</span> || e &gt;= <span class="hljs-number">32</span>)
+        <span class="hljs-keyword">return</span> INF; <span class="hljs-comment">// 超过int范围返回INF</span>
+    <span class="hljs-keyword">if</span> (e &lt; <span class="hljs-number">0</span>) <span class="hljs-comment">// 小数返回0</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span> (e &lt;= <span class="hljs-number">22</span>) <span class="hljs-comment">// 位数小于等于22位，尾数位右移</span>
+        uf &gt;&gt;= <span class="hljs-number">23</span>-e;
+    <span class="hljs-keyword">else</span> 
+        uf &lt;&lt;= e<span class="hljs-number">-23</span>; <span class="hljs-comment">// 尾数大于22位，尾数为左移</span>
+    <span class="hljs-keyword">if</span> (s) 
+        uf = ~uf + <span class="hljs-number">1</span>;<span class="hljs-comment">// 若原uf为负数，则对此处的正数uf取反加1得其相反数</span>
+    <span class="hljs-keyword">return</span> uf;
+&#125;</code></pre></div>
+
+<h3 id="13-floatPower2函数"><a href="#13-floatPower2函数" class="headerlink" title="13. floatPower2函数"></a>13. floatPower2函数</h3><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* </span>
+<span class="hljs-comment"> * floatPower2 - Return bit-level equivalent of the expression 2.0^x</span>
+<span class="hljs-comment"> *   (2.0 raised to the power x) for any 32-bit integer x.</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> *   The unsigned value that is returned should have the identical bit</span>
+<span class="hljs-comment"> *   representation as the single-precision floating-point number 2.0^x.</span>
+<span class="hljs-comment"> *   If the result is too small to be represented as a denorm, return</span>
+<span class="hljs-comment"> *   0. If too large, return +INF.</span>
+<span class="hljs-comment"> * </span>
+<span class="hljs-comment"> *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. Also if, while </span>
+<span class="hljs-comment"> *   Max ops: 30 </span>
+<span class="hljs-comment"> *   Rating: 4</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">unsigned</span> <span class="hljs-title function_">floatPower2</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;
+<span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+&#125;</code></pre></div>
+
+<p>题意：  给出一个无符号整数x，将其看作一个浮点数，返回2**x。   </p>
+<p>思路：  先得到阶码<code>exp = x + 127</code>，然后考虑临界值：  </p>
+<p><code>bin(x) = 0 00000000 00000000000000000000001</code>，此数是<code>2**((-126)+(-23))</code>,<br>即<code>exp = 0</code>时情况；  </p>
+<p><code>bin(x) = 0 00000001 00000000000000000000000</code>，此数是<code>2**(-126)</code>，<br>即<code>exp = 23</code>时情况；</p>
+<p><code>bin(x) = 0 11111111 00000000000000000000000</code> ，此数是<code>2**(128)</code>，<br>即<code>exp = 255</code>时情况。</p>
+<p>代码一：</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">unsigned</span> <span class="hljs-title function_">floatPower2</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;
+  <span class="hljs-type">int</span> <span class="hljs-built_in">exp</span> = x + <span class="hljs-number">0x7f</span>;                          <span class="hljs-comment">// x + 127</span>
+
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exp</span> &lt; <span class="hljs-number">0</span>) 
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">exp</span> &lt; <span class="hljs-number">0xff</span> ? <span class="hljs-built_in">exp</span> &lt;&lt; <span class="hljs-number">23</span> : <span class="hljs-number">0x7f800000</span>;  <span class="hljs-comment">//0xff = 255</span>
+&#125;</code></pre></div>
+
+<p>代码二：</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">unsigned</span> <span class="hljs-title function_">floatPower2</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;
+    <span class="hljs-type">unsigned</span> INF = <span class="hljs-number">0xff</span> &lt;&lt; <span class="hljs-number">23</span>; <span class="hljs-comment">// 阶码全1</span>
+    <span class="hljs-type">int</span> e = <span class="hljs-number">127</span> + x;    <span class="hljs-comment">// 得到阶码</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exp</span> &lt; <span class="hljs-number">0</span>) <span class="hljs-comment">// 阶数小于0直接返回0</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span> (e &gt;= <span class="hljs-number">255</span>) <span class="hljs-comment">// 阶码&gt;=255直接返回INF</span>
+        <span class="hljs-keyword">return</span> INF;
+    <span class="hljs-keyword">return</span> e &lt;&lt; <span class="hljs-number">23</span>;
+    <span class="hljs-comment">// 直接将阶码左移23位，尾数全0，规格化时尾数隐藏有1个1作为底数</span>
+&#125;</code></pre></div>
+
+
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><a target="_blank" rel="noopener" href="https://imgtu.com/i/qvVsYD"><img src="https://s1.ax1x.com/2022/04/06/qvVsYD.png" srcset="/img/loading.gif" lazyload alt="qvVsYD.png"></a></p>
+<h2 id="实验总结"><a href="#实验总结" class="headerlink" title="实验总结"></a>实验总结</h2><p>不愧是计算机系统的实验，实验内容和系统基础知识紧密联系，所接触到的不再是10进制数的计算，而是二进制及其反码补码，十六进制的计算，也不再仅仅是算术运算而更多的是逻辑、位的运算。由于知识储备的限制，一开始进行试验的时候实在是无从下手，思路上也受到了极大的限制，加之对于反码补码、有符号数无符号数、逻辑运算符、位运算符等等之类掌握的不深切，就觉得实验真的很难，当然本次实验的难度确实很大，实验内容也仅是datalab-handout的一部分，对其研究个八九不离十，十分有利与我对计算机系统学习，同时也要做好学习记录，以便日后回忆。  </p>
+<p>tip：<br>  这篇博客会在后续继续完善（在自己更加明白时），目前内容仅供参考。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" class="category-chain-item">实验记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Csapp/">#Csapp</a>
+      
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">#计算机系统</a>
+      
+        <a href="/tags/%E4%BD%8D%E8%AE%A1%E7%AE%97/">#位计算</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>计算机系统基础实验之datalab-handout</div>
+      <div>https://muxiner.github.io/datalab-handout/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Muxiner</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年11月10日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/git-password/" title="git push 不用每次输入用户名和密码">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">git push 不用每次输入用户名和密码</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"Muxiner/muxiner.github.io","repo-id":"MDEwOlJlcG9zaXRvcnkzMTU5MTM1NzY=","category":"博客文章评论","category-id":"DIC_kwDOEtR1aM4CVjN6","theme-light":"light","theme-dark":"dark","mapping":"title","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,920 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Muxiner">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Ubuntu 上安装“终极”终端 —— ZSH，并安装 oh my zsh + powerlevel10k 进行美化。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu 安装 zsh + oh my zsh 美化终端">
+<meta property="og:url" content="https://muxiner.github.io/ubuntu-zsh-ohmyzsh/index.html">
+<meta property="og:site_name" content="Muxiner&#39;s Blog">
+<meta property="og:description" content="Ubuntu 上安装“终极”终端 —— ZSH，并安装 oh my zsh + powerlevel10k 进行美化。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101150411-agnoster.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101150655-half-life.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101150823-jtriley.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101150956-mortalscumbag.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101151132-steeef.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101151412-terminalparty.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101151526-tjkirch.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101151728-ys.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101152215-powerlevel10k.png">
+<meta property="article:published_time" content="2022-11-01T05:58:52.000Z">
+<meta property="article:modified_time" content="2023-02-23T17:10:03.000Z">
+<meta property="article:author" content="Muxiner">
+<meta property="article:tag" content="install">
+<meta property="article:tag" content="Ubuntu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101150411-agnoster.png">
+  
+  
+  
+  <title>Ubuntu 安装 zsh + oh my zsh 美化终端 - Muxiner&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"muxiner.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":5,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Muxiner&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Ubuntu 安装 zsh + oh my zsh 美化终端"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Muxiner
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-01 13:58" pubdate>
+          2022年11月1日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          30 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Ubuntu 安装 zsh + oh my zsh 美化终端</h1>
+            
+              <p class="note note-success">
+                
+                  
+                    本文最后更新于：2023年2月24日星期五凌晨1点10分
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>关于 zsh 的一些简单介绍，查看权威介绍：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Z_shell">Z shell | 中文维基百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Zsh_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Zsh | archlinux</a></li>
+</ul>
+<h3 id="install-zsh"><a href="#install-zsh" class="headerlink" title="install zsh"></a>install zsh</h3><p>Ubuntu 安装 zsh 十分简单，只是执行命令即可：</p>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install zsh</code></pre></div>
+
+<blockquote>
+<p>又看到别人教程说还需要切换 zsh 为默认 shell，目前来看是没有必要的。<br>因为安装完 oh my zsh 后，其会自动设置 zsh 为默认终端。</p>
+</blockquote>
+<div class="note note-info">
+            <p>如果手动设置默认 shell：</p><div class="code-wrapper"><pre><code class="hljs arcade">chsh -s <span class="hljs-string">`which zsh`</span></code></pre></div><p>再输入密码，并重启就行。</p>
+          </div>
+
+<h3 id="install-oh-my-zsh"><a href="#install-oh-my-zsh" class="headerlink" title="install oh-my-zsh"></a>install oh-my-zsh</h3><blockquote>
+<p>Oh My Zsh 是一个令人愉快的、开源的、社区驱动的框架，用于管理咱们的 Zsh 配置。<br>它捆绑了数千个有用的功能、助手、插件、主题，以及一些让咱们兴奋的东西……</p>
+</blockquote>
+<ul>
+<li>官网：<a target="_blank" rel="noopener" href="https://ohmyz.sh/">oh my zsh</a></li>
+<li>文档：<a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh/wiki">oh my zsh | github wiki</a></li>
+</ul>
+<p><strong>安装</strong>：</p>
+<blockquote>
+<p>install oh-my-zsh via curl</p>
+</blockquote>
+<div class="code-wrapper"><pre><code class="hljs bash">sh -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>&quot;</span></code></pre></div>
+
+<blockquote>
+<p>install oh-my-zsh via wget</p>
+</blockquote>
+<div class="code-wrapper"><pre><code class="hljs bash">sh -c <span class="hljs-string">&quot;<span class="hljs-subst">$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)</span>&quot;</span></code></pre></div>
+
+<blockquote>
+<p>上述命令会将 oh my zsh 安装在用户目录中，即 <code>/home/username/.oh-my-zsh</code>。是个隐藏文件。</p>
+</blockquote>
+<h3 id="powerlevel10k"><a href="#powerlevel10k" class="headerlink" title="powerlevel10k"></a>powerlevel10k</h3><p>接下来主要是配置 oh my zsh 的主题，其自带的主题还是比较多的，比如：</p>
+<div class="note note-default">
+            <p>在我看来，也就 <code>agnoster</code> 最好看了。所以我将其放在第一位。</p><p>后面的只是我粗看一看，还过得去的。</p><p>罗卜白菜，各有所爱啦。</p>
+          </div>
+<ul>
+<li><p><code>agnoster</code></p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101150411-agnoster.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p><code>half-life</code></p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101150655-half-life.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p><code>jtriley</code></p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101150823-jtriley.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p><code>mortalscumbag</code></p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101150956-mortalscumbag.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p><code>steeef</code></p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101151132-steeef.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p><code>terminalparty</code></p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101151412-terminalparty.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p><code>tjkirch</code></p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101151526-tjkirch.png" srcset="/img/loading.gif" lazyload>  </p>
+</li>
+<li><p><code>ys</code></p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101151728-ys.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+<p>更多主题情况请详见：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh/wiki/Themes">oh my zsh themes | github wiki</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh/wiki/External-themes">oh my zsh External themes | github wiki</a></li>
+</ul>
+<p>除了上述主题外，还有一种非常 freedom 的一种主题 ——  <code>powerlevel10k</code>。</p>
+<blockquote>
+<p>它强调速度、灵活性和开箱即用的体验。<br>It emphasizes speed, flexibility and out-of-the-box experience.</p>
+</blockquote>
+<p>该主题可以自行选择你所喜欢的样式来美化你的 prompt，也就是主题所改变的部分。</p>
+<p>先看看咱的：</p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221101152215-powerlevel10k.png" srcset="/img/loading.gif" lazyload></p>
+<div class="note note-info">
+            <p>就只是简单的选择了自己喜欢的样式。</p><p>该主题还可以添加更多有意思的部分，这个详见：<a target="_blank" rel="noopener" href="https://github.com/romkatv/powerlevel10k">powerlevel10k | github</a></p>
+          </div>
+
+<h3 id="install-powerlevel10k"><a href="#install-powerlevel10k" class="headerlink" title="install powerlevel10k"></a>install powerlevel10k</h3><p>下载仓库：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $&#123;ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom&#125;/themes/powerlevel10k</code></pre></div>
+
+<div class="note note-success">
+            <p>中国大陆用户可以使用 gitee.com 上的官方镜像加速下载.</p><div class="code-wrapper"><pre><code class="hljs zsh">git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git $&#123;ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom&#125;/theme</code></pre></div>
+          </div>
+
+<p>然后修改 <code>.zshrc</code> 文件：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">nano ~/.zshrc</code></pre></div>
+<p>注释 <code>ZSH_THEME</code> 字段，并在下方添加 <code>ZSH_THEME=&quot;powerlevel10k/powerlevel10k&quot;</code>。</p>
+<p>最后执行命令进行设置，仔细阅读选项进行选择即可：</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">p10k configure</code></pre></div>
+
+<h3 id="安装-zsh-插件"><a href="#安装-zsh-插件" class="headerlink" title="安装 zsh 插件"></a>安装 zsh 插件</h3><blockquote>
+<p>看到别人推荐，自己试了确实不错。<br>zsh 插件确实挺多，可以去 wiki 看看：<a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins">zsh Plugins | github wiki</a></p>
+</blockquote>
+<p><del>这里咱就只说俩，<strong>自动补全</strong> + <strong>代码高亮</strong>。</del></p>
+<h4 id="安装自动补全-——-zsh-autosuggestions"><a href="#安装自动补全-——-zsh-autosuggestions" class="headerlink" title="安装自动补全 —— zsh-autosuggestions"></a>安装自动补全 —— <code>zsh-autosuggestions</code></h4><p>先下载到 oh my zsh 插件中</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">git clone https://github.com/zsh-users/zsh-autosuggestions $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-autosuggestions</code></pre></div>
+<p>然后在配置文件 <code>.zshrc</code> 相关位置如下添加：</p>
+<div class="code-wrapper"><pre><code class="hljs txt">plugins=( 
+    # other plugins...
+    zsh-autosuggestions
+)</code></pre></div>
+
+<h4 id="安装代码高亮-——-zsh-syntax-highlighting"><a href="#安装代码高亮-——-zsh-syntax-highlighting" class="headerlink" title="安装代码高亮 —— zsh-syntax-highlighting"></a>安装代码高亮 —— <code>zsh-syntax-highlighting</code></h4><p>还是先下载到 oh my zsh 的插件中</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-syntax-highlighting</code></pre></div>
+<p>然后还是在配置文件 <code>.zshrc</code> 对应位置：</p>
+<div class="code-wrapper"><pre><code class="hljs txt">plugins=( [plugins...] zsh-syntax-highlighting)</code></pre></div>
+
+<h4 id="允许在命令历史记录中搜索子串-——-history-substring-search"><a href="#允许在命令历史记录中搜索子串-——-history-substring-search" class="headerlink" title="允许在命令历史记录中搜索子串 —— history-substring-search"></a>允许在命令历史记录中搜索子串 —— <code>history-substring-search</code></h4><div class="code-wrapper"><pre><code class="hljs zsh">git clone https://github.com/zsh-users/zsh-history-substring-search.git $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/history-substring-search</code></pre></div>
+<p>然后还是在配置文件 <code>.zshrc</code> 对应位置：</p>
+<div class="code-wrapper"><pre><code class="hljs txt">plugins=( [plugins...] history-substring-search)</code></pre></div>
+
+<h4 id="目录导航-——-zsh-navigation-tools"><a href="#目录导航-——-zsh-navigation-tools" class="headerlink" title="目录导航 —— zsh-navigation-tools"></a>目录导航 —— <code>zsh-navigation-tools</code></h4><p>安装 <code>zsh-navigation-tools</code> 可以提供一些在命令行中浏览和编辑不同内容的工具，包括浏览别名、目录、函数、历史记录、进程、环境变量等。</p>
+<p>安装：</p>
+<div class="code-wrapper"><pre><code class="hljs bash">sh -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh)</span>&quot;</span></code></pre></div>
+<p>更新该插件就再运行该指令。</p>
+<div class="note note-info">
+            <p>The tools are:</p><ul><li><p><code>n-aliases</code> - 浏览别名，并将编辑委托给 <code>vared</code></p></li><li><p><code>n-cd</code> - 浏览 <code>dirstack</code> 和已标记的目录，并允许进入所选目录</p></li><li><p><code>n-functions</code> - 浏览函数，并将编辑委托给 <code>zed</code> 或 <code>vared</code></p></li><li><p><code>n-history</code> - 浏览历史记录，并允许编辑和运行其中的命令</p></li><li><p><code>n-kill</code> - 浏览进程列表，并允许向所选进程发送信号</p></li><li><p><code>n-env</code> - 浏览环境，并将编辑委托给 <code>vared</code></p></li><li><p><code>n-options</code> - 浏览选项，并允许切换其状态</p></li><li><p><code>n-panelize</code> - 将给定命令的输出加载到浏览列表中<br>所有工具都支持使用 <code>&lt;</code>, <code>&gt;</code>, <code>{</code>, <code>}</code>, <code>h</code>, <code>l</code> 或<strong>左右光标</strong>进行水平滚动。其他键包括：</p></li><li><p><code>H</code>，<code>?</code>（来自 <code>n-history</code>） - 运行 <code>n-help</code></p></li><li><p><code>Ctrl-R</code> - 启动 <code>n-history</code>，增量、多关键字历史搜索器（<code>Zsh</code> 绑定）</p></li><li><p><code>Ctrl-A</code> - 旋转输入的单词（1+2+3 -&gt; 3+1+2）</p></li><li><p><code>Ctrl-F</code> - 修正模式（近似匹配）</p></li><li><p><code>Ctrl-L</code> - 重新绘制整个显示</p></li><li><p><code>Ctrl-T</code> - 浏览主题（下一个主题）</p></li><li><p><code>Ctrl-G</code> - 浏览主题（上一个主题）</p></li><li><p><code>Ctrl-U</code> - 上半页</p></li><li><p><code>Ctrl-D</code> - 下半页</p></li><li><p><code>Ctrl-P</code> - 上一个元素（也可以使用vim的k）</p></li><li><p><code>Ctrl-N</code> - 下一个元素（也可以使用vim的j）</p></li><li><p><code>[</code>，<code>]</code> - 在  <code>n-cd</code> 中跳转目录书签，在 <code>n-kill</code> 中跳转典型信号</p></li><li><p><code>g</code>，<code>G</code> - 列表的开始和结尾</p></li><li><p><code>/</code> - 显示增量搜索</p></li><li><p><code>F3</code> - 显示&#x2F;隐藏增量搜索</p></li><li><p><code>Esc</code> - 退出增量搜索，并清除过滤器</p></li><li><p><code>Ctrl-W</code>（在增量搜索中） - 删除整个单词</p></li><li><p><code>Ctrl-K</code>（在增量搜索中） - 删除整行</p></li><li><p><code>Ctrl-O</code>，<code>o</code> - 进入唯一模式（无重复行）</p></li><li><p><code>Ctrl-E</code>，<code>e</code> - 编辑私有历史记录（当在私有历史记录视图中时）</p></li><li><p><code>F1</code> - （在 <code>n-history</code> 中） - 切换视图</p></li><li><p><code>F2</code>，<code>Ctrl-X</code>，<code>Ctrl-/</code> - 搜索预定义关键字（在配置文件中定义）</p></li></ul>
+          </div>
+
+<p>结束。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh/">oh my zsh | github</a></li>
+<li><a target="_blank" rel="noopener" href="https://ohmyz.sh/">oh my zsh</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins">oh my zsh Plugins| github wiki</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/romkatv/powerlevel10k">powerlevel10k | github</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-autosuggestions">zsh-autosuggestions | github</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#oh-my-zsh">zsh-autosuggestions install</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-syntax-highlighting">zsh-syntax-highlighting | github</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md">zsh-syntax-highlighting install</a></li>
+<li><a target="_blank" rel="noopener" href="https://matnoble.me/tech/ubuntu/install-zsh/">Ubuntu 安装 Zsh ，配置最强终端</a></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%B0%E5%BD%95/" class="category-chain-item">记录</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%B0%E5%BD%95/Ubuntu/" class="category-chain-item">Ubuntu</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/install/">#install</a>
+      
+        <a href="/tags/Ubuntu/">#Ubuntu</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Ubuntu 安装 zsh + oh my zsh 美化终端</div>
+      <div>https://muxiner.github.io/ubuntu-zsh-ohmyzsh/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Muxiner</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/cygwin-installation/" title="Cygwin 的安装与配置">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Cygwin 的安装与配置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/ubuntu-ustc-sources/" title="Ubuntu 更换中科大软件源">
+                        <span class="hidden-mobile">Ubuntu 更换中科大软件源</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"Muxiner/muxiner.github.io","repo-id":"MDEwOlJlcG9zaXRvcnkzMTU5MTM1NzY=","category":"博客文章评论","category-id":"DIC_kwDOEtR1aM4CVjN6","theme-light":"light","theme-dark":"dark","mapping":"title","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

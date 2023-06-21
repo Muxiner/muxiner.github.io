@@ -1,0 +1,895 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Muxiner">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="在 Windows 10 系统下安装 Cygwin，并进行一下简单的配置。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cygwin 的安装与配置">
+<meta property="og:url" content="https://muxiner.github.io/cygwin-installation/index.html">
+<meta property="og:site_name" content="Muxiner&#39;s Blog">
+<meta property="og:description" content="在 Windows 10 系统下安装 Cygwin，并进行一下简单的配置。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/Pixiv/installing-cygwin.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/Pixiv/apt-cyg-install-nano.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/Pixiv/cygwin-env-path.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/Pixiv/cygwin-installation-final.png">
+<meta property="article:published_time" content="2022-11-13T13:04:57.000Z">
+<meta property="article:modified_time" content="2022-11-13T13:09:10.000Z">
+<meta property="article:author" content="Muxiner">
+<meta property="article:tag" content="install">
+<meta property="article:tag" content="Cygwin">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/Pixiv/installing-cygwin.png">
+  
+  
+  
+  <title>Cygwin 的安装与配置 - Muxiner&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"muxiner.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":5,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Muxiner&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Cygwin 的安装与配置"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Muxiner
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-13 21:04" pubdate>
+          2022年11月13日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          31 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Cygwin 的安装与配置</h1>
+            
+              <p class="note note-success">
+                
+                  
+                    本文最后更新于：2022年11月13日星期日晚上9点09分
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="什么是-Cygwin"><a href="#什么是-Cygwin" class="headerlink" title="什么是 Cygwin"></a>什么是 Cygwin</h2><p>安装之前先简单地介绍一下 <code>Cygwin</code> —— <strong>是一个可原生运行于 Windows 系统上的 POSIX 兼容环境</strong>。</p>
+<blockquote>
+<p><strong>维基百科</strong>：<br>Cygwin 是许多自由软件的集合，最初由 Cygnus Solutions 开发，用于各种版本的 Microsoft Windows 上，运行类 UNIX 系统。Cygwin 的主要目的是通过重新编译，将 POSIX 系统（例如 Linux、BSD，以及其他 Unix 系统）上的软件移植到 Windows 上。</p>
+</blockquote>
+<p>不多比比，直接开整。</p>
+<h2 id="安装-cygwin"><a href="#安装-cygwin" class="headerlink" title="安装 cygwin"></a>安装 cygwin</h2><h3 id="下载-cygwin-安装包"><a href="#下载-cygwin-安装包" class="headerlink" title="下载 cygwin 安装包"></a>下载 cygwin 安装包</h3><p>官网指路：<a target="_blank" rel="noopener" href="https://cygwin.com/">Cygwin - Get the Linux feeling on Windows</a>.</p>
+<p>进入官网后，找到下方一 <code>Installing Cygwin</code> 的地方，点击下方黑体加粗后的链接 - <a target="_blank" rel="noopener" href="https://cygwin.com/setup-x86_64.exe">setup-x86_64.exe</a>.</p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/Pixiv/installing-cygwin.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>图省事直接点击咱这个 setup-x86_64.exe 就行。</p>
+</blockquote>
+<div class="note note-info">
+            <p>Use the setup program to perform a <strong>fresh install</strong> or to <strong>update</strong> an existing installation.</p><p>当你安装了 Cygwin 后，还可以使用该安装程序进行<strong>更新</strong>和<strong>重新安装</strong>。非常的好用。</p>
+          </div>
+
+<h3 id="开始安装-cygwin"><a href="#开始安装-cygwin" class="headerlink" title="开始安装 cygwin"></a>开始安装 cygwin</h3><p>点击下载好的 <a target="_blank" rel="noopener" href="https://cygwin.com/setup-x86_64.exe">setup-x86_64.exe</a>.</p>
+<blockquote>
+<p>没有下载还可以再点击一下上述链接，开始下载，完成后开始点击，进行安装。</p>
+</blockquote>
+<p>进入安装界面后，仔细看界面内容进行修改或者是下一步，如：</p>
+<ul>
+<li>选择<strong>根目录</strong>，如 <code>C:\cygwin64</code>.</li>
+<li>选择<strong>本地包目录</strong>，如 <code>C:\xxxxx\cygwin_download</code>，自定义的。</li>
+<li>设置<strong>网络连接</strong>，如 <code>系统代理</code>。</li>
+<li>选择<strong>下载站点</strong>，如 <code>https://mirrors.ustc.edu.cn</code>.</li>
+<li>选择<strong>需要下载或是更新的包</strong>，自行研究。</li>
+</ul>
+<p>然后还是下一步安装或是更新 cygwin，直至完成。</p>
+<h2 id="配置-Cygwin"><a href="#配置-Cygwin" class="headerlink" title="配置 Cygwin"></a>配置 Cygwin</h2><h3 id="安装命令行软件包管理器-apt-cyg"><a href="#安装命令行软件包管理器-apt-cyg" class="headerlink" title="安装命令行软件包管理器 apt-cyg"></a>安装命令行软件包管理器 apt-cyg</h3><h4 id="简单介绍-apt-cyg"><a href="#简单介绍-apt-cyg" class="headerlink" title="简单介绍 apt-cyg"></a>简单介绍 apt-cyg</h4><p><code>apt-cyg</code> 是类似与 <code>apt-get</code>、<code>apt</code>、<code>yum</code>、<code>pacman</code> 等著名命令行包管理器的命令行包管理器，在 <code>Cygwin</code> 下使用。</p>
+<p>Github 上托管了 n 种 shell 语言版的 apt-cyg —— <a target="_blank" rel="noopener" href="https://github.com/search?l=Shell&q=apt-cyg&type=Repositories">Search apt-cyg | github</a>.</p>
+<p>咱们要使用的是搜索结果排行第一的 <a target="_blank" rel="noopener" href="https://github.com/transcode-open/apt-cyg">transcode-open&#x2F;apt-cyg</a>。</p>
+<blockquote>
+<p>其遵循 MIT 开源协议发布，2016 年发布 v1 版本后便再未更新过。<br>它其实就是一个 Shell 脚本，帮助用户查找、安装、卸载软件包，还可以根据文件名称反向查找所属的软件包。</p>
+</blockquote>
+<h4 id="安装-apt-cyg"><a href="#安装-apt-cyg" class="headerlink" title="安装 apt-cyg"></a>安装 apt-cyg</h4><p>项目推荐的安装步骤：</p>
+<ol>
+<li><p>下载安装包</p>
+ <div class="code-wrapper"><pre><code class="hljs bash">lynx -<span class="hljs-built_in">source</span> rawgit.com/transcode-open/apt-cyg/master/apt-cyg &gt; apt-cyg</code></pre></div>
+ <div class="note note-warning">
+            <p>如果上述命令无法完成下载，则直接使用 <code>git clone</code> 进行拉去项目：</p><div class="code-wrapper"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/transcode-open/apt-cyg.git apt-cyg</code></pre></div>
+          </div></li>
+<li><p>安装</p>
+ <div class="code-wrapper"><pre><code class="hljs bash">install apt-cyg /bin</code></pre></div>
+ <div class="note note-warning">
+            <p>如果使用 <code>git clone</code> 下载，则需要先进入 <code>apt-cyg</code> 文件夹在进行安装：</p><div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> apt-cyg
+install apt-cyg /bin</code></pre></div>
+          </div></li>
+</ol>
+<div class="note note-success">
+            <p>使用 <a target="_blank" rel="noopener" href="https://silaoa.github.io/2019/2019-05-25-Cygwin%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AB%EF%BC%89%EF%BC%9A%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8apt-cyg.html#0x01-%E5%AE%89%E8%A3%85apt-cyg">Cygwin系列（八）：命令行软件包管理器apt-cyg | silaoa.github.io</a> 内容解释上述命令：</p><p>第 1 行是使用 <code>lynx</code> 命令将 <code>apt-cyg</code> 脚本从网站下载保存至当前目录的 <code>apt-cyg</code> 文件。<br>第 2 行是使用 <code>install</code> 命令将 <code>apt-cyg</code> 文件安装至 <code>/bin</code> 目录下，这一步其实包含了两个动作：</p><ul><li>将 <code>apt-cyg</code> 文件复制到 <code>/bin</code> 目录</li><li>增加 <code>/bin/apt-cyg</code> 文件可执行权限，这样用户可以在任意位置使用 <code>apt-cyg</code> 命令</li></ul><p>也可以手工的方式用浏览器下载 <code>apt-cyg</code> 脚本至本地，通过 <code>cp</code> 命令复制到 <code>/bin</code> 目录，再通过 <code>chmod</code> 命令增加 <code>/bin/apt-cyg</code> 文件可执行权限。</p><p><code>apt-cyg</code> 运行过程中依赖 <code>bash</code>、<code>tar</code>、<code>wget</code>、<code>bzip2</code>、<code>gawk</code>、<code>xz</code> 软件包中的命令来完成文件下载、文本分析、压缩&#x2F;解压等基本功能，需要先在 <code>Cygwin</code> 中安装好这些软件包。</p><p>其中，<code>bash</code>、<code>tar</code>、<code>wget</code>、<code>gawk</code> 属于 <code>Base</code> 类，在安装最小系统时已包含；<code>bzip2</code>、<code>xz</code> 属于 <code>Archive</code>类，需要通过 <code>setup</code> 先装上，确保后续运行 <code>apt-cyg</code> 不出错。</p><blockquote><p>突然发现了盲点，我光安装了 <code>apt-cyg</code> 没有安装 <code>bzip2</code>、<code>xz</code>，不过问题不大，再走一遍 <code>setup-x86_64.exe</code> 就行了。</p></blockquote><blockquote><p>突然又发现了盲点，上述的几个包都已经安装了，不需要再额外安装。</p></blockquote>
+          </div>
+
+<p>安装后可以使用 <code>apt-cyg install nano</code> 命令安装一个 <code>nano</code> 编辑器检测 apt-cyg 是否安装成功：<br><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/Pixiv/apt-cyg-install-nano.png" srcset="/img/loading.gif" lazyload></p>
+<div class="note note-info">
+            <p>关于 apt-cyg 的使用可见大佬 <strong>silaoA</strong> 的一篇博客，嗯，还是上述那篇 —— <a target="_blank" rel="noopener" href="https://silaoa.github.io/2019/2019-05-25-Cygwin%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AB%EF%BC%89%EF%BC%9A%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8apt-cyg.html#0x02-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8">Cygwin系列（八）：命令行软件包管理器apt-cyg | silaoa.github.io</a>.</p>
+          </div>
+
+<h3 id="添加环境变量"><a href="#添加环境变量" class="headerlink" title="添加环境变量"></a>添加环境变量</h3><p><strong>为能够在 Windows 环境下的命令行工具直接使用 linux 命令行命令，需在在系统环境变量的 <code>path</code> 中添加三条路径：</strong></p>
+<ol>
+<li><p><code>C:\cygwin64\bin</code></p>
+<p><code>bin</code> 为 <code>binary</code> 的简写，包含基本的用户命令，可被所有用户使用。包含能够同时被用户和系统管理员使用的命令（二进制程序），并且可以在不挂载任何其它文件系统的情况下使用。</p>
+</li>
+<li><p><code>C:\cygwin64\sbin</code></p>
+<p>存放系统管理员以及其他需要 <code>root</code> 权限来运行的工具。</p>
+</li>
+<li><p><code>C:\cygwin64\usr\local\bin</code></p>
+<p>本地站点用户使用的二进制程序文件。</p>
+</li>
+</ol>
+<p>结果如图：</p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/Pixiv/cygwin-env-path.png" srcset="/img/loading.gif" lazyload></p>
+<div class="note note-info">
+            <p>就是将 cygwin 中的<strong>用户可执行文件的目录</strong>以及<strong>系统可执行文件的目录</strong>加入到 Windows 系统环境变量中，以便于 Windows 下的命令行工具调用 cygwin 中的可执行文件，从而在 Windows 下使用 linux 一部分的命令行命令。</p><ul><li>用户可执行文件：<code>/bin</code>、<code>/usr/bin</code>、<code>/usr/local/bin</code>.</li><li>系统可执行文件：<code>/sbin</code>、<code>/usr/sbin</code>、<code>/usr/local/sbin</code>.</li></ul>
+          </div>
+
+<div class="note note-primary">
+            <p>快捷打开 Windows 环境变量设置的方法：</p><ol><li><code>Win + R</code> 打开<strong>运行</strong></li><li>输入 <code>systempropertiesadvanced</code>，进入<strong>系统属性</strong>界面</li><li>点击下方<strong>环境变量</strong>，进入环境变量设置</li></ol><p>怎么说，就很快。</p>
+          </div>
+
+
+<h2 id="使用-zsh-和-oh-my-zsh-进行美化"><a href="#使用-zsh-和-oh-my-zsh-进行美化" class="headerlink" title="使用 zsh 和 oh my zsh 进行美化"></a>使用 zsh 和 oh my zsh 进行美化</h2><p>方法与<a href="https://muxiner.github.io/2022/11/01/ubuntu-zsh-ohmyzsh/">Ubuntu 安装 zsh + oh my zsh 美化终端</a>殊途同归:</p>
+<h3 id="安装-zsh"><a href="#安装-zsh" class="headerlink" title="安装 zsh"></a>安装 zsh</h3><div class="code-wrapper"><pre><code class="hljs bash">apt-cyg install zsh</code></pre></div>
+
+<h3 id="安装-oh-my-zsh"><a href="#安装-oh-my-zsh" class="headerlink" title="安装 oh my zsh"></a>安装 oh my zsh</h3><p>两个命令二选一：</p>
+<div class="code-wrapper"><pre><code class="hljs bash">sh -c <span class="hljs-string">&quot;<span class="hljs-subst">$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)</span>&quot;</span>
+
+sh -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>&quot;</span></code></pre></div>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><div class="code-wrapper"><pre><code class="hljs bash">nano ~/.bashrc</code></pre></div>
+<p>在最后加入 <code>exec zsh</code>。</p>
+<h3 id="修改-oh-my-zsh-主题"><a href="#修改-oh-my-zsh-主题" class="headerlink" title="修改 oh my zsh 主题"></a>修改 oh my zsh 主题</h3><div class="code-wrapper"><pre><code class="hljs bash">nano ~/.zshrc</code></pre></div>
+<p>找到 <code>ZSH_THEME</code> 字段，修改引号内内容为 <code>robbyrussell</code>.</p>
+<h3 id="生效配置"><a href="#生效配置" class="headerlink" title="生效配置"></a>生效配置</h3><p>输入命令使配置生效：</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">exec</span> zsh</code></pre></div>
+
+<div class="note note-default">
+            <p>如果还需要安装 zsh 插件，可见 <a href="https://muxiner.github.io/2022/11/01/ubuntu-zsh-ohmyzsh/#%E5%AE%89%E8%A3%85-zsh-%E6%8F%92%E4%BB%B6">Ubuntu 安装 zsh + oh my zsh 美化终端</a>.</p>
+          </div>
+
+<h2 id="添加-Cygwin-到-Windows-Terminal"><a href="#添加-Cygwin-到-Windows-Terminal" class="headerlink" title="添加 Cygwin 到 Windows Terminal"></a>添加 Cygwin 到 Windows Terminal</h2><ul>
+<li>打开 Windows Terminal；</li>
+<li>然后 <code>设置 &gt; 配置文件 &gt; 添加新配置文件</code>；</li>
+<li>再者 <code>新建空配置文件</code>；</li>
+<li>对空配置文件进行修改（基础修改）：<ul>
+<li>名称：<code>Cygwin</code></li>
+<li>命令行：<code>C:\cygwin64\bin\bash.exe -i -l</code></li>
+<li>启动目录：<code>C:\cygwin64\home\xxxxxx</code></li>
+<li>图标：<code>C:\cygwin64\Cygwin.ico</code></li>
+</ul>
+</li>
+</ul>
+<div class="note note-info">
+            <p>关于命令行的一点点解释，使用大佬 leo3418 <a target="_blank" rel="noopener" href="https://leo3418.github.io/zh/2020/05/24/cygwin-git-bash-in-wt.html">在 Windows Terminal 中使用 Cygwin 命令行或 Git Bash</a> 的部分内容：</p><p>首先确定 Cygwin 的安装路径。如果您装的是 64 位版本，那么默认的安装路径是 <code>C:\cygwin64</code>。Bash 的可执行文件 <code>bash.exe</code> 存在 Cygwin 安装路径下的 <code>bin</code> 文件夹中，因此在默认的情况下，该文件的绝对路径是 <code>C:\cygwin64\bin\bash.exe</code>。</p><p>此处需要注意的一点是，Cygwin 中的 Bash 需要以交互式登录 shell（interactive login shell）的形式启动，否则的话，在运行一些包括 <code>ls</code> 在内的基本指令的时候会出 “command not found” 的消息。这个的原因是只有登录 shell 会在启动的时候运行 <code>/etc/profile</code>，然后 Cygwin 中的 <code>/etc/profile</code> 会把 <code>/usr/bin</code> 和 <code>/usr/local/bin</code> 加到 <code>PATH</code> 环境变量当中。如果开启的不是登录 shell，那么 <code>/etc/profile</code> 不会被运行，环境变量也就不会被设置。<strong>启动交互式登录 shell 的方法是使用 -i -l 选项</strong>。如果您想使用别的 shell，那么请自行确认下让 <code>/usr/bin</code> 和 <code>/usr/local/bin</code> 被添加到 PATH 下的方法。</p>
+          </div>
+
+<h2 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h2><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/Pixiv/cygwin-installation-final.png" srcset="/img/loading.gif" lazyload></p>
+<p>大功告成。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%B0%E5%BD%95/" class="category-chain-item">记录</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%B0%E5%BD%95/Windows/" class="category-chain-item">Windows</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/install/">#install</a>
+      
+        <a href="/tags/Cygwin/">#Cygwin</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Cygwin 的安装与配置</div>
+      <div>https://muxiner.github.io/cygwin-installation/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Muxiner</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月13日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/scoop-replace-source/" title="Windows 包管理工具 Scoop 更换国内可用源">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Windows 包管理工具 Scoop 更换国内可用源</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/ubuntu-zsh-ohmyzsh/" title="Ubuntu 安装 zsh + oh my zsh 美化终端">
+                        <span class="hidden-mobile">Ubuntu 安装 zsh + oh my zsh 美化终端</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"Muxiner/muxiner.github.io","repo-id":"MDEwOlJlcG9zaXRvcnkzMTU5MTM1NzY=","category":"博客文章评论","category-id":"DIC_kwDOEtR1aM4CVjN6","theme-light":"light","theme-dark":"dark","mapping":"title","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

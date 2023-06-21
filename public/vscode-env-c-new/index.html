@@ -1,0 +1,1058 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Muxiner">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="windows 系统环境下的 vs code 配置 C&#x2F;C++ 环境。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows 下 VS code 配置 C&#x2F;C++ 环境">
+<meta property="og:url" content="https://muxiner.github.io/vscode-env-c-new/index.html">
+<meta property="og:site_name" content="Muxiner&#39;s Blog">
+<meta property="og:description" content="windows 系统环境下的 vs code 配置 C&#x2F;C++ 环境。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg">
+<meta property="article:published_time" content="2022-04-19T01:34:45.000Z">
+<meta property="article:modified_time" content="2022-06-28T09:35:10.000Z">
+<meta property="article:author" content="Muxiner">
+<meta property="article:tag" content="VS code">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg">
+  
+  
+  
+  <title>Windows 下 VS code 配置 C/C++ 环境 - Muxiner&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"muxiner.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":5,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Muxiner&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://w.wallhaven.cc/full/z8/wallhaven-z8j1qo.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Windows 下 VS code 配置 C/C++ 环境"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Muxiner
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-19 09:34" pubdate>
+          2022年4月19日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          74 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Windows 下 VS code 配置 C/C++ 环境</h1>
+            
+              <p class="note note-success">
+                
+                  
+                    本文最后更新于：2022年6月28日星期二下午5点35分
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="阅读本文后应该可以顺利的在-Windows-系统下配置好-VS-code-的-C-x2F-C-环境。"><a href="#阅读本文后应该可以顺利的在-Windows-系统下配置好-VS-code-的-C-x2F-C-环境。" class="headerlink" title="阅读本文后应该可以顺利的在 Windows 系统下配置好 VS code 的 C&#x2F;C++ 环境。"></a>阅读本文后应该可以顺利的在 Windows 系统下配置好 VS code 的 C&#x2F;C++ 环境。</h2><p>若是继续快速配置环境，可直接到 <strong><a href="#%E5%8F%AF%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">可直接使用的配置文件</a></strong> 处复制代码到对应文件，然后即可使用。</p>
+<h3 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h3><p>默认已经安装好 <code>VS code</code> 和 Windows 下的 <code>C/C++</code> 编译器 —— <code>MinGW</code>。</p>
+<p>若是未能安装，那就自行安装吧。<del>（自己找教程去）</del></p>
+<p>(&#96;ヮ´ ) 开摆！</p>
+<p>安装好了的话，那就开整。</p>
+<p>ᕕ( ᐛ )ᕗ</p>
+<h3 id="所需插件"><a href="#所需插件" class="headerlink" title="所需插件"></a>所需插件</h3><p>配置环境只需要两个插件：</p>
+<ul>
+<li><code>C/C++</code> : 让 <code>VS code</code> 支持 <code>C/C++</code> 语法和编译调试</li>
+<li><code>C/C++ Extension Pack</code> : 暂时不知道</li>
+</ul>
+<h3 id="基础环境配置"><a href="#基础环境配置" class="headerlink" title="基础环境配置"></a>基础环境配置</h3><p>配置好 <code>C/C++</code> 环境大致也就需要几个步骤：</p>
+<h4 id="使用-VS-code-打开一个文件夹作为工作路径"><a href="#使用-VS-code-打开一个文件夹作为工作路径" class="headerlink" title="使用 VS code 打开一个文件夹作为工作路径"></a>使用 <code>VS code</code> 打开一个文件夹作为<strong>工作路径</strong></h4><p>   该文件夹可以包含子文件夹，或是创建子文件夹，配置好环境后，该文件夹会多一个 <code>.vscode</code>，该文件夹会有几个 <code>json</code> 文件。</p>
+<h4 id="在该文件夹目录中创建-C-C-文件，并进行编辑"><a href="#在该文件夹目录中创建-C-C-文件，并进行编辑" class="headerlink" title="在该文件夹目录中创建 C/C++ 文件，并进行编辑"></a>在该文件夹目录中创建 <code>C/C++</code> 文件，并进行编辑</h4><p>   简单的编辑一下就好，比如输出个 Hello World。</p>
+<h4 id="首先进行配置生成任务"><a href="#首先进行配置生成任务" class="headerlink" title="首先进行配置生成任务"></a>首先进行配置生成任务</h4><p>   选择已经编辑好的 C&#x2F;C++ 文件，点击顶部菜单栏的 <code>终端(T) &gt; 配置任务</code>。</p>
+<p>   <img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172419.png" srcset="/img/loading.gif" lazyload></p>
+<p>   在选择 <code>C/C++: gcc.exe 生成活动文件</code>。</p>
+<blockquote>
+<p>因为自己使用 <code>C</code> 文件进行配置任务，因为配置任务时显示的是 <code>gcc.exe</code>。<br>若是使用 <code>C++</code> 文件进行配置任务，会显示 <code>g++.exe</code>。<br><code>gcc.exe</code> 是 <code>C</code> 的编译器<br><code>g++.exe</code> 是 <code>C++</code> 的编译器，但是也可以编译 <code>C</code><br>不过这一点没什么大问题，都可以在后续的 <code>json</code> 文件中修改</p>
+</blockquote>
+<p>   <img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172452.png" srcset="/img/loading.gif" lazyload></p>
+<p>   之后会自动生成一个 <code>tasks.json</code> 文件，位于 <code>.vacode</code> 文件夹，如图：</p>
+<p>   <img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172512.png" srcset="/img/loading.gif" lazyload></p>
+<p>   进入 <code>tasks.json</code>:</p>
+<p>   <img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172535.png" srcset="/img/loading.gif" lazyload></p>
+<p>   其中：</p>
+<ul>
+<li><p>type: 要自定义的任务类型<br>  可支持类型： <code>cppbuild</code>, <code>shell</code>, <code>process</code>.</p>
+</li>
+<li><p>label: 任务名称。即是你将在任务列表中看到的值（就是上上上图中可见的：C&#x2F;C++：gcc.exe 生成活动文件）；你可以给它取任何你喜欢的名字。</p>
+<blockquote>
+<p>该值还和后续调试任务有关</p>
+</blockquote>
+</li>
+<li><p>command: 执行编译器或编译脚本的路径。</p>
+</li>
+<li><p>args: 其他要传给编译器或者编译脚本的参数。</p>
+</li>
+<li><p><del>options：其他命令选项。</del></p>
+<ul>
+<li><del>cwd: 已执行程序或脚本的当前工作目录。如果省略，则使用当前代码的工作区根。</del></li>
+</ul>
+</li>
+<li><p>problemMatcher: 要使用的问题匹配程序。可以是一个字符串或一个问题匹配程序定义，也可以是一个字符串数组和多个问题匹配程序。</p>
+</li>
+<li><p>group: build: 将任务标记为可通过“运行生成任务”命令访问的生成任务。</p>
+</li>
+<li><p>detail: 任务的其他详细信息。</p>
+</li>
+</ul>
+<p>   <code>tasks.json</code>:<br>   <div class="code-wrapper"><pre><code class="hljs json">  <span class="hljs-punctuation">&#123;</span>
+<span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2.0.0&quot;</span><span class="hljs-punctuation">,</span>
+<span class="hljs-attr">&quot;tasks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+	<span class="hljs-punctuation">&#123;</span>
+		<span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cppbuild&quot;</span><span class="hljs-punctuation">,</span>
+		<span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C/C++: gcc.exe 生成活动文件&quot;</span><span class="hljs-punctuation">,</span>
+		<span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:/MinGW/bin/gcc.exe&quot;</span><span class="hljs-punctuation">,</span>
+                    
+		<span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+			<span class="hljs-string">&quot;-fdiagnostics-color=always&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// 彩色警告</span>
+			<span class="hljs-string">&quot;-g&quot;</span><span class="hljs-punctuation">,</span>                         <span class="hljs-comment">// 编译器编译时，产生调试信息</span>
+			<span class="hljs-string">&quot;$&#123;file&#125;&quot;</span><span class="hljs-punctuation">,</span>                    <span class="hljs-comment">// 当前文件名(含有文件路径)</span>
+			<span class="hljs-string">&quot;-o&quot;</span><span class="hljs-punctuation">,</span>                         <span class="hljs-comment">// 编译时输出的位置</span>
+			<span class="hljs-string">&quot;$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;.exe&quot;</span>
+                                         <span class="hljs-comment">// 编译输出的可执行文件</span>
+		<span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+		<span class="hljs-attr">&quot;problemMatcher&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+			<span class="hljs-string">&quot;$gcc&quot;</span>
+		<span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+		   <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;build&quot;</span><span class="hljs-punctuation">,</span>
+		   <span class="hljs-attr">&quot;detail&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;编译器: C:/MinGW/bin/gcc.exe&quot;</span>
+	   <span class="hljs-punctuation">&#125;</span>
+   <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">&#125;</span></code></pre></div></p>
+<p>   然后点击 <code>终端(T) &gt; 运行生成任务</code>，如图：</p>
+<blockquote>
+<p>当然可以使用快捷键 <code>Shift + Ctrl + B</code>，快速 <code>运行生成任务</code>。</p>
+</blockquote>
+<p>   <img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172556.png" srcset="/img/loading.gif" lazyload></p>
+<p>   此时，VS code 下部的终端就会显示 <code>Executing task</code>， 即开始编译 C 文件并获得 exe 文件。</p>
+<blockquote>
+<p>从图中可见，运行的任务将 tasks.json 中的部分内容显示出来。<br>如：</p>
+<ul>
+<li>label</li>
+<li>编译的指令<blockquote>
+<p>成功执行指令后，会显示<code>生成已成功完成</code>。<br>未能成功执行时，则会显示<code>错误信息</code>。</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<p>   <img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172612.png" srcset="/img/loading.gif" lazyload></p>
+<p>   成功之后，在文件夹中会多出对应的 exe 文件，如图：</p>
+<p>   <img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172629.png" srcset="/img/loading.gif" lazyload></p>
+<p>   强调一下，将上述任务完成后，我们只是利用 tasks.json 配置文件将 C 文件编译成了可执行的 exe 文件后续没有执行 该 exe 文件。想要查看运行结果的话：有两种办法：</p>
+<ul>
+<li>在 VS code 的终端中输入相应的指令以执行文件</li>
+<li>到对应的文件夹中找到该 exe 文件，直接执行。</li>
+</ul>
+<p>   若是需要对代码进行调试，就需要配置接下来的 <code>launch.json</code> 文件。</p>
+<h4 id="其次进行配置调试任务"><a href="#其次进行配置调试任务" class="headerlink" title="其次进行配置调试任务"></a>其次进行配置调试任务</h4><p>   点击 <code>运行(R) &gt; 添加配置</code>，如图:</p>
+<p>   <img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172731.png" srcset="/img/loading.gif" lazyload></p>
+<p>   再次点击图中选项</p>
+<blockquote>
+<p>由于不明原因，我这点击该选项后，直接生成了 launch.json 文件，但是是空的，和其他教程不一样，不过问题不大，就是配置复杂了一点。<br>↙(&#96;ヮ´ )↗ 开摆！</p>
+</blockquote>
+<p>   <img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172748.png" srcset="/img/loading.gif" lazyload><br>   生成 launch.json 文件。<br>   <img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172803.png" srcset="/img/loading.gif" lazyload></p>
+<p>   空的？没事，点击右边的 <code>添加配置</code>，选择 <code>C/C++: (gdb) 启动</code>。</p>
+<blockquote>
+<p>之所以选择该选项，是在我尝试了各选项的配置后做出的决定。<br>原因吗：</p>
+<ul>
+<li>功能刚好，基本满足要求</li>
+<li>没有复杂 <del>（可能无用的）</del> 的配置选项</li>
+</ul>
+</blockquote>
+<p>   <img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172825.png" srcset="/img/loading.gif" lazyload></p>
+<p>   然后生成的配置文件大致如图所示，不过还不能直接用，还需要修改其中部分字段。<br>   <img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172846.png" srcset="/img/loading.gif" lazyload></p>
+<p>   各字段的作用：</p>
+<ul>
+<li><code>name</code>: 配置名称，用于显示在启动配置的下拉菜单中。</li>
+<li><code>type</code>: 配置类型。</li>
+<li><code>request</code>: 请求配置类型。可是 <code>启动</code> 或 <code>附加</code>，对应 <code>launch</code> 和 <code>attach</code>。</li>
+<li><code>program</code>: 程序可执行的完整路径。</li>
+<li><code>args</code>: 传递给程序的命令行参数。</li>
+<li><code>stopAtEntry</code>: 可选参数。如果是为 <code>true</code>，则调试程序就会在目标的入口点处停止。如果传递了 <code>processId</code>，则不起任何作用。</li>
+<li><code>cwd</code>: 目标的工作目录。</li>
+<li><code>environment</code>: 要添加到程序环境的环境变量。</li>
+<li><code>externalConsole</code>: 如果为 <code>true</code>，则为调试对象启动控制台；为 <code>false</code>，则会在 <code>linux</code> 和 <code>Windows</code> 上显示在集成控制台中。<blockquote>
+<p>意思就是：<br><code>true</code>: 额外开启一个控制台来显示结果。<br><code>false</code>: 直接在 VS code 的集成终端显示结果。 </p>
+</blockquote>
+</li>
+<li><code>MIMode</code>: 指示 <code>MIDebugEngine</code> 要连接到的控制台调试程序。允许的值，<code>gdb</code>、<code>lldb</code>。</li>
+<li><code>miDubuggerPath</code>: <code>MI</code> 调试程序（如 <code>gdb</code>）的路径。如若未指定（如 <code>gdb.exe</code>），将首先在路径中搜索调试程序。</li>
+<li><code>setupCommands</code>: 为了安装基础调试程序而执行一个或多个 <code>GDB/LLDB</code> 命令。<ul>
+<li><code>description</code>: 此命令的可选说明。</li>
+<li><code>text</code>: 要执行的调试命令。</li>
+<li><code>ignoreFailures</code>: 如果为 <code>true</code>，则会忽略该命令执行失败。默认值：<code>false</code>。</li>
+</ul>
+</li>
+</ul>
+<p>   对 <code>program</code>、<code>miDebuggerPath</code>、<code>externalConsole</code> 等字段进行修改后。<br>   可得正常使用的 <code>launch.json</code>:</p>
+<blockquote>
+<p>在该文件中，加了一新的字段 <code>preLaunchTask</code>，用于调试时从新生成 exe 文件，并根据新的 exe 文件进行调试。<br>否则，在对代码进行修改后，直接使用调试功能，你会发现，执行的是之前的程序，而非修改后的程序。</p>
+<p>preLaunchTask: 调试会话开始前要运行的任务。</p>
+</blockquote>
+   <div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+ <span class="hljs-comment">// 使用 IntelliSense 了解相关属性。 </span>
+ <span class="hljs-comment">// 悬停以查看现有属性的描述。</span>
+ <span class="hljs-comment">// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387</span>
+ <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.2.0&quot;</span><span class="hljs-punctuation">,</span>
+ <span class="hljs-attr">&quot;configurations&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+     <span class="hljs-punctuation">&#123;</span>
+         <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;(gdb) 启动&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cppdbg&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;preLaunchTask&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C/C++: gcc.exe 生成活动文件&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// 在 launch 之前的任务名，</span>
+                                                        <span class="hljs-comment">// 即 在launch 之前先执行 tasks.json 的任务</span>
+                                                        <span class="hljs-comment">// 用于调试时从新生成 exe 文件，并根据新的 exe 文件进行调试</span>
+                                                        <span class="hljs-comment">// 因而该字段内容需和 tasks.json 中的 label 一样，如此才能正确的先生成再调试</span>
+         <span class="hljs-attr">&quot;request&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;launch&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;program&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;.exe&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;stopAtEntry&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;cwd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;fileDirname&#125;&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;environment&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;externalConsole&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;MIMode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;gdb&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;miDebuggerPath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:/MinGW/bin/gdb.exe&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;setupCommands&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+               <span class="hljs-punctuation">&#123;</span>
+                  <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;为 gdb 启用整齐打印&quot;</span><span class="hljs-punctuation">,</span>
+                  <span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-enable-pretty-printing&quot;</span><span class="hljs-punctuation">,</span>
+                  <span class="hljs-attr">&quot;ignoreFailures&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+               <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-punctuation">&#123;</span>
+                  <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span>  <span class="hljs-string">&quot;将反汇编风格设置为 Intel&quot;</span><span class="hljs-punctuation">,</span>
+                  <span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-gdb-set disassembly-flavor intel&quot;</span><span class="hljs-punctuation">,</span>
+                  <span class="hljs-attr">&quot;ignoreFailures&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+                <span class="hljs-punctuation">&#125;</span>
+            <span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">&#125;</span>
+    <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+<p>   此时会到 C 文件，就可以点击 <code>运行(R) &gt; 启动调试</code> 来调试程序，快捷键：<code>F5</code>，或是 <code>运行(R) &gt; 以非调试模式运行</code> 来运行程序（不调试），快捷键：<code>Ctrl + F5</code>。结果如图：</p>
+<p>   <img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628172909.png" srcset="/img/loading.gif" lazyload></p>
+<p>至此，Windows 系统下 VS code 的 C&#x2F;C++ 环境算是配置完成了。</p>
+<p>好耶！</p>
+<p>ᕕ( ᐛ )ᕗ</p>
+<h3 id="进阶环境配置"><a href="#进阶环境配置" class="headerlink" title="进阶环境配置"></a>进阶环境配置</h3><p>我所谓的进阶配置，主要指的是，对 <code>tasks.json</code> 中使用更多的变量参数。</p>
+<h4 id="预定义变量-Predefined-variables"><a href="#预定义变量-Predefined-variables" class="headerlink" title="预定义变量 Predefined variables"></a>预定义变量 Predefined variables</h4><p>支持以下预定义变量：</p>
+<ul>
+<li><code>$&#123;workspaceFolder&#125;</code> - 在 <code>VS Code</code> 中打开的文件夹的路径</li>
+<li><code>$&#123;workspaceFolderBasename&#125;</code> - 在 <code>VS Code</code> 中打开的文件夹的名称，不带任何斜线 (&#x2F;)</li>
+<li><code>$&#123;file&#125;</code> - 当前打开的文件</li>
+<li><code>$&#123;fileWorkspaceFolder&#125;</code> - 当前打开文件的工作区文件夹</li>
+<li><code>$&#123;relativeFile&#125;</code> - 当前打开的相对于 <code>workspaceFolder</code> 的文件</li>
+<li><code>$&#123;relativeFileDirname&#125;</code> - 当前打开文件相对于 <code>workspaceFolder</code> 的目录名</li>
+<li><code>$&#123;fileBasename&#125;</code> - 当前打开文件的基本名称</li>
+<li><code>$&#123;fileBasenameNoExtension&#125;</code> - 当前打开的文件的基本名称，没有文件扩展名</li>
+<li><code>$&#123;fileDirname&#125;</code> - 当前打开文件的目录名</li>
+<li><code>$&#123;fileExtname&#125;</code> - 当前打开文件的扩展名</li>
+<li><code>$&#123;cwd&#125;</code> - 启动 <code>VS Code</code> 时任务运行器的当前工作目录</li>
+<li><code>$&#123;lineNumber&#125;</code> - 活动文件中当前选定的行号</li>
+<li><code>$&#123;selectedText&#125;</code> - 活动文件中当前选定的文本</li>
+<li><code>$&#123;execPath&#125;</code> - 正在运行的 <code>VS Code</code> 可执行文件的路径</li>
+<li><code>$&#123;defaultBuildTask&#125;</code> - 默认构建任务的名称</li>
+<li><code>$&#123;pathSeparator&#125;</code> - 操作系统用来分隔文件路径中的组件的字符</li>
+</ul>
+<h5 id="预定义变量示例-Predefined-variables-examples"><a href="#预定义变量示例-Predefined-variables-examples" class="headerlink" title="预定义变量示例 Predefined variables examples"></a>预定义变量示例 Predefined variables examples</h5><p>假设您有以下要求：</p>
+<ol>
+<li>位于 <code>/home/your-username/your-project/folder/file.ext</code> 的文件在您的编辑器中打开；</li>
+<li>目录 <code>/home/your-username/your-project</code> 作为您的根工作区打开。</li>
+</ol>
+<p>因此，每个变量都将具有以下值：</p>
+<ul>
+<li><code>$&#123;workspaceFolder&#125;</code> - <code>/home/your-username/your-project</code></li>
+<li><code>$&#123;workspaceFolderBasename&#125;</code> - <code>你的项目</code></li>
+<li><code>$&#123;file&#125;</code> - <code>/home/your-username/your-project/folder/file.ext</code></li>
+<li><code>$&#123;fileWorkspaceFolder&#125;</code> - <code>/home/your-username/your-project</code></li>
+<li><code>$&#123;relativeFile&#125;</code> - <code>folder/file.ext</code></li>
+<li><code>$&#123;relativeFileDirname&#125;</code> - <code>folder</code></li>
+<li><code>$&#123;fileBasename&#125; - file.ext</code></li>
+<li><code>$&#123;fileBasenameNoExtension&#125;</code> - <code>file</code></li>
+<li><code>$&#123;fileDirname&#125;</code> - <code>/home/your-username/your-project/folder</code></li>
+<li><code>$&#123;fileExtname&#125;</code> - <code>.ext</code></li>
+<li><code>$&#123;lineNumber&#125;</code> - 光标的行号</li>
+<li><code>$&#123;selectedText&#125;</code> - 在代码编辑器中选择的文本</li>
+<li><code>$&#123;execPath&#125;</code> - Code.exe 的位置</li>
+<li><code>$&#123;pathSeparator&#125;</code> - <code>/</code> 在 macOS 或 linux 上，<code>\</code> 在 Windows 上</li>
+</ul>
+<blockquote>
+<p>Tip:<br>在 tasks.json 和 launch.json 的字符串值中使用 IntelliSense 以获取预定义变量的完整列表</p>
+</blockquote>
+<h5 id="每个工作区文件夹范围内的变量-Variables-scoped-per-workspace-folder"><a href="#每个工作区文件夹范围内的变量-Variables-scoped-per-workspace-folder" class="headerlink" title="每个工作区文件夹范围内的变量 Variables scoped per workspace folder"></a>每个工作区文件夹范围内的变量 Variables scoped per workspace folder</h5><p>通过将根文件夹的名称附加到变量（用冒号分隔），可以访问工作区的同级根文件夹。 如果没有根文件夹名称，则该变量的作用域为使用它的同一文件夹。</p>
+<p>例如，在具有文件夹 <code>Server</code> 和 <code>Client</code> 的多根工作区中，<code>$&#123;workspaceFolder:Client</code>} 指的是 <code>Client</code> 根的路径。</p>
+<h4 id="环境变量-Environment-variables"><a href="#环境变量-Environment-variables" class="headerlink" title="环境变量 Environment variables"></a>环境变量 Environment variables</h4><p>您还可以通过 <code>$&#123;env:Name&#125;</code> </p>
+<p>语法（例如，<code>$&#123;env:USERNAME&#125;</code>）引用环境变量。</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+  <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;request&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;launch&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Launch Program&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;program&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;workspaceFolder&#125;/app.js&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;cwd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;workspaceFolder&#125;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;$&#123;env:USERNAME&#125;&quot;</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+
+<h3 id="可直接使用的配置文件"><a href="#可直接使用的配置文件" class="headerlink" title="可直接使用的配置文件"></a>可直接使用的配置文件</h3><blockquote>
+<p>PS:<br>该配置文件暂时仅是支持单个文件的编译<br>多个文件的编译请详细阅读本篇文章</p>
+</blockquote>
+<p>简要介绍一下两个文件表示的工作流程：</p>
+<ul>
+<li><code>tasks.json</code> 是将 C&#x2F;C++ 文件编译成 exe 文件，其路径与 C&#x2F;C++ 文件相同，即在同一文件夹</li>
+<li><code>launch.json</code> 会先将文件编译成 exe 可执行文件，然后再进行调试</li>
+</ul>
+<p>所以，使用流程：</p>
+<ul>
+<li>在工作文件夹下创建 <code>.vscode</code> 文件夹，</li>
+<li>再在 <code>.vscide</code> 下创建俩文件，并将下述代码复制进去<ul>
+<li><code>tasks.json</code></li>
+<li><code>launch.json</code></li>
+</ul>
+</li>
+<li>按 <code>F5</code> 进行调试</li>
+<li>按 <code>Ctrl + F5</code> 非调试运行</li>
+</ul>
+<p><code>tasks.json</code>:</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+	<span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2.0.0&quot;</span><span class="hljs-punctuation">,</span>
+	<span class="hljs-attr">&quot;tasks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+		<span class="hljs-punctuation">&#123;</span>
+			<span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cppbuild&quot;</span><span class="hljs-punctuation">,</span>
+			<span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;g++.exe 生成活动文件&quot;</span><span class="hljs-punctuation">,</span>
+			<span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:/MinGW/bin/g++.exe&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// 编译器路径</span>
+                                            <span class="hljs-comment">// 需要自行修改</span>
+                     
+			<span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+				<span class="hljs-string">&quot;-fdiagnostics-color=always&quot;</span><span class="hljs-punctuation">,</span> 
+				<span class="hljs-string">&quot;-g&quot;</span><span class="hljs-punctuation">,</span>                         
+				<span class="hljs-string">&quot;$&#123;file&#125;&quot;</span><span class="hljs-punctuation">,</span>                    
+				<span class="hljs-string">&quot;-o&quot;</span><span class="hljs-punctuation">,</span>                         <span class="hljs-comment">// 编译时输出的位置</span>
+				<span class="hljs-string">&quot;$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;.exe&quot;</span>
+                                          <span class="hljs-comment">// 编译输出的可执行文件</span>
+			<span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+			<span class="hljs-attr">&quot;problemMatcher&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+				<span class="hljs-string">&quot;$gcc&quot;</span>
+			<span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+			   <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;build&quot;</span><span class="hljs-punctuation">,</span>
+			   <span class="hljs-attr">&quot;detail&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;编译器: C:/MinGW/bin/g++.exe&quot;</span>
+		   <span class="hljs-punctuation">&#125;</span>
+	   <span class="hljs-punctuation">]</span>
+   <span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+<p><code>launch.json</code>:</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-comment">// 使用 IntelliSense 了解相关属性。 </span>
+    <span class="hljs-comment">// 悬停以查看现有属性的描述。</span>
+    <span class="hljs-comment">// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387</span>
+    <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.2.0&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;configurations&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">&#123;</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;(gdb) 启动&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cppdbg&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;preLaunchTask&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;g++.exe 生成活动文件&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// 在 launch 之前的任务名，</span>
+                                                           <span class="hljs-comment">// 即 在launch 之前先执行 tasks.json 的任务</span>
+                                                           <span class="hljs-comment">// 用于调试时从新生成 exe 文件，并根据新的 exe 文件进行调试</span>
+                                                           <span class="hljs-comment">// 因而该字段内容需和 tasks.json 中的 label 一样，如此才能正确的先生成再调试</span>
+            <span class="hljs-attr">&quot;request&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;launch&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;program&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;.exe&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;stopAtEntry&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;cwd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;fileDirname&#125;&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;environment&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;externalConsole&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;MIMode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;gdb&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;miDebuggerPath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:/MinGW/bin/gdb.exe&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// 调试器的路径</span>
+                                                      <span class="hljs-comment">// 需要自行修改</span>
+            <span class="hljs-attr">&quot;setupCommands&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                  <span class="hljs-punctuation">&#123;</span>
+                     <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;为 gdb 启用整齐打印&quot;</span><span class="hljs-punctuation">,</span>
+                     <span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-enable-pretty-printing&quot;</span><span class="hljs-punctuation">,</span>
+                     <span class="hljs-attr">&quot;ignoreFailures&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+                  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+                  <span class="hljs-punctuation">&#123;</span>
+                     <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span>  <span class="hljs-string">&quot;将反汇编风格设置为 Intel&quot;</span><span class="hljs-punctuation">,</span>
+                     <span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-gdb-set disassembly-flavor intel&quot;</span><span class="hljs-punctuation">,</span>
+                     <span class="hljs-attr">&quot;ignoreFailures&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+                   <span class="hljs-punctuation">&#125;</span>
+               <span class="hljs-punctuation">]</span>
+           <span class="hljs-punctuation">&#125;</span>
+       <span class="hljs-punctuation">]</span>
+   <span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+<p>ᕕ( ᐛ )ᕗ</p>
+<p>现在你就可以畅想 vscode 的 C 语言编程了。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/cpp/config-mingw#_build-helloworldcpp">Visual Studio Code 官方文档 | GCC on Windows</a></li>
+<li><a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/editor/variables-reference">Visual Studio Code 官方文档 | Variables Reference</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_14202100/5188327">【开发环境】Ubuntu 中使用 VSCode 开发 C&#x2F;C++ ⑤ ( tasks.json 中的 args 数组配置分析 | 编译并执行 C++ 程序 )</a></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/VS-code/">#VS code</a>
+      
+        <a href="/tags/C-C/">#C/C++</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Windows 下 VS code 配置 C/C++ 环境</div>
+      <div>https://muxiner.github.io/vscode-env-c-new/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Muxiner</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年4月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/ml-boston-housing/" title="多元线性回归 —— 波士顿房价预测">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">多元线性回归 —— 波士顿房价预测</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/vscode-markdown-pdf-math-latex-error/" title="【水博客】VS code Markdown 导出 PDF 时，数学公式未能正确导出">
+                        <span class="hidden-mobile">【水博客】VS code Markdown 导出 PDF 时，数学公式未能正确导出</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"Muxiner/muxiner.github.io","repo-id":"MDEwOlJlcG9zaXRvcnkzMTU5MTM1NzY=","category":"博客文章评论","category-id":"DIC_kwDOEtR1aM4CVjN6","theme-light":"light","theme-dark":"dark","mapping":"title","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

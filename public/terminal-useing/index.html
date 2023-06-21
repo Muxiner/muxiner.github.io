@@ -1,0 +1,890 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Muxiner">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="用来记录使用 Windows Terminal 一路上遇到的问题以及解决的办法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows Terminal 使用及美化记录">
+<meta property="og:url" content="https://muxiner.github.io/terminal-useing/index.html">
+<meta property="og:site_name" content="Muxiner&#39;s Blog">
+<meta property="og:description" content="用来记录使用 Windows Terminal 一路上遇到的问题以及解决的办法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232410.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232435.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232455.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232521.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232542.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232556.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232612.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232636.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232650.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232710.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232727.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232742.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232757.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232811.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232826.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232840.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232855.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232915.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232959.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628233024.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628233052.png">
+<meta property="article:published_time" content="2022-04-06T10:11:19.000Z">
+<meta property="article:modified_time" content="2022-06-28T14:39:30.000Z">
+<meta property="article:author" content="Muxiner">
+<meta property="article:tag" content="Beauty">
+<meta property="article:tag" content="Terminal">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232410.png">
+  
+  
+  
+  <title>Windows Terminal 使用及美化记录 - Muxiner&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"muxiner.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":5,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Muxiner&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Windows Terminal 使用及美化记录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Muxiner
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-06 18:11" pubdate>
+          2022年4月6日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          28 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Windows Terminal 使用及美化记录</h1>
+            
+              <p class="note note-success">
+                
+                  
+                    本文最后更新于：2022年6月28日星期二晚上10点39分
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>用来记录使用 Windows Terminal 一路上遇到的问题以及解决的办法。</p>
+<p>写本文时，运行 Windows Terminal 的环境：</p>
+<ul>
+<li>Windows 11</li>
+<li>自带的 Windows Terminal</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li>Windows 10<br>  Windows 10 可以从系统自带的 MicroSoft Store 进行下载安装，搜索 Windows Terminal，点击安装即可。</li>
+<li>Windows 11<br>  Windows 11 直接自带 Windows Terminal，并将其作为默认的命令行工具——无论是 PowerShell 还是 CMD，或者是用户自己后续安装的如 Git Bash 等等均会直接使用 Windows Terminal 进行打开，怎么说就，十分舒适。</li>
+</ul>
+<p>总所周知，Windows Terminal 是可以进行美化的，而这意味着什么？</p>
+<p>我们可以将不忍直视的 CMD 或者 Git Bash 界面做成让我们自己赏心悦目的样子，可以极大的愉悦我们的心情。</p>
+<h2 id="Windows-Terminal-美化"><a href="#Windows-Terminal-美化" class="headerlink" title="Windows Terminal 美化"></a>Windows Terminal 美化</h2><h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>简单的说就是，Windows Terminal 通过修改<strong>配置文件</strong>中的内容，获得不一样的视觉效果。</p>
+<p>配置文件包含三块部分：</p>
+<ol>
+<li>常规</li>
+<li>外观 —— 设置字体、窗口样式、配色方案、透明度、背景图片等</li>
+<li>高级</li>
+</ol>
+<h3 id="常规"><a href="#常规" class="headerlink" title="常规"></a>常规</h3><blockquote>
+<p>Windows 10、早期的 Windows 11 的 Terminal 的配置文件还是分为上述的三部分<br>不过，在 22 年 4 月份的时候，Terminal 的配置文件部分就发生了一点变化。<br>首先就是界面部分变得和 Windows 11 设置一样的 UI 风格<br>其次，常规部分变成了如图所示样子：<br><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232410.png" srcset="/img/loading.gif" lazyload><br>外观 + 高级则隶属于其他设置（内容大致没有变化）。</p>
+</blockquote>
+<blockquote>
+<p>本文根据当前样式进行介绍。</p>
+</blockquote>
+<p>该部分共有 6 个字段：</p>
+<ul>
+<li><p>名称：下拉列表中显示的配置文件名称。</p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232435.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>命令行：在配置文件中所使用的可执行文件。</p>
+<p> 简单说就是，需要用到的命令行的可执行文件（路径），如：</p>
+<ul>
+<li><code>cmd</code>：就是 <code>cmd.exe</code></li>
+<li><code>git</code>：就是 <code>git.exe</code></li>
+</ul>
+<p> 等等。</p>
+</li>
+<li><p>启动目录：加载配置文件时启动的目录。</p>
+<blockquote>
+<p>用人话说就是：打开该命令行后，所在的文件路径。<br>默认值：<code>&quot;%USERPROFILE%&quot;</code>，该值是用户名的文件夹，即：<br><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232455.png" srcset="/img/loading.gif" lazyload></p>
+</blockquote>
+<blockquote>
+<p>备注：<br>反斜杠需要转义。 例如，应以 <code>C:\\Users\\USERNAME\\Documents</code> 的形式输入 <code>C:\Users\USERNAME\Documents</code>。</p>
+</blockquote>
+</li>
+<li><p>图标：配置文件中所使用的图标的表情符号或图像文件位置。</p>
+<blockquote>
+<p>这将设置在选项卡、下拉菜单、跳转列表和选项卡切换器中显示的图标。<br>由此就可以将图标设置成喜欢的样子，例如：</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232521.png" srcset="/img/loading.gif" lazyload></p>
+<p>将 powershell 的图标设置成这个样子了。</p>
+</li>
+<li><p>选项卡标题：将配置文件名称替换为标题，以在启动时传递给外壳。</p>
+<blockquote>
+<p>设置后就会如图所示，标题一直是<code>cmd</code>、<code>powershell</code>。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232542.png" srcset="/img/loading.gif" lazyload><br><del>似乎没有那么好看了，不过这是看情况的</del></p>
+</li>
+<li><p>从下拉菜单中隐藏：如果启用，配置文件将不会显示在配置文件列表中。</p>
+<blockquote>
+<p>这可用于<strong>隐藏</strong> <code>默认配置文件</code> 和 <code>动态生成的配置文件</code>，同时将他们保留在设置文件中。</p>
+</blockquote>
+<p>  <img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232556.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+<p>更多关于该部分的信息，请详见 <a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/terminal/customize-settings/profile-general"><strong>Windows 终端中的常规配置文件设置</strong></a>。</p>
+<h3 id="外观"><a href="#外观" class="headerlink" title="外观"></a>外观</h3><p>外观是咱们 Windows Terminal 美化的主战场，主要就是自定义修改<strong>字体</strong>、<strong>配色方案</strong>、<strong>背景图片</strong>、<strong>亚克力效果</strong>（透明度）等等。</p>
+<p>共有两种修改方式：</p>
+<ol>
+<li>使用图形界面的设置 —— 就是进入 Windows Terminal 的设置里一点点的调整</li>
+<li>修改配置文件（JSON文件）—— 这个会比第一种复杂不少，因为是需要自己文件中的一点点设置啦</li>
+</ol>
+<p>不过两者各有所长，至少配置文件可以用来保存设置好的美化方案，方便分享或是重装系统后的恢复。</p>
+<p>通过修改上述的几点设置后，咱们的终端界面就会有很大的不同了，看起来就有那么一点点的赏心悦目。</p>
+<p>现在从配色方案、字体、背景图片、亚克力效果进行说明。</p>
+<p>更多关于该部分的信息，请详见 <a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/terminal/customize-settings/profile-appearance"><strong>Windows 终端中的外观配置文件设置</strong></a>。</p>
+<blockquote>
+<p>注意：<br>可设置选项请以所使用的 Windows Terminal 显示的为主。</p>
+</blockquote>
+<h4 id="配色方案"><a href="#配色方案" class="headerlink" title="配色方案"></a>配色方案</h4><p>配色方案就好比一个主题，有着不同的风格（颜色），可以使得咱们的 Terminal 看起来具有别样的美感，同时也可以根据个人的喜好，获取自己别样的美学享受。<del>瞎扯ing</del></p>
+<p>但是，使用、获取一个配色方案很简单，使用、获取一个合适的配色方案就不是那么简单了。</p>
+<blockquote>
+<p>一个合适的配色方案需要考虑到多种因素，如背景图片、亚克力效果等等。<br>他们有机组合在一起才可以获取一个美观、清楚、清晰的美化效果。<br>不然呀，就会发现，某某地方怎么不清楚、看不到了呢？整体看着那么别扭呢？<br>不过，俺也就在这简单的说一说，具体怎么实现美观、清楚、清晰的效果，俺还不知道，后续更新去了。</p>
+</blockquote>
+<p>Windows Terminal 中有几个默认的配色方案可供使用：</p>
+<ul>
+<li><code>Campbell</code><br><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232612.png" srcset="/img/loading.gif" lazyload></li>
+<li><code>Campbell Powershell</code><br><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232636.png" srcset="/img/loading.gif" lazyload></li>
+<li><code>One Half Dark</code><br><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232650.png" srcset="/img/loading.gif" lazyload></li>
+<li><code>One Half Light</code><br><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232710.png" srcset="/img/loading.gif" lazyload></li>
+<li><code>Solarized Dark</code><br><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232727.png" srcset="/img/loading.gif" lazyload></li>
+<li><code>Solarized Light</code><br><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232742.png" srcset="/img/loading.gif" lazyload></li>
+<li><code>Tango Dark</code><br><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232757.png" srcset="/img/loading.gif" lazyload></li>
+<li><code>Tango Light</code><br><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232811.png" srcset="/img/loading.gif" lazyload></li>
+<li><code>Vintage</code><br><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232826.png" srcset="/img/loading.gif" lazyload></li>
+</ul>
+<p>如果默认的配色方案没法满足你的需求，还可以自己设置想要的配色方案哦（有时候可能会有一点点困难）。</p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232840.png" srcset="/img/loading.gif" lazyload></p>
+<p>选择合适的终端颜色、系统颜色，再保存，就拥有自己喜欢的配色方案了。</p>
+<p>不过具体的效果就不知道如何了。</p>
+<p>如果自己设置的配色方案还是没法满足自己的需要，咋办？</p>
+<p>没事，有大佬们设计了很多很多种华丽的配色方案: <a target="_blank" rel="noopener" href="https://windowsterminalthemes.dev/">Windows Terminal Themes</a></p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232855.png" srcset="/img/loading.gif" lazyload></p>
+<p>一共有几十共不同的配色方案，一种配色方案还有 <code>Dark</code>，<code>Light</code> 两种选择，共有一款会是你喜欢的，或者是适合你的。</p>
+<h4 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h4><p>字体，字体选择也会对终端的界面有很大的改变。</p>
+<p>这里没有太多好说的，主要是需要使用<strong>等宽字体</strong>，不要使用中文字体，如宋体、幼圆、黑体。</p>
+<p>这是使用了<strong>黑体</strong>的结果，就一个字 —— 丑。</p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232915.png" srcset="/img/loading.gif" lazyload></p>
+<p>不过 terminal 也提供了很多不错的字体，如 <code>Cascadia Code</code>、<code>Cascadia Mono</code>、<code>Consolas</code> 等等。</p>
+<p>当然你还可以自己安装你喜欢的字体，如 <a target="_blank" rel="noopener" href="https://www.jetbrains.com/zh-cn/lp/mono/">JetBrains Mono</a>。</p>
+<blockquote>
+<p>该字体有很多种系列，如细体、特细、细、正常、中等、半粗体、粗体、超粗体，同时还有对应的斜体。<br>怎么说，就很丰富。</p>
+</blockquote>
+<p>而我自己使用的字体，是 <a target="_blank" rel="noopener" href="https://www.nerdfonts.com/font-downloads">Nerd Font</a> 字体系列中的 <a target="_blank" rel="noopener" href="https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip">Hack Nerd Font</a>。（点击后会直接下载该字体哦)</p>
+<blockquote>
+<p>该系列的字体会比 JetBrains 的字体好一点，因为他们有图标，可以显示某些主题的一下图标。</p>
+</blockquote>
+<p>可以自己找到喜欢的字体，然后安装，就可以设置该字体作为终端的字体了。</p>
+<h4 id="背景图片"><a href="#背景图片" class="headerlink" title="背景图片"></a>背景图片</h4><p>背景图片可以让你的终端看起来更加的花里胡哨。</p>
+<p>你可以选择自己想要的图片，或者是桌面壁纸。</p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232959.png" srcset="/img/loading.gif" lazyload></p>
+<p>选择使用背景图片后，还可以设置图片的一些属性：</p>
+<ul>
+<li>背景图像拉升模式</li>
+<li>背景图像对齐</li>
+<li>背景图像不透明度</li>
+</ul>
+<p>可自行调试上述的属性。</p>
+<blockquote>
+<p>注意：<br>使用背景图片使用时，要注意与配色方案的协调性——就是避免背景图片的某些部分影响了文字的可读性，就如上图中，是灰色的字体，部分地方因为背景图片而看的不甚清楚。<br>当图片会影响到文字的阅读时，可能需要更换其他合适的图片，或者是调整<strong>背景图像不透明度</strong>，这一属性，使得终端看起来舒服些。</p>
+</blockquote>
+<h4 id="亚克力效果、透明效果"><a href="#亚克力效果、透明效果" class="headerlink" title="亚克力效果、透明效果"></a>亚克力效果、透明效果</h4><p>设置该配置文件的窗口透明度。效果如下：</p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628233024.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>可以看见窗口下层关于 <code>Windows Terminal Themes</code> 的内容。<br>透明度也是需要适当设置的，不然也会影响文字的阅读。<br>这一点也是需要和配色方案协调起来，比如某些颜色的字更容易看清楚。<br>不过更多的是与 terminal 下层的窗口有关系，它的颜色很容易影响文字的阅读。<br>所以，最好还是合理的hi用该透明的效果。</p>
+</blockquote>
+<p>不过还有<strong>亚克力效果</strong>可以缓解上述问题：当启用亚克力效果时，终端会创建一个模糊的背景——应用一个半透明的纹理。</p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628233052.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>如图，窗口下层依然是关于 <code>Windows Terminal Themes</code> 的内容，但是仅能隐约的看到相关内容。</p>
+</blockquote>
+<h3 id="高级"><a href="#高级" class="headerlink" title="高级"></a>高级</h3><p>看了一下，似乎没有什么和美化有关的内容，所以就不在此叙述。</p>
+<p>更多关于该部分的信息，请详见 <a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/terminal/customize-settings/profile-advanced"><strong>Windows 终端中的高级配置文件设置</strong></a>。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>本篇文章仅仅只是介绍了 Windows Terminal 对于终端的美化，设置图片、字体、配色方案、透明度之类的。</p>
+<p>或许你也发现，文中配图的 powershell 不太一样，这是因为我使用了 <a target="_blank" rel="noopener" href="https://ohmyposh.dev/">oh my posh</a>(A prompt theme engine for any shell.)</p>
+<p>会在下篇文章介绍 oh my posh 的使用。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/terminal/">Windows Terminal 官方文档</a></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Terminal/" class="category-chain-item">Terminal</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Beauty/">#Beauty</a>
+      
+        <a href="/tags/Terminal/">#Terminal</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Windows Terminal 使用及美化记录</div>
+      <div>https://muxiner.github.io/terminal-useing/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Muxiner</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年4月6日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/cannot-ssh-connect-with-ps/" title="【水博客】解决 Windows Powershell 中 SSH 远程连接失败问题">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【水博客】解决 Windows Powershell 中 SSH 远程连接失败问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/cannot-display-pictrue/" title="【水博客】解决 Github Pages + hexo 网页无法显示图片问题">
+                        <span class="hidden-mobile">【水博客】解决 Github Pages + hexo 网页无法显示图片问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"Muxiner/muxiner.github.io","repo-id":"MDEwOlJlcG9zaXRvcnkzMTU5MTM1NzY=","category":"博客文章评论","category-id":"DIC_kwDOEtR1aM4CVjN6","theme-light":"light","theme-dark":"dark","mapping":"title","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

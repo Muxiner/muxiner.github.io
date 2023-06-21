@@ -1,0 +1,941 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Muxiner">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="本文所写为 Windows 11 下包管理器 Scoop 的安装与使用，主要用于记录使用方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows 下包管理器 Scoop 的安装与使用">
+<meta property="og:url" content="https://muxiner.github.io/using-scoop/index.html">
+<meta property="og:site_name" content="Muxiner&#39;s Blog">
+<meta property="og:description" content="本文所写为 Windows 11 下包管理器 Scoop 的安装与使用，主要用于记录使用方法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-30T15:59:37.000Z">
+<meta property="article:modified_time" content="2022-11-17T13:10:22.000Z">
+<meta property="article:author" content="Muxiner">
+<meta property="article:tag" content="Scoop">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Windows 下包管理器 Scoop 的安装与使用 - Muxiner&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"muxiner.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":5,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Muxiner&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Windows 下包管理器 Scoop 的安装与使用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Muxiner
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-05-30 23:59" pubdate>
+          2022年5月30日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          34 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Windows 下包管理器 Scoop 的安装与使用</h1>
+            
+              <p class="note note-success">
+                
+                  
+                    本文最后更新于：2022年11月17日星期四晚上9点10分
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="🍉-什么是-Scoop"><a href="#🍉-什么是-Scoop" class="headerlink" title="🍉 什么是 Scoop"></a>🍉 什么是 Scoop</h3><blockquote>
+<p>😶‍🌫️ 可以去看 <a target="_blank" rel="noopener" href="https://github.com/ScoopInstaller/Scoop">Scoop Github 上的介绍</a>。</p>
+<p>😶‍🌫️ 还有官方文档 <a target="_blank" rel="noopener" href="https://github.com/ScoopInstaller/Scoop/wiki">Scoop Wiki</a></p>
+<p>😶‍🌫️ 官网 <a target="_blank" rel="noopener" href="https://scoop.sh/">Scoop.sh</a></p>
+</blockquote>
+<p><code>Scoop</code> 是 <code>Windows</code> 上的命令行安装工具。</p>
+<p>🙈 可以用来干嘛？</p>
+<p>🦥 通过命令行界面，<code>Scoop</code> 可以顺畅地安装应用程序。（官方说明）</p>
+<ul>
+<li>🌲 没有权限弹出窗口</li>
+<li>🌲 隐藏 GUI 向导式安装程序</li>
+<li>🌲 防止因而安装大量程序造成 PATH 污染</li>
+<li>🌲 避免安装和卸载程序的不当使用</li>
+<li>🌲 自动查找并安装依赖项</li>
+<li>🌲 自动执行所有额外的设置步骤来获取工作程序</li>
+</ul>
+<h3 id="🍉-安装-Scoop"><a href="#🍉-安装-Scoop" class="headerlink" title="🍉 安装 Scoop"></a>🍉 安装 Scoop</h3><h4 id="🍊-准备工作"><a href="#🍊-准备工作" class="headerlink" title="🍊 准备工作"></a>🍊 准备工作</h4><ul>
+<li><p><code>PowerShell</code> ：	确保已安装 <code>PowerShell 5.0</code> 或更高版本。</p>
+<blockquote>
+<p><code>Windows 10</code> 以及更高的版本默认安装的 <code>PowerShell 5.0</code>。</p>
+</blockquote>
+</li>
+<li><p>确保以允许 <code>Powershell</code> 执行本地脚本。</p>
+<div class="code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">set-executionpolicy</span> remotesigned <span class="hljs-literal">-scope</span> currentuser</code></pre></div>
+
+<blockquote>
+<p><code>Unrestricted</code> 也可以，但是安全性较低。</p>
+<p>最好使用 <code>RemoteSigned</code>。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="🍉-安装-Scoop-1"><a href="#🍉-安装-Scoop-1" class="headerlink" title="🍉 安装 Scoop"></a>🍉 安装 Scoop</h3><h4 id="🍑-安装在默认位置"><a href="#🍑-安装在默认位置" class="headerlink" title="🍑 安装在默认位置"></a>🍑 安装在默认位置</h4><p>默认安装在 <code>C:\Users\username\scoop</code> 路径下。</p>
+<p>执行命令：</p>
+<div class="code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">Invoke-Expression</span> (<span class="hljs-built_in">New-Object</span> System.Net.WebClient).DownloadString(<span class="hljs-string">&#x27;https://get.scoop.sh&#x27;</span>)</code></pre></div>
+
+<p>或是执行（更短的）：</p>
+<div class="code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">iwr</span> <span class="hljs-literal">-useb</span> get.scoop.sh | <span class="hljs-built_in">iex</span></code></pre></div>
+<div class="note note-info">
+            <p><a id="install"><strong>2022.11.17 更新：</strong></a></p><p>为加快 Scoop 的安装速度，主要是下载速度，使用代理进行加速下载。</p><ul><li><p><strong>fastgit</strong> 下载</p><ul><li><p>进入用户主目录：<code>cd ~</code></p></li><li><p>下载 <code>scoop_install.ps1</code>：</p> <div class="code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">curl</span> <span class="hljs-literal">-o</span> scoop_install.ps1 https://raw.fastgit.org/scoopinstaller/install/master/install.ps1</code></pre></div></li><li><p>修改 <code>scoop_install.ps1</code> 中文件下载地址：</p><div class="code-wrapper"><pre><code class="hljs powershell">(<span class="hljs-built_in">Get-Content</span> scoop_install.ps1).replace(<span class="hljs-string">&#x27;https://github.com/ScoopInstaller/&#x27;</span>, <span class="hljs-string">&#x27;https://download.fastgit.org//ScoopInstaller/&#x27;</span>) | <span class="hljs-built_in">Set-Content</span> scoop_install.ps1</code></pre></div></li><li><p>安装 Scoop：<code>./scoop_install.ps1</code></p></li><li><p>删除 <code>scoop_install.ps1</code>：<code>rm scoop_install.ps1</code></p></li></ul></li><li><p><strong>github proxy</strong> 下载</p><ul><li><p>进入用户主目录：<code>cd ~</code></p></li><li><p>下载 <code>scoop_install.ps1</code>：</p> <div class="code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">curl</span> <span class="hljs-literal">-o</span> scoop_install.ps1 https://ghproxy.com/https://raw.githubusercontent.com/scoopinstaller/install/master/install.ps1</code></pre></div></li><li><p>修改 <code>scoop_install.ps1</code> 中文件下载地址：</p><div class="code-wrapper"><pre><code class="hljs powershell">(<span class="hljs-built_in">Get-Content</span> scoop_install.ps1).replace(<span class="hljs-string">&#x27;https://github.com/ScoopInstaller/&#x27;</span>, <span class="hljs-string">&#x27;https://ghproxy.com/https://github.com/ScoopInstaller/&#x27;</span>) | <span class="hljs-built_in">Set-Content</span> scoop_install.ps1</code></pre></div></li><li><p>安装 Scoop：<code>./scoop_install.ps1</code></p></li><li><p>删除 <code>scoop_install.ps1</code>：<code>rm scoop_install.ps1</code></p></li></ul></li></ul>
+          </div>
+
+<h4 id="🍑-自定义安装目录"><a href="#🍑-自定义安装目录" class="headerlink" title="🍑 自定义安装目录"></a>🍑 自定义安装目录</h4><p>例如将 <code>Scoop</code> 安装在 <code>C:\Scoop</code> 路径下。</p>
+<p>需要添加该路径到<strong>用户变量</strong>中：</p>
+<div class="code-wrapper"><pre><code class="hljs powershell"><span class="hljs-variable">$env:SCOOP</span>=<span class="hljs-string">&#x27;C:\scoop&#x27;</span></code></pre></div>
+
+<div class="code-wrapper"><pre><code class="hljs powershell">[<span class="hljs-type">environment</span>]::setEnvironmentVariable(<span class="hljs-string">&#x27;SCOOP&#x27;</span>,<span class="hljs-variable">$env:SCOOP</span>,<span class="hljs-string">&#x27;User&#x27;</span>)</code></pre></div>
+
+<blockquote>
+<p>当然也可以添加到<strong>系统变量</strong>中：</p>
+<p>不过此时需要以<strong>管理员身份</strong>运行 <code>PowerShell</code> ，或是以<strong>管理员身份</strong>运行 <code>Windows Terminal</code>，再打开 <code>PowerShell</code> ，否则会报错：</p>
+<div class="code-wrapper"><pre><code class="hljs powershell">[<span class="hljs-type">environment</span>]::setEnvironmentVariable(<span class="hljs-string">&#x27;SCOOP&#x27;</span>,<span class="hljs-variable">$env:SCOOP</span>,<span class="hljs-string">&#x27;Machine&#x27;</span>)</code></pre></div>
+</blockquote>
+<blockquote>
+<p><span style="color:red;">添加完环境变量后需要重启 PowerShell 或 Terminal 等待变量生效。</span></p>
+</blockquote>
+<p>然后再执行安装指令：</p>
+<div class="code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">iwr</span> <span class="hljs-literal">-useb</span> get.scoop.sh | <span class="hljs-built_in">iex</span></code></pre></div>
+<div class="note note-info">
+            <p>安装方式同上，<a href="#install">点此跳转到新的安装方式</a></p>
+          </div>
+
+<h4 id="🍑-自定义全局应用安装目录"><a href="#🍑-自定义全局应用安装目录" class="headerlink" title="🍑 自定义全局应用安装目录"></a>🍑 自定义全局应用安装目录</h4><p>例如自定义将全局应用安装在 <code>C:\apps</code> 路径下：</p>
+<p>就需要将该目录添加到系统变量中，步骤同上文相同：</p>
+<ol>
+<li>😶‍🌫️ 以管理员身份运行</li>
+<li>😶‍🌫️ <code>$env:SCOOP_GLOBAL=&#39;C:\apps&#39;</code></li>
+<li>😶‍🌫️ <code>[environment]::setEnvironmentVariable(&#39;SCOOP_GLOBAL&#39;,$env:SCOOP_GLOBAL,&#39;Machine&#39;)</code></li>
+<li>😶‍🌫️ 安装指令：<code>scoop install -g &lt;app&gt;</code></li>
+</ol>
+<p>合起来就是：</p>
+<div class="code-wrapper"><pre><code class="hljs powershell"><span class="hljs-variable">$env:SCOOP_GLOBAL</span>=<span class="hljs-string">&#x27;C:\apps&#x27;</span>
+[<span class="hljs-type">environment</span>]::setEnvironmentVariable(<span class="hljs-string">&#x27;SCOOP_GLOBAL&#x27;</span>,<span class="hljs-variable">$env:SCOOP_GLOBAL</span>,<span class="hljs-string">&#x27;Machine&#x27;</span>)
+scoop install <span class="hljs-literal">-g</span> &lt;app&gt;</code></pre></div>
+
+<h3 id="🍉-使用-Scoop"><a href="#🍉-使用-Scoop" class="headerlink" title="🍉 使用 Scoop"></a>🍉 使用 Scoop</h3><p>查看 scoop 的命令：</p>
+<div class="code-wrapper"><pre><code class="hljs powershell">scoop help</code></pre></div>
+
+<p>查看命令的详细信息：</p>
+<div class="code-wrapper"><pre><code class="hljs powershell">scoop help &lt;command&gt;
+<span class="hljs-comment"># for example: scoop help install </span>
+<span class="hljs-comment"># For more detailed information on INSTALL</span></code></pre></div>
+
+<p>执行 <code>scoop help install </code>：</p>
+<div class="code-wrapper"><pre><code class="hljs powershell">Usage: scoop install &lt;app&gt; [<span class="hljs-type">options</span>]
+
+e.g. The usual way to install an app (uses your local <span class="hljs-string">&#x27;buckets&#x27;</span>):
+     scoop install git
+
+To install an app from a manifest at a URL:
+     scoop install https://raw.githubusercontent.com/ScoopInstaller/Main/master/bucket/runat.json
+
+To install an app from a manifest on your computer
+     scoop install \path\to\app.json
+
+Options:
+  <span class="hljs-literal">-g</span>, <span class="hljs-literal">--global</span>              Install the app globally
+  <span class="hljs-literal">-i</span>, <span class="hljs-literal">--independent</span>         Don<span class="hljs-string">&#x27;t install dependencies automatically</span>
+<span class="hljs-string">  -k, --no-cache            Don&#x27;</span>t use the download cache
+  <span class="hljs-literal">-u</span>, <span class="hljs-literal">--no-update-scoop</span>     Don<span class="hljs-string">&#x27;t update Scoop before installing if it&#x27;</span>s outdated
+  <span class="hljs-literal">-s</span>, <span class="hljs-literal">--skip</span>                Skip hash validation (use with caution!)
+  <span class="hljs-literal">-a</span>, <span class="hljs-literal">--arch</span> &lt;<span class="hljs-number">32</span>bit|<span class="hljs-number">64</span>bit&gt;  Use the specified architecture, <span class="hljs-keyword">if</span> the app supports it</code></pre></div>
+
+
+
+<h4 id="🍒-安装应用"><a href="#🍒-安装应用" class="headerlink" title="🍒 安装应用"></a>🍒 安装应用</h4><p>分为两种情况：</p>
+<h5 id="😃为当前用户安装"><a href="#😃为当前用户安装" class="headerlink" title="😃为当前用户安装"></a>😃为当前用户安装</h5><p>安装路径：<code>scoop\apps</code> </p>
+<blockquote>
+<p><code>scoop</code> 路径默认在 <code>C:\User\username</code> 。</p>
+<p>若是自定义安装路径，例如上文的位置，则在 <code>C:\Scoop</code> </p>
+</blockquote>
+<p>安装命令：</p>
+<div class="code-wrapper"><pre><code class="hljs powershell">scoop install &lt;app&gt;
+<span class="hljs-comment"># for example:</span>
+<span class="hljs-comment"># scoop install nano</span></code></pre></div>
+
+<h5 id="😃为所有用户安装"><a href="#😃为所有用户安装" class="headerlink" title="😃为所有用户安装"></a>😃为所有用户安装</h5><p>默认的安装路径：<code>C:\ProgramData\scoop</code></p>
+<p>若是如上文所示，自定义了全局应用安装目录，则安装路径：<code>C:\apps</code></p>
+<blockquote>
+<p>需要以<strong>管理员身份</strong>运行。</p>
+</blockquote>
+<p>安装命令：</p>
+<div class="code-wrapper"><pre><code class="hljs powershell">scoop install &lt;app&gt; <span class="hljs-literal">-g</span>
+<span class="hljs-comment"># for example:</span>
+<span class="hljs-comment"># scoop install nano -g</span></code></pre></div>
+
+<h4 id="🍒-卸载应用"><a href="#🍒-卸载应用" class="headerlink" title="🍒 卸载应用"></a>🍒 卸载应用</h4><h5 id="😃卸载某一程序"><a href="#😃卸载某一程序" class="headerlink" title="😃卸载某一程序"></a>😃卸载某一程序</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop uninstall &lt;app&gt;</code></pre></div>
+
+<h5 id="😃卸载程序并移除配置文件"><a href="#😃卸载程序并移除配置文件" class="headerlink" title="😃卸载程序并移除配置文件"></a>😃卸载程序并移除配置文件</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop uninstall &lt;app&gt; <span class="hljs-literal">-p</span></code></pre></div>
+
+<h5 id="😃卸载全局程序"><a href="#😃卸载全局程序" class="headerlink" title="😃卸载全局程序"></a>😃卸载全局程序</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop uninstall &lt;app&gt; <span class="hljs-literal">-g</span></code></pre></div>
+
+<h5 id="😃更多信息"><a href="#😃更多信息" class="headerlink" title="😃更多信息"></a>😃更多信息</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop help uninstall</code></pre></div>
+
+
+
+<h4 id="🍒-更新"><a href="#🍒-更新" class="headerlink" title="🍒 更新"></a>🍒 更新</h4><h5 id="😃更新-scoop-及所有-bucket-但不更新-app"><a href="#😃更新-scoop-及所有-bucket-但不更新-app" class="headerlink" title="😃更新 scoop 及所有 bucket 但不更新 app"></a>😃更新 scoop 及所有 bucket 但不更新 app</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop update</code></pre></div>
+
+<h5 id="😃更新某一-app"><a href="#😃更新某一-app" class="headerlink" title="😃更新某一 app"></a>😃更新某一 app</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop update &lt;app&gt;</code></pre></div>
+
+<h5 id="😃更新-scoop、bucket、app"><a href="#😃更新-scoop、bucket、app" class="headerlink" title="😃更新 scoop、bucket、app"></a>😃更新 scoop、bucket、app</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop update *</code></pre></div>
+
+<h5 id="😃更新全局-app"><a href="#😃更新全局-app" class="headerlink" title="😃更新全局 app"></a>😃更新全局 app</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop update &lt;app&gt; <span class="hljs-literal">-g</span></code></pre></div>
+
+<h5 id="😃更多信息-1"><a href="#😃更多信息-1" class="headerlink" title="😃更多信息"></a>😃更多信息</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop help update</code></pre></div>
+
+
+
+<h4 id="🍒-其他有用操作"><a href="#🍒-其他有用操作" class="headerlink" title="🍒 其他有用操作"></a>🍒 其他有用操作</h4><h5 id="😃查看已安装-app"><a href="#😃查看已安装-app" class="headerlink" title="😃查看已安装 app"></a>😃查看已安装 app</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop list</code></pre></div>
+
+<h5 id="😃查看可更新-app"><a href="#😃查看可更新-app" class="headerlink" title="😃查看可更新 app"></a>😃查看可更新 app</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop status</code></pre></div>
+
+<h5 id="😃查看某-app-主页"><a href="#😃查看某-app-主页" class="headerlink" title="😃查看某 app 主页"></a>😃查看某 app 主页</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop home &lt;app&gt;</code></pre></div>
+
+<h5 id="😃查看「已知库」"><a href="#😃查看「已知库」" class="headerlink" title="😃查看「已知库」"></a>😃查看「已知库」</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop bucket known</code></pre></div>
+
+<h5 id="😃添加「已知库」"><a href="#😃添加「已知库」" class="headerlink" title="😃添加「已知库」"></a>😃添加「已知库」</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop bucket add &lt;bucket&gt;</code></pre></div>
+
+<h5 id="😃查看已添加的库"><a href="#😃查看已添加的库" class="headerlink" title="😃查看已添加的库"></a>😃查看已添加的库</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop bucket list</code></pre></div>
+
+<h5 id="😃删除已添加的库"><a href="#😃删除已添加的库" class="headerlink" title="😃删除已添加的库"></a>😃删除已添加的库</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop bucket <span class="hljs-built_in">rm</span> &lt;bucket&gt;</code></pre></div>
+
+<h5 id="😃添加第三方库"><a href="#😃添加第三方库" class="headerlink" title="😃添加第三方库"></a>😃添加第三方库</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop bucket add &lt;bucket&gt; &lt;bucket_url&gt;</code></pre></div>
+
+<h5 id="😃删除已安装软件的旧版本"><a href="#😃删除已安装软件的旧版本" class="headerlink" title="😃删除已安装软件的旧版本"></a>😃删除已安装软件的旧版本</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop cleanup *</code></pre></div>
+
+<h5 id="😃清理软件缓存"><a href="#😃清理软件缓存" class="headerlink" title="😃清理软件缓存"></a>😃清理软件缓存</h5><p>通常是下载的软件安装包。</p>
+<p>以下命令清除所有缓存，即清空 <code>Scoop</code> 目录下的 <code>cache</code> 文件夹。</p>
+<div class="code-wrapper"><pre><code class="hljs powershell">scoop cache <span class="hljs-built_in">rm</span> *</code></pre></div>
+
+<h3 id="🍉-进阶"><a href="#🍉-进阶" class="headerlink" title="🍉 进阶"></a>🍉 进阶</h3><p>更多信息请查看 <a target="_blank" rel="noopener" href="https://github.com/ScoopInstaller/Scoop/wiki">官方文档</a>。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%B0%E5%BD%95/" class="category-chain-item">记录</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%B0%E5%BD%95/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Scoop/">#Scoop</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Windows 下包管理器 Scoop 的安装与使用</div>
+      <div>https://muxiner.github.io/using-scoop/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Muxiner</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年5月30日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/vscode-plugins/" title="Visual Studio Code 插件使用记录">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Visual Studio Code 插件使用记录</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/discrete-mathematics-set-knowledge/" title="离散数学笔记 —— 支配集、覆盖集、独立集与匹配">
+                        <span class="hidden-mobile">离散数学笔记 —— 支配集、覆盖集、独立集与匹配</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"Muxiner/muxiner.github.io","repo-id":"MDEwOlJlcG9zaXRvcnkzMTU5MTM1NzY=","category":"博客文章评论","category-id":"DIC_kwDOEtR1aM4CVjN6","theme-light":"light","theme-dark":"dark","mapping":"title","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,1198 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Muxiner">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="机器学习实验，使用决策树算法实现隐形眼镜数据的预测。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="决策树 —— 隐形眼镜数据集预测">
+<meta property="og:url" content="https://muxiner.github.io/ml-decision-tree/index.html">
+<meta property="og:site_name" content="Muxiner&#39;s Blog">
+<meta property="og:description" content="机器学习实验，使用决策树算法实现隐形眼镜数据的预测。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230841.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231217.png">
+<meta property="article:published_time" content="2022-05-14T15:07:20.000Z">
+<meta property="article:modified_time" content="2022-06-28T14:39:30.000Z">
+<meta property="article:author" content="Muxiner">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230841.png">
+  
+  
+  
+  <title>决策树 —— 隐形眼镜数据集预测 - Muxiner&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"muxiner.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":5,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Muxiner&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="决策树 —— 隐形眼镜数据集预测"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Muxiner
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-05-14 23:07" pubdate>
+          2022年5月14日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          59 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">决策树 —— 隐形眼镜数据集预测</h1>
+            
+              <p class="note note-success">
+                
+                  
+                    本文最后更新于：2022年6月28日星期二晚上10点39分
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="实验原理"><a href="#实验原理" class="headerlink" title="实验原理"></a>实验原理</h2><hr>
+<h3 id="决策树思想"><a href="#决策树思想" class="headerlink" title="决策树思想"></a>决策树思想</h3><p>决策树学习的本质：<strong>从训练数据集中归纳出一组分类规则</strong>。</p>
+<blockquote>
+<ul>
+<li><p>可能这种决策规则一个也没有</p>
+</li>
+<li><p>也可能有多个决策规则</p>
+</li>
+</ul>
+</blockquote>
+<p>此时需要选择一个<strong>与数据集矛盾较小</strong>的决策树规则，同时有需要很好的泛化效果。</p>
+<h3 id="学习算法原理"><a href="#学习算法原理" class="headerlink" title="学习算法原理"></a>学习算法原理</h3><ol>
+<li>构造<strong>根节点</strong>，将<strong>所有的训练数据集放入根节点</strong></li>
+<li>选择一个<strong>最优特征</strong>，将训练集<strong>分割成子集</strong>，使得训练及在当前条件下有最好的分类</li>
+<li>如果这些子集已经可能很好的分类，那么构建叶子节点；如果还不能很好的分类，继续对其分割，构造相应的节点</li>
+<li><strong>重复（递归）</strong>进行上述步骤，直至所有训练数据集<strong>被基本正确分类</strong>，或者<strong>没有合适的特征</strong>为止</li>
+</ol>
+<p>经过以上过程，决策树可能对训练集有了很好的分类能力，但是对未知数据不一定同样有很好的分类效果。</p>
+<p>所以，为了避免<strong>过拟合</strong>现象，还需要对生成的树进行<strong>剪枝</strong>，将树变得更简单，以实现更好的泛化能力。</p>
+<p>从上面可以看出，一个决策树学习算法需要包括<strong>特征选取</strong>、<strong>决策树生成</strong>和<strong>决策树剪枝</strong>过程。</p>
+<blockquote>
+<p>常用的学习算法有：</p>
+<ul>
+<li><p><code>ID3</code> [Quinlan, 1986]：最优特征选择标准是<strong>信息增益</strong></p>
+</li>
+<li><p><code>ID4.5</code> [Quinlan, 1993]：最优特征选择标准是<strong>信息增益率</strong></p>
+</li>
+<li><p><code>CART</code> [Breiman, 1984]：最有特征选择标准是<strong>节点方差的大小</strong></p>
+</li>
+</ul>
+</blockquote>
+<h3 id="决策树学习基本算法"><a href="#决策树学习基本算法" class="headerlink" title="决策树学习基本算法"></a>决策树学习基本算法</h3><h3 id="信息增益率"><a href="#信息增益率" class="headerlink" title="信息增益率"></a>信息增益率</h3><p>增益率（gain ratio）<br>$$<br>Gain_ratio(D,a)&#x3D;\frac{Gain(D,a)}{IV(a)}<br>$$<br>其中<br>$$<br>IV(a)&#x3D;-\sum_{v&#x3D;1}^{V}\frac{|D^v|}{|D|}log_2\frac{|D^v|}{|D|}<br>$$<br>称为属性 a 的“固有值”（intrinsic value）[Quinlan, 1993]。</p>
+<p>属性 a 的可能取值数目越多（即 V 越大），则 IV(a) 的值通常会越大。</p>
+<blockquote>
+<p>近看上述公式，并不是很明白增益率如何计算。查阅资料后知，分为几步：</p>
+<ol>
+<li>计算整体的信息熵<br>$$<br>H(X) &#x3D; -\sum_{i &#x3D; 1}^{m}p_ilog_2(p_i)<br>$$</li>
+</ol>
+<ul>
+<li>$m$: 训练数据集结果的标签数</li>
+<li>$p_i$: 第 $i$ 类标签的比例</li>
+</ul>
+<ol start="2">
+<li>计算某特征的条件熵<br>$$<br>H(X|Y)&#x3D;\sum_{y\in Y}p(y)H(X|Y&#x3D;y)<br>$$</li>
+</ol>
+<ul>
+<li><p>$H(X|Y&#x3D;y)$: 该特征中某标签的条件熵<br>$$<br>H(X|Y &#x3D; y_i) &#x3D;-\sum_{i&#x3D;1}^{n}p_ilog_2(p_i)<br>$$</p>
+</li>
+<li><p>$n$: 在条件为该特征中某标签下，结果的标签数</p>
+</li>
+<li><p>$p_i$: 在条件为该特征中某标签下，第 $i$ 类结果标签的比例</p>
+</li>
+</ul>
+<ol start="3">
+<li><p>计算某特征的信息增益<br>$$<br>g(X,Y)&#x3D;H(X)-H(X|Y)<br>$$</p>
+</li>
+<li><p>计算某特征的内部信息（Intrinsic Information of an Attribute）<br>其实就是<strong>特征的信息熵</strong><br>$$<br>Intl(X,Y)&#x3D;-\sum_{i&#x3D;1}^{m}\frac{|Y_i|}{|X|}log_2(\frac{|Y_i|}{|X|})<br>$$</p>
+</li>
+</ol>
+<ul>
+<li>$Y$: 表示某个特征的随机变量</li>
+<li>$Y_i$: 该特征的第 $i$  类的个数</li>
+<li>$X$: 表示样本的总个数</li>
+<li>$\frac{|Y_i|}{|X|}$: 表示该特征的第 $i$ 类占样本的比例</li>
+</ul>
+<ol start="5">
+<li>计算某特征的信息增益率<br>$$<br>g(X|Y)&#x3D;\frac{g(X,Y)}{Intl(X,yY)}<br>$$</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>结合实例理解请详见：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010916338/article/details/94653402">信息增益率</a></p>
+</blockquote>
+<h3 id="决策树算法框架"><a href="#决策树算法框架" class="headerlink" title="决策树算法框架"></a>决策树算法框架</h3><ol>
+<li><p><strong>决策树主函数</strong></p>
+<p>各类决策树的主函数都大同小异，本质上是一个<strong>递归函数</strong>。</p>
+<p>该函数的主要功能是按照某种规则生长出决策树的各个分支节点，并根据终止条件结束算法。</p>
+<p>一般来讲，主函数需要完成如下几个功能：</p>
+<ol>
+<li>输入需要分类的数据集和类别标签</li>
+<li>根据<strong>某种分类规则</strong>得到<strong>最优的划分特征</strong>，并创建特征的划分节点 —— 计算最优特征子函数</li>
+<li>按照该特征的每个取值<strong>划分数据</strong>集为若干部分 —— 划分数据集子函数</li>
+<li>根据划分子函数的计算结果构建出新的节点，作为树生长出的新分支</li>
+<li><strong>检验是否符合递归的终止条件</strong></li>
+<li>将划分的新节点包含的数据集和类别标签作为输入，<strong>递归执行</strong>上述步骤。</li>
+</ol>
+</li>
+<li><p><strong>计算最优特征子函数</strong></p>
+<p>计算最优特征子函数是除主函数外最重要的函数。</p>
+<p>每种决策树之所以不同，一般都是因为<strong>最优特征选择的标准</strong>不同，不同的标准导致不同类型的决策树。如：</p>
+<blockquote>
+<ul>
+<li><p><code>ID3</code> [Quinlan, 1986]：最优特征选择标准是<strong>信息增益</strong></p>
+</li>
+<li><p><code>ID4.5</code> [Quinlan, 1993]：最优特征选择标准是<strong>信息增益率</strong></p>
+</li>
+<li><p><code>CART</code> [Breiman, 1984]：最有特征选择标准是<strong>节点方差的大小</strong></p>
+</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>划分数据集子函数</strong></p>
+<p>划分数据集函数的主要功能是分隔数据集，有的需要删除某个特征轴所在的数据列，返回剩余的数据集；有的干脆将数据集一分为二。</p>
+</li>
+<li><p><strong>分类器</strong></p>
+<p>所有的机器学习算法都要勇于分类或回归预测。</p>
+<p>决策树的分类器就是通过遍历整个决策树，使测试集数据找到决策树中叶子节点对应的类别标签。这个标签就是返回的结果。</p>
+</li>
+</ol>
+<h2 id="数据集介绍"><a href="#数据集介绍" class="headerlink" title="数据集介绍"></a>数据集介绍</h2><hr>
+<ul>
+<li><p><strong>数据集</strong>：<code>隐形眼镜数据集/lenses_data.txt</code><br>共有 24 个样本:</p>
+<ul>
+<li>4 个<strong>输入变量</strong>(数据集中第一列为<strong>样本编号</strong>)</li>
+<li>1 个输出变量(数据集中最后一列)</li>
+</ul>
+</li>
+<li><p><strong>数据集信息</strong>:</p>
+<ul>
+<li>3 类结果标签：<ul>
+<li><code>1</code>：患者应佩戴硬隐形眼镜</li>
+<li><code>2</code>：患者应佩戴软性隐形眼镜</li>
+<li><code>3</code>：患者不应佩戴隐形眼镜</li>
+</ul>
+</li>
+<li>4 类特征及其标签<ul>
+<li>年龄：<ul>
+<li><code>1</code>：青年</li>
+<li><code>2</code>：中年</li>
+<li><code>3</code>：老年</li>
+</ul>
+</li>
+<li>症状：<ul>
+<li><code>1</code>：近视</li>
+<li><code>2</code>：远视</li>
+</ul>
+</li>
+<li>散光：<ul>
+<li><code>1</code>：否</li>
+<li><code>2</code>：是</li>
+</ul>
+</li>
+<li>眼泪数量：<ul>
+<li><code>1</code>：减少</li>
+<li><code>2</code>：正常</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>详见 <code>隐形眼镜数据集/lenses_names.txt</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h2><hr>
+<ul>
+<li><code>Python</code> 版本：<code>Python 3.6</code></li>
+<li>编辑器：<code>PyCharm</code></li>
+<li>扩展包：<code>numpy</code>、<code>pandas</code>、<code>matplotlib</code> 等<strong>基础扩展包</strong><blockquote>
+<p>不可使用 <code>sklearn</code>、<code>kreas</code> 等<strong>机器学习包</strong></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="实验要求"><a href="#实验要求" class="headerlink" title="实验要求"></a>实验要求</h2><hr>
+<ol>
+<li>采用 <code>C4.5</code> 算法建立决策树模型</li>
+<li>将每个特征的信息增益率打印输出</li>
+<li>输出最后建立的决策树模型结构图（可以用 <code>字典结构</code> 表示，也可以用 <code>matplotlib</code> 等图形库绘制出树形图）<blockquote>
+<ul>
+<li>字典表示：<img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230841.png" srcset="/img/loading.gif" lazyload></li>
+<li>树形图表示：   <img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231217.png" srcset="/img/loading.gif" lazyload width="60%"/></li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<h2 id="实验代码详解"><a href="#实验代码详解" class="headerlink" title="实验代码详解"></a>实验代码详解</h2><hr>
+<h3 id="读取数据文件"><a href="#读取数据文件" class="headerlink" title="读取数据文件"></a>读取数据文件</h3><p>简单的使用 <code>numpy.loadtxt</code> 读取 <code>txt</code> 的后五行数据。</p>
+<p>一开始读取完数据后还分一下训练集、测试集的，后面发现，这数据是有规律的，就像是四类特征的标签进行了笛卡尔积运算一行，结果的标签也具有一点点的规律。</p>
+<p>又仔细看了看<strong>实验要求</strong>，没说需要预测，只是说需要 <strong>信息增益率</strong> + <strong>决策树结构</strong>。</p>
+<p>所以就，不分训练集和测试集。</p>
+<h3 id="最优特征子函数-——-信息增益率计算"><a href="#最优特征子函数-——-信息增益率计算" class="headerlink" title="最优特征子函数 —— 信息增益率计算"></a>最优特征子函数 —— 信息增益率计算</h3><p>该部分主要是计算各特征的信息增益率，并进行比较，<strong>返回</strong>信息增益率最大的特征的<strong>索引</strong>。</p>
+<p>该计算也分为几步：</p>
+<ol>
+<li>计算标签信息熵：对应函数 <code>get_info_entropy(x)</code></li>
+<li>计算条件信息熵：对应函数 <code>get_conditional_info_entropy(feature, x)</code></li>
+<li>计算信息增益率：对应函数 <code>get_info_gain_ratio(feature, x)</code></li>
+<li><strong>获取最佳信息增益率的索引</strong>：对应函数 <code>get_best_feature(data, label, is_print)</code></li>
+</ol>
+<blockquote>
+<p>计算均按照上述公式</p>
+</blockquote>
+<h3 id="数据集划分子函数"><a href="#数据集划分子函数" class="headerlink" title="数据集划分子函数"></a>数据集划分子函数</h3><p>该部分就是在递归时，获取作为递归参数 —— 数据集。</p>
+<p>该数据集的特征有：</p>
+<ul>
+<li>缺少上一次递归时最佳特征所在的那一列</li>
+<li>缺少的这一列的值均相同</li>
+</ul>
+<blockquote>
+<p>就是：</p>
+<p>该函数会根据最佳特征的标签的情况将数据集划分为 $m$ 类。</p>
+<p>$m$ 是最佳特征标签的个数。</p>
+<p>每类子数据集都是最佳特征标签相同的其他特征数据的集合。</p>
+</blockquote>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">split_dataset</span>(<span class="hljs-params">data, index, value</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    对数据集进行分片</span>
+<span class="hljs-string">    :param data: 需要分片的数据集</span>
+<span class="hljs-string">    :param index: 新数据集不需要的某列的索引</span>
+<span class="hljs-string">    :param value: 用于确定新数据集需要某行在 某列[index]对应的值</span>
+<span class="hljs-string">    :return: 新的数据集</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    has_split_dataset = []
+    <span class="hljs-keyword">for</span> col_data <span class="hljs-keyword">in</span> data:
+        <span class="hljs-comment"># 选择特定行的数据进行切片</span>
+        <span class="hljs-keyword">if</span> col_data[index] == value:
+            <span class="hljs-comment"># 取 第 index 个前的所有元素</span>
+            has_split_col = col_data[:index].tolist()
+            <span class="hljs-comment"># 再加上第 index 个后面的所有元素</span>
+            has_split_col.extend(col_data[index + <span class="hljs-number">1</span>:].tolist())
+            <span class="hljs-comment"># 再将其加入 新的 数据集</span>
+            has_split_dataset.append(has_split_col)
+    <span class="hljs-keyword">return</span> np.array(has_split_dataset)</code></pre></div>
+
+<h3 id="决策树主函数"><a href="#决策树主函数" class="headerlink" title="决策树主函数"></a>决策树主函数</h3><p>获取数据集中的标签数据：<code>labels = [item[-1] for item in data]</code></p>
+<h4 id="递归终止条件"><a href="#递归终止条件" class="headerlink" title="递归终止条件"></a>递归终止条件</h4><ol>
+<li><p>子节点的样本属于同一类标签</p>
+<p>返回该类标签</p>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">if</span> <span class="hljs-number">1</span> == <span class="hljs-built_in">len</span>(<span class="hljs-built_in">set</span>(labels)):
+    <span class="hljs-keyword">return</span> labels[<span class="hljs-number">0</span>]</code></pre></div></li>
+<li><p>子节点样本的特征标签相同，或是没有了样本</p>
+<p> 返回出现次数最多的标签</p>
+ <div class="code-wrapper"><pre><code class="hljs python">
+    <span class="hljs-comment"># 特征集为空 或是 特征集上的取值相同，停止分类</span>
+    <span class="hljs-comment"># 返回出现次数最多的 标签</span>
+    <span class="hljs-comment"># len(data[0]) == 1 就是数据集里只剩下标签，没有特征了</span>
+    <span class="hljs-comment"># len(set(data[:, 0])) == 1 特征集上的取值相同</span>
+    <span class="hljs-comment"># not feature_label 特征集空了</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(data[<span class="hljs-number">0</span>]) == <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> <span class="hljs-built_in">len</span>(<span class="hljs-built_in">set</span>(data[:, <span class="hljs-number">0</span>])) == <span class="hljs-number">1</span>:
+        <span class="hljs-keyword">return</span> most_label(labels)
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">most_label</span>(<span class="hljs-params">data</span>):
+        <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">        返回，出现次数最大多的标签</span>
+<span class="hljs-string">        &quot;&quot;&quot;</span>
+        label = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">set</span>(data))
+        most = <span class="hljs-string">&#x27;&#x27;</span>
+        most_count = <span class="hljs-number">0</span>
+        <span class="hljs-keyword">for</span> item_label <span class="hljs-keyword">in</span> label:
+            count = <span class="hljs-number">0</span>
+            <span class="hljs-keyword">for</span> item_data <span class="hljs-keyword">in</span> data:
+                <span class="hljs-keyword">if</span> item_label == item_data:
+                    count += <span class="hljs-number">1</span>
+            most = item_label <span class="hljs-keyword">if</span> count &gt; most_count <span class="hljs-keyword">else</span> most
+            most_count = count
+        <span class="hljs-keyword">return</span> most
+    ```Glasses
+
+<span class="hljs-number">3.</span> 特征集为空
+   
+   返回出现次数最多的标签
+
+   ```python
+       <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> feature_label:
+           <span class="hljs-keyword">return</span> most_label(labels)</code></pre></div></li>
+</ol>
+<h4 id="创建节点"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点</h4><ul>
+<li>通过最优特征子函数获取最优特征的索引</li>
+<li>根据索引从特征集中获取最有特征</li>
+<li>将最优特征添加到决策树中</li>
+<li>删除特征集中的最优特征<blockquote>
+<p>该删除并非真的删除，而是进入递归时，进入递归的特征集不包含最优特征</p>
+</blockquote>
+</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 从特征标签中选择最优划分标签</span>
+<span class="hljs-comment"># 选择最优标签</span>
+best_index = get_best_feature(data[:, <span class="hljs-number">0</span>:-<span class="hljs-number">1</span>], np.array(labels), <span class="hljs-literal">False</span>)
+<span class="hljs-comment"># 获取最优的标签</span>
+best_feature_label = feature_label[best_index]
+<span class="hljs-comment"># 根据最优特征的标签生成树</span>
+decision_tree = &#123;best_feature_label: &#123;&#125;&#125;
+<span class="hljs-comment"># 删除已使用的标签</span>
+<span class="hljs-comment"># del (feature_label[best_index])</span></code></pre></div>
+
+<h4 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h4><ul>
+<li>获取数据集中最优特征的所有数据</li>
+<li>根据数据获取特征标签</li>
+<li>根据特征标签创建分支</li>
+<li>进入递归：<ul>
+<li>划分数据集，作为递归中的数据集参数</li>
+<li>划分特征集，作为递归中的特征集参数</li>
+</ul>
+</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 得到训练集中所有最优特征的标签</span>
+feat_value = [item[best_index] <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> data]
+<span class="hljs-comment"># 去掉重复值</span>
+<span class="hljs-keyword">for</span> value <span class="hljs-keyword">in</span> <span class="hljs-built_in">set</span>(feat_value):
+    decision_tree[best_feature_label][value] = create_decision_tree(
+        split_dataset(data, best_index, value), 
+        split_feature(feature_label, best_index))</code></pre></div>
+<p>两个划分函数：</p>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">split_dataset</span>(<span class="hljs-params">data, index, value</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    对数据集进行分片</span>
+<span class="hljs-string">    :param data: 需要分片的数据集</span>
+<span class="hljs-string">    :param index: 新数据集不需要的某列的索引</span>
+<span class="hljs-string">    :param value: 用于确定新数据集需要某行在 某列[index]对应的值</span>
+<span class="hljs-string">    :return: 新的数据集</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    has_split_dataset = []
+    <span class="hljs-keyword">for</span> col_data <span class="hljs-keyword">in</span> data:
+        <span class="hljs-comment"># 选择特定行的数据进行切片</span>
+        <span class="hljs-keyword">if</span> col_data[index] == value:
+            <span class="hljs-comment"># 取 第 index 个前的所有元素</span>
+            has_split_col = col_data[:index].tolist()
+            <span class="hljs-comment"># 再加上第 index 个后面的所有元素</span>
+            has_split_col.extend(col_data[index + <span class="hljs-number">1</span>:].tolist())
+            <span class="hljs-comment"># 再将其加入 新的 数据集</span>
+            has_split_dataset.append(has_split_col)
+    <span class="hljs-keyword">return</span> np.array(has_split_dataset)
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">split_feature</span>(<span class="hljs-params">label, index</span>):
+    error_deal = []
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(label)):
+        <span class="hljs-keyword">if</span> i != index:
+            error_deal.append(label[i])
+    <span class="hljs-keyword">return</span> error_deal</code></pre></div>
+
+<h4 id="返回决策树"><a href="#返回决策树" class="headerlink" title="返回决策树"></a>返回决策树</h4><p>当分支创建完毕后，就返回决策树。</p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><hr>
+<p>实验结果输出<strong>各特征的信息增益率</strong>和<strong>决策树模型</strong>（<code>元组结构</code>）。</p>
+<p>信息增益率：</p>
+<div class="code-wrapper"><pre><code class="hljs txt">第 1 个特征的信息增益率为 0.02485642633702430
+第 2 个特征的信息增益率为 0.03951083542356582
+第 3 个特征的信息增益率为 0.37700523001147723
+第 4 个特征的信息增益率为 0.54879494069539858</code></pre></div>
+
+<p>决策树模型（手动进行了格式化处理）：</p>
+<div class="code-wrapper"><pre><code class="hljs txt">&#123;
+    &#x27;眼泪数量&#x27;: 
+    &#123;
+        1: 3, 
+        2: 
+        &#123;
+            &#x27;散光&#x27;: 
+            &#123;
+                1: 
+                &#123;
+                    &#x27;年龄&#x27;: 
+                    &#123;
+                        1: 2, 
+                        2: 2, 
+                        3: 
+                        &#123;
+                            &#x27;症状&#x27;: 
+                            &#123;
+                                1: 3, 
+                                2: 2
+                            &#125;
+                        &#125;
+                    &#125;
+                &#125;, 
+                2: 
+                &#123;
+                    &#x27;症状&#x27;: 
+                    &#123;
+                        1: 1, 
+                        2: 
+                        &#123;
+                            &#x27;年龄&#x27;: 
+                            &#123;
+                                1: 1, 
+                                2: 3, 
+                                3: 3
+                            &#125;
+                        &#125;
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre></div>
+<blockquote>
+<p>文件中显示的为：</p>
+<p>{‘眼泪数量’: {1: 3, 2: {‘散光’: {1: {‘年龄’: {1: 2, 2: 2, 3: {‘症状’: {1: 3, 2: 2}}}}, 2: {‘症状’: {1: 1, 2: {‘年龄’: {1: 1, 2: 3, 3: 3}}}}}}}}</p>
+</blockquote>
+<blockquote>
+<p>结果均输出在 <code>output.txt</code> 文件中。</p>
+</blockquote>
+<h2 id="实验心得体会"><a href="#实验心得体会" class="headerlink" title="实验心得体会"></a>实验心得体会</h2><hr>
+<p>实验就，很有意思。</p>
+<h3 id="遇到的问题及解决办法"><a href="#遇到的问题及解决办法" class="headerlink" title="遇到的问题及解决办法"></a>遇到的问题及解决办法</h3><hr>
+<p>主要是递归终止条件上的问题，未能很好的明确递归终止的条件，经过一番查询及自己思考后，明确了四个条件：</p>
+<ol>
+<li><strong>子节点的样本属于同一类标签</strong>：返回该类标签</li>
+<li><strong>子节点样本的特征标签相同</strong>：返回出现次数最多的标签</li>
+<li><strong>子节点没有样本</strong>：返回出现次数最多的标签</li>
+<li><strong>特征集为空</strong>：返回出现次数最多的标签</li>
+</ol>
+<p>总的就算两种情况下的终止条件：</p>
+<ol>
+<li>返回出现次数最多的标签：<strong>子节点样本的特征标签相同</strong>、<strong>子节点没有样本</strong>、<strong>特征集为空</strong></li>
+<li>返回该类标签：<strong>子节点的样本属于同一类标签</strong></li>
+</ol>
+<p>还有一个问题就是，也是浪费时间比较多的问题：<strong>特征集在递归中会提前为空，以至于在子节点中的样本还没有完全分类时，就提前结束了递归，返回了决策树</strong>。</p>
+<p>此时的实验结果是：</p>
+<p>{‘眼泪数量’:{1: 3,2:{‘散光’:{1:{‘年龄’:{1: 2,2: 2,3:{‘症状’:{1: 3,2: 2}}}},2: 1}}}}</p>
+<p>仔细审查后发现是特征集在里层递归改变后，外层的递归中也发生了改变。虽然发现了上述问题的原因，但是并没有明白导致该问题是因为什么。</p>
+<p>经过一番思索获得了解决问题的方法，然后得到下面的结果：</p>
+<p>{‘眼泪数量’: {1: 3, 2: {‘散光’: {1: {‘年龄’: {1: 2, 2: 2, 3: {‘年龄’: {1: 3, 2: 2}}}}, 2: {‘症状’: {1: 1, 2: {‘年龄’: {1: 1, 2: 3, 3: 3}}}}}}}}</p>
+<p>{‘眼泪数量’: {1: 3, 2: {‘散光’: {1: {‘年龄’: {1: 2, 2: 2, 3: {‘症状’: {1: 3, 2: 2}}}}, 2: {‘年龄’: {1: 1, 2: {‘症状’: {1: 1, 2: 3, 3: 3}}}}}}}}</p>
+<p>但是并不能解决问题。</p>
+<p>后面根据自己仔细地、一步步试错，发现是特征集的数据类型，在经过删除操作后，会改变其他所有后续执行中的特征集。</p>
+<p>这也就是为什么“特征集在递归中会提前为空，以至于在子节点中的样本还没有完全分类时，就提前结束了递归，返回了决策树”。</p>
+<p>此时便想起特征集的内存地址都是一样的，无论什么操作都是对同一内存地址上的数据进行操作，也就导致这里动、那里变，就导致“特征集提前为空”。</p>
+<p>然后查看特征集的数据类型 —— <strong>list，列表</strong>，一查其存储方式，果然如此</p>
+<blockquote>
+<p>列表如何存储？</p>
+<p>列表本质是动态的数组，列表存储的是每个元素在内存中的地址（即引用），当列表中空白占位低于1&#x2F;3时，会在内存中开辟一块更大的空间，并将旧列表中存储的地址复制到新列表中，旧列表则被销毁，这样就实现了扩容。因为列表存储的是元素的引用这个特性，而引用所占的内存空间是相同的，这样便可以同时存放不同类型的数据了。</p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><hr>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/126294494">决策树算法</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sumatch/article/details/103680771">(python)列表和字典的存储方式</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d153130b813f">决策树的基本结构及三个终止条件</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010916338/article/details/94653402">信息增益率</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/EnzoDin/p/12417184.html">机器学习-决策树的基本思想</a></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/">#Python</a>
+      
+        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">#机器学习</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>决策树 —— 隐形眼镜数据集预测</div>
+      <div>https://muxiner.github.io/ml-decision-tree/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Muxiner</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年5月14日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/ml-lda/" title="线性判别分析 —— 献血预测">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">线性判别分析 —— 献血预测</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/ubuntu-update-failed/" title="【水博客】Ubuntu Update 失败：Release file is not valid yet">
+                        <span class="hidden-mobile">【水博客】Ubuntu Update 失败：Release file is not valid yet</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"Muxiner/muxiner.github.io","repo-id":"MDEwOlJlcG9zaXRvcnkzMTU5MTM1NzY=","category":"博客文章评论","category-id":"DIC_kwDOEtR1aM4CVjN6","theme-light":"light","theme-dark":"dark","mapping":"title","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
