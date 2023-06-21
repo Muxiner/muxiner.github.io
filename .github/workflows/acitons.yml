@@ -55,5 +55,8 @@ jobs:
     # hexo deploy 部署博客文件
     - name: Deploy Public Blog
       run: | 
-        npx hexo deploy
+        # npx hexo deploy
+        git add -f public/
+        git commmit -m "😁go to master"
+        git push origin main:master
         
