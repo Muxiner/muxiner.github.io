@@ -54,9 +54,13 @@ jobs:
 
     # hexo deploy 部署博客文件
     - name: Deploy Public Blog
+      env: 
+        REPO: github.com/muxiner/muxiner.github.io
+        GH_TOKEN: ${{ secrets.GH_TOKEN }} 
       run: | 
         # npx hexo deploy
         git add -f public/
         git commit -m "😁go to master"
-        git push --force --quiet source:master
+        # git push --force --quiet source:master
+        git push --force --quiet "https://$GH_TOKEN@$REPO" source:master
         
