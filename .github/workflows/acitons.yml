@@ -58,5 +58,5 @@ jobs:
         # npx hexo deploy
         git add -f public/
         git commmit -m "😁go to master"
-        git push origin main:master
+        git push origin source:master
         
