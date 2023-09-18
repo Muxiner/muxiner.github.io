@@ -236,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          169 字
+          2.4k 字
         
       </span>
     
@@ -247,7 +247,7 @@
         
         
         
-          2 分钟
+          21 分钟
         
       </span>
     
@@ -303,6 +303,89 @@
 <h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h4><div class="note note-danger">
             <p><strong>To Be Continued:</strong></p><p>还没写完涅。</p>
           </div>
+
+<p>假装直接安装 Anaconda 一步到位。</p>
+<h3 id="VS-code-python"><a href="#VS-code-python" class="headerlink" title="VS code + python"></a>VS code + python</h3><h4 id="下载安装-vscode"><a href="#下载安装-vscode" class="headerlink" title="下载安装 vscode"></a>下载安装 vscode</h4><p><strong>Visual Studio Code</strong> 下载地址：<a target="_blank" rel="noopener" href="https://code.visualstudio.com/Download">Visual Studio Code | Download</a>.</p>
+<p>一般选择的都是 <code>Windows</code> + <code>User Installer</code> + <code>x64</code>，选择 <code>Windows</code> 下面 <code>User Installer</code> 后面的 <code>x64</code> 点一下就开始下载。</p>
+<p>后面安装看界面就行，按步骤安装。</p>
+<h4 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h4><p>主要下载的是用于 python 的扩展和汉化扩展。</p>
+<p>扩展下载位置是 vscode 左边应该是第四个图标 —— 有四个正方形，三个挨在一起，第四个在右上角的图标，那就是扩展管理的地方。</p>
+<p>安装下述扩展的话，就，直接先搜索，然后找到名称对应的点击<code>安装</code>，即可进行安装。</p>
+<p>需要安装的扩展：</p>
+<ul>
+<li>Chinese (Simplified) (简体中文) Language Pack for Visual Studio Code</li>
+<li>Python</li>
+</ul>
+<p>安装完上述的扩展，那就行了。</p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>现在配置 vscode 让其可以轻易编辑 python 代码并执行。</p>
+<p>我直接按照 vscode 官方文档的步骤开始操作。</p>
+<p>首先，打开你的<code>终端</code>，执行命令：</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> hello
+<span class="hljs-built_in">cd</span> hello
+code .</code></pre></div>
+
+<p>意思为创建 hello 文件夹，进入 hello 的路径，并使用 vscode 打开 hello 文件夹。</p>
+<h5 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h5><p>文档上说，Python 开发人员最佳实践是使用特殊的项目 - 即使用<strong>虚拟环境</strong>。</p>
+<p>激活该环境后，随后安装的任何软件包都将与其他环境（包括全局解释器环境）隔离，从而减少了软件包版本冲突可能带来的许多复杂性。</p>
+<p>可以使用 <code>Venv</code> 在 VS Code 中创建非全局虚拟环境。</p>
+<p>然后就是打开命令面板 （Ctrl+Shift+P），开始键入要搜索的“Python： 创建环境”命令，然后选择该命令。</p>
+<p>再选择下面中含有 Venv 字样的一行。</p>
+<p>接下来就是选择 Python 解释器：随便选择下面中的一个就行。</p>
+<p>稍微等一会，虚拟环境就创建成功了，具体进度可以看看 vscode 右下角的的提示窗口，直到出现文字：已选择以下环境~，等等。</p>
+<p>此时可以看见左边的资源管理器中出现了一个名为 <code>.venv</code> 的文件夹，如果没看到资源管理器，那就按快捷键：<code>Ctrl + Shift + E</code>。</p>
+<h5 id="创建-py-文件"><a href="#创建-py-文件" class="headerlink" title="创建 py 文件"></a>创建 py 文件</h5><p>现在就可以开始创建 py 文件，并编辑 py 文件了。</p>
+<p>尽你所能在左边的资源管理器创建一个文件，名为：<code>hello.py</code>。</p>
+<p>然后你就可以开始编辑 <code>hello.py</code> 文件，如果知道在哪里编辑的话，不知道就算了。</p>
+<p>编辑的内容，如下：</p>
+<div class="code-wrapper"><pre><code class="hljs python">msg = <span class="hljs-string">&quot;Hello World, Hello Python.&quot;</span>
+<span class="hljs-built_in">print</span>(msg)</code></pre></div>
+
+<p>可以直接复制，也可以自己敲。完成后，按 <code>Ctrl + S</code> 保存。</p>
+<p>接下来就是运行了，现在 vscode 又好了很多，它在右上角有个图标，像是播放器的播放图标一样的三角形，点击一下就可以运行了。此时你就发现 vscode 下方出现了终端窗口，并且还出现了字样：<code>Hello World, Hello Python.</code>。 那就说明运行成功了。</p>
+<p>也可以在编辑界面中鼠标右键，选择下面的 <code>运行 Python</code>，再选择 <code>在终端中运行 Python 文件</code>。</p>
+<p>同样可以出现上述结果。</p>
+<h5 id="配置调试器"><a href="#配置调试器" class="headerlink" title="配置调试器"></a>配置调试器</h5><p>一般来说，编辑代码还是需要调试的，所谓调试，就是 py 文件中设置一个断点，当我们以调试模式运行 py 文件时，运行到设置断点位置的代码时，就会暂停，方便我们查看程序后续的执行情况 —— 即和数据的变化情况，查看是否符合我们想编辑出的代码的预期结果。</p>
+<p>如何设置断点呢：就在代码那行左边的数字的左边位置点一下，就会出现一个<strong>红点</strong>，出现红点后，就说明我们在这个位置设置了一个断点。</p>
+<p>如何以调试模式运行呢：按 <code>F5</code>，或是 vscode 左上角点击<code>运行</code>，选择<code>启动调试</code>。（按 F5 没有效果的话，试试按键盘中的 Fn + F5，有些笔记本需要这样，因为设置了 Fn 功能按键）</p>
+<p>此时，出现选择项 —— <code>选择调试配置</code>，直接选择第一个 —— <code>Python 文件</code>。</p>
+<p>不出意外的话，就会发现，界面发生了变化：</p>
+<ul>
+<li>左边资源管理器位置变成了变量</li>
+<li>编辑界面上方出现了几个按钮 —— 分别表示 —— 继续执行、逐过程执行、单步调试、单步跳出、重启（重新启动调试）、停止。<ul>
+<li>继续执行：讲剩下的代码执行完</li>
+<li>逐过程执行：将过程视为一个基本单位来执行，执行完一个语句后再继续执行下一个语句</li>
+<li>单步调试：一次执行一个语句</li>
+<li>单步跳出：跳出函数内部</li>
+</ul>
+</li>
+<li>还有就是，最下面的一行变了颜色</li>
+</ul>
+<p>我们还可使用 <code>调试控制台</code> 使用变量（调试控制台的位置在下面位置，有着调试控制台的文字，点一下就行）：</p>
+<h5 id="安装和使用包（packages）"><a href="#安装和使用包（packages）" class="headerlink" title="安装和使用包（packages）"></a>安装和使用包（packages）</h5><p>安装包呢，在下方的终端执行：<code>py -m pip install &lt;package name&gt;</code>，将 <code>&lt;package name&gt;</code> 替换为想要安装的包，如安装 <code>numpy</code>：<code>py -m pip install numpy</code>。</p>
+<p>这是在虚拟环境下安装包。</p>
+<p>使用呢就是：<code>import numpy as np</code>，意为，导入名为 <code>numpy</code> 的包，并将其命名为 <code>np</code> —— 即，下文中，可以使用 <code>ny</code> 代指 <code>numpy</code> 进行使用。</p>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+msg = <span class="hljs-string">&quot;Roll a dice&quot;</span>
+<span class="hljs-built_in">print</span>(msg)
+
+<span class="hljs-built_in">print</span>(np.random.randint(<span class="hljs-number">1</span>,<span class="hljs-number">9</span>))</code></pre></div>
+
+<p>执行结果：</p>
+<div class="code-wrapper"><pre><code class="hljs bash">Roll a dice
+2</code></pre></div>
+<p>OK。</p>
+<h5 id="暂告一段落"><a href="#暂告一段落" class="headerlink" title="暂告一段落"></a>暂告一段落</h5><p>到现在呢，咱们就可以在 vscode 上面编辑并运行简单的 python 代码了。</p>
+<p>再说一下步骤：</p>
+<ol>
+<li>使用 vscode 打开文件夹作为工作区</li>
+<li>创建 python 的虚拟环境</li>
+<li>创建 py 文件或者复制文件过来</li>
+<li>如果使用 import 导入某些包时，就需要进行安装，使用命令：<code>py -m pip install &lt;package name&gt;</code></li>
+<li>运行或者调试</li>
+</ol>
+<p>大致就是这样了。</p>
+
                 
               </div>
             
