@@ -692,8 +692,7 @@ sup > a::before,
 }
 .toc-body ol {
   list-style: none;
-  -webkit-padding-start: 1rem;
-          padding-inline-start: 1rem;
+  padding-inline-start: 1rem;
 }
 .toc-body::-webkit-scrollbar {
   display: none;
